@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="gaodig_tmall_crawler_shop_item_mdskip">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$EXTRACT_JSON(html,"defaultModel")]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="tb_items">
+		<uiobject fieldName="rowId:item_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"item_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="sales_num" nullAble="false">
+			<expression><![CDATA[$CvtStr2Int($EXTRACT_JSON($EXTRACT_JSON(tidyDom,"sellCountDO"),"sellCount"))]]></expression>
+		</uiobject>
+		<uiobject fieldName="stock_num" nullAble="false">
+			<expression><![CDATA[$CvtStr2Int($EXTRACT_JSON($EXTRACT_JSON(tidyDom,"inventoryDO"),"icTotalQuantity"))]]></expression>
+		</uiobject>
+		<uiobject fieldName="update_time" nullAble="false">
+			<expression><![CDATA[$SYSDATE()]]></expression>
+		</uiobject>
+	</uielements>
+</page>

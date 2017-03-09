@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="anhui_caigou_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=txw_bid_ah_caigou_list_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"ul>li>a",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"ul>li>a")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-anhui.gov.cn/"+$JSOUPATTRDOC(tidyDom,"ul>li>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["anhui_caigou_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"url")+"##mongodb|txw_bid_ah_caigou_detail_raw|id"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[(page+1)>$STR2INT($REGEXP($JSOUPTXTLISTDOC(tidyDom,".columnFooter.flipPage",0),"/(\\d+)"))?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-anhui.gov.cn/mhxt/MhxtSearchBulletinController.zc?method=bulletinChannelRightDown&pageSize=50&channelCode=sjcg&pageNo="+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["anhui_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=0301"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---省招标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_shenzhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=0302"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---省中标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_shenzhongbiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=0303"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---市县招标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_shizhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=0304"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---市县中标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_shizhongbiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=0305"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---信息更正"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_xinxi_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=0306"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---废标公告 "]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_feibiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=0307"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---资格预审公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_zige_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[6]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/listpunishmentall.jsp?curpage=1&colcode="+row]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA[row]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---投诉处理"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_tousu_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[3]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode="+(2100+row)]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA[(2100+row)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---公示区"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_gongshi_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shandong.gov.cn/sdgp2014/site/channelall.jsp?curpage=1&colcode=2106"]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA[2106]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["中国山东政府采购网---公示区"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_gongshi_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>
+
+	

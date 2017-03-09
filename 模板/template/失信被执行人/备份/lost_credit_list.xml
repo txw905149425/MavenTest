@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="lost_credit_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT($ARRAY($KEYVAL($JSONFMT(html),"data"),1))]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="emitperpage=txw_lost_credit_info2">
+		<rows><![CDATA[$ROWSARRAY($KEYVAL(tidyDom,"result"))]]></rows>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL(tidyDom,"result"),row),"caseCode")]]></expression>
+		</uiobject>
+		<uiobject fieldName="basicInformation" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(tidyDom,"result"),row)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="emitperpage=txw_lost_credit_info2_raw">
+		<rows><![CDATA[$ROWSARRAY($KEYVAL(tidyDom,"result"))]]></rows>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL(tidyDom,"result"),1),"caseCode")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="detailTask">
+		<rows><![CDATA[$ROWSARRAY($KEYVAL(tidyDom,"result"))]]></rows>
+		<uiobject fieldName="name" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL(tidyDom,"result"),row),"iname")]]></expression>
+		</uiobject>
+		<uiobject fieldName="caseCode" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL(tidyDom,"result"),row),"caseCode")]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"caseCode")+"##mongodb|txw_lost_credit_info2|id"]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?resource_id=6899&query=%E5%A4%B1%E4%BF%A1%E8%A2%AB%E6%89%A7%E8%A1%8C%E4%BA%BA%E5%90%8D%E5%8D%95&cardNum=&iname="+$CHARCODE($KEYVAL(map,"name"),"utf-8")+"&rn=10&ie=utf-8&oe=utf-8&format=json&t="+$KEYVAL(task,"time")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["lost_credit_detail"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[page>100?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?resource_id=6899&query=%E5%A4%B1%E4%BF%A1%E8%A2%AB%E6%89%A7%E8%A1%8C%E4%BA%BA&pn="+$MULTIPLY_NUM(page+1,10)+"&rn=10&ie=utf-8&oe=utf-8&format=json&t="+$KEYVAL(task,"time")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="time" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"time")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["lost_credit_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+</page>

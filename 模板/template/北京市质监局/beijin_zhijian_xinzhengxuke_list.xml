@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijin_zhijian_xinzhengxuke_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+
+	<uielements objectName="emitperpage=beijin_zhijian_info_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[pageUrl]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".menu-list-bg",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickTask">
+		<rows><![CDATA[page==1?1:0]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,"#article > table > tbody > tr:nth-child(3) > td > table > tbody > tr > td > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(23) > td > center > table > tbody > tr > td:nth-child(11) > a:nth-child(2)",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhijian_xinzhengxuke_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickTask">
+		<rows><![CDATA[page>1&&page<23145?1:0]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,"#31 2 > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(23) > td > center > table > tbody > tr > td:nth-child(12) > a:nth-child(2)",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhijian_xinzhengxuke_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

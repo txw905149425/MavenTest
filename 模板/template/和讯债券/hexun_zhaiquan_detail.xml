@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="hexun_zhaiquan_detail">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=a_hexun_zhaiquan_info">
+	    <uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$MD5($KEYVAL(task,"url")+$KEYVAL(task,"name"))]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>	
+	 	<uiobject fieldName="supclass" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"supclass")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="name" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"name")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="basicInformation" nullAble="false">
+			<expression><![CDATA[$JSOUPMAP2JS($CHINA_TMP(tidyDom,"table[cellpadding='2']",0),"tr","td:nth-child(1)")]]></expression>
+		</uiobject>	
+	</uielements>
+</page>

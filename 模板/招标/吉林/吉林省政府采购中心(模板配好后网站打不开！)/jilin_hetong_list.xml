@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="jilin_hetong_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="emitperpage=txw_bid_jl_hetong_list_raw">
+		<bvalid><![CDATA[$STR_LENGTH(html)>300]]></bvalid>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="detailTask">
+		<rows><![CDATA[$ROWSARRAY($ARRAYFMT($KEYVAL(tidyDom,"rows")))]]></rows>
+		<uiobject fieldName="serialno" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL(tidyDom,"rows"),row),"serialno")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://122.139.65.195:9008/zfcg/contract/searchDetailContract.action?_ContractNo="+$KEYVAL(map,"serialno")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jilin_hetong_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"url")+"##mongodb|txw_bid_jl_hetong_detail_raw|id"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[(page+1)>$STR2INT($KEYVAL(tidyDom,"totalPageNum"))?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp")+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jilin_hetong_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>
+

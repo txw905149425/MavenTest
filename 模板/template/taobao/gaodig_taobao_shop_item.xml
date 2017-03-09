@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="gaodig_taobao_shop_item">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$TIDYDOMFMT($CLEAN(html,$KEYVAL(task,"url")))]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=tb_items">
+		<rows><![CDATA[$ROWS(tidyDom,"//li[contains(@class,'item-wrap')]")]]></rows>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[contains(@class,'items')]/li["+row+"]/dl/dd/p[1]/a")]]></expression>
+		</uiobject>
+		<uiobject fieldName="item_url" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[contains(@class,'items')]/li["+row+"]/dl/dd/p[1]/a/@href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="item_img_url" nullAble="false">
+			<expression><![CDATA["https:"+ $STR_REPLACE($XPATHROWS(tidyDom,"//ul[contains(@class,'items')]/li["+row+"]/dl/dt/a/img/@src"),"/\"","")]]></expression>
+		</uiobject>
+		<uiobject fieldName="rowId:item_id" nullAble="false">
+			<expression><![CDATA[$GETURLFIELD($XPATHROWS(tidyDom,"//ul[contains(@class,'items')]/li["+row+"]/dl/dd/p[1]/a/@href"),"id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="price" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[contains(@class,'items')]/li["+row+"]/dl/dd/p[2]/span/span[2]")]]></expression>
+		</uiobject>
+		<uiobject fieldName="shop_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="update_time" nullAble="false">
+			<expression><![CDATA[$SYSDATE()]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="tb_items_detail_Task">
+		<rows><![CDATA[$ROWS(tidyDom,"//li[contains(@class,'item-wrap')]")]]></rows>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[contains(@class,'items')]/li["+row+"]/dl/dd/p[1]/a")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[contains(@class,'items')]/li["+row+"]/dl/dd/p[1]/a/@href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="seller_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"seller_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA[$TOSTRING($KEYVAL(task,"shop_type"))=="tmall"?"gaodig_tmall_shop_item_detail":"gaodig_taobao_shop_item_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="referer" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+		<uiobject fieldName="failReturnInfo" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"failReturnInfo")]]></expression>
+		</uiobject>
+		<uiobject fieldName="proxyType" nullAble="true">
+			<expression><![CDATA["taobao"]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+		<rows><![CDATA[$XPATHROWS(tidyDom,"//a[contains(text(),'下一页')]/@href")==""||page>100?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//a[contains(text(),'下一页')]/@href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gaodig_taobao_shop_item"]]></expression>
+		</uiobject>
+		<uiobject fieldName="seller_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"seller_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="shop_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+		<uiobject fieldName="failReturnInfo" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"failReturnInfo")]]></expression>
+		</uiobject>
+		<uiobject fieldName="proxyType" nullAble="true">
+			<expression><![CDATA["taobao"]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+		<rows><![CDATA[$XPATHROWS(tidyDom,"//input[@id='J_ShopAsynSearchURL']/@value")==""||page>100?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["https://"+$GETHOST($KEYVAL(task,"url"))+$XPATHROWS(tidyDom,"//input[@id='J_ShopAsynSearchURL']/@value")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gaodig_taobao_shop_item"]]></expression>
+		</uiobject>
+		<uiobject fieldName="seller_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"seller_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="shop_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+		<uiobject fieldName="referer" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="failReturnInfo" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"failReturnInfo")]]></expression>
+		</uiobject>
+		<uiobject fieldName="proxyType" nullAble="true">
+			<expression><![CDATA["taobao"]]></expression>
+		</uiobject>
+	</uielements>
+</page>

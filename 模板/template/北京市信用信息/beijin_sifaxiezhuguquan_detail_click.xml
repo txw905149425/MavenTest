@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijin_sifaxiezhuguquan_detail_click">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=a_a_beijin_detail_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[pageUrl+$KEYVAL(curPageTask,"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="suptitle" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"tr:nth-child(1)>.rightTd:nth-child(2)",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="instantClickTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["click:back"]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["do_nothing"]]></expression>
+		</uiobject>
+	</uielements>
+</page>

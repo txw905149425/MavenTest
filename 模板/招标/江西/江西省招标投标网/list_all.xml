@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.jxtb.org.cn/qtmorelist.asp?categoryid=19&Page=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.jxtb.org.cn/qtmorelist.asp?categoryid=19&Page="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省招标投标网---招标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="charSet" nullAble="false">
+			<expression><![CDATA["gbk"]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.jxtb.org.cn/qtmorelist.asp?categoryid=24&Page=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.jxtb.org.cn/qtmorelist.asp?categoryid=24&Page="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省招标投标网---中标候选人公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="charSet" nullAble="false">
+			<expression><![CDATA["gbk"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_zhongbiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+
+</page>
+

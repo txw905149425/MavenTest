@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%8B%9B%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-01&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%8B%9B%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=20188-01-01&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---省招标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shengcaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E4%B8%AD%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E4%B8%AD%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---省中标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shengcaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%9B%B4%E6%AD%A3%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%9B%B4%E6%AD%A3%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---省更正公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shengcaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%BA%9F%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%BA%9F%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---省废标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shengcaigou_list"]]></expression>
+		</uiobject>
+	<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%8D%95%E4%B8%80%E6%9D%A5%E6%BA%90%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%8D%95%E4%B8%80%E6%9D%A5%E6%BA%90%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---省单一来源公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shengcaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%85%B6%E5%AE%83%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%85%B6%E5%AE%83%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.QYBM=420001&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---省其它公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shengcaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%8B%9B%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-01&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%8B%9B%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=20188-01-01&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---市县招标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E4%B8%AD%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E4%B8%AD%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---市县中标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%9B%B4%E6%AD%A3%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E6%9B%B4%E6%AD%A3%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---市县更正公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%BA%9F%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%BA%9F%E6%A0%87%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---市县废标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%8D%95%E4%B8%80%E6%9D%A5%E6%BA%90%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%8D%95%E4%B8%80%E6%9D%A5%E6%BA%90%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---市县单一来源公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%85%B6%E5%AE%83%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!listFNoticeInfos_n.action?rank=1&queryInfo.GGLX=%E5%85%B6%E5%AE%83%E5%85%AC%E5%91%8A&queryInfo.BEGINTIME1=1998-01-01&queryInfo.ENDTIME1=2018-01-10&queryInfo.pageSize=50&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---市县其它公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnewsAction!listImport.action?queryInfo.PUBDATE_S=1998-01-11&queryInfo.PUBDATE_E=2018-01-11&queryInfo.QYBM=420001&queryInfo.curPage=1&queryInfo.pageSize=100"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnewsAction!listImport.action?queryInfo.PUBDATE_S=1998-01-11&queryInfo.PUBDATE_E=2018-01-11&queryInfo.QYBM=420001&queryInfo.pageSize=100&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---省进口产品公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_jinkou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnewsAction!listImport.action?queryInfo.PUBDATE_S=1998-01-11&queryInfo.PUBDATE_E=2018-01-11&queryInfo.curPage=1&queryInfo.pageSize=100"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnewsAction!listImport.action?queryInfo.PUBDATE_S=1998-01-11&queryInfo.PUBDATE_E=2018-01-11&queryInfo.pageSize=100&queryInfo.curPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---市进口产品公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_jinkou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[8]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://jczy.ccgp.gov.cn/gs1/gs1agentreg/getPubList.regx?provinceCode=420000&rows=50&sort=regValidDate&order=desc&page="+row]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["湖北省政府采购网---代理机构信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_daili_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>
+

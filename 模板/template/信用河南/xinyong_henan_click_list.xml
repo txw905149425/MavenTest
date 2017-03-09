@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="xinyong_henan_click_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+	</uielements>
+
+	<uielements objectName="emitperpage=a_xinyong_henan_list_raw">
+		<rows><![CDATA[$ROWSARRAY($KEYVAL(tidyDom,"data"))]]></rows>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(tidyDom,"data"),row)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")+row]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[4135]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.xyhn.gov.cn/cms/xzxklist?pagesize=100&page="+(row+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_henan_click_list2"]]></expression>
+		</uiobject>
+	</uielements>
+
+</page>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="biangengdengji_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=banquan_biangengdengji_info">
+		<rows><![CDATA[$JSOUPROWSDOC($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1),"tr")]]></rows>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$MD5($JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 0))]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bianhao" nullAble="false">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="register_id" nullAble="true">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="soft_name" nullAble="true">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 2)]]></expression>
+		</uiobject>
+		<uiobject fieldName="version" nullAble="true">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 3)]]></expression>
+		</uiobject>
+		<uiobject fieldName="change_what" nullAble="true">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 4)]]></expression>
+		</uiobject>
+		<uiobject fieldName="before_change" nullAble="true">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 5)]]></expression>
+		</uiobject>
+		<uiobject fieldName="after_change" nullAble="true">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 6)]]></expression>
+		</uiobject>
+		<uiobject fieldName="date" nullAble="true">
+			<expression><![CDATA[$JSOUPMYTEXT($JSOUPELMENT($CHINA_TMP(tidyDom,"form[name=generalForm]>table",1), "tr", row-1),"td", 7)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+		<rows><![CDATA[$JSOUPATTRDOC(tidyDom,"a:contains(下一页)","href",0)==""?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccopyright.com.cn"+$JSOUPATTRDOC(tidyDom,"a:contains(下一页)","href",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["biangengdengji_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	
+	
+</page>

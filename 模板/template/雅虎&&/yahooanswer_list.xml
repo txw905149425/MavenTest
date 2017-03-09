@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="yahooanswer_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$TAGNODEFMT($CLEAN(html,$KEYVAL(task,"url")))]]></expression>
+		</uiobject>
+	</uielements>
+	<!--  https://answers.yahoo.com/search/search_result?p=china -->
+	
+	<uielements objectName="questionTask">
+		<rows><![CDATA[$ROWS(tidyDom,"//div[@class='Bfc']")>=1?1:0]]></rows>
+		
+		<uiobject fieldName="doc_num" nullAble="false">
+			<expression><![CDATA[$ROWS(tidyDom,"//ul[@id='yan-questions']/li")>=1?1:0]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[@id='yan-questions']/li["+row+"]/div[1]/h3/a/@href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="src_id" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[@id='yan-questions']/li["+row+"]/@id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[@id='yan-questions']/li["+row+"]/div[1]/h3/a")]]></expression>
+		</uiobject>
+		<uiobject fieldName="abstract" nullAble="true">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//ul[@id='yan-questions']/li["+row+"]/div[1]/div[1]/span")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yahooanswer_document"]]></expression>
+		</uiobject>
+		<uiobject fieldName="rank" nullAble="false">
+			<expression><![CDATA[row]]></expression>
+		</uiobject>	
+		<uiobject fieldName="task_time" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"task_time")]]></expression>
+		</uiobject>
+		<uiobject fieldName="question" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"question")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="qid" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"qid")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="query" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"query")]]></expression>
+		</uiobject>	
+	
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA["false"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="bAdsl" nullAble="false">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>	
+	</uielements>
+	
+</page>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="sichuan_daili_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=txw_bid_sc_daili_list_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"#agencyInfoList>tbody>tr>td:eq(0)>a",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"#agencyInfoList>tbody>tr>td:eq(0)>a")]]></rows>
+		<uiobject fieldName="tp1" nullAble="false">
+			<expression><![CDATA[$JSOUPATTRDOC(tidyDom,"#agencyInfoList>tbody>tr>td:eq(0)>a","onclick",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="tp2" nullAble="false">
+			<expression><![CDATA[$SPLIT($STR_REPLACE($REGEXP($KEYVAL(map,"tp1"),"showList_showDetail\\((.*?)\\);"),"'",""),",")]]></expression>
+		</uiobject>
+		<uiobject fieldName="objId" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(map,"tp2"),1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="bh" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(map,"tp2"),2)]]></expression>
+		</uiobject>
+		<uiobject fieldName="fv" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(map,"tp2"),3)]]></expression>
+		</uiobject>
+		<uiobject fieldName="sqrq" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(map,"tp2"),4)]]></expression>
+		</uiobject>
+		<uiobject fieldName="yxq" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(map,"tp2"),5)]]></expression>
+		</uiobject>
+		<uiobject fieldName="jb" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(map,"tp2"),6)]]></expression>
+		</uiobject>
+		<uiobject fieldName="zzfile" nullAble="false">
+			<expression><![CDATA[$ARRAY($KEYVAL(map,"tp2"),7)]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.sczfcg.com/AgencyShowController.do?method=getAgencyInfo&anhui=anhui&objId="+$KEYVAL(map,"objId")+"&bh="+$KEYVAL(map,"bh")+"&fv="+$KEYVAL(map,"fv")+"&sqrq="+$KEYVAL(map,"sqrq")+"&yxq="+$KEYVAL(map,"yxq")+"&jb="+$KEYVAL(map,"jb")+"&zzfile="+$KEYVAL(map,"zzfile")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["sichuan_daili_comp"]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"url")+"##mongodb|txw_bid_hen_daili_comp_detail_raw|id"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"#agencyInfoList>tbody>tr>td:eq(7)>a")]]></rows>
+		<uiobject fieldName="tp1" nullAble="false">
+			<expression><![CDATA[$REGEXP($JSOUPATTRDOC(tidyDom,"#agencyInfoList>tbody>tr>td:eq(7)>a","onclick",row-1),"'(.*)'")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.sczfcg.com/AttachmentController.do?defineSelf=qualificationFile&isSelect=yes&attachRelaId="+$KEYVAL(map,"tp1")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"#agencyInfoList>tbody>tr>td:eq(0)>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["sichuan_daili_zhengshu"]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"url")+"##mongodb|txw_bid_sc_daili_zhengshu_detail_raw|id"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

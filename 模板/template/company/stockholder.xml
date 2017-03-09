@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="company_stockholder_search">	
+   <uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+		<expression><![CDATA[$ARRAYFMT($EXTRACT_JSON($JSONFMT(html),"topTenHolders"))]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=tobelisted_company_stockholder_info">
+	  <rows><![CDATA[$ROWSARRAY(tidyDom)]]></rows>
+	  <uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_code")+"+"+row]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.neeq.com.cn/nq/detailcompany.html?typeId=1&typename=G&companyCode="+$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="公司简称" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="公司代码" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="截止日期" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"date")]]></expression>
+		</uiobject>
+		<uiobject fieldName="股东名称" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="持股数" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"quantity")]]></expression>
+		</uiobject>
+		<uiobject fieldName="持股比例" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"ratio")]]></expression>
+		</uiobject>
+		<uiobject fieldName="持股排名" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"num")]]></expression>
+		</uiobject>
+		
+	</uielements>		
+</page>

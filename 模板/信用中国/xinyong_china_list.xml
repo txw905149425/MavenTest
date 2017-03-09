@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="xinyong_china_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="detailTask">
+		<rows><![CDATA[$ROWSARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"))]]></rows>
+		<uiobject fieldName="listInformation" nullAble="true">
+			<expression><![CDATA[$ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),row)]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.creditchina.gov.cn/credit_info_detail?objectType=2&encryStr="+$CLEAN_BLANK_STR($EXTRACT_JSON($ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),row),"encryStr"))]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_china_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+		<rows><![CDATA[(page+1)>$DIVIDED($KEYVAL($KEYVAL(tidyDom,"result"),"totalCount"),"10")?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.creditchina.gov.cn/credit_info_search?keyword="+$CHARCODE($KEYVAL(task,"keyword"),"utf-8")+"&page="+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_china_list"]]></expression>
+		</uiobject>
+	</uielements>
+</page>

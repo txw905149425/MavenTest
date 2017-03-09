@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gszfcg.gansu.gov.cn/web/doSearch.action?limit=20&start=10"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gszfcg.gansu.gov.cn/web/doSearch.action?limit=20&start="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["甘肃省政府采购网---采购公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gansu_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+
+</page>

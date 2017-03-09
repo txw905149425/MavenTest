@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ggzy.hi.gov.cn/cggg/index_1.jhtml"]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ggzy.hi.gov.cn/cggg/index_"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["海南省公共资源交易服务中心---采购公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hainan_gg_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ggzy.hi.gov.cn/cgzbgg/index_1.jhtml"]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.ggzy.hi.gov.cn/cgzbgg/index_"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["海南省公共资源交易服务中心---中标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hainan_gg_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+</page>

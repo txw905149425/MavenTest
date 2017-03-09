@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="guangxi_zt_zhaotou_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=txw_bid_gx_zt_zhaotou_list_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".a14>a",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".a14>a")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp1")+$REGEXP($JSOUPATTRDOC(tidyDom,".a14>a","href",row-1),".(.*)")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".a14>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["guangxi_zt_zhaotou_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"url")+"##mongodb|txw_bid_gx_zt_zhaotou_detail_raw|id"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[page>$STR2INT($REGEXP($JSOUPTXTLISTDOC(tidyDom,"div.page>script",0),"(\\d+)"))?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp")+page+".htm"]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp1")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["guangxi_zt_zhaotou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

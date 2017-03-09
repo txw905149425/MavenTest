@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="yahooanswer_document">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$TAGNODEFMT($CLEAN(html,$KEYVAL(task,"url")))]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="answer_document">		
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="abstract" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"abstract")]]></expression>
+		</uiobject>		
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="src_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"src_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="rank" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"rank")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>	
+		<uiobject fieldName="answer" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,".//*[@id='ya-best-answer']/div/div[2]/div[1]/span[3]")]]></expression>
+		</uiobject>	
+
+		<uiobject fieldName="task_time" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"task_time")]]></expression>
+		</uiobject>
+		<uiobject fieldName="question" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"question")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="qid" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"qid")]]></expression>
+		</uiobject>	
+			<uiobject fieldName="query" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"query")]]></expression>
+		</uiobject>	
+	</uielements>
+	<uielements objectName="answer_document">		
+		<rows><![CDATA[$ROWS(tidyDom,".//*[@id='ya-qn-answers']/li")]]></rows>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="abstract" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"abstract")]]></expression>
+		</uiobject>		
+		<uiobject fieldName="src_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"src_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="rank" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"rank")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>	
+		<uiobject fieldName="answer" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,".//*[@id='ya-qn-answers']/li["+row+"]/div[2]/div[1]/span")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="isbestanswer" nullAble="false">
+			<expression><![CDATA["false"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="task_time" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"task_time")]]></expression>
+		</uiobject>
+		<uiobject fieldName="question" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"question")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="qid" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"qid")]]></expression>
+		</uiobject>	
+			<uiobject fieldName="query" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"query")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="doc_num" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"doc_num")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="rank" nullAble="false">
+			<expression><![CDATA[row]]></expression>
+		</uiobject>	
+	</uielements>
+</page>

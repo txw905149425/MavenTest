@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&findAjaxZoneAtClient=false&sign=100&flag=1&method=moreList&district=&bulletinstable_totalpages=3890&bulletinstable_totalrows=77800&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=0"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&findAjaxZoneAtClient=false&sign=100&flag=1&method=moreList&district=&bulletinstable_totalpages=3890&bulletinstable_totalrows=77800&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---招标（谈判、询价、更正）公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=2&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=3893&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=2&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=3893&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---采购结果公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p=2&bulletinstable_pg=2"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=3&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=274&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---单一来源审核前公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---进口产品审核前公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---采购合同公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---供应商查询"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_gongying_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/agencies.do?ec_i=agencies2table&agencies2table_efn=&agencies2table_crd=20&agencies2table_s_agenciename=&agencies2table_s_busiaddress=&agencies2table_s_contactname=&agencies2table_s_contactphone=&agencies2table_s_contactftel=&flag=2&method=normalAgenciesList&agencies2table_totalpages=16&agencies2table_totalrows=318&agencies2table_rd=20&findAjaxZoneAtClient=false&agencies2table_p=1&agencies2table_pg=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/agencies.do?ec_i=agencies2table&agencies2table_efn=&agencies2table_crd=20&agencies2table_s_agenciename=&agencies2table_s_busiaddress=&agencies2table_s_contactname=&agencies2table_s_contactphone=&agencies2table_s_contactftel=&flag=2&method=normalAgenciesList&agencies2table_totalpages=16&agencies2table_totalrows=318&agencies2table_rd=20&findAjaxZoneAtClient=false&agencies2table_p="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---代理机构查询"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_daili_list"]]></expression>
+		</uiobject>
+	</uielements>
+		
+</page>

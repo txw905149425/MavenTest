@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="china_http_list">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.creditchina.gov.cn/credit_info_search?t="+$SYSDATELONG()]]></expression>
+		</uiobject>
+		<uiobject fieldName="listParam" nullAble="false">
+			<expression><![CDATA["keyword@"+$KEYVAL(task,"keyword")+";searchtype@0;objectType@2;dataType@1;page@1"]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["信用中国---信用信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="isGetMethod" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"isGetMethod")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_china_xinyong_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="company_senior_search">	
+   <uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$ARRAYFMT($EXTRACT_JSON($JSONFMT(html),"executives"))]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=tobelisted_company_senior_info">
+	<rows><![CDATA[$ROWSARRAY(tidyDom)]]></rows>
+	  <uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_code")+"+"+row]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.neeq.com.cn/nq/detailcompany.html?typeId=1&typename=G&companyCode="+$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="公司简称" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="公司代码" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="高管名称" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="职位" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"job")]]></expression>
+		</uiobject>
+		<uiobject fieldName="性别" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"gender")]]></expression>
+		</uiobject>
+		<uiobject fieldName="年龄" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"age")]]></expression>
+		</uiobject>
+		<uiobject fieldName="学历" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"education")]]></expression>
+		</uiobject>
+		<uiobject fieldName="任职时间" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"term")]]></expression>
+		</uiobject>
+		<uiobject fieldName="salary" nullAble="true">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"salary")]]></expression>
+		</uiobject>
+		
+	</uielements>		
+</page>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gdgpo.gov.cn/queryMoreInfoList.do?channelCode=0005&issueOrgan=&operateDateFrom=&operateDateTo=&performOrgName=&purchaserOrgName=&regionIds=&sitewebId=4028889705bebb510105bec068b00003&sitewebName=%E5%B9%BF%E4%B8%9C%E7%9C%81&stockIndexName=&stockNum=&stockTypes=&title=&pageSize=15&pointPageIndexId=1&pageIndex=1"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["广东省政府采购---采购公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["caigou_gonggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gdgpo.gov.cn/queryMoreInfoList.do?channelCode=0006&issueOrgan=&operateDateFrom=&operateDateTo=&performOrgName=&purchaserOrgName=&regionIds=&sitewebId=4028889705bebb510105bec068b00003&sitewebName=%E5%B9%BF%E4%B8%9C%E7%9C%81&stockIndexName=&stockNum=&stockTypes=&title=&pageSize=15&pointPageIndexId=1&pageIndex=1"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["广东省政府采购---更正公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gengzheng_gonggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gdgpo.gov.cn/queryMoreInfoList.do?channelCode=0008&issueOrgan=&operateDateFrom=&operateDateTo=&performOrgName=&purchaserOrgName=&regionIds=&sitewebId=4028889705bebb510105bec068b00003&sitewebName=%E5%B9%BF%E4%B8%9C%E7%9C%81&stockIndexName=&stockNum=&stockTypes=&title=&pageSize=15&pointPageIndexId=1&pageIndex=1"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["广东省政府采购---中标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["zhongbiao_gonggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gdgpo.gov.cn/queryMoreInfoList.do?channelCode=0014&issueOrgan=&operateDateFrom=&operateDateTo=&performOrgName=&purchaserOrgName=&regionIds=&sitewebId=4028889705bebb510105bec068b00003&sitewebName=%E5%B9%BF%E4%B8%9C%E7%9C%81&stockIndexName=&stockNum=&stockTypes=&title=&pageSize=15&pointPageIndexId=1&pageIndex=1"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["广东省政府采购---代理机构公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["daili_gonggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gdgpo.gov.cn/queryMoreInfoList.do?channelCode=0017&issueOrgan=&operateDateFrom=&operateDateTo=&performOrgName=&purchaserOrgName=&regionIds=&sitewebId=4028889705bebb510105bec068b00003&sitewebName=%E5%B9%BF%E4%B8%9C%E7%9C%81&stockIndexName=&stockNum=&stockTypes=&title=&pageSize=15&pointPageIndexId=1&pageIndex=1"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["广东省政府采购---电子反拍公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["dianzi_gonggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gdgpo.gov.cn/organization/queryPerformOrgList.do?pointPageIndexId=1&pageIndex=1&pageSize=10"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["广东省政府采购---代理机构信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jigou_gonggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gdgpo.gov.cn/organization/querySellerOrgList.do?pageSize=10&pointPageIndexId=2&pageIndex=1"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["广东省政府采购---供应商信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gongyingshang_gonggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="gaodig_common_crawler_list_yahu">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC($EXTRACT_JSON($EXTRACT_JSON($JSONFMT(html),"YANewDiscoverTabModule"),"html"))]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="detailTask">
+	   <rows><![CDATA[$JSOUPROWSDOC(tidyDom,"h3>a")]]></rows>
+		<uiobject fieldName="rowId" nullAble="false">
+			<expression><![CDATA[$MD5($JSOUPATTRDOC(tidyDom,"h3>a","href",row-1))]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["https://sg.answers.yahoo.com"+$JSOUPATTRDOC(tidyDom,"h3>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="original_website" nullAble="false">
+			<expression><![CDATA["https://sg.answers.yahoo.com"+$JSOUPATTRDOC(tidyDom,"h3>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="question" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"h3>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="subclass" nullAble="true">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"div.Clr-888>a.Clr-b",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="superclass" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"superclass")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gaodig_common_crawler_detail_yahu"]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+		<rows><![CDATA[page>1000?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"father_url")+"&bpos="+page+"&cpos="+$YAHU_COUNT_TMP(page)+"&after=pc"+($YAHU_COUNT_TMP(page)-1)+"~p%3A0&disableLoadMore=false"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gaodig_common_crawler_list_yahu"]]></expression>
+		</uiobject>
+	</uielements>
+</page>

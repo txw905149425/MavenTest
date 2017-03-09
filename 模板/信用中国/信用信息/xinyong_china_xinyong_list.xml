@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="xinyong_china_xinyong_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="emitperpage=txw_xinyong_china_xinyong_list_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$CLEAN_BLANK_STR($KEYVAL($ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),1),"encryStr"))]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="detailTask">
+		<rows><![CDATA[$ROWSARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"))]]></rows>
+		<uiobject fieldName="encryStr" nullAble="false">
+			<expression><![CDATA[$CLEAN_BLANK_STR($KEYVAL($ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),row),"encryStr"))]]></expression>
+		</uiobject>
+		<uiobject fieldName="name" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),row),"name")+" 在营"]]></expression>
+		</uiobject>
+		<uiobject fieldName="name2" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),row),"name")+" 注销"]]></expression>
+		</uiobject>
+		<uiobject fieldName="name3" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),row),"name")+" 吊销"]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.creditchina.gov.cn/credit_info_detail?objectType=2&encryStr="+$KEYVAL(map,"encryStr")]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_china_xinyong_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"name")+"GaodigAnd"+$KEYVAL(map,"name2")+"GaodigAnd"+$KEYVAL(map,"name3")+"##mongodb|txw_xinyong_china_xinyong_detail_raw|id"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[(page+1)>$DIVIDED($KEYVAL($KEYVAL(tidyDom,"result"),"totalCount"),"10")?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="listParam" nullAble="false">
+			<expression><![CDATA["keyword@"+$KEYVAL(task,"keyword")+";searchtype@0;objectType@2;dataType@1;page@"+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_china_xinyong_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="isGetMethod" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"isGetMethod")]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>
+
+	
+
+		<!-- <uiobject fieldName="name" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL($KEYVAL(tidyDom,"result"),"results"),row),"name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"name")+"##mongodb|txw_xinyong_china_xinyong_detail_raw|id"]]></expression>
+		</uiobject> -->

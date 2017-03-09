@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="xinyong_hubei_click_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".xkgs_title>a")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$JSOUPATTRDOC(tidyDom,".xkgs_title>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_hubei_click_detail"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[page>$DIVIDED($REGEXP($JSOUPTXTLISTDOC(tidyDom,"div:contains(为您找到相关结果)",0),"(\\d+)"),"10")?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hbcredit.gov.cn/credithb/gkgs/list.html?bt=&bmmc=&sxmc=&type="+$KEYVAL(task,"type")+"&pageIndex="+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="type" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"type")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_hubei_click_list"]]></expression>
+		</uiobject>
+	</uielements>
+
+</page>

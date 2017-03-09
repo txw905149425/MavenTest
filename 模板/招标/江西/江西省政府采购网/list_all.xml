@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://ggzy.jiangxi.gov.cn/jxzbw/zfcg/017002/017002001/MoreInfo.aspx?CategoryNum=017002001"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省政府采购网---采购公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_jiaoyi_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="false">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://ggzy.jiangxi.gov.cn/jxzbw/zfcg/017002/017002004/MoreInfo.aspx?CategoryNum=017002004"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省政府采购网---变更公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_jiaoyi_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="false">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://ggzy.jiangxi.gov.cn/jxzbw/zfcg/017002/017002003/MoreInfo.aspx?CategoryNum=017002003"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省政府采购网---答疑澄清"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_jiaoyi_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="false">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://ggzy.jiangxi.gov.cn/jxzbw/zfcg/017002/017002004/MoreInfo.aspx?CategoryNum=017002004"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省政府采购网---结果公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_jiaoyi_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="false">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://ggzy.jiangxi.gov.cn/jxzbw/zfcg/017002/017002005/MoreInfo.aspx?CategoryNum=017002005"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省政府采购网---单一来源公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_jiaoyi_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="false">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://ggzy.jiangxi.gov.cn/jxzbw/zfcg/017004/017004001/MoreInfo.aspx?CategoryNum=017004001"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省政府采购网---曝光台—代理机构"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_baoguang_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="false">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://ggzy.jiangxi.gov.cn/jxzbw/zfcg/017004/017004002/MoreInfo.aspx?CategoryNum=017004002"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["江西省政府采购网---曝光台—供应商"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="cookie" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"cookie")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["jiangxi_baoguang_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="false">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+	</uielements>
+</page>

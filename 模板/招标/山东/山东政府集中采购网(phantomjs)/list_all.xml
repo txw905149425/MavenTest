@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.sdzfcg.gov.cn/site/Page/Information/AffichePage.aspx"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["山东政府集中采购网---采购公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="true">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_jz_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.sdzfcg.gov.cn/site/Page/Information/AffichePage.aspx?type=correct"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["山东政府集中采购网---更正公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="true">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_jz_gengzheng_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.sdzfcg.gov.cn/site/Page/Information/AffichePage.aspx?type=result"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["山东政府集中采购网---中标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="page" nullAble="true">
+			<expression><![CDATA[1]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shandong_jz_zhongbiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

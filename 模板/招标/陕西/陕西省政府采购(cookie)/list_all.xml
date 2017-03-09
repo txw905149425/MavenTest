@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-shaanxi.gov.cn/"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["list_all_cookie"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

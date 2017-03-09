@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="company_finance_search">	
+   <uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$EXTRACT_JSON($JSONFMT(html),"finance")]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=tobelisted_company_finance_info">
+	  <uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.neeq.com.cn/nq/detailcompany.html?typeId=1&typename=G&companyCode="+$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="公司简称" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="公司代码" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="营业收入（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"income")]]></expression>
+		</uiobject>
+		<uiobject fieldName="营业利润（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"profit")]]></expression>
+		</uiobject>
+		<uiobject fieldName="净利润（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"netProfit")]]></expression>
+		</uiobject>
+		<uiobject fieldName="未分配利润（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"nonDistributeProfit")]]></expression>
+		</uiobject>
+		<uiobject fieldName="总资产（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"totalAssets")]]></expression>
+		</uiobject>
+		<uiobject fieldName="净资产（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"netAssets")]]></expression>
+		</uiobject>
+		<uiobject fieldName="每股收益（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"earningsPerShare")]]></expression>
+		</uiobject>
+		<uiobject fieldName="每股净资产（元）" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"netAssetsPerShare")]]></expression>
+		</uiobject>
+		<uiobject fieldName="净资产收益率" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON(tidyDom,"netAssetsYield")]]></expression>
+		</uiobject>
+	</uielements>		
+</page>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="sougou_wenwen_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="detailTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"span.fl")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://wenwen.sogou.com"+$JSOUPATTRDOC(tidyDom,"span.fl>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"span.fl",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="super_class" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"super_class")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["sougou_wenwen_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+	      <rows><![CDATA[$JSOUPATTRDOC(tidyDom,"li.next>a","href",0)==""||page>50?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://wenwen.sogou.com/"+$JSOUPATTRDOC(tidyDom,"li.next>a","href",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["sougou_wenwen_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="zhihu_sousuo_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="detailTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"div.feed-main>div.content")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.zhihu.com"+$JSOUPATTRDOC(tidyDom,"div.feed-main>div.content>h2>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"div.feed-main>div.content>h2>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="answer_abstract" nullAble="true">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"div.zh-summary.summary.clearfix",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="super_tag" nullAble="true">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"h1.zm-editable-content",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["zhihu_sousuo_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+	     <rows><![CDATA[page>50?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")+"?page="+page]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["zhihu_sousuo_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

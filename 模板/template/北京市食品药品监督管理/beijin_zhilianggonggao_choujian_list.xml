@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijin_zhilianggonggao_choujian_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+    <uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".left>a")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn"+$JSOUPATTRDOC(tidyDom,".left>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhilianggonggao_choujian_detail"]]></expression>
+		</uiobject>
+	</uielements>	
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[page>3?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/gzhd/zlgg/210223/f07f2bbc-"+page+".html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhilianggonggao_choujian_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="guangxi_gongying_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="emitperpage=txw_bid_gx_gongying_list_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL(tidyDom,"rows"),1),"orgName")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+	</uielements>
+
+	<uielements objectName="nextTask">
+		<rows><![CDATA[(page+1)>$DIVIDED($KEYVAL(tidyDom,"total"),"10")?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp")+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["guangxi_gongying_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

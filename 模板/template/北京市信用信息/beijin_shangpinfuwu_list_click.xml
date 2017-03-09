@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijin__shangpinfuwu_list_click">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"#innerTable>tbody>tr>td>div>span")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,"#innerTable>tbody>tr>td>div>span",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".er-dang>span",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shangpinfuwu_detail_click"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickNextPageTask">
+		<rows><![CDATA[page>201?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,".cx00>a[title=下一页]",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin__shangpinfuwu_list_click"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="focus_deep_document">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$TIDYDOMFMT($CLEAN(html,$KEYVAL(task,"url")))]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$ROWS(tidyDom,"//a")]]></rows>
+		<bvalid><![CDATA[$CONTAINS_MUL_WORDS($XPATH_ROW_IN_LIST(tidyDom,"//a",row),$KEYVAL(task,"keyword"))]]></bvalid>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$XPATH_ROW_IN_LIST(tidyDom,"//a/@href",row)]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$XPATH_ROW_IN_LIST(tidyDom,"//a",row)]]></expression>
+		</uiobject>
+		<uiobject fieldName="websitename" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"websitename")]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["detail_document"]]></expression>
+		</uiobject>
+		<uiobject fieldName="rank" nullAble="false">
+			<expression><![CDATA[row]]></expression>
+		</uiobject>
+		<uiobject fieldName="page_num" nullAble="false">
+			<expression><![CDATA[page]]></expression>
+		</uiobject>
+		<uiobject fieldName="shop_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA["false"]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="documents">
+		<bvalid><![CDATA[$CONTAINS_MUL_WORDS(html,$KEYVAL(task,"keyword"))]]></bvalid>
+		<uiobject fieldName="rowId" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")+"_"+$MD5($KEYVAL(task,"url"))]]></expression>
+		</uiobject>
+		<uiobject fieldName="meta:url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="meta:title" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="meta:md5" nullAble="false">
+			<expression><![CDATA[$MD5(html)]]></expression>
+		</uiobject>
+		<uiobject fieldName="meta:keyword" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="original:html" nullAble="false">
+			<expression><![CDATA[$JSOUPHTML(html,"body")]]></expression>
+		</uiobject>
+		<uiobject fieldName="extracted:submit_time" nullAble="true">
+			<expression><![CDATA[$DATEFMT($GETTIME(html),"yyyy-MM-dd HH:mm")]]></expression>
+		</uiobject>
+		<uiobject fieldName="extracted:content" nullAble="true">
+			<expression><![CDATA[$JSOUPCONTENT(html)]]></expression>
+		</uiobject>
+		<uiobject fieldName="extracted:description" nullAble="true">
+			<expression><![CDATA[$SUBSTR($KEYVAL(map,"extracted:content"),0,150)]]></expression>
+		</uiobject>
+		<uiobject fieldName="meta:rank" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"rank")]]></expression>
+		</uiobject>
+		<uiobject fieldName="meta:page_num" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"page_num")]]></expression>
+		</uiobject>
+		<uiobject fieldName="meta:shop_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="nextTask">
+		<rows><![CDATA[$XPATHROWS(tidyDom,"//a[contains(text(),'下一页')]/@href")==""?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//a[contains(text(),'下一页')]/@href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["focus_deep_document"]]></expression>
+		</uiobject>
+		<uiobject fieldName="shop_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA["false"]]></expression>
+		</uiobject>
+	</uielements>
+</page>

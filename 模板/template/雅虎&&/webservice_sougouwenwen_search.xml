@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="webservice_sougouwenwen_search">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+
+	<uielements objectName="results">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".result_list>li>h3>a>span")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://wenwen.sogou.com"+$JSOUPATTRDOC(tidyDom,".result_list>li>h3>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".result_list>li>h3>a>span",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="abstract" nullAble="true">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".summary>p",row-1)]]></expression>
+		</uiobject>
+		
+		<uiobject fieldName="total_answers_num" nullAble="true">
+			<expression><![CDATA[$REGEXP($JSOUPTXTLISTDOC(tidyDom,".info",row-1),"(\\d+)个回答")]]></expression>
+		</uiobject>
+		
+		<uiobject fieldName="order" nullAble="true">
+			<expression><![CDATA[row]]></expression>
+		</uiobject>
+		
+		<uiobject fieldName="page_num" nullAble="true">
+			<expression><![CDATA[page]]></expression>
+		</uiobject>
+
+	</uielements>
+
+
+	<uielements objectName="nextTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".page_turn")==null||page>10?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://wenwen.sogou.com"+$JSOUPATTRDOC(tidyDom,".page_turn","href",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["webservice_sougouwenwen_search"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>
+</page>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="hubei_shicaigou_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=txw_bid_hb_shicaigou_list_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".news_content>ul>li>a",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".news_content>ul>li>a")]]></rows>
+		<uiobject fieldName="tp1" nullAble="false">
+			<expression><![CDATA[$REGEXP($JSOUPATTRDOC(tidyDom,".news_content>ul>li>a","href",row-1),"GGID=(.*)&")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccgp-hubei.gov.cn/fnoticeAction!findFNoticeInfoByGgid.action?queryInfo.GGID="+$KEYVAL(map,"tp1")+"&queryInfo.isHtmlPage="]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"url")+"##mongodb|txw_bid_hb_shicaigou_detail_raw|id"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[(page+1)>$STR2INT($REGEXP($JSOUPTXTLISTDOC(tidyDom,"#right_border_bj>div>table>tbody>tr>td>table>tbody>tr>td:nth-child(8)",0),"/(\\d+)"))?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"tmp")+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hubei_shicaigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>
+
+<!-- <uiobject fieldName="tp2" nullAble="false">
+			<expression><![CDATA[$REGEXP($JSOUPATTRDOC(tidyDom,".news_content>ul>li>a","href",row-1),"HTMLPATH=(.*)")]]></expression>
+		</uiobject> -->

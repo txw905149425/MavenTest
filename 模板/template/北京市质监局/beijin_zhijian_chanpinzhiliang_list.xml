@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijin_zhijian_chanpinzhiliang_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".td-dotline>a")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjtsb.gov.cn/"+$JSOUPATTRDOC(tidyDom,".td-dotline>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhijian_chanpinzhiliang_detail"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[page>13?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjtsb.gov.cn/"+$JSOUPATTRDOC(tidyDom,"a:contains(下一页)","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhijian_zhizaoxiuli_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

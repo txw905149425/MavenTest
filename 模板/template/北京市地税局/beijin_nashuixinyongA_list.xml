@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijin_nashuixinyongA_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+	</uielements>
+
+	<uielements objectName="documentTask">
+		<rows><![CDATA[2943]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://shiju.tax861.gov.cn/bjds/swcx/nsajcx2015/result_json.asp?1=1&aa="+row]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_nashuixinyongA_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+	</uielements>	
+</page>

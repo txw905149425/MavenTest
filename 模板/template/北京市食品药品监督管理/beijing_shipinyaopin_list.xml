@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijing_shipinyaopin_list">
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331007&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---食品经营"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331007"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shiping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331009&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---食品流通"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331009"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shiping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331011&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331011"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---食品生产SC"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shiping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331015&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---食品生产QS"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331015"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shiping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331017&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---食品添加剂生产许可"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331017"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shiping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331136&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---药品生产企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331136"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yaoping_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331138&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---放射性药品使用许可"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331138"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yaoping_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331140&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---放射性药品生产许可"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331140"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yaoping_list"]]></expression>
+		</uiobject>
+	</uielements>	
+		
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331142&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---医疗机构制剂许可"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331142"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yaoping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+		
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331148&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---药品经营企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331148"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yaoping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331150&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---医疗机构制剂品种信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331150"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yaoping_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331157&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---第三类医疗器械经营企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331157"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331179&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---第二类医疗器械经营企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331179"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=332250&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---第一类医疗器械生产企业备案"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["332250"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=332256&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---第二三类医疗器械生产企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["332256"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=332262&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---第一类医疗器械备案"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["332262"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=332268&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---第一类体外诊断试剂备案"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["332268"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=348736&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---医疗器械产品注册信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["348736"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331184&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---保健食品生产企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331184"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_baojianshipin_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331186&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---保健食品经营企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331186"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_baojianshipin_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331188&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---保健食品企业标准备案"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331188"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_baojianshipin_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331193&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---化妆品生产企业"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331188"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331201&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---执业药师"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331201"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhiyeyaoshi_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=353675&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---从业药师"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["353675"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhiyeyaoshi_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331205&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---药品广告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331205"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_guanggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331207&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---医疗器械广告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331207"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_guanggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331209&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---保健食品广告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331209"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_guanggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=355537&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---药品广告备案"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["355537"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_guanggao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331216&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---行政处罚信息公开表"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331216"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shiyaoxinzhenchufa_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/eportal/ui?pageId=331228&filter_LIKE_XKZH=&filter_LIKE_TITLE=&filter_EQ_FZJG=&currentPage=1&pageSize=20"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---餐饮服务单位"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["331228"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_canyinfuwu_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/aqxx/ac2741f9-1.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/aqxx/ac2741f9-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---食品安全"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_shipinanquan_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/zlgg/ypl/index.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---质量公告药品类"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_canyinfuwu_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/zlgg/ylqxl/index.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---质量公告医疗器械类"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhilianggonggao_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/zlgg/hzpl/index.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---质量公告化妆品类"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhilianggonggao_huazhuang_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/gzhd/zlgg/210223/f07f2bbc-1.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/gzhd/zlgg/210223/f07f2bbc-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---质量公告化食品抽检信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_zhilianggonggao_huazhuang_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/246019/cpzh/index.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---产品召回---医疗器械召回"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_chanpinzhaohui_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/246019/246131/f695e90d-1.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/246019/246131/f695e90d-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---产品召回---食品召回"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_chanpinzhaohui_yiliao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/136582/377513/c22fb086-1.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="code" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/136582/377513/c22fb086-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---监管动态---注销公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_jianguandongtai_zhuxiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/136582/ypgmprz/331034/077b3287-1.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/136582/ypgmprz/331034/077b3287-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---监管动态---药品GMP认证审查公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_jianguandongtai_yaopin_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/136582/ypgmprz/331037/index.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---监管动态药品GMP认证公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_jianguandongtai_yaopin_list1"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/136582/ypgmprz/331040/index.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---监管动态收回药品GMP证书公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_jianguandongtai_yaopin_list2"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.bjda.gov.cn/bjfda/syaq/136582/_136954/4c0156d1-1.html"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["北京市食品药品监督---监管动态药品GSP认证"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_jianguandongtai_yaopin_list3"]]></expression>
+		</uiobject>
+	</uielements>
+	
+
+</page>

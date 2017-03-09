@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="hexun_txw_detail">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=a_hexun_detail_txw_info">
+	    <uiobject fieldName="id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="title" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"title")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="pub_time" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"pub_time")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="abstract" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"abstract")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"company")]]></expression>
+		</uiobject>
+		<uiobject fieldName="context" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"div.art_context",0)]]></expression>
+		</uiobject>	
+	</uielements>
+</page>

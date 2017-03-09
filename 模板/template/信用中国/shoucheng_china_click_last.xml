@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="shoucheng_china_click_last">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="emitperpage=a_china_shoucheng_list_raw2">
+		<rows><![CDATA[200]]></rows>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".clearfix>.first-blacklist-item",row-1)+$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_name" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".clearfix>.first-blacklist-item",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_code" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".clearfix>.second-blacklist-item",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="area" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".clearfix>.last-blacklist-item",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+
+</page>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="beijin__xiehui_list_list2_click">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"#tableIdStyle>tbody>tr>td>table>tbody>tr>td>span>a")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,"#tableIdStyle>tbody>tr>td>table>tbody>tr>td>span>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"#moreDive>font",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin_xiehui_detail_click"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickTask">
+		<rows><![CDATA[page>10?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,".bx>p>a[title=下一页]",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["beijin__xiehui_list_list2_click"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="instantClickTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["click:back"]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["do_nothing"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+</page>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="taobao_shop_item_marketsearch">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$ARRAYFMT($EXTRACT_JSON(html,"itemList"))]]></expression>
+		</uiobject>
+	</uielements>
+<!-- http://shop*****.taobao.com/search.htm?viewType=list -->
+	<uielements objectName="emitperpage=tb_items">
+		<rows><![CDATA[$ROWSARRAY(tidyDom)]]></rows>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="item_url" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="rowId:item_id" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"itemId")]]></expression>
+		</uiobject>
+		<uiobject fieldName="price" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"currentPrice")]]></expression>
+		</uiobject>
+		<uiobject fieldName="shop_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="update_time" nullAble="false">
+				<expression><![CDATA[$SYSDATE()]]></expression>
+		</uiobject>
+	</uielements>
+	<!-- 需要进一步爬取的详情页面 -->
+	<uielements objectName="tb_items_detail_Task">
+		<rows><![CDATA[$ROWSARRAY(tidyDom)]]></rows>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$EXTRACT_JSON($ARRAY(tidyDom,row),"href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="seller_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"seller_id")]]></expression>
+		</uiobject>		
+		<!-- 指定进一步爬取的页面类型 -->
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA[$TOSTRING($KEYVAL(task,"shop_type"))=="tmall"?"gaodig_tmall_shop_item_detail":"gaodig_taobao_shop_item_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="referer" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+	</uielements>
+
+	//todo!!!!!!!!!!!!!!!!!!http://list.taobao.com/itemlist/default.htm?_input_charset=utf-8&json=on&cat=0&sort=biz30day&sd=1&viewIndex=1&as=1&commend=all&atype=b&s=95&style=list&nick=johnny88qq&same_info=1&isnew=2&pSize=95&_ksTS=1431194742719_56&callback=jsonp57
+	<!-- 爬取下个页面的宝贝列表 -->
+	<uielements objectName="nextTask">
+		<rows><![CDATA[$XPATHROWS(tidyDom,"//a[contains(@class,'J_SearchAsync next')]")==""||page>100?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$XPATHROWS(tidyDom,"//a[contains(@class,'J_SearchAsync next')]/@href")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gaodig_taobao_shop_item"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="seller_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"seller_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="shop_id" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"shop_id")]]></expression>
+		</uiobject>
+	</uielements>
+
+</page>

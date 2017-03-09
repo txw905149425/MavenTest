@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gsei.com.cn/index.php/cms/item-list-category-1336-page-1.shtml"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.gsei.com.cn/index.php/cms/item-list-category-1336-page-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["甘肃经济信息网---招标公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gansu_jj_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gsei.com.cn/index.php/cms/item-list-category-1337-page-1.shtml"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.gsei.com.cn/index.php/cms/item-list-category-1337-page-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["甘肃经济信息网---中标公示"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gansu_jj_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.gsei.com.cn/index.php/cms/item-list-category-1390-page-1.shtml"]]></expression>
+		</uiobject>		
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.gsei.com.cn/index.php/cms/item-list-category-1390-page-"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["甘肃经济信息网---代理公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["gansu_jj_zhaobiao_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

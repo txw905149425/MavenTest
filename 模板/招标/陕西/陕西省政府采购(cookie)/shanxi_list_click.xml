@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="shanxi_list_click">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickTask">
+		<rows><![CDATA[3]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,".bb1>tbody>tr>td>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["shanxi_shengcaigou_list"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA["true"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

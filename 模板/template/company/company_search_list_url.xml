@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="company_search_list_url2">
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccopyright.com.cn/cpcc/RAttornContractAction.do?method=list&no=fck"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["zhuanrang_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ccopyright.com.cn/cpcc/RProprietaryContractAction.do?method=list&no=fck"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["zhuanyouxuke_list"]]></expression>
+		</uiobject>
+	</uielements>	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.neeq.com.cn/nqhqController/detailCompany.do?_=1472620780959&zqdm="+$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_name" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_code" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["company_stockholder_search"]]></expression>
+		</uiobject>
+	</uielements>	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.neeq.com.cn/nqhqController/detailCompany.do?_=1472620780959&zqdm="+$KEYVAL(task,"company_code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_name" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_code" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"code")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["company_finance_search"]]></expression>
+		</uiobject>
+	</uielements>	
+</page>

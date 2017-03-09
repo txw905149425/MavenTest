@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="judge_document_detail">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=judge_detail_raw">
+		<bvalid><![CDATA[$STR_LENGTH(html)>700]]></bvalid>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="judge_id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"judge_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_name" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["裁判文书网---detail页面"]]></expression>
+		</uiobject>
+		<uiobject fieldName="case_type" nullAble="true">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"html>body>div",1)]]></expression>
+		</uiobject>
+	</uielements>
+</page>

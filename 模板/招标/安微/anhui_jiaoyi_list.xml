@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="anhui_jiaoyi_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=txw_bid_ah_jiaoyi_list_raw">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(curPageTask,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".newsList>ul>li>a",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".newsList>ul>li>a")]]></rows>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA[$REGEXP($JSOUPATTRDOC(tidyDom,".newsList>ul>li>a","href",row-1),"id=(\\d+)")]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ahtba.org.cn/Notice/NoticeContent"]]></expression>
+		</uiobject>
+		<uiobject fieldName="listParam" nullAble="false">
+			<expression><![CDATA["id@"+$KEYVAL(map,"tmp")]]></expression>
+		</uiobject>
+		<uiobject fieldName="isGetMethod" nullAble="true">
+			<expression><![CDATA["false"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["anhui_jiaoyi_detail"]]></expression>
+		</uiobject>
+		<uiobject fieldName="checkRepeat" nullAble="true">
+			<expression><![CDATA["I##"+$KEYVAL(map,"url")+$KEYVAL(map,"listParam")+"##mongodb|txw_bid_ah_jiaoyi_detail_raw|id"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="nextTask">
+		<rows><![CDATA[(page+1)>2133?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.ahtba.org.cn/Notice/AnhuiNoticeSearch?spid=739&scid=740&srcode=&sttype=&stime=36500&stitle=&pageSize=20&pageNum="+(page+1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["anhui_jiaoyi_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

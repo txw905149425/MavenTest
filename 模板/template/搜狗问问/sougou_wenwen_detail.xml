@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="sougou_wenwen_detail">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=z_sougou_answers">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"div.pending-wrap.resolved")]]></rows>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")+row]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"#questionTitle",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="super_class" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"super_class")]]></expression>
+		</uiobject>
+		<uiobject fieldName="order" nullAble="true">
+			<expression><![CDATA[row]]></expression>
+		</uiobject>
+		<uiobject fieldName="answer_detail" nullAble="true">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"div.answer-con",row-1)]]></expression>
+		</uiobject>
+	</uielements>
+</page>

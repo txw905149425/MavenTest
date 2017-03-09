@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="xinyong_china_click_list2">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="emitperpage=a_china_xinyong_list_raw2">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$MD5(pageUrl+$JSOUPATTRDOC(tidyDom,".object-type>a","href",0))]]></expression>
+		</uiobject>
+		<uiobject fieldName="html" nullAble="false">
+			<expression><![CDATA[html]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".object-type>a",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickNextPageTask">
+		<rows><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".page-link.next",0)==""?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,".page-link.next",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["xinyong_china_click_list2"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

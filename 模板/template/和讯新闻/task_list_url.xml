@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="task_list_url">
+  <uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://news.search.hexun.com/news?s=1&page=1&t=0&f=0&key="+$CHARCODE($KEYVAL(task,"company_name"),"gb2312")]]></expression>
+		</uiobject>
+		<uiobject fieldName="num" nullAble="false">
+			<expression><![CDATA[$REGEXP(tidyDom,"page =(.*?);")]]></expression>
+		</uiobject>
+		<uiobject fieldName="http" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"http")]]></expression>
+		</uiobject>
+		<uiobject fieldName="zhong" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"zhong")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_name" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["hexun_txw_list"]]></expression>
+		</uiobject>
+	</uielements>	
+</page>

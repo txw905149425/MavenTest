@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="zhihu_url_info_list">
+   <uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="listUrlTask">
+	 <rows><![CDATA[$JSOUPROWSDOC(tidyDom,"div.item")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["https://www.zhihu.com"+$JSOUPATTRDOC(tidyDom,"div.item>div.blk>a","href",row-1)+"/top-answers"]]></expression>
+		</uiobject>
+		<uiobject fieldName="super_tag" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"super_tag")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["zhihu_sousuo_list"]]></expression>
+		</uiobject>
+	</uielements>
+
+</page>

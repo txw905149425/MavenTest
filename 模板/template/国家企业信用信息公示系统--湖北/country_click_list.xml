@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="country_click_list">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="clickTask">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,".more>ul>li>div>a")]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,".more>ul>li>div>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["country_click_detail"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="clickNextPageTask">
+		<rows><![CDATA[page>26288?0:1]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$CLICKROW(tidyDom,"#pages > ul > li:nth-child(12) > a",0)]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"website")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["country_click_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

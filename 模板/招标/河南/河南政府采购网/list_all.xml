@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="list_all">
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0101&bz=1&pageSize=16&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0101&bz=1&pageSize=16&pageNo="]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/cgxx/cggg/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---采购公告(省直)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0101&bz=2&pageSize=16&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0101&bz=2&pageSize=16&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/cgxx/cggg/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---采购公告(市县)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0102&bz=1&pageSize=16&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0101&bz=1&pageSize=16&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/cgxx/jggg/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---结果公告(省直)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0102&bz=2&pageSize=16&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0101&bz=2&pageSize=16&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/cgxx/jggg/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---结果公告(市县)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_caigou_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0103&bz=1&pageSize=16&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0103&bz=1&pageSize=16&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/wzxx/ggcs/sxgz/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---变更公告(省直)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0103&bz=2&pageSize=16&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=0103&bz=2&pageSize=16&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/wzxx/ggcs/sxgz/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---变更公告(市县)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1301&bz=0&pageSize=10&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1301&bz=0&pageSize=10&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/qtgg/dgly/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---其他公告(单一来源)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1302&bz=0&pageSize=10&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1302&bz=0&pageSize=10&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/qtgg/jkcp/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---其他公告(进口产品)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1303&bz=0&pageSize=10&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1303&bz=0&pageSize=10&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/qtgg/jszb/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---其他公告(技术指标)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1304&bz=0&pageSize=10&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1304&bz=0&pageSize=10&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/qtgg/qt/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---其他公告(征询意见)"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1401&bz=0&pageSize=10&pageNo=1"]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1401&bz=0&pageSize=10&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/htysgg/htgg/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---合同公告"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	<uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1402&bz=0&pageSize=10&pageNo=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/henan/ggcx?appCode=H60&channelCode=1402&bz=0&pageSize=10&pageNo="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/webfile/henan/htysgg/ysgg/webinfo/"]]></expression>
+		</uiobject>
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---验收结果"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_biangeng_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+	
+	<uielements objectName="documentTask">
+		<rows><![CDATA[8]]></rows>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.hngp.gov.cn/xygh/egp/jd/dljg/dljgxx/ListDljg,$Form.direct?area=00390019&sbSqlWhere_Split=+ba.zt+%3D%3AZT+and+jg.id++%3D+ba.dljgxh++and+jg.dllb+%3D%3ADLLB++and+ba.baqy+%3D%3AAREA++and+jg.enabled+%3D%3AENABLED++order+by+jg.bs%2C+jg.zcrq+asc++&pageSize_Split=50&currentPage_Split="+row]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["河南政府采购网---代理机构信息"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["henan_daili_list"]]></expression>
+		</uiobject>
+	</uielements>
+	
+</page>

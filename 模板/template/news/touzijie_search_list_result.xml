@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="touzijie_list_search">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
+		</uiobject>
+	</uielements>
+  <uielements objectName="results">
+		<rows><![CDATA[$JSOUPROWSDOC(tidyDom,"#search-list-news>li>a")]]></rows>
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$JSOUPATTRDOC(tidyDom,"#search-list-news>li>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA[$JSOUPATTRDOC(tidyDom,"#search-list-news>li>a","href",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="title" nullAble="false">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,"#search-list-news>li>a",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="abstract" nullAble="true">
+			<expression><![CDATA[$JSOUPTXTLISTDOC(tidyDom,".searchxt>p",row-1)]]></expression>
+		</uiobject>
+		<uiobject fieldName="search_number" nullAble="false">
+		<expression><![CDATA[$REGEXP($STR_REPLACE($JSOUPTXTLISTDOC(tidyDom,".search-result>ul>li:nth-child(1)",0),",",""),"(\\d+)")]]></expression>
+		</uiobject>
+		<uiobject fieldName="company_code" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"code")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="company_name" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"company_name")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website_name" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website_name")]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website_type" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"website_type")]]></expression>
+		</uiobject>		
+		<uiobject fieldName="order" nullAble="true">
+			<expression><![CDATA[row]]></expression>
+		</uiobject>
+	</uielements>
+
+</page>

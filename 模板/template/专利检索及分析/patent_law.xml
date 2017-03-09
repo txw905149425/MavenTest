@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page pageType="patent_law">
+	<uielements objectName="beforeSemantic">
+		<uiobject fieldName="tidyDom">
+			<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+	</uielements>
+	<uielements objectName="emitperpage=patent_law_info">
+	     <uiobject fieldName="id" nullAble="false">
+		<expression><![CDATA[$KEYVAL(task,"url")+row]]></expression>
+		</uiobject>
+		<uiobject fieldName="keyword" nullAble="true">
+		<expression><![CDATA[$KEYVAL(task,"keyword")]]></expression>
+		</uiobject>
+			
+		<uiobject fieldName="title" nullAble="false">
+		<expression><![CDATA[$KEYVAL(task,"title")]]></expression>
+		</uiobject>
+		<uiobject fieldName="tag" nullAble="true">
+		<expression><![CDATA[$KEYVAL(task,"tag")]]></expression>
+		</uiobject>
+	    <uiobject fieldName="patent_id" nullAble="true">
+		<expression><![CDATA[$KEYVAL(task,"patent_id")]]></expression>
+		</uiobject>
+		  <uiobject fieldName="only_id" nullAble="true">
+		<expression><![CDATA[$KEYVAL(task,"only_id")]]></expression>
+		</uiobject>
+		 <uiobject fieldName="nrdPN_id" nullAble="true">
+		<expression><![CDATA[$KEYVAL(task,"nrdPN_id")]]></expression>
+		</uiobject>
+		  <uiobject fieldName="url" nullAble="false">
+		<expression><![CDATA[$KEYVAL(task,"url")]]></expression>
+		</uiobject>
+		 <uiobject fieldName="listInformation" nullAble="false">
+		<expression><![CDATA[$KEYVAL(task,"listInformation")]]></expression>
+		</uiobject>
+		<uiobject fieldName="lawState" nullAble="true">
+		<expression><![CDATA[$JSONFMT(html)]]></expression>
+		</uiobject>
+		
+	</uielements>
+</page>
