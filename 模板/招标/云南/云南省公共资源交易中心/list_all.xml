@@ -91,7 +91,7 @@
 		</uiobject>	
 		<uiobject fieldName="tmp" nullAble="false">
 			<expression><![CDATA["http://www.ynggzy.com/bulletininfo.do?ec_i=bulletininfotable&bulletininfotable_efn=&bulletininfotable_crd=5&bulletininfotable_s_bulletintitle=&bulletininfotable_s_finishday=&hySort=1&method=bulletinMore&bulletinclass=08&bulletininfotable_totalpages=2987&bulletininfotable_totalrows=14932&bulletininfotable_pg=1&bulletininfotable_rd=5&findAjaxZoneAtClient=false&bulletininfotable_p="]]></expression>
-		</uiobject>	
+		</uiobject>
 		<uiobject fieldName="website" nullAble="false">
 			<expression><![CDATA["云南省公共资源交易中心---政府采购---更正公告列表 "]]></expression>
 		</uiobject>
@@ -105,27 +105,5 @@
 			<expression><![CDATA["yn_gg_caigou_list"]]></expression>
 		</uiobject>
 	</uielements>
-	
-	<uielements objectName="documentTask">
-		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.ynggzy.com/bulletininfo.do?ec_i=bulletininfotable&bulletininfotable_efn=&bulletininfotable_crd=5&bulletininfotable_s_bulletintitle=&bulletininfotable_s_finishday=&hySort=1&method=bulletinMore&bulletinclass=08&bulletininfotable_totalpages=2987&bulletininfotable_totalrows=14932&bulletininfotable_pg=1&bulletininfotable_rd=5&findAjaxZoneAtClient=false&bulletininfotable_p=1"]]></expression>
-		</uiobject>	
-		<uiobject fieldName="tmp" nullAble="false">
-			<expression><![CDATA["http://www.ynggzy.com/bulletininfo.do?ec_i=bulletininfotable&bulletininfotable_efn=&bulletininfotable_crd=5&bulletininfotable_s_bulletintitle=&bulletininfotable_s_finishday=&hySort=1&method=bulletinMore&bulletinclass=08&bulletininfotable_totalpages=2987&bulletininfotable_totalrows=14932&bulletininfotable_pg=1&bulletininfotable_rd=5&findAjaxZoneAtClient=false&bulletininfotable_p="]]></expression>
-		</uiobject>	
-		<uiobject fieldName="website" nullAble="false">
-			<expression><![CDATA["云南省公共资源交易中心---政府采购---更正公告列表 "]]></expression>
-		</uiobject>
-		<uiobject fieldName="bAjax" nullAble="false">
-			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
-		</uiobject>
-		<uiobject fieldName="bProxy" nullAble="true">
-			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
-		</uiobject>
-		<uiobject fieldName="pageType" nullAble="false">
-			<expression><![CDATA["yn_gg_caigou_list"]]></expression>
-		</uiobject>
-	</uielements>
-	
 	
 </page>

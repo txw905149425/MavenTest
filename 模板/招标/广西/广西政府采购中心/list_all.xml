@@ -147,7 +147,7 @@
 			<expression><![CDATA["guangxi_zx_zhaobiao_list"]]></expression>
 		</uiobject>
 	</uielements>
-	
+
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
 			<expression><![CDATA["http://www.gxgp.gov.cn/zbgkzb/index_1.htm"]]></expression>
@@ -168,5 +168,5 @@
 			<expression><![CDATA["guangxi_zx_zhaobiao_list"]]></expression>
 		</uiobject>
 	</uielements>
-	
+
 </page>

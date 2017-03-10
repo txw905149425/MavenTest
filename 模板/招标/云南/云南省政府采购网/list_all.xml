@@ -46,7 +46,7 @@
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p=2&bulletinstable_pg=2"]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
 		</uiobject>	
 		<uiobject fieldName="tmp" nullAble="false">
 			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=3&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=274&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
@@ -128,7 +128,6 @@
 		</uiobject>
 	</uielements>
 	
-	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
 			<expression><![CDATA["http://www.yngp.com/agencies.do?ec_i=agencies2table&agencies2table_efn=&agencies2table_crd=20&agencies2table_s_agenciename=&agencies2table_s_busiaddress=&agencies2table_s_contactname=&agencies2table_s_contactphone=&agencies2table_s_contactftel=&flag=2&method=normalAgenciesList&agencies2table_totalpages=16&agencies2table_totalrows=318&agencies2table_rd=20&findAjaxZoneAtClient=false&agencies2table_p=1&agencies2table_pg=1"]]></expression>
@@ -149,5 +148,5 @@
 			<expression><![CDATA["yn_daili_list"]]></expression>
 		</uiobject>
 	</uielements>
-		
+	
 </page>
