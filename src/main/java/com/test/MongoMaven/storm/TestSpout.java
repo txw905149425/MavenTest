@@ -1,4 +1,4 @@
-package com.test.MongoMaven.strom;
+package com.test.MongoMaven.storm;
 
 import java.io.FileReader;
 import java.util.Map;

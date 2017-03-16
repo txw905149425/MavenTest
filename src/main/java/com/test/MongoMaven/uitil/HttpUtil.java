@@ -18,6 +18,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import net.sf.json.JSONObject;
+
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
@@ -244,35 +246,30 @@ public class HttpUtil {
 	
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		
-		String url="http://www.tianyancha.com/search?key=%E5%8D%8E%E4%B8%BA&checkFrom=searchBox";
-//		url="http://www.tianyancha.com/company/17068229.json";
-//		PrintWriter pw=new PrintWriter(new File("D:/dd.html"));
+		String url="http://www.creditchina.gov.cn/publicity_info_search?t=1489654089700";
 		HashMap< String, String> map=new HashMap<String, String>();
-		map.put("User-Agent","Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36");
-		map.put("Accept-Encoding","gzip, deflate, sdch");
-		map.put("Cache-Control","max-age=0");
-		map.put("Host","www.tianyancha.com");
-		map.put("Accept","application/json, text/plain, */*");
-		map.put("Accept-Language","zh-CN,zh;q=0.8");
-		map.put("CheckError","check");
-		map.put("Connection","keep-alive");
-//		map.put("Cookie","aliyungf_tc=AQAAANHwP1zr7wYAYTsNr9UYb2VBK17d; TYCID=2ac1e6bc0d87449eaf537afc35ef90b4; tnet=175.13.59.97; RTYCID=2cc81e33b6d742e6a89d797c0b86570d; _pk_ref.1.e431=%5B%22%22%2C%22%22%2C1488436697%2C%22https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DjfUraZhqw7wOarhyJwfy3qKy2itYqIxc24tWFW_upQW3h6kGSS1I2UgBaLdNkxrw%26wd%3D%26eqid%3Df2202e3e000bd7860000000658b77ba2%22%5D; _pk_id.1.e431=931ef23e3d8eebfb.1486281989.12.1488437550.1488436697.; _pk_ses.1.e431=*; Hm_lvt_e92c8d65d92d534b0fc290df538b4758=1486373959,1487581351,1488419754,1488425442; Hm_lpvt_e92c8d65d92d534b0fc290df538b4758=1488437550; token=8862ecf9d9e04aceb6e7d557627dd9c0; _utm=e1338e8b10bd4a3fa1375074e15f0bc0; paaptp=32b0386b45595e867e0c3c1e1d3cfd5cb55372952f04f0315615a8dca9bab");
-		map.put("Referer","http://www.tianyancha.com/company/17068229");
-		map.put("Tyc-From","normal");
-		
-		Map< String, String> result=getHtml(url, map, "utf8", 1);
-//		System.out.println(result.get("html"));
-		System.out.println(result.get("setCookie"));
-		url="http://www.tianyancha.com/company/24416401";
-		map.put("Cookie",result.get("setCookie"));
-		 result=getHtml(url, map, "utf8", 1);
-//		 System.out.println(result.get("html"));
-		 System.out.println(result.get("setCookie"));
-		map.put("Cookie",result.get("setCookie"));
-		 url="http://www.tianyancha.com/company/17068229.json";
-		 result=getHtml(url, map, "utf8", 1);
-		 System.out.println(result.get("setCookie"));
-		 
+		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
+//		keyword:中鼎
+//		searchtype:1
+//		objectType:2
+//		areas:
+//		creditType:
+//		dataType:0
+//		areaCode:
+//		templateId:
+//		exact:0
+//		page:1
+		list.add(new BasicNameValuePair("keyword", "中鼎"));
+		list.add(new BasicNameValuePair("searchtype", "1"));
+		list.add(new BasicNameValuePair("objectType", "2"));
+		list.add(new BasicNameValuePair("dataType", "0"));
+		list.add(new BasicNameValuePair("exact", "0"));
+		list.add(new BasicNameValuePair("page", "1"));
+//		list.add(new BasicNameValuePair("", ""));
+		String html=postHtml(url, map, list, 10000, 1);
+		 System.out.println(html);
+		 JSONObject json= JSONObject.fromObject(html);
+		 System.out.println(json);
 		/*
 		 * httpclient post请求时 request Payload 参数传递测试
 		 * */

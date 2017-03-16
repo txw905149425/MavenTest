@@ -5,7 +5,7 @@
 			<expression><![CDATA[$JSOUPDOC(html)]]></expression>
 		</uiobject>
 	</uielements>
-	<uielements objectName="emitperpage=txw_bid_hen_caigou_list_raw">
+	<uielements objectName="emitperpage=txw_bid_hen_daili_list_raw">
 		<uiobject fieldName="id" nullAble="false">
 			<expression><![CDATA[$KEYVAL(curPageTask,"url")]]></expression>
 		</uiobject>

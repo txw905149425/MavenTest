@@ -1,4 +1,4 @@
-package com.test.MongoMaven.strom;
+package com.test.MongoMaven.storm;
 
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;

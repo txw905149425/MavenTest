@@ -41,6 +41,7 @@
 	</uielements>
 	
 	<uielements objectName="nextTask">
+		<bvalid><![CDATA[$STR_LENGTH($KEYVAL($JSONFMT(html),"data"))>200]]></bvalid>
 		<rows><![CDATA[page>100?0:1]]></rows>
 		<uiobject fieldName="url" nullAble="false">
 			<expression><![CDATA["https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?resource_id=6899&query=%E5%A4%B1%E4%BF%A1%E8%A2%AB%E6%89%A7%E8%A1%8C%E4%BA%BA%E5%90%8D%E5%8D%95&cardNum=&iname="+$CHARCODE($KEYVAL(task,"name"),"utf-8")+"&pn="+$MULTIPLY_NUM(page,10)+"&rn=10&ie=utf-8&oe=utf-8&format=json&t="+$KEYVAL(task,"time")]]></expression>			

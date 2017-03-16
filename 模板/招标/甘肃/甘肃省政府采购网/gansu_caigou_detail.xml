@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<page pageType="anhui_caigou_detail">
+<page pageType="gansu_caigou_detail">
 	<uielements objectName="beforeSemantic">
 		<uiobject fieldName="tidyDom">
 			<expression><![CDATA[$JSOUPDOC(html)]]></expression>

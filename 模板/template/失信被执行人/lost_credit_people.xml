@@ -29,6 +29,7 @@
 	</uielements>
 	
 	<uielements objectName="emitperpage=txw_lost_credit_info2_raw">
+	<bvalid><![CDATA[$STR_LENGTH($KEYVAL($JSONFMT(html),"data"))>50]]></bvalid>
 		<rows><![CDATA[$ROWSARRAY($KEYVAL(tidyDom,"result"))]]></rows>
 		<uiobject fieldName="id" nullAble="false">
 			<expression><![CDATA[$KEYVAL($ARRAY($KEYVAL(tidyDom,"result"),1),"caseCode")]]></expression>

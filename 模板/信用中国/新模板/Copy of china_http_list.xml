@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page pageType="china_http_list">
+
+	<uielements objectName="emitperpage=companyName2">
+		<uiobject fieldName="id" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"doc_id")]]></expression>
+		</uiobject>
+		<uiobject fieldName="china_crawl_time" nullAble="false">
+			<expression><![CDATA[$SYSDATE()]]></expression>
+		</uiobject>
+	</uielements>
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">

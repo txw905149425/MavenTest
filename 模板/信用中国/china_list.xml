@@ -22,6 +22,7 @@
 		<uiobject fieldName="url" nullAble="false">
 			<expression><![CDATA["http://www.creditchina.gov.cn/search_all#keyword="+$CHARCODE($KEYVAL(task,"keyword"),"utf-8")+"&searchtype=1&areaCode=&dataType=0&page=1"]]></expression>
 		</uiobject>
+		
 		<uiobject fieldName="website" nullAble="false">
 			<expression><![CDATA["信用中国-----行政处罚"]]></expression>
 		</uiobject>

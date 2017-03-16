@@ -3,10 +3,10 @@
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&findAjaxZoneAtClient=false&sign=100&flag=1&method=moreList&district=&bulletinstable_totalpages=3890&bulletinstable_totalrows=77800&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=0"]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=1&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=0&districtCode=all&current=1"]]></expression>
 		</uiobject>	
 		<uiobject fieldName="tmp" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&findAjaxZoneAtClient=false&sign=100&flag=1&method=moreList&district=&bulletinstable_totalpages=3890&bulletinstable_totalrows=77800&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=1&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=0&districtCode=all&current="]]></expression>
 		</uiobject>	
 		<uiobject fieldName="website" nullAble="false">
 			<expression><![CDATA["云南省政府采购网---招标（谈判、询价、更正）公告"]]></expression>
@@ -25,10 +25,10 @@
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=2&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=3893&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=2&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=1&districtCode=all&current=1"]]></expression>
 		</uiobject>	
 		<uiobject fieldName="tmp" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=2&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=3893&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=2&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=1&districtCode=all&current="]]></expression>
 		</uiobject>
 		<uiobject fieldName="website" nullAble="false">
 			<expression><![CDATA["云南省政府采购网---采购结果公告"]]></expression>
@@ -46,10 +46,10 @@
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=3&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=1&districtCode=all&current=1"]]></expression>
 		</uiobject>	
 		<uiobject fieldName="tmp" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=3&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=274&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=3&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=1&districtCode=all&current="]]></expression>
 		</uiobject>	
 		<uiobject fieldName="website" nullAble="false">
 			<expression><![CDATA["云南省政府采购网---单一来源审核前公示"]]></expression>
@@ -67,10 +67,10 @@
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=4&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=1&districtCode=all&current=1"]]></expression>
 		</uiobject>	
 		<uiobject fieldName="tmp" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=4&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=2896&bulletinstable_rd=20&bulletinstable_p="]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?method=moreListQuery&rowCount=10&searchPhrase=&sign=4&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=1&districtCode=all&current="]]></expression>
 		</uiobject>	
 		<uiobject fieldName="website" nullAble="false">
 			<expression><![CDATA["云南省政府采购网---进口产品审核前公示"]]></expression>
@@ -88,11 +88,14 @@
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?current=1&method=moreListQuery&rowCount=10&searchPhrase=&sign=1&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=0&districtCode=all"]]></expression>
 		</uiobject>	
 		<uiobject fieldName="tmp" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
-		</uiobject>	
+			<expression><![CDATA["http://www.yngp.com/bulletin.do?current="]]></expression>
+		</uiobject>
+		<uiobject fieldName="tmp1" nullAble="false">
+			<expression><![CDATA["&method=moreListQuery&rowCount=10&searchPhrase=&sign=1&query_bulletintitle=&query_startTime=&query_endTime=&query_sign=1&flag=1&listSign=0&districtCode=all"]]></expression>
+		</uiobject>
 		<uiobject fieldName="website" nullAble="false">
 			<expression><![CDATA["云南省政府采购网---采购合同公告"]]></expression>
 		</uiobject>
@@ -107,26 +110,7 @@
 		</uiobject>
 	</uielements>
 	
-	<uielements objectName="documentTask">
-		<uiobject fieldName="url" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p=1&bulletinstable_pg=1"]]></expression>
-		</uiobject>	
-		<uiobject fieldName="tmp" nullAble="false">
-			<expression><![CDATA["http://www.yngp.com/bulletin.do?ec_i=bulletinstable&bulletinstable_efn=&bulletinstable_crd=20&bulletinstable_s_bulletintitle=&bulletinstable_s_codeName=&bulletinstable_s_finishday=&listSign=1&findAjaxZoneAtClient=false&sign=5&flag=1&districtCode=all&method=moreList&district=&bulletinstable_totalpages=145&bulletinstable_totalrows=&bulletinstable_rd=20&bulletinstable_p="]]></expression>
-		</uiobject>	
-		<uiobject fieldName="website" nullAble="false">
-			<expression><![CDATA["云南省政府采购网---供应商查询"]]></expression>
-		</uiobject>
-		<uiobject fieldName="bAjax" nullAble="false">
-			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
-		</uiobject>
-		<uiobject fieldName="bProxy" nullAble="true">
-			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
-		</uiobject>
-		<uiobject fieldName="pageType" nullAble="false">
-			<expression><![CDATA["yn_gongying_list"]]></expression>
-		</uiobject>
-	</uielements>
+	
 	
 	<uielements objectName="documentTask">
 		<uiobject fieldName="url" nullAble="false">
@@ -148,5 +132,26 @@
 			<expression><![CDATA["yn_daili_list"]]></expression>
 		</uiobject>
 	</uielements>
+	
+	<!-- <uielements objectName="documentTask">
+		<uiobject fieldName="url" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/course.do?method=list&selectedtable=suppliertable&ismain=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="tmp" nullAble="false">
+			<expression><![CDATA["http://www.yngp.com/course.do?method=list&selectedtable=suppliertable&ismain=1"]]></expression>
+		</uiobject>	
+		<uiobject fieldName="website" nullAble="false">
+			<expression><![CDATA["云南省政府采购网---供应商查询"]]></expression>
+		</uiobject>
+		<uiobject fieldName="bAjax" nullAble="false">
+			<expression><![CDATA[$KEYVAL(task,"bAjax")]]></expression>
+		</uiobject>
+		<uiobject fieldName="bProxy" nullAble="true">
+			<expression><![CDATA[$KEYVAL(task,"bProxy")]]></expression>
+		</uiobject>
+		<uiobject fieldName="pageType" nullAble="false">
+			<expression><![CDATA["yn_gongying_list"]]></expression>
+		</uiobject>
+	</uielements> -->
 	
 </page>

@@ -1,4 +1,4 @@
-package com.test.MongoMaven.strom;
+package com.test.MongoMaven.storm;
 
 import org.apache.storm.topology.BasicOutputCollector;
 import org.apache.storm.topology.OutputFieldsDeclarer;

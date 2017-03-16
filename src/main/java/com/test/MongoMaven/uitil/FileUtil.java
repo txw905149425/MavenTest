@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import clojure.main;
+
 public class FileUtil {
 	
 		public static void readFile(String url){
@@ -76,7 +78,14 @@ public class FileUtil {
 	   }
 		
 		
-		
+		public static void main(String[] args) {
+			ArrayList<String> list=readFileReturn("txt");
+//			4:a.conn.run:37768,-,1
+			for(String str:list){
+				String last="4:"+str+",-,1";
+				System.out.println(last);
+			}
+		}
 		
 		
 		
