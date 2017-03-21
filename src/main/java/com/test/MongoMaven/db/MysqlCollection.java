@@ -14,14 +14,9 @@ public class MysqlCollection {
 	    // connect to MySQL  
 	   public Connection connSQL() {  
 		  Connection conn = null;  
-//	        String dbUrl = "jdbc:mysql://172.16.0.115:3306/gdkj"; 
-//	        String dbUrl = "jdbc:mysql://172.16.0.115:3306/gdkj?characterEncoding=UTF-8";  //本地mysql
-//		    String username = "root";  				//本地mysql
-//	        String password = "bjgdFristMan115"; // 加载驱动程序以连接数据库   					//本地mysql
-	        String dbUrl = "jdbc:mysql://172.19.104.42:3001/CrawlerData";	                        // idcmysql 内部
-//	        String dbUrl = "jdbc:mysql://218.76.52.43:3001/CrawlerData";	                        // idcmysql 外部
-	        String username = "cralwerUser";  				//本地mysql
-	        String password = "bjgdFristCralerRelatedDataStore2016";      
+	        String dbUrl = "jdbc:mysql://172.158.1099.42:332546/hh";	                        // 地址
+	        String username = "testtt";  				//本地mysql
+	        String password = "jhjjjjj";      
 	        try {   
 	            Class.forName("com.mysql.jdbc.Driver" );   
 				 conn = DriverManager.getConnection(dbUrl, username, password);

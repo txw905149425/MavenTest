@@ -246,9 +246,15 @@ public class HttpUtil {
 	
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		
-		String url="http://www.creditchina.gov.cn/publicity_info_search?t=1489654089700";
+		String url="http://www.ccgp-shanghai.gov.cn/news.do?method=purchasePracticeMore&ec_i=bulletininfotable&bulletininfotable_crd=10&treenum=09&title=%E6%BE%84%E6%B8%85%E5%85%AC%E5%91%8A&flag=cqgg&method=purchasePracticeMore&bulletininfotable_totalpages=6&bulletininfotable_totalrows=58&bulletininfotable_pg=1&bulletininfotable_rd=10&findAjaxZoneAtClient=false&&bulletininfotable_p=1";
 		HashMap< String, String> map=new HashMap<String, String>();
-		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
+		Map<String,String> result=getHtml(url, map, "utf8", 1);
+		System.out.println(result.get("html"));
+		System.out.println(result.get("Set-Cookie"));
+		
+		
+		
+//		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
 //		keyword:中鼎
 //		searchtype:1
 //		objectType:2
@@ -259,17 +265,17 @@ public class HttpUtil {
 //		templateId:
 //		exact:0
 //		page:1
-		list.add(new BasicNameValuePair("keyword", "中鼎"));
-		list.add(new BasicNameValuePair("searchtype", "1"));
-		list.add(new BasicNameValuePair("objectType", "2"));
-		list.add(new BasicNameValuePair("dataType", "0"));
-		list.add(new BasicNameValuePair("exact", "0"));
-		list.add(new BasicNameValuePair("page", "1"));
-//		list.add(new BasicNameValuePair("", ""));
-		String html=postHtml(url, map, list, 10000, 1);
-		 System.out.println(html);
-		 JSONObject json= JSONObject.fromObject(html);
-		 System.out.println(json);
+//		list.add(new BasicNameValuePair("keyword", "中鼎"));
+//		list.add(new BasicNameValuePair("searchtype", "1"));
+//		list.add(new BasicNameValuePair("objectType", "2"));
+//		list.add(new BasicNameValuePair("dataType", "0"));
+//		list.add(new BasicNameValuePair("exact", "0"));
+//		list.add(new BasicNameValuePair("page", "1"));
+////		list.add(new BasicNameValuePair("", ""));
+//		String html=postHtml(url, map, list, 10000, 1);
+//		 System.out.println(html);
+//		 JSONObject json= JSONObject.fromObject(html);
+//		 System.out.println(json);
 		/*
 		 * httpclient post请求时 request Payload 参数传递测试
 		 * */

@@ -11,7 +11,7 @@ import java.util.Map.Entry;
  * 
  * @author chenjunliang
  */
-public class CopyOfWriterIntoMysql  {
+public class WriteMysql  {
 	DBStatement stmt = null;
 	ResultSet rs = null;
 	DataBase database = null;
@@ -22,10 +22,10 @@ public class CopyOfWriterIntoMysql  {
 	public void saveRecord(HashMap<String, List<HashMap<String, Object>>> result) {
 		String dbType = "Mysql";		
 //		String dbUrl = "jdbc:mysql://localhost:3306/some";		
-		String dbUrl = "jdbc:mysql://172.16.0.115:3306/gdkj";
-		String	dbUserName = "root";				
+		String dbUrl = "jdbc:mysql://1785.188.0.1555:6636/klj";
+		String	dbUserName = "5555";				
 //		String 	dbPassword = "root";	
-		String 	dbPassword = "bjgdFristMan115";
+		String 	dbPassword = "88888888";
 		try {
 			if(database == null){
 			database = DataBase.createConnection(dbType,dbUrl,dbUserName, dbPassword);
@@ -94,7 +94,7 @@ public class CopyOfWriterIntoMysql  {
 	list.add(map);
 	HashMap<String, List<HashMap<String, Object>>>rs = new HashMap<String, List<HashMap<String, Object>>>();
 	rs.put("test", list);
-	CopyOfWriterIntoMysql copy = new CopyOfWriterIntoMysql();
+	WriteMysql copy = new WriteMysql();
 	copy.saveRecord(rs);
 	}
 
