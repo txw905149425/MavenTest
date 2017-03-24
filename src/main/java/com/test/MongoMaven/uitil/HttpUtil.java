@@ -122,7 +122,6 @@ public class HttpUtil {
 //			    	 resultMap.put("html",html);
 //			    }
 			 int statusCode = response.getStatusLine().getStatusCode();
-			 System.out.println(statusCode);
 			if (statusCode == 200) {
 				ContentType contentType = ContentType.getOrDefault(entity);
 				Charset defaultCharset = contentType.getCharset();

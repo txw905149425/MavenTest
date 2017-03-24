@@ -1,4 +1,4 @@
-package com.test.MongoMaven.uitil;
+package com.test.MongoMaven.db;
 
 import java.util.Arrays;
 
@@ -18,13 +18,13 @@ public class Collenction1 {
 		if (ShardDataConn != null) {
 			return ShardDataConn;
 		}
-		String userdb = "bigcrawler"; // Mongodb认证库
-		String username = "test"; // Mongodb用户名
-		String password = "testss"; // Mongodb密码
-		String host = "1111.111.11.11"; // IDC Mongodb服务器地址 外部地址
+		String userdb = "admin"; // Mongodb认证库
+		String username = "root"; // Mongodb用户名
+		String password = "root"; // Mongodb密码
+		String host = "localhost"; // IDC Mongodb服务器地址 外部地址
 //		String host = "11112.69.1022.4245"; // IDC Mongodb服务器地址 内部地址
-		Integer port = 3010; // Mongodb端口
-		String dbname = "test"; // 使用的数据库名
+		Integer port = 27017; // Mongodb端口
+		String dbname = "root"; // 使用的数据库名
 		ServerAddress svrAddr = new ServerAddress(host, port);
 		MongoCredential credential = MongoCredential.createCredential(username,userdb, password.toCharArray());
 		MongoClient mongoClient = new MongoClient(svrAddr,Arrays.asList(credential));

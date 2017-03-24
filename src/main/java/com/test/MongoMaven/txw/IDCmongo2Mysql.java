@@ -18,8 +18,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.test.MongoMaven.db.Collenction1;
 import  com.test.MongoMaven.db.MysqlCollection;
-import com.test.MongoMaven.uitil.Collenction1;
 
 public class IDCmongo2Mysql {
 	static String regexp="(^[A-Za-z0-9]+$)|(.*楼$)|(.*苑$)|(.*厅$)|(.*亭$)|(.*区$)|(.*社$)|(.*站$)|(.*家$)|(.*路$)|(.*街$)|(.*道$)|(.*煤矿$)|(.*室$)|(.*号$)|(.*口$)|(.*客车$)|(.*楼$)|(.*厅$)|(.*行$)|(.*园$)|(.*店$)|(.*所$)|(.*庄$)|(.*部$)|(.*市$)|(.*屋$)|(.*场$)|(.*摊$)|(.*通讯$)|(.*点$)|(.*处$)|(.*中心$)|(.*户$)|(.*坊$)|(.*房$)|(.*基地$)|(.*养殖$)|(.*队$)|(.*吧$)|(.*照明 $)|(.*货运$)|(.*院$)|(.*木艺$)|(.*城$)|(.*ＫＴＶ$)|(.*KTV$)|(.*门窗$)|(.*库$)|(.*服饰$)|(.*服装$)|(.*总汇$)|(.*业$)|(.*部）$)|(.*摊床$)|(.*代办$)|(.*电器 $)|(.*寄賣$)|(.*寄卖$)|(.*铺$)|(.*内衣 $)|(.*经销$)|(.*装潢$)|(.*馆$)|(.*斋$)|(.*大棚$)|(.*组$)|(.*班$)|(.*间$)|(.*家私$)|(.*柜$)|(.*分厂$)|(.*团$)|(.*画廊$)|(.*会$)|(.*苗圃$)|(.*阁$)|(.*运输$)|(.*村$)|(.*分公司.*)|(.*经销部.*)|(.*电站.*)|(.*分厂.*)";

@@ -1,4 +1,4 @@
-package com.test.MongoMaven.uitil;
+package com.test.MongoMaven.db;
 
 import java.util.Arrays;
 import com.mongodb.MongoClient;
@@ -29,6 +29,8 @@ public class Collenction {
 		ShardDataConn = mongoClient.getDatabase(dbname);
 		return ShardDataConn;
 	}
+	
+	
 
 }
 

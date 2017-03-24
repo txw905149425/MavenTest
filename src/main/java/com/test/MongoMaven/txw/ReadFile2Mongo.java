@@ -14,7 +14,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
-import com.test.MongoMaven.uitil.Collenction1;
+import com.test.MongoMaven.db.Collenction1;
 import com.test.MongoMaven.uitil.FileUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 

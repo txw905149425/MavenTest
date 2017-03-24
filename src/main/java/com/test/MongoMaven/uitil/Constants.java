@@ -5,7 +5,9 @@ import java.net.InetAddress;
 
 public class Constants {
 
-	
+	public static String JAVA_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	public static String DATE_FORMAT_YMD = "yyyyMMdd";
+	public static String NOYEAR_DATE_FORMAT = "MM-dd HH:mm:ss";
 	// 默认的全局Redis服务器连接IP和对应的端口
 	private static String redis_global_ip = "468456456";
 	private static int redis_global_port = 4554;

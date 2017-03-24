@@ -10,7 +10,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.test.MongoMaven.uitil.Collenction1;
+import com.test.MongoMaven.db.Collenction1;
 
 public class Test {
 

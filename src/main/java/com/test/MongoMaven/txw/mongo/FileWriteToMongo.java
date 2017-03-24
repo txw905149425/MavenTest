@@ -2,24 +2,49 @@ package com.test.MongoMaven.txw.mongo;
 
 import java.util.ArrayList;
 
+import org.bson.BsonArray;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
-import com.test.MongoMaven.uitil.Collenction1;
+import com.test.MongoMaven.db.Collenction1;
 import com.test.MongoMaven.uitil.FileUtil;
 
 public class FileWriteToMongo {
    
 	
-	public static void main(String[] args) {
-		String collectionName="task_keyword";
-		String uri="d:/4阶分词.txt";
-		Collenction1 conn=new Collenction1();
-		file2Mongo(conn,collectionName,uri);
+	public static void main(String[] args){
+		String collectionName="txwTest";
+//		Collenction1 conn=new Collenction1();
+//		MongoDatabase con=null;
+		
+		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoDatabase db = mongoClient.getDatabase("root");
+		MongoCollection<Document> mongo=db.getCollection(collectionName);
+		Document key = new Document("id", 1) ;
+		mongo.createIndex(key, new IndexOptions().unique(true).background(true).name("id_unique"))  ;	
+//		try {
+//			con=conn.getMongoDataBase();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.out.println("mongodb 连接异常...");
+//		}
+		
+//		MongoCollection<Document> mongo=con.getCollection(collectionName);
+		Document doc=new Document();
+		doc.append("id", "2");
+		doc.append("name", "txw");
+		doc.append("sex", "man");
+		doc.append("love", "吃..吃..吃");
+		doc.append("abstract", "please call me xiang wu");
+		mongo.insertOne(doc);
 	}
 	
 	/**
