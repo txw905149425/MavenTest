@@ -16,7 +16,7 @@ public class TestBolt extends BaseBasicBolt{
 		try{
 			String msg=input.getString(0);
 			if(msg!=null){
-				System.out.println(msg);
+				System.err.println(msg);
 				  collector.emit(new Values(msg + "msg is processed!"));
 			}
 		}catch(Exception e){

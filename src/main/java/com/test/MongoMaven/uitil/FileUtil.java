@@ -11,8 +11,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.bson.Document;
 
 import clojure.main;
 
@@ -77,6 +80,30 @@ public class FileUtil {
 			 return list;
 	   }
 		
+		
+		public static List<Document>  readFileReturnDoc(String url){
+			List<Document> list=new ArrayList<Document>();
+			 try {
+				   InputStream input = new FileInputStream(url);
+				   BufferedReader reader = new BufferedReader(new InputStreamReader(input, "utf8"));
+				   String line = null;
+				   while ((line = reader.readLine()) != null) {
+					   if(line!=null&&line!=""){
+						 Document	doc=new Document();
+						 doc.append("id", line);
+					     list.add(doc);
+					   }
+				   }
+				   reader.close();
+				   input.close();
+				  } catch (FileNotFoundException e) {
+				   e.printStackTrace();
+				  } catch (IOException e) {
+				   e.printStackTrace();
+				  }
+			 
+			 return list;
+	   }
 		
 		public static void main(String[] args) {
 			ArrayList<String> list=readFileReturn("txt");

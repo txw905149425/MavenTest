@@ -1,9 +1,6 @@
 package com.test.MongoMaven.uitil;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -11,19 +8,14 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import net.sf.json.JSONObject;
-
 import org.apache.http.Header;
-import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -73,7 +65,7 @@ public class HttpUtil {
 			   httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
 			   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost("163.204.80.62",8888);
 //			    configBuilder.setProxy(proxyer);  //设置代理
-			    requestConfig=configBuilder.setConnectTimeout(16000).setConnectionRequestTimeout(16000).setSocketTimeout(16000).build();
+			    requestConfig=configBuilder.setConnectTimeout(30000).setConnectionRequestTimeout(30000).setSocketTimeout(30000).build();
 			    httpGet.setConfig(requestConfig);  
 		 		 httpGet.setHeader("Accept-Encoding","gzip, deflate, sdch");  
 	 			 httpGet.setHeader("Accept-Language","zh-CN,zh;q=0.8");  
@@ -140,7 +132,8 @@ public class HttpUtil {
 				 } 
 				try{
 					if(entity!=null){
-						if (defaultCharset == null) {
+//						if (defaultCharset == null) {
+						if (charset == null) {
 							byte[] raw = EntityUtils.toByteArray(entity);
 							html = new String(raw);
 							String charsetstr =StringUtil.getCharSet(html);
@@ -150,13 +143,16 @@ public class HttpUtil {
 								html = new String(raw, charset);
 							}
 						} else {
-							html = EntityUtils.toString(entity,defaultCharset);
+//							html = EntityUtils.toString(entity,defaultCharset);
+							html = EntityUtils.toString(entity,charset);
 						}
 						resultMap.put("html",html);
 					}
-			//这里关流????
-					response.close();
-					httpclient.close();
+					//这里关流????
+					try{response.close();}catch(Exception e){}finally{
+						httpclient.close();
+					}
+					
 				}catch(Exception es){
 					es.printStackTrace();
 				}finally{
@@ -226,7 +222,7 @@ public class HttpUtil {
 	 		  }
 	 		 
 	 		CloseableHttpResponse response= httpclient.execute(httpPost);
-	 		System.out.println(response.getStatusLine());	  
+//	 		System.out.println(response.getStatusLine());	  
 	 		try {
 			    HttpEntity entity = response.getEntity();
 			    if(entity!=null){
@@ -246,12 +242,15 @@ public class HttpUtil {
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		
 		String url="http://www.ccgp-shanghai.gov.cn/news.do?method=purchasePracticeMore&ec_i=bulletininfotable&bulletininfotable_crd=10&treenum=09&title=%E6%BE%84%E6%B8%85%E5%85%AC%E5%91%8A&flag=cqgg&method=purchasePracticeMore&bulletininfotable_totalpages=6&bulletininfotable_totalrows=58&bulletininfotable_pg=1&bulletininfotable_rd=10&findAjaxZoneAtClient=false&&bulletininfotable_p=1";
+		url="http://www.yztz.com/trade/strategy/sim/getUserDetailInfo.htm";
+		url="http://gmv.cjzg.cn/Mv/get_more.html";
 		HashMap< String, String> map=new HashMap<String, String>();
-		Map<String,String> result=getHtml(url, map, "utf8", 1);
-		System.out.println(result.get("html"));
-		System.out.println(result.get("Set-Cookie"));
+		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
+		list.add(new BasicNameValuePair("loadingnum", "1"));
+//		list.add(new BasicNameValuePair("pageSize", "10"));
+		String html=postHtml(url, map, list, 1000, 1);
 		
-		
+		System.out.println(html);
 		
 //		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
 //		keyword:中鼎

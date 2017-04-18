@@ -1,6 +1,9 @@
 package com.test.MongoMaven;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -20,61 +23,33 @@ import com.test.MongoMaven.uitil.HttpUtil;
 
 public class Test {
 	
-	public static void main(String[] args) {
-		 HttpUtil ht=new HttpUtil();
-		 String url="http://www.creditchina.gov.cn/publicity_info_search?t=1481250169448";
-		url="http://www.lnzc.gov.cn/SitePages/AfficheListAll1.aspx";
-		 String html=null;
-		 HashMap<String, String> map=new HashMap<String, String>();
-		 map.put("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-		 map.put("Accept-Encoding","gzip, deflate");
-		 map.put("Connection","keep-alive");
-		 map.put("Content-Type","application/x-www-form-urlencoded");
-//		 map.put("Cookie","ASP.NET_SessionId=1vcfet55px2axhediwmmoeez; __CSRFCOOKIE=85f7a30a-ecab-4b13-921c-d7e2a86c6bcb");
-		 map.put("X-Requested-With","XMLHttpRequest");
-//		 try {
-////				html=ht.getHtml(url, map, 1, 10000);
-//			} catch (ClientProtocolException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-		 Document doc=Jsoup.parse(html);
-//		 __EVENTTARGET:ctl00$ctl00$ContentPlaceHolderMain$ContentPlaceHolderMain$g_8ac3be76_5de3_4bbf_a034_d924bd6995c4
-//		 __EVENTARGUMENT:dvt_firstrow={26};dvt_startposition={Paged=TRUE&p_publishDate=20161219 16:00:00&p_ID=3540}
-//		 __REQUESTDIGEST:0x8176EF9F7DAF5EF6C7B766179DC3F892B293CDC63A80BEC426258E0E41EAD90D87CDF63CD8DB7EB0D72D3374DDBC22D4BDAF2315882176699E19BDE0CB5CB639,18 Jan 2017 01:55:36 -0000
-//		 __VIEWSTATE:/wEPBSpWU0tleTo1MmQ0NTY0MS1iN2I2LTRkMzAtOThmNi1jODk3MDA5YzhlNDVkTxrvdMwdwvDTpkIzGj5uggB65KioGm4odJnEQNFdZJQ=
-		 String qaz=doc.select(".ms-paging>a").get(0).attr("href");
-		 String wsx=regexp(qaz,"\\((.*?)\\)").replaceAll("'","");
-		 String[] arr=wsx.split(",");
-		 System.out.println(arr[0]);
-		 System.out.println(arr[1]);
-		 String __REQUESTDIGEST=doc.select("input[name=__REQUESTDIGEST]").get(0).attr("value");
-		 String __VIEWSTATE=doc.select("input[name=__VIEWSTATE]").get(0).attr("value");
-		 System.out.println(__REQUESTDIGEST);
-		 System.out.println(__VIEWSTATE);
-		 ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
-		 list.add(new BasicNameValuePair("__EVENTTARGET",arr[0]));
-		 list.add(new BasicNameValuePair("__EVENTARGUMENT",arr[1]));
-		 list.add(new BasicNameValuePair("__REQUESTDIGEST",__REQUESTDIGEST));
-		 list.add(new BasicNameValuePair("__VIEWSTATE",__VIEWSTATE));
-//		 keyword=贺兰&searchtype=0&objectType=2&page=1
-//		 keyword=%E8%B4%BA%E5%85%B0&searchtype=0&objectType=2&dataType=1&exact=0&page=1
-//		 list.add(new BasicNameValuePair("searchtype","0"));
-//		 list.add(new BasicNameValuePair("objectType","2"));
-		 try {
-			html=ht.postHtml(url, map, list, 1000, 1);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static void main(String[] args) throws FileNotFoundException {
+		String str1="00";
+		String str2="0";
+		PrintWriter pw=new PrintWriter(new File("d:/code2.txt"));
+		for(int j=0;j<3;j++){
+			String n="";
+			if(j==0){
+				n="000";
+			}else if(j==1){
+				n="001";
+			}else{
+				n="002";
+			}
+			for(int i=0;i<1000;i++){
+				String num=String.valueOf(i);
+				if(num.length()==1){
+					num=n+str1+num;
+				}else if(num.length()==2){
+					num=n+str2+num;
+				}else{
+					num=n+num;
+				}
+				pw.println(num);
+			}
 		}
-		 System.out.println(html);
-		 
+		pw.close();
+		System.out.println("end!!!!");
 
 	}
 	public static String clear_blank_str(Object v) {

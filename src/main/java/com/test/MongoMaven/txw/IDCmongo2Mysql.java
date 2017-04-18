@@ -49,6 +49,7 @@ public class IDCmongo2Mysql {
  			}
  		}    	
      try{
+//    	 http://t.10jqka.com.cn/api.php?method=group.getLatestPost&limit=20&page=0&pid=0&return=json&allowHtml=0&uid=384369689&code=601344
      	MongoCollection<Document> mogoCollection=IDCmongo.getCollection(collectionName);
      	String sql ="insert into a_a_company_clean(company_name) values(?)";
      	PreparedStatement  statement=conn.prepareStatement(sql) ;

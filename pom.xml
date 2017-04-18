@@ -102,7 +102,7 @@
                 </descriptorRefs>  
                 <archive>  
                     <manifest>  
-                        <mainClass>com.gaodig.testConssandra.test.TestCassandra</mainClass>  
+                        <mainClass>com.test.MongoMaven.crawlerjy.niu.CrawlerNiuRen</mainClass>  
                     </manifest>  
                 </archive>  
             </configuration>  

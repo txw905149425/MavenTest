@@ -1982,6 +1982,50 @@ public  static String dateFmt(Object obj, String format) {
 				 return js;
 		}
 		
+		public static String timeFormat(String str){
+			if(StringUtil.isEmpty(str)){
+				return "";
+			}
+			
+			if(str.contains("今天")){
+				 Date d = new Date();  
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+			     String dateNowStr = sdf.format(d); 
+				 str=dateNowStr+" "+str.replace("今天", "");
+			}else if(str.contains("分钟前")){
+				String tmp=str.replace("分钟前", "");
+				int num=Integer.parseInt(tmp);
+				long numMill=num*60*1000;
+				Long s =System.currentTimeMillis()-numMill;
+				Date date=new Date(s);
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
+			     String dateNowStr = sdf.format(date); 
+				str=dateNowStr;
+			}else if(str.contains("月")&&str.contains("日")){
+				 Calendar now = Calendar.getInstance();  
+			      int year=now.get(Calendar.YEAR); 
+				  str=year+"-"+str.replace("月", "-").replace("日","");
+			}else if(str.length()==5){//06-21
+				 Calendar now = Calendar.getInstance();  
+			      int year=now.get(Calendar.YEAR); 
+				 str=year+"-"+str;
+			}else if(str.length()==11){//06-21 12:54  统一加当前年份，取数据时，如果大于当前时间搓的话 视为无效数据即可
+				 Calendar now = Calendar.getInstance();
+			      int year=now.get(Calendar.YEAR);
+				 str=year+"-"+str;
+			}else if("刚刚".equals(str)){
+				Date date=new Date();
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
+			     str=sdf.format(date);
+			}else{
+				System.err.println("*******====>  时间转换出现新情况："+str);
+				return "1";
+			}
+//			System.out.println(str);
+			return  str;
+			
+		}
+		
 	   
 	public static String judgeResultByLenth(Object results,Object index){
 		String rs = results.toString().trim();
