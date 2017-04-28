@@ -19,72 +19,104 @@ import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.test.MongoMaven.crawler.sina.Actions;
-import com.test.MongoMaven.uitil.DataUtil;
-import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 
 public class SpeakStock {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 //		str2TimeMuli("2017-04-17 22:17:15");
+		PostData post=new PostData();
 		 MongoDbUtil mongo=new MongoDbUtil();
-		 MongoCollection<Document>  collection=mongo.getShardConn("ths_talk_stock_json");
-		 MongoCollection<Document>  collection1=mongo.getShardConn("east_money_stock_json");
-		 MongoCollection<Document>  collection2=mongo.getShardConn("sina_talk_stock_json");
+		 MongoCollection<Document>  collection=mongo.getShardConn("ss_ths_talk_stock_json");
+		 MongoCollection<Document>  collection1=mongo.getShardConn("ss_east_money_stock_json");
+//		 MongoCollection<Document>  collection2=mongo.getShardConn("ss_sina_talk_stock_json");
 		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator(); 
-		 while(cursor.hasNext()){
-			 HashMap<String, Object> records=new HashMap<String, Object>();
-			 Document doc=cursor.next();
-			 Object id=doc.get("id");
-			 Object name=doc.get("name");
-			 System.out.println(id);
-			 Document filter=new Document("id",id);
-			 Document doc1= collection1.find(filter).first();
-			 Document doc2= collection2.find(filter).first();
-			 Object list=doc.get("list");
-			 Object list1=doc1.get("list");
-			 Object list2=doc2.get("list");
-			 List<HashMap<String, Object>> listMap=new ArrayList<HashMap<String,Object>>();
-			 JSONArray js=JSONArray.fromObject(list);
-			 int num=js.size();
-			 for(int i=0;i<num;i++){
-				 Object  block=js.get(i);
-				 HashMap<String, Object> map=toHashMap(block);
-				 listMap.add(map);
-			 }
-			 JSONArray js1=JSONArray.fromObject(list1);
-			 num=js1.size();
-			 for(int i=0;i<num;i++){
-				 Object  block=js1.get(i);
-				 HashMap<String, Object> map=toHashMap(block);
-				 listMap.add(map);
-			 }
-			 JSONArray js2=JSONArray.fromObject(list2);
-			 num=js2.size();
-			 for(int i=0;i<num;i++){
-				 Object  block=js2.get(i);
-				 HashMap<String, Object> map=toHashMap(block);
-				 listMap.add(map);
-				 
-			 }
-			 Collections.sort(listMap, new Comparator<HashMap<String, Object >>() {
-		            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
-		                String  one =a.get("utime").toString();
-		                String two = b.get("utime").toString();
-		                int time=str2TimeMuli(one);
-		                int time1=str2TimeMuli(two);
-		                return time1 - time;
-		            }
-		        });
-			 
-			 for(HashMap<String, Object> map:listMap){
-				 System.out.println(map.toString());
-			 }
-			 
-			 System.exit(1);
-			 
-			 
+		 try{
+				 while(cursor.hasNext()){
+					 long t1=System.currentTimeMillis();
+					 HashMap<String, Object> records=new HashMap<String, Object>();
+					 Document doc=cursor.next();
+					 Object id=doc.get("id");
+					 Object name=doc.get("name");
+//					 System.out.println(id);
+					 if("300496".equals(id.toString())){
+						System.out.println(id); 
+					 }
+					 Document filter=new Document("id",id);
+					 List<HashMap<String, Object>> listMap=new ArrayList<HashMap<String,Object>>();
+					 if(doc.containsKey("list")){
+						 Object list=doc.get("list");
+						 JSONArray js=JSONArray.fromObject(list);
+						 int num=js.size();
+						 for(int i=0;i<num;i++){
+							 Object  block=js.get(i);
+							 HashMap<String, Object> map=toHashMap(block);
+							 listMap.add(map);
+						 }
+					 }
+					
+					 Document doc1= collection1.find(filter).first();
+					 if(doc1!=null&&doc1.containsKey("list")){
+						 Object list1=doc1.get("list");
+						 JSONArray js1=JSONArray.fromObject(list1);
+						 int num=js1.size();
+						 for(int i=0;i<num;i++){
+							 Object  block=js1.get(i);
+							 HashMap<String, Object> map=toHashMap(block);
+							 listMap.add(map);
+						 }
+					 }
+					
+//						 Document doc2=collection2.find(filter).first();
+//						 if(doc2!=null&&doc2.containsKey("list")){
+//							 Object list2=doc2.get("list");
+//							 JSONArray js2=JSONArray.fromObject(list2);
+//							int  num=js2.size();
+//							 for(int i=0;i<num;i++){
+//								 Object  block=js2.get(i);
+//								 HashMap<String, Object> map=toHashMap(block);
+//								 listMap.add(map);
+//								 
+//							 }
+//						 } 
+					 records.put("id", id);
+					 records.put("name", name);
+					 records.put("code", id+""+name);
+					 records.put("list",listMap);
+					 mongo.upsertMapByTableName(records, "test");
+					 long t2=System.currentTimeMillis();
+					 System.out.println("插入到本地耗时：    "+(t2-t1));
+//					 JSONObject json=JSONObject.fromObject(records);
+						String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=ss_stock_json",new HashMap<String, String>(), records.toString(), "utf-8", 1);
+						if(su.contains("exception")){
+							System.err.println("写入数据异常！！！！  < "+su+" >");
+						}
+						long t3=System.currentTimeMillis();
+					 System.out.println("插入到gavinduan耗时：    "+(t3-t2));
+//					 txw@jiangcaijing.partner.onmschina.cn
+//					 Jcj2017666@
+		//			 Collections.sort(listMap, new Comparator<HashMap<String, Object >>() {
+		//		            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
+		//		                String  one =a.get("utime").toString();
+		//		                String two = b.get("utime").toString();
+		//		                int time=str2TimeMuli(one);
+		//		                int time1=str2TimeMuli(two);
+		//		                return time1 - time;
+		//		            }
+					 
+//					/go.asp?svid=4&id=4950674&tpages=3&ttimes=1&tzone=8&tcolor=24&sSize=1920,1080&referrer=https%3A//www.baidu.com/link%3Furl%3DodipX6AQ3SQ9-X7U05bfE5xetij_h_WSzzB98oQYKo7usPzkQROBOumhhIFv21Mb%26wd%3D%26eqid%3D871bcdef0001a28f0000000658f9a8d6&vpage=http%3A//www.justwinit.cn/post/6728/&vvtime=1492756710602 HTTP/1.1
+		//		        });
+		//			 
+		//			 for(HashMap<String, Object> map:listMap){
+		//				 System.out.println(map.toString());
+		//			 }
+		//			 
+		//			 System.exit(1);
+				 }
+		 }catch(Exception e){
+			 System.out.println("哦哦哦，有网站没有评论哟！！");
+			 e.printStackTrace();
 		 }
 	}
 	
@@ -101,33 +133,6 @@ public class SpeakStock {
 		return map;
 	}
 	
-	public static void combineData(List<HashMap<String, Object>> list){
-		int num=list.size();
-		for(int i=0;i<num-1;i++){
-			HashMap<String, Object>  map=list.get(i);
-			String  timeStr=map.get("ctime").toString();
-			long time=str2TimeMuli(timeStr);
-			for(int j=0;j<num-1-i;j++){
-				HashMap<String, Object>  map1=list.get(j);
-				String  timeStr1=map1.get("ctime").toString();
-//				Long time1=str2TimeMuli(timeStr1);
-//				if(time1>time){
-////					HashMap<String, Object> tmp=list[i];
-//					System.out.println();
-//				}
-			}
-			
-//			Collections.sort(list, new Comparator() {
-//				public int compare(Object o1, Object o2) {
-//					HashMap<K, V>
-//					return 0;
-//				}
-//				
-//			});
-			
-		}
-		
-	}
 	
 	
 	public static int str2TimeMuli(String str){

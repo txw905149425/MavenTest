@@ -2,6 +2,7 @@ package com.test.MongoMaven.crawler.thsApp;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -96,9 +97,11 @@ public class ParseMethod {
 	public static HashMap<String,Object> formatTHSJson(Object json){
 		HashMap<String,Object> records=new HashMap<String, Object>();
 		List<HashMap<String,Object>> listJsonMap=new ArrayList<HashMap<String,Object>>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 		Object postlist=IKFunction.keyVal(json, "postlist");
 		Object userinfo=IKFunction.keyVal(json, "userinfo");
 		for(int i=1;i<=20;i++){
+			List<Long> timeList=new ArrayList<Long>();
 			Object block=IKFunction.keyVal(postlist, i);
 			if(StringUtil.isEmpty(block.toString())){
 				break;
@@ -108,11 +111,10 @@ public class ParseMethod {
 			Object uname=IKFunction.keyVal(IKFunction.keyVal(userinfo,uid),"nickname");
 			Object utime=IKFunction.keyVal(block,"ctime");
 			long timel=Long.parseLong(utime.toString());
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+			timeList.add(timel);
 			String ttt=sdf.format(new Date(timel*1000L));  
 			Object ucontent=IKFunction.keyVal(block,"content");
 			Object comment=IKFunction.keyVal(block,"comment");
-			
 			if(!StringUtil.isEmpty(comment.toString())){
 				List<HashMap<String,Object>> jsonMap=new ArrayList<HashMap<String,Object>>();
 				JSONObject js=JSONObject.fromObject(comment);
@@ -126,6 +128,7 @@ public class ParseMethod {
 	               Object name=IKFunction.keyVal(IKFunction.keyVal(userinfo,cid),"nickname");
 	               Object time=IKFunction.keyVal(comm,"ctime");
 	               long timel1=Long.parseLong(time.toString());
+	               timeList.add(timel1);
 	               String ttt1=sdf.format(new Date(timel1*1000L));  
 	               Object content=IKFunction.keyVal(comm,"content");
 //	               System.out.println("评论：    "+name+"   "+time+"   "+content);
@@ -138,6 +141,8 @@ public class ParseMethod {
 						result.put("flist", jsonMap);
 				}
 			}
+			Collections.sort(timeList);
+			result.put("lastCommentTime", sdf.format(new Date(timeList.get(timeList.size()-1)*1000L)));
 			result.put("uname", uname);
 			result.put("utime", ttt);
 			result.put("ucontent", ucontent);

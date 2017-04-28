@@ -27,7 +27,7 @@ public class CrawlerSina {
 	 	 String url="http://licaishi.sina.com.cn/api/askList?page=null&ind_id=1&is_p=null&u_time="+urltmp+"&__t="+d.getTime();  
 		 HashMap<String, String> map=new HashMap<String, String>();
 		 for(int i=0;i<4;i++){
-			 Map<String, String> resultMap= HttpUtil.getHtml(url, map, "utf8", 1);
+			 Map<String, String> resultMap= HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 			 String html=resultMap.get("html");
 			 List<HashMap<String, Object>> list= ParthMethod.parseList(html);
 			 try {

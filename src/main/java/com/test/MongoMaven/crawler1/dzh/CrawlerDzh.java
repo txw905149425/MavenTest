@@ -17,7 +17,7 @@ public class CrawlerDzh {
 			try {
 				for(int i=0;i<31;i++){
 					String url="https://htg.yundzh.com/data/showindex_"+i+".json?49718476";
-					Map<String, String> resultMap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1);
+					Map<String, String> resultMap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 					String html=resultMap.get("html");
 //					System.out.println(html);
 					List<HashMap<String, Object>> listMap=parseList(html);

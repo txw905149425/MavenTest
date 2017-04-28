@@ -35,7 +35,7 @@ public class CrawlerTest {
 	
 	public static int pageCount(String url){
 		HashMap<String, String> map=new HashMap<String, String>();
-		Map<String, String> resultmap=HttpUtil.getHtml(url, map, "utf8", 1);
+		Map<String, String> resultmap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 		String html=resultmap.get("html");
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 		Object text=IKFunction.jsoupTextByRowByDoc(doc, ".page_info", 0);

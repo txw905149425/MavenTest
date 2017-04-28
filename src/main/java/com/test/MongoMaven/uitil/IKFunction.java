@@ -193,6 +193,27 @@ public class IKFunction {
 		}
 
 	}
+	
+	public static Object jsonFmtWith(Object obj) {
+		try {
+			if (obj == null||obj.toString()=="") {
+				return "";
+			}
+			String jsonstr = obj.toString();
+			if (jsonstr.indexOf("{") != 0) {
+				jsonstr = jsonstr.substring(jsonstr.indexOf("{"));
+			}
+			jsonstr = jsonstr.substring(0, jsonstr.lastIndexOf("}") + 1);
+			if(jsonstr.contains("\\")){
+				jsonstr=jsonstr.replaceAll("\\\\", "");
+			}
+			System.out.println(jsonstr);
+			return JSONObject.fromObject(jsonstr);
+		} catch (Exception e) {
+			return  new JSONObject();
+		}
+
+	}
 
 	
 	public static Object arrayFmt(Object obj) {
@@ -1986,42 +2007,87 @@ public  static String dateFmt(Object obj, String format) {
 			if(StringUtil.isEmpty(str)){
 				return "";
 			}
+			str=str.trim();
+			try{
+				int num=str.length();
+				long time=Long.parseLong(str);
+				if(num==10){
+					time=time*1000L;
+				}
+				 Date date=new Date(time);
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+			     String dateNowStr = sdf.format(date); 
+				return dateNowStr;
+			}catch(Exception e){
+				
+			}
 			
 			if(str.contains("今天")){
 				 Date d = new Date();  
+				 Random r = new Random();
+				 int second= r.nextInt(60);
+				 String se="";
+				 if(Integer.toString(second).length()<2){
+					 se="0"+second;
+				 }else{
+					 se=""+second;
+				 }
 			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
 			     String dateNowStr = sdf.format(d); 
-				 str=dateNowStr+" "+str.replace("今天", "");
+				 str=dateNowStr+" "+str.replace("今天", "")+":"+se;
 			}else if(str.contains("分钟前")){
 				String tmp=str.replace("分钟前", "");
 				int num=Integer.parseInt(tmp);
 				long numMill=num*60*1000;
 				Long s =System.currentTimeMillis()-numMill;
 				Date date=new Date(s);
-			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 			     String dateNowStr = sdf.format(date); 
 				str=dateNowStr;
 			}else if(str.contains("月")&&str.contains("日")){
 				 Calendar now = Calendar.getInstance();  
 			      int year=now.get(Calendar.YEAR); 
 				  str=year+"-"+str.replace("月", "-").replace("日","");
-			}else if(str.length()==5){//06-21
+			}else if(str.length()==5){
+				Date d = new Date();  
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+			    String dateNowStr = sdf.format(d); 
+				 Random r = new Random();
+				 int second= r.nextInt(60);
+				 String se="";
+				 if(Integer.toString(second).length()<2){
+					 se="0"+second;
+				 }else{
+					 se=""+second;
+				 }
+				 str=dateNowStr+" "+str+":"+se;
+			}else if(str.length()==11){
+				 Random r = new Random();
+				 int second= r.nextInt(60);
+				 String se="";
+				 if(Integer.toString(second).length()<2){
+					 se="0"+second;
+				 }else{
+					 se=""+second;
+				 }
 				 Calendar now = Calendar.getInstance();  
 			      int year=now.get(Calendar.YEAR); 
-				 str=year+"-"+str;
-			}else if(str.length()==11){//06-21 12:54  统一加当前年份，取数据时，如果大于当前时间搓的话 视为无效数据即可
-				 Calendar now = Calendar.getInstance();
-			      int year=now.get(Calendar.YEAR);
-				 str=year+"-"+str;
-			}else if("刚刚".equals(str)){
-				Date date=new Date();
-			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
-			     str=sdf.format(date);
-			}else{
+				 str=year+"-"+str+":"+se;
+			}else if(str.length()==16){
+				 Random r = new Random();
+				 int second= r.nextInt(60);
+				 String se="";
+				 if(Integer.toString(second).length()<2){
+					 se="0"+second;
+				 }else{
+					 se=""+second;
+				 }
+				 str=str+":"+se;
+			}
+			else{
 				System.err.println("*******====>  时间转换出现新情况："+str);
 				return "1";
 			}
-//			System.out.println(str);
 			return  str;
 			
 		}
@@ -2069,9 +2135,9 @@ public  static String dateFmt(Object obj, String format) {
 //		String sss="/pages/show/indexNotice.jsp?GGID=aMdnTtK9Sw6GvFx2&HTMLPATH=htmlPage//201612//aMdnTtK9Sw6GvFx2.html";
 //		System.out.println(regexp(sss,"GGID=(.*)&"));
 //		System.out.println(regexp(sss,"HTMLPATH=(.*)"));
-		String html = read("txt");
-		Object obj=jsonFmt(html);
-		System.out.println(obj);
+
+		System.out.println(timeFormat("1567988764"));
+		
 		
 //		Document d=Jsoup.parse(html);
 //		int num=jsoupRows(d, "li[class]>a");

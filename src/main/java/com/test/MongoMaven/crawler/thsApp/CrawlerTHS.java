@@ -16,7 +16,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
  *  优化代码(1.循环创建对象)
  * */
 public class CrawlerTHS {
-	static int threadNum=5;
+	static int threadNum=1;
 	public static void main(String[] args) {
 		  ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 			 MongoDbUtil mongo=new MongoDbUtil();
@@ -32,7 +32,6 @@ public class CrawlerTHS {
 				 util=new DataUtil();
 				 util.setCode(code.toString());
 				 util.setUrl(url);
-//				 new Actions1(util);
 				 executor.execute(new Actions(util)); 
 			 }
 		  cursor.close();

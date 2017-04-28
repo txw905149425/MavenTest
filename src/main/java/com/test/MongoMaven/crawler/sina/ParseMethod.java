@@ -3,6 +3,7 @@ package com.test.MongoMaven.crawler.sina;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +72,7 @@ public class ParseMethod {
 				}else{
 					url="http://guba.sina.com.cn/"+tmp;
 				}
-				resultmap=HttpUtil.getHtml(url, map1, "gbk", 1);
+				resultmap=HttpUtil.getHtml(url, map1, "gbk", 1,new HashMap<String, String>());
 				html=resultmap.get("html");
 				if(htmlFilter(html,".ilt_tit")){
 					HashMap<String,Object> jsonMap=ParseMethod.parseDetail2(html);//flist
@@ -86,36 +87,48 @@ public class ParseMethod {
 	public static HashMap<String,Object> parseDetail2(String html){
 		HashMap<String,Object> records=new HashMap<String, Object>();	 //带主评论的整条评论
 		List<HashMap<String,Object>> commentList=new ArrayList<HashMap<String,Object>>();  //跟评论列表
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		List<Long> timeList=new ArrayList<Long>();
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 		//抓取主评论
-		String ucontent=doc.select(".ilt_tit").get(0).text();
-		String uname=doc.select(".ilt_name").get(0).text();
-		String utime=doc.select(".fl_left.iltp_time").get(0).text();
-		 utime=timeFormat(utime);
-		//抓取跟评论
-		Elements es=doc.select(".repost_list>div.item_list");
-		int size=es.size();
-		if(size>0){
-			HashMap<String,Object> dbMap=null;
-			for(int i=0;i<size;i++){
-				dbMap=new HashMap<String, Object>();
-				Element e=es.get(i);
-				String userName=e.select(".ilt_name").get(0).text().trim();
-				String timeStr=e.select(".fl_left>span").get(0).text().trim();
-				String time=timeFormat(timeStr);
-				String  comment=e.select(".ilt_p").get(0).text().trim();
-				dbMap.put("name", userName);
-				dbMap.put("time", time);
-				dbMap.put("content", comment);
-				commentList.add(dbMap);
+		try{
+			String ucontent=doc.select(".ilt_tit").get(0).text();
+			String uname=doc.select(".ilt_name").get(0).text();
+			String utime=doc.select(".fl_left.iltp_time").get(0).text();
+			 utime=timeFormat(utime);
+			 long ti=sdf.parse(utime).getTime();
+			timeList.add(ti);
+			//抓取跟评论
+			Elements es=doc.select(".repost_list>div.item_list");
+			int size=es.size();
+			if(size>0){
+				HashMap<String,Object> dbMap=null;
+				for(int i=0;i<size;i++){
+					dbMap=new HashMap<String, Object>();
+					Element e=es.get(i);
+					String userName=e.select(".ilt_name").get(0).text().trim();
+					String timeStr=e.select(".fl_left>span").get(0).text().trim();
+					String time=timeFormat(timeStr);
+					long ti1=sdf.parse(time).getTime();
+					timeList.add(ti1);
+					String  comment=e.select(".ilt_p").get(0).text().trim();
+					dbMap.put("name", userName);
+					dbMap.put("time", time);
+					dbMap.put("content", comment);
+					commentList.add(dbMap);
+				}
 			}
-		}
-		records.put("ucontent", ucontent);
-		records.put("uname", uname);
-		records.put("utime", utime);
-		records.put("website", "新浪");
-		if(!commentList.isEmpty()){
-			records.put("flist", commentList);
+			Collections.sort(timeList);
+			records.put("lastCommentTime", sdf.format(new Date(timeList.get(timeList.size()-1))));
+			records.put("ucontent", ucontent);
+			records.put("uname", uname);
+			records.put("utime", utime);
+			records.put("website", "新浪");
+			if(!commentList.isEmpty()){
+				records.put("flist", commentList);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		
 		return records;

@@ -1,6 +1,7 @@
 package com.test.MongoMaven.uitil;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -52,20 +53,45 @@ public class HttpUtil {
      * @param times �������
      * @return htmlԴ����
      */ 
-	public static Map<String,String> getHtml(String url,HashMap<String,String> map,String charset,int times){
+	@SuppressWarnings("resource")
+	public static Map<String,String> getHtml(String url,HashMap<String,String> map,String charset,int times,HashMap<String,String> proxyMap){
 			Map<String,String> resultMap=new HashMap<String,String>();
 			String html="";
 		  	CloseableHttpClient httpclient = null;
 			  HttpGet httpGet=new HttpGet(url);
 			  RequestConfig requestConfig = null;
 			   Builder configBuilder = RequestConfig.custom();
-			   //密码设置代理
 			   CredentialsProvider credsProvider = new BasicCredentialsProvider();
-			   credsProvider.setCredentials(new AuthScope("163.204.80.62",8888/*代理端口*/), new UsernamePasswordCredentials("user","password"));
-			   httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
-			   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost("163.204.80.62",8888);
-//			    configBuilder.setProxy(proxyer);  //设置代理
-			    requestConfig=configBuilder.setConnectTimeout(30000).setConnectionRequestTimeout(30000).setSocketTimeout(30000).build();
+			  
+			   String ip="";
+			   int port=8888;
+			   String user="";
+			   String pwd="";
+		try {
+			   if(!proxyMap.isEmpty()){
+				   //密码设置代理
+				   if(proxyMap.containsKey("ip")){
+					   ip=proxyMap.get("ip");
+				   }
+				   if(proxyMap.containsKey("port")){
+					   port=Integer.parseInt(proxyMap.get("port"));
+				   }
+				   if(proxyMap.containsKey("user")){
+					   user=proxyMap.get("user");
+				   }
+				   if(proxyMap.containsKey("pwd")){
+					   pwd=proxyMap.get("pwd");
+				   }
+				    if(proxyMap.containsKey("need")){
+				    	credsProvider.setCredentials(new AuthScope(ip,port), new UsernamePasswordCredentials(user,pwd));
+						   httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
+						   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost(ip,port);
+						    configBuilder.setProxy(proxyer);  //设置代理
+					   }else{
+						   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost(ip,port);
+							configBuilder.setProxy(proxyer);					   }
+			   }
+			    requestConfig=configBuilder.setConnectTimeout(10000).setConnectionRequestTimeout(8000).setSocketTimeout(8000).build();
 			    httpGet.setConfig(requestConfig);  
 		 		 httpGet.setHeader("Accept-Encoding","gzip, deflate, sdch");  
 	 			 httpGet.setHeader("Accept-Language","zh-CN,zh;q=0.8");  
@@ -99,69 +125,70 @@ public class HttpUtil {
 				httpclient = HttpClients.custom().setRetryHandler(retryHandler).setDefaultCredentialsProvider(credsProvider).build();
 			}
 	 		CloseableHttpResponse response=null;
-			try {
 				response = httpclient.execute(httpGet);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			    HttpEntity entity = response.getEntity();
-//			    if(entity!=null){
-//			    	 html=EntityUtils.toString(entity);
-//			    	 resultMap.put("html",html);
-//			    }
-			 int statusCode = response.getStatusLine().getStatusCode();
-			if (statusCode == 200) {
-				ContentType contentType = ContentType.getOrDefault(entity);
-				Charset defaultCharset = contentType.getCharset();
-				//获取本次访问的cookie
-				 Header[] header = response.getAllHeaders(); 
-//				 System.out.println(response.getFirstHeader("Set-Cookie"));
-				 if (header != null){ 
-				    for (int i = 0; i < header.length; i++){ 
-//				    	System.out.println(header[i].getName() + ":" + header[i].getValue()); 
-					    if (header[i].getName().equalsIgnoreCase("Set-Cookie")){ 
-					     	resultMap.put("setCookie",header[i].getValue());
-					    }else if(header[i].getName().equalsIgnoreCase("cookie")){
-					    	resultMap.put("cookie",header[i].getValue());
-					    }
-				    } 
-				 } 
-				try{
-					if(entity!=null){
-//						if (defaultCharset == null) {
-						if (charset == null) {
-							byte[] raw = EntityUtils.toByteArray(entity);
-							html = new String(raw);
-							String charsetstr =StringUtil.getCharSet(html);
-							if (!StringUtil.isEmpty(charsetstr)){
-								html = new String(raw, charsetstr);
-							}else if(!StringUtil.isEmpty(charset)){
-								html = new String(raw, charset);
+				   HttpEntity entity = response.getEntity();
+//				    if(entity!=null){
+//				    	 html=EntityUtils.toString(entity);
+//				    	 resultMap.put("html",html);
+//				    }
+				 int statusCode = response.getStatusLine().getStatusCode();
+				if (statusCode == 200) {
+					ContentType contentType = ContentType.getOrDefault(entity);
+					Charset defaultCharset = contentType.getCharset();
+					//获取本次访问的cookie
+//					 Header[] header = response.getAllHeaders(); 
+//					 resultMap.put("cookie",response.getFirstHeader("Set-Cookie").toString());
+//					 System.out.println(response.getFirstHeader("Set-Cookie"));
+//					 if (header != null){ 
+//					    for (int i = 0; i < header.length; i++){ 
+////					    	System.out.println(header[i].getName() + ":" + header[i].getValue()); 
+//						    if (header[i].getName().equalsIgnoreCase("Set-Cookie")){ 
+//						     	resultMap.put("setCookie",header[i].getValue());
+//						    }else if(header[i].getName().equalsIgnoreCase("cookie")){
+//						    	resultMap.put("cookie",header[i].getValue());
+//						    }
+//					    } 
+//					 } 
+					try{
+						if(entity!=null){
+							if (defaultCharset == null) {
+								byte[] raw = EntityUtils.toByteArray(entity);
+								html = new String(raw);
+								String charsetstr =StringUtil.getCharSet(html);
+								if (!StringUtil.isEmpty(charsetstr)){
+									html = new String(raw, charsetstr);
+								}else if(!StringUtil.isEmpty(charset)){
+									html = new String(raw, charset);
+								}
+							} else {
+								html = EntityUtils.toString(entity,defaultCharset);
 							}
-						} else {
-//							html = EntityUtils.toString(entity,defaultCharset);
-							html = EntityUtils.toString(entity,charset);
+							resultMap.put("html",html);
 						}
-						resultMap.put("html",html);
+						//这里关流????
+						try{response.close();}catch(Exception e){}finally{
+							httpclient.close();
+						}
+						
+					}catch(Exception es){
+						es.printStackTrace();
+					}finally{
+						
 					}
-					//这里关流????
-					try{response.close();}catch(Exception e){}finally{
-						httpclient.close();
-					}
-					
-				}catch(Exception es){
-					es.printStackTrace();
-				}finally{
-					
-				}
-		} else {
-				System.out.println("MyClient抓取页面失败： " + "执行的URL： " + url + " StatusCode: " + statusCode);
+			} else {
+					System.out.println("MyClient抓取页面失败： " + "执行的URL： " + url + " StatusCode: " + statusCode);
+			}
+		} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (IOException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			System.out.println("使用ip: "+ip+":"+port+"执行：  "+url+"异常");
+		}catch(Exception e){
+				e.printStackTrace();
+				
 		}
-		 
 		  return resultMap;
 	}
 	

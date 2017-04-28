@@ -28,7 +28,7 @@ public class ThreadActions implements Runnable{
 		String url=util.getUrl();
 		String describe=util.getDescribe();
 		try{
-			Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1);
+			Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 			String html=map.get("html");
 			if(html.length()>300){
 				MongoDbUtil mongo=new MongoDbUtil();
@@ -68,6 +68,7 @@ public class ThreadActions implements Runnable{
 			map.put("AccountID", uid);
 			map.put("AddTime", time);
 			map.put("html",tmp);
+			map.put("website","牛股王");
 			list.add(map);
 		}
 		return list;
@@ -87,7 +88,7 @@ public class ThreadActions implements Runnable{
 		String closing_cost="成交价"+IKFunction.regexp(str, "成交价(.*?),");
 		String proportion=IKFunction.regexp(str, "元,(.*)");
 		map.put("closing_cost",closing_cost);
-		map.put("proportion",proportion);
+		map.put("quantity",proportion);
 		return map;
 		
 	}

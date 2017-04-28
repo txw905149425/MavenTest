@@ -92,7 +92,7 @@ public class ParseThs {
 			map=new HashMap<String, Object>();
 			lists=block.get(i);
 			String url="http:"+lists.attr("href");
-			resultMap=HttpUtil.getHtml(url, new HashMap<String,String>(), "utf8", 1);
+			resultMap=HttpUtil.getHtml(url, new HashMap<String,String>(), "utf8", 1,new HashMap<String, String>());
 			html=resultMap.get("html");
 			map=parseDetail(html);
 			list.add(map);

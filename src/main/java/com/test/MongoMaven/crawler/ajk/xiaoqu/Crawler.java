@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -21,7 +23,7 @@ public class Crawler {
 			 Map<String, String> resultMap=null;
 			 for(int i=1;i<=24;i++){
 				 String url="http://www.anjuke.com/zh/cm-zu/p"+i+"/";;
-				 resultMap=HttpUtil.getHtml(url, map, "utf8", 1);
+				 resultMap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 				 String html=resultMap.get("html");
 				 List<HashMap<String, Object>> list=parseList(html);
 				 try {

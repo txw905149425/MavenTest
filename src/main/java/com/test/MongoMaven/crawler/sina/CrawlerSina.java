@@ -18,7 +18,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
  * 新浪股吧
  * */
 public class CrawlerSina {
-	static int threadNum=30;
+	static int threadNum=60;
 	public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
 		 ExecutorService executor = Executors.newFixedThreadPool(threadNum);

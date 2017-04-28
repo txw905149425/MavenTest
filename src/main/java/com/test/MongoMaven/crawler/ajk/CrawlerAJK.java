@@ -11,6 +11,7 @@ import org.jsoup.Jsoup;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import com.test.MongoMaven.uitil.DataUtil;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
@@ -32,7 +33,7 @@ public class CrawlerAJK {
 				 Document doc=cursor.next();
 				 String url=doc.get("id").toString();
 				 Object uid=doc.get("uid");
-				 Map<String, String> resultmap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1);
+				 Map<String, String> resultmap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 				 if(resultmap.isEmpty()){
 					 
 				 }else{
@@ -62,9 +63,5 @@ public class CrawlerAJK {
 		}
 		 cursor.close();
 	}
-	
-
-
-	
 	
 }

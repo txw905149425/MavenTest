@@ -25,7 +25,7 @@ public class CrawlerCoach {
 		MongoDbUtil mongo=new MongoDbUtil();
 		MongoCollection<org.bson.Document> collection=mongo.getShardConn("ww_stock_coach_ask_online");	
 		String url="http://t.10jqka.com.cn/api.php?method=newcircle.getLives&mask=&brokerName=&sort=";
-		Map<String , String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1);
+		Map<String , String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 		String html=result.get("html");
 		try{
 			if(filter(html)){
@@ -34,7 +34,7 @@ public class CrawlerCoach {
 					String durl="http://t.10jqka.com.cn/api.php?method=newcircle.getCircleLiveList&allowHtml=1&sort=down&master=0&limit=100&fid="+str;
 //					System.out.println(durl);
 					result.clear();
-					result=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1);
+					result=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 					 html=result.get("html");
 					 if(filter(html)){
 						 List<HashMap<String, Object>> records=parseDetail(html);

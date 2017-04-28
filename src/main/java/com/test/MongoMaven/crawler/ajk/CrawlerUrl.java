@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import com.test.MongoMaven.crawler.ajk.thread.ParseMethod;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -23,9 +24,10 @@ public class CrawlerUrl {
 		public static void main(String[] args)  {
 			MongoDbUtil mongo=new MongoDbUtil();
 			 MongoCollection<Document>  collection=mongo.getShardConn("ajk_list_url");
-			 Bson filter = Filters.exists("crawl", true);
+			 Bson filter = Filters.exists("crawl", false);
 			 MongoCursor<Document> cursor =collection.find(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
 			 try{
+				 int i=0;
 				 while(cursor.hasNext()){
 					 Document doc=cursor.next();
 					 String url=doc.get("id").toString();
@@ -33,7 +35,7 @@ public class CrawlerUrl {
 					 if(url==null){
 						 continue;
 					 }else{
-					 Map<String, String> resultmap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1);
+					 Map<String, String> resultmap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,applyProxy());
 						String html=resultmap.get("html");
 						if(html==null){
 							continue;
@@ -43,7 +45,7 @@ public class CrawlerUrl {
 							mongo.upsetManyMapByTableName(list, "ajk_detail_url");
 						    HashMap<String, Object > map=new HashMap<String, Object>();
 							map.put("id", url);
-							map.put("crawl", "2");
+							map.put("crawl", "1");
 							mongo.upsertMapByTableName(map, "ajk_list_url");
 							System.out.println("o.o");
 						}else if(ParseMethod.htmlFilter(html, ".info>p")){
@@ -51,11 +53,33 @@ public class CrawlerUrl {
 							 org.jsoup.nodes.Document dd=Jsoup.parse(html);
 							 String text=dd.select(".info>p").get(0).text();
 							 System.err.println(text);
+//							 resultmap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,applyProxy());
+//							 html=resultmap.get("html");
+//							 if(!StringUtil.isEmpty(html)&&ParseMethod.htmlFilter(html, ".wrapper>div>h3")){
+//									 HashMap<String , Object> records= ParseMethod.parseDetail(html);
+//									 records.put("url", url);
+//									 records.put("uid",uid);
+//									 mongo.upsertMapByTableName(records, "ajk_house_information");
+//									 HashMap<String, Object > map=new HashMap<String, Object>();
+//									 map.put("id", url);
+//									 map.put("crawl", "1");
+//									mongo.upsertMapByTableName(map, "ajk_detail_url");
+//									 System.out.println("[0.0]");
+//								 }
+							 
+//							 System.out.println(html);
 						 }else{
-							 System.out.println("****************、、n\\n\n\n\\n********************");
+//							 System.out.println("****************、、n\\n\n\n\\n********************");
 							 System.err.println(html);
 						 }
-						Thread.sleep(10000);
+//						i++;
+//						if(i%20==0){
+//							Thread.sleep(5000);	
+//						}else{
+//							Thread.sleep(1000);
+//						}
+						
+						
 				 }
 				 }
 			 }catch(Exception e){
@@ -64,7 +88,15 @@ public class CrawlerUrl {
 		  cursor.close();
 			 
 		}
-		
+		public static HashMap<String, String> applyProxy(){
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("ip", "proxy.abuyun.com");
+			map.put("port", "9020");
+			map.put("user", "H9J817853G9IE02D");
+			map.put("pwd", "3687A33E59E93C69");
+			map.put("need", "need");
+			return map;	
+		}
 		
 		public static List<HashMap<String, Object >> parseList(String html,String uid){
 			List<HashMap<String, Object > > list=new ArrayList<HashMap<String,Object>>();

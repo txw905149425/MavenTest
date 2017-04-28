@@ -3,7 +3,9 @@ package com.test.MongoMaven.crawler.rongziyilan;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.bson.Document;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.test.MongoMaven.db.MyCollection;
@@ -21,7 +23,7 @@ public class Actions implements Runnable{
 		MyCollection conn=new MyCollection();
 		HashMap<String, String> map=new HashMap<String, String>();
 		map.put("", "");
-		Map<String, String> resultmap=HttpUtil.getHtml(url, map, "utf8", 1);
+		Map<String, String> resultmap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 		String html=resultmap.get("html");
 		List<HashMap<String,Object>> resultDbMapList=ParseMethod.parseList(html,"ths_margin_data");
 		

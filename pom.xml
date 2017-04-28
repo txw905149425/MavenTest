@@ -99,12 +99,7 @@
                 <appendAssemblyId>false</appendAssemblyId>  
                 <descriptorRefs>  
                     <descriptorRef>jar-with-dependencies</descriptorRef>  
-                </descriptorRefs>  
-                <archive>  
-                    <manifest>  
-                        <mainClass>com.test.MongoMaven.crawlerjy.niu.CrawlerNiuRen</mainClass>  
-                    </manifest>  
-                </archive>  
+                </descriptorRefs>   
             </configuration>  
             <executions>  
                 <execution>  

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
@@ -31,7 +32,7 @@ public class Test {
 					 continue;
 				 }
 				 String durl="http://zh.anjuke.com/ajax/communityext/?useflg=onlyForAjax&commid="+uid.toString();
-				 resultMap=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1);
+				 resultMap=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 				 String html=resultMap.get("html");
 				 if(html.contains("saleNum")){
 					 HashMap<String, Object> records= parse(html);

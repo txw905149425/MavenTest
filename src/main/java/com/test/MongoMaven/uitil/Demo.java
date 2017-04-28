@@ -41,7 +41,7 @@ public class Demo {
         map.put("Host","t.10jqka.com.cn");
         map.put("If-Modified-Since","27 Mar 2017 07:44:28 UTC");
         
-		Map<String, String> result= ht.getHtml(url, map, "utf8", 1);
+		Map<String, String> result= ht.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 		String html=result.get("html");
 		System.out.println(html);
 //		PrintWriter pw=new PrintWriter(new File("test"));

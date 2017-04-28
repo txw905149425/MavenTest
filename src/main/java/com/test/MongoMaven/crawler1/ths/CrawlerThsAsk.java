@@ -13,7 +13,7 @@ public class CrawlerThsAsk {
 	public static void main(String[] args) {
 		String url="http://t.10jqka.com.cn/m/askIndex.html";
 		HashMap<String, String> map=new HashMap<String, String>();
-		Map<String, String> resultMap=HttpUtil.getHtml(url, map, "utf8", 1);
+		Map<String, String> resultMap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 		String html=resultMap.get("html");
 		List<HashMap<String, Object>> listMap=ParseThs.parseList(html);
 		 MongoDbUtil mongo=new MongoDbUtil();

@@ -7,9 +7,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -170,7 +172,7 @@ public class ParseMethod {
 	}
 	
 	public static void main(String[] args) {
-		Map<String, String> map=HttpUtil.getHtml("http://zh.zu.anjuke.com/fangyuan/1058243146", new HashMap<String, String>(), "utf8", 1);
+		Map<String, String> map=HttpUtil.getHtml("http://zh.zu.anjuke.com/fangyuan/1058243146", new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 		String html=map.get("html");
 		MongoDbUtil mongo=new MongoDbUtil();
 		HashMap<String , Object> records=parseDetail(html);

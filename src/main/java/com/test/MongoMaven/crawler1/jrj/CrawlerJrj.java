@@ -19,7 +19,7 @@ public class CrawlerJrj {
 			 if(i!=1){
 				url="http://itougu.jrj.com.cn/ques/na_"+i+".shtml";
 			}
-			 resultMap=HttpUtil.getHtml(url, map, "utf8", 1);
+			 resultMap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 			 String html=resultMap.get("html");
 			 List<HashMap<String, Object>> list= ParseMethod.parseList(html);
 			 try {

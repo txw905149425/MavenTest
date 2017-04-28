@@ -17,7 +17,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
  * 东方财富股吧数据
  * */
 public class CrawlerEastMoney {
-	static int threadNum=10;
+	static int threadNum=60;
 	public static void main(String[] args) {
 		ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 			 MongoDbUtil mongo=new MongoDbUtil();
@@ -35,8 +35,8 @@ public class CrawlerEastMoney {
 				 Object name=doc.get("name");
 				 String url="http://guba.eastmoney.com/list,"+code+",f.html";
 				 util.setCode(code.toString());
-				 util.setUrl(url);
 				 util.setName(name.toString());
+				 util.setUrl(url);
 				 executor.execute(new Actions(util)); 
 			 }
 		   cursor.close();

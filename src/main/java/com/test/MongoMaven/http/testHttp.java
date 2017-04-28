@@ -22,7 +22,7 @@ public class testHttp {
 			HashMap<String, String>  map =new HashMap<String, String>();
 //			map.put("Cookie", "emstat_bc_emcount=24103958402492106440; st_pvi=13078228188975; HAList=a-sz-002525-%u80DC%u666F%u5C71%u6CB3; em_hq_fls=old; ADVS=34e5f695bc8a28; ASL=17233,rroio,b7d68760b7d6876fb7d68769858231d9af0d3dfd; st_si=46461112729587; emstat_ss_emcount=6_1488983760_227369416; ADVC=34402c9556f3e0");
 			try {
-				resultMap=ht.getHtml(url, map, "", 1);
+				resultMap=ht.getHtml(url, map, "", 1,new HashMap<String, String>());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

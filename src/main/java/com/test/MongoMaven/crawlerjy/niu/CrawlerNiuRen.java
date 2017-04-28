@@ -15,7 +15,7 @@ public class CrawlerNiuRen {
 	public static void main(String[] args) {
 		String url="https://swww.niuguwang.com/tr/2016/history.ashx?s=xiaomi&version=3.7.0&packtype=1";
 	try {
-			Map<String, String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1);
+			Map<String, String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 			String html=result.get("html");
 			List<HashMap<String, Object>> listMap=parseList(html);
 			 MongoDbUtil mongo=new MongoDbUtil();

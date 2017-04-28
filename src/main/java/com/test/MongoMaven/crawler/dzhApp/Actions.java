@@ -2,6 +2,7 @@ package com.test.MongoMaven.crawler.dzhApp;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.test.MongoMaven.uitil.DataUtil;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -23,7 +24,7 @@ public class Actions implements Runnable{
 	     String tableName1="sina_talk_stock_json_count";	//数据汇总表
 	     String tableName2="sina_talk_stock_json";	//当日最新数据表
 	     String tableName3="stock_code";		//任务源表
-		Map<String, String> resultmap=HttpUtil.getHtml(url, map, "utf8", 1);
+		Map<String, String> resultmap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 		String html=resultmap.get("html");
 		if(!StringUtil.isEmpty(html)){
 			boolean flag=ParseMethod.htmlFilter(html,"tr[class]");

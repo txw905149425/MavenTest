@@ -5,19 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.apache.storm.shade.org.eclipse.jetty.client.Address;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.test.MongoMaven.crawler.sina.ParseMethod;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.StringUtil;
@@ -38,9 +35,7 @@ public class ParseMethod {
 	 * */
 	public static List<HashMap<String,Object>> parseList2(String html) throws Exception{
 		HashMap<String, String> map1=new HashMap<String, String>();
-//		HashMap<String,Object> oneMapRecord=new HashMap<String,Object>();
 		Map<String, String> resultmap=null;
-		HashMap<String,Object> dbMap=null;
 		List<HashMap<String,Object>> listDbMap=new ArrayList<HashMap<String,Object>>();
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 		int num=IKFunction.jsoupRowsByDoc(doc, ".l3>a");
@@ -64,7 +59,6 @@ public class ParseMethod {
 			if(!timeFilter(utime)){
 				break;
 			}
-			dbMap=new HashMap<String, Object>();
 				//抓取评论详情页的内容
 				String tmp=IKFunction.jsoupListAttrByDoc(doc, ".l3>a","href",i);
 				if(!StringUtil.isEmpty(tmp)){
@@ -76,21 +70,13 @@ public class ParseMethod {
 					}else{
 						url="http://guba.eastmoney.com/"+tmp;
 					}
-					resultmap=HttpUtil.getHtml(url, map1, "utf8", 1);
+					resultmap=HttpUtil.getHtml(url, map1, "utf8", 1,new HashMap<String, String>());
 					html=resultmap.get("html");
-					if(htmlFilter(html,".zwlitxt")){
+					if(htmlFilter(html,"#zwconttbt")){
 						HashMap<String,Object> jsonMap=ParseMethod.parseDetail2(html);//flist
 						listDbMap.add(jsonMap);
 					}
 				}
-				//获取评论数为0的该条评论内容
-				String ucontent=IKFunction.jsoupListAttrByDoc(doc, ".l3>a","title", i);
-				String uname=IKFunction.jsoupTextByRowByDoc(doc, "span.l4", i+1);
-				dbMap.put("ucontent", ucontent);
-				dbMap.put("uname", uname);
-				dbMap.put("utime", utime);
-				dbMap.put("website", "东方财富");
-				listDbMap.add(dbMap);
 		}
 //		oneMapRecord.put("list", listDbMap);
 		return listDbMap;
@@ -140,10 +126,7 @@ public class ParseMethod {
 			}
 		}
 		Collections.sort(timeList);
-		for (long i : timeList) {
-	        System.out.println(i);
-	    }
-		records.put("lastCommentTime", sdf.format(new Date(timeList.get(0))));
+		records.put("lastCommentTime", sdf.format(new Date(timeList.get(timeList.size()-1))));
 		records.put("ucontent", ucontent);
 		records.put("uname", uname);
 		records.put("utime", utime);
