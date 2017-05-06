@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.jsoup.Jsoup;
 
 import com.mongodb.BasicDBObject;
@@ -16,10 +17,13 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.ListIndexesIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
 
@@ -306,6 +310,41 @@ public class MongoDbUtil {
 			}
 		}
 		return isAllInsert;
+	}
+	
+	/**
+	 * 查询通用模块
+	 * 
+	 * @param tableName
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	private FindIterable<Document> queryDocuments(String tableName, Bson filter, String key)  {
+		FindIterable<Document> queryResults = null;
+		try{
+		MongoCollection<Document> collectionconn = getShardConn(tableName);
+	    queryResults = collectionconn.find(filter).projection(Projections.include(key)).projection(Projections.excludeId()); // collection查询模块
+		}catch(Exception es){
+			es.printStackTrace();
+//			RedisApi.error(pool, "LogDBMongoQuery", "Exceptions:" + StringUtil.getError(es), log_level);
+		}
+		return queryResults;
+	}
+
+	public Boolean judgeExistsByKV(String tablename, String key, String value) {
+		Boolean isExists = false;
+		try {
+			Bson filter = Filters.eq(key, value); // 查询条件
+			Document querydoc = queryDocuments(tablename, filter, key).first();
+			if (querydoc != null && !querydoc.isEmpty()) {
+				isExists = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+//			RedisApi.error(pool, "LogDBMongoQuery", "Exceptions:" + StringUtil.getError(e), log_level);
+		}
+		return isExists;
 	}
 	
 	

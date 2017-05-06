@@ -36,9 +36,10 @@ public class MongodbImg {
 	}
 	
 	public static void main(String[] args) {
-		String url="http://www.creditchina.gov.cn/pubdetail?encryStr=djt5bGluMTY=&dataType=1";
+		String url="http://static.sse.com.cn/disclosure/listedinfo/announcement/c/2017-05-05/601328_20170505_1.pdf";
+		url="http://static.sse.com.cn/disclosure/listedinfo/announcement/c/2017-05-05/603776_20170505_6.pdf";
 		try {
-			downLoadFromUrl(url,"","");
+			downLoadFromUrl(url,"test.pdf","d:/");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

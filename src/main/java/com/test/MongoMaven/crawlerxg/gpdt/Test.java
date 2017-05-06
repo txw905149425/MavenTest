@@ -1,21 +1,28 @@
-package com.test.MongoMaven.crawlerxg;
+package com.test.MongoMaven.crawlerxg.gpdt;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.client.ClientProtocolException;
-
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
-import com.test.MongoMaven.uitil.PostData;
 
+
+/**
+ * 选股版块
+ * 一个网站存一张表，每个网站中会有多个指标 多指标一样的存一张表
+ * 取数据时
+ * */
 public class Test {
+	
 	public static void main(String[] args) {
-		String url="https://news.wedengta.com/getNews?AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_10003%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&action=AdditionList&startid=0&_=1493645032544";
+		String url="https://sec.wedengta.com/getIntelliStock?action=CategoryDetail&AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&id=16&_=1493371309453";
+		url="https://sec.wedengta.com/getIntelliStock?action=CategoryDetail&AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_10003%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&id=14&_=1493631750547";
+		url="https://sec.wedengta.com/getIntelliStock?action=CategoryDetail&AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_10003%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&id=18&_=1493643379809https://sec.wedengta.com/getIntelliStock?action=CategoryDetail&AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_10003%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&id=18&_=1493643379809";
+		url="https://sec.wedengta.com/getIntelliStock?action=CategoryDetail&AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_10003%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&id=17&_=1493644668700";
+		url="https://sec.wedengta.com/getIntelliStock?action=CategoryDetail&AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_10003%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&id=33&_=1493644924459";
 		Map<String , String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "unicode", 1, new HashMap<String, String>());
 		String html=result.get("html");
 		MongoDbUtil mongo=new MongoDbUtil();
@@ -25,7 +32,6 @@ public class Test {
 		Object json=IKFunction.jsonFmt(html);
 		Object js=IKFunction.keyVal(json, "content");
 		System.out.println(js);
-		System.exit(1);
 		Object list=IKFunction.keyVal(js, "vtDaySec");
 		int num=IKFunction.rowsArray(list);
 		for(int i=1;i<=num;i++){
@@ -74,13 +80,14 @@ public class Test {
 				listMap.add(stockList);
 			}
 			records.put("title", title);
+			records.put("website", "股票灯塔");
 			records.put("time", time);
 			records.put("id", time+""+title);
 			records.put("list", listMap);
 			mongo.upsertMapByTableName(records, "xg_gpdt_stock");
 		}
 		
-	
-		
 	}
+	
+	
 }

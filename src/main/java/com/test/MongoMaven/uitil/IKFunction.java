@@ -2118,6 +2118,95 @@ public  static String dateFmt(Object obj, String format) {
 			}
 		}
 	}
+	
+	public static boolean htmlFilter(String html,String css){
+		boolean flag=false;
+		org.jsoup.nodes.Document doc=Jsoup.parse(html);
+		Elements es = doc.select(css);
+		if (es.size() > 0) {		
+			flag=true;
+		}
+		return flag;
+	}
+	
+	public static HashMap<String, Object> parseSina(String html){
+//		 var hq_str_sh600000="浦发银行,15.210,15.210,15.160,15.220,15.130,15.160,15.170,12607509,191225527.000,9830,15.160,63300,15.150,186800,15.140,223400,15.130,108700,15.120,125100,15.170,161920,15.180,29200,15.190,148963,15.200,189415,15.210,2017-05-02,15:00:00,00";
+//		浦发银行,15.160,15.160,15.140,15.160,15.130,15.140,15.150,173380,2625508.000,29420,15.140,7700,15.130,88800,15.120,51900,15.110,69900,15.100,5200,15.150,44160,15.160,1700,15.170,1400,15.180,24500,15.190,2017-05-03,09:33:20,00
+		if(StringUtil.isEmpty(html)||html.length()<50){
+			return new HashMap<String,Object>();
+		}
+		HashMap<String, Object> map=null;
+		String[] one=html.split(";");
+			String onestr=one[0];
+			String code=onestr.split("=")[0].replace("var hq_str_", "");
+			map=new HashMap<String, Object>();
+			String str=onestr.split("=")[1];
+			 String tmp=str.replace("\"", "");
+			 String[] list=tmp.split(",");
+				 String name=list[0];
+				 map.put("name", name);
+				 String priceB=list[1];
+				 map.put("priceB", priceB);
+				 String priceE=list[2];
+				 map.put("priceE", priceE);
+				 String priceNow=list[3];
+				 map.put("priceNow", priceNow);
+				 String priceH=list[4];
+				 map.put("priceH", priceH);
+				 String priceL=list[5];
+				 map.put("priceL", priceL);
+				 String buy1=list[6];
+				 map.put("buy1", buy1);
+				 String sale1=list[7];
+				 map.put("sale1", sale1);
+				 String tradeNum=list[8];
+				 map.put("tradeNum", tradeNum);
+				 String tradePrice=list[9];
+				 map.put("tradePrice", tradePrice);
+				 String buy1Nums=list[10];
+				 map.put("buy1Nums", buy1Nums);
+				 String buy2Nums=list[12];
+				 map.put("buy2Nums", buy2Nums);
+				 String buy2=list[13];
+				 map.put("buy2", buy2);
+				 String buy3Nums=list[14];
+				 map.put("buy3Nums", buy3Nums);
+				 String buy3=list[15];
+				 map.put("buy3", buy3);
+				 String buy4Nums=list[16];
+				 map.put("buy4Nums", buy4Nums);
+				 String buy4=list[17];
+				 map.put("buy4", buy4);
+				 String buy5Nums=list[18];
+				 map.put("buy5Nums", buy5Nums);
+				 String buy5=list[19];
+				 map.put("buy5", buy5); 
+				 String sale1Nums=list[20];
+				 map.put("sale1Nums", sale1Nums);
+				 String sale2Nums=list[22];
+				 map.put("sale2Nums", sale2Nums);
+				 String sale2=list[23];
+				 map.put("sale2", sale2);
+				 String sale3Nums=list[24];
+				 map.put("sale3Nums", sale3Nums);
+				 String sale3=list[25];
+				 map.put("sale3", sale3);
+				 String sale4Nums=list[26];
+				 map.put("sale4Nums", sale4Nums);
+				 String sale4=list[27];
+				 map.put("sale4", sale4);
+				 String sale5Nums=list[28];
+				 map.put("sale5Nums", sale5Nums);
+				 String sale5=list[29];
+				 map.put("sale5", sale5);
+				 String year=list[30];
+				 map.put("year", year);
+				 String time=list[31];
+				 map.put("time", time);
+				 map.put("id", code+year+time);
+			 return map;
+	}
+	
 	public static void main(String[] args) throws Exception {
 //		System.out.println(java.net.URLDecoder.decode("http://weixin.sogou.com/weixin?type=2&query=%E4%B8%AD%E5%9B%BD%E9%93%B6%E8%A1%8C", "utf-8"));
 		//testRegex();

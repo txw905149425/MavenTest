@@ -54,7 +54,7 @@ public class HttpUtil {
      * @return htmlԴ����
      */ 
 	@SuppressWarnings("resource")
-	public static Map<String,String> getHtml(String url,HashMap<String,String> map,String charset,int times,HashMap<String,String> proxyMap){
+	public static Map<String,String> getHtml(String url,HashMap<String,String> map,String charset,int time,HashMap<String,String> proxyMap){
 			Map<String,String> resultMap=new HashMap<String,String>();
 			String html="";
 		  	CloseableHttpClient httpclient = null;
@@ -91,7 +91,13 @@ public class HttpUtil {
 						   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost(ip,port);
 							configBuilder.setProxy(proxyer);					   }
 			   }
-			    requestConfig=configBuilder.setConnectTimeout(10000).setConnectionRequestTimeout(8000).setSocketTimeout(8000).build();
+			   if(time<10000){
+				   requestConfig=configBuilder.setConnectTimeout(10000).setConnectionRequestTimeout(8000).setSocketTimeout(8000).build();
+			   }else{
+				   requestConfig=configBuilder.setConnectTimeout(time).setConnectionRequestTimeout(time).setSocketTimeout(time).build();
+			   }
+			   
+			   
 			    httpGet.setConfig(requestConfig);  
 		 		 httpGet.setHeader("Accept-Encoding","gzip, deflate, sdch");  
 	 			 httpGet.setHeader("Accept-Language","zh-CN,zh;q=0.8");  

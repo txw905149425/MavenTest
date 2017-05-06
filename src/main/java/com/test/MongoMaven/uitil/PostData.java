@@ -37,7 +37,7 @@ import org.apache.http.util.EntityUtils;
 
 public class PostData {
 
-	  public  String postHtml(String url,HashMap<String,String> map,String json,String charset,int times) throws ClientProtocolException, IOException{
+	  public static  String postHtml(String url,HashMap<String,String> map,String json,String charset,int times) throws ClientProtocolException, IOException{
 		  if(!IKFunction.isEmptyString(url)&&!IKFunction.isEmptyString(json)){}
 		  String html="";
 		  CloseableHttpClient httpclient = null;
@@ -94,8 +94,8 @@ public class PostData {
 				Charset defaultCharset = contentType.getCharset();
 				try{
 					if(entity!=null){
-						if (defaultCharset == null) {
-//						if (charset == null) {
+//						if (defaultCharset == null) {
+						if (charset == null) {
 							byte[] raw = EntityUtils.toByteArray(entity);
 							html = new String(raw);
 							String charsetstr =StringUtil.getCharSet(html);
@@ -105,8 +105,8 @@ public class PostData {
 								html = new String(raw, charset);
 							}
 						} else {
-							html = EntityUtils.toString(entity,defaultCharset);
-//							html = EntityUtils.toString(entity,charset);
+//							html = EntityUtils.toString(entity,defaultCharset);
+							html = EntityUtils.toString(entity,charset);
 						}
 					}
 			//这里关流????
@@ -136,4 +136,11 @@ public class PostData {
 	        }  
 	    }; 
 	  
+	    
+	    public static void main(String[] args) throws ClientProtocolException, IOException {
+			String url="http://www.xyhn.gov.cn/cms/xzxklist";
+			String json="pagesize=20&page=0&id=998986";
+			String html=postHtml(url, new HashMap<String, String>(), json, "utf8", 2);
+			System.out.println(html);
+		}
 }
