@@ -8,7 +8,7 @@ import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 
 
-//金融界 -问股
+//金融界 -问股   （爱投顾） 更新较快，抓取频率要高  1-2分钟左右抓一次
 public class CrawlerJrj {
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
@@ -23,7 +23,9 @@ public class CrawlerJrj {
 			 String html=resultMap.get("html");
 			 List<HashMap<String, Object>> list= ParseMethod.parseList(html);
 			 try {
-				mongo.upsetManyMapByTableName(list, "tzj_ask_shares");
+				 if(!list.isEmpty()){
+					 mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+				 }
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

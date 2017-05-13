@@ -13,7 +13,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 
 
-/*公牛选股*/
+/*公牛选股    对应的版块下线了！！！  2017-05-10发现*/   
 public class Crawler {
 	
 	public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class Crawler {
 		map.put("Content-Type", "application/x-www-form-urlencoded");
 		map.put("Host", "api.gongniuchaogu.com");
 		map.put("Connection", "Keep-Alive");
-		map.put("X-Session-Token","3ee4bb28daad9a1e037ae2e256e643ba");
+		map.put("X-Session-Token","7b512fabcce224c84f27ff09406228a4");
 		String url="https://api.gongniuchaogu.com/api/zb/curCList";
 		List<HashMap<String , Object>> listresult=new ArrayList<HashMap<String , Object>>();
 		HashMap<String , Object> result = null;
@@ -43,14 +43,18 @@ public class Crawler {
 							result=new HashMap<String, Object>();
 							Object one=IKFunction.array(list,j);
 							Object que=IKFunction.keyVal(one, "quotes");
+							Object time=IKFunction.keyVal(one, "time");
+							if(!IKFunction.timeOK(time.toString())){
+								continue;
+							}
+							String tt=IKFunction.timeFormat(time.toString());
 							if("{}".equals(que.toString())){
 								Object tmp=IKFunction.keyVal(one, "user");
 								Object name=IKFunction.keyVal(tmp, "name");
 								Object question=IKFunction.keyVal(one, "content");
-								Object time=IKFunction.keyVal(one, "time");
-								result.put("id", question+"--"+time);
+								result.put("id", question+""+time);
 								result.put("question", question);
-								result.put("time", time);
+								result.put("time", tt);
 								result.put("name", name);
 								result.put("website", "公牛炒股");
 								result.put("json_str", one);
@@ -59,11 +63,10 @@ public class Crawler {
 								Object name=IKFunction.keyVal(tmp, "name");
 								Object question=IKFunction.keyVal(que, "content");
 								Object answer=IKFunction.keyVal(one, "content");
-								Object time=IKFunction.keyVal(one, "time");
-								result.put("id", question+"--"+time);
+								result.put("id", question+""+time);
 								result.put("question", question);
 								result.put("answer", answer);
-								result.put("time", time);
+								result.put("time", tt);
 								result.put("name", name);
 								result.put("website", "公牛炒股");
 								result.put("json_str", one);
@@ -75,7 +78,7 @@ public class Crawler {
 					
 			}
 			if(!listresult.isEmpty()){
-				mongo.upsetManyMapByTableName(listresult, "ww_gncg_ask_online");	
+				mongo.upsetManyMapByTableName(listresult, "ww_ask_online_all");	
 			}
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

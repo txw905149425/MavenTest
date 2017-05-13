@@ -7,7 +7,7 @@ import java.util.Map;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 
-//同花顺问股
+//同花顺问股   跟新速度快，抓取频率也要高快，抓取速度1分钟一次
 public class CrawlerThsAsk {
 	
 	public static void main(String[] args) {
@@ -18,22 +18,17 @@ public class CrawlerThsAsk {
 		List<HashMap<String, Object>> listMap=ParseThs.parseList(html);
 		 MongoDbUtil mongo=new MongoDbUtil();
 		 try {
-			mongo.upsetManyMapByTableName(listMap, "ths_ask_shares");
+			 if(!listMap.isEmpty()){
+			   mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
+			 }
+			 listMap.clear();
+			 listMap=ParseThs.parseList2(html);
+			 if(!listMap.isEmpty()){
+				 mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
+			 }
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 System.out.println("...........");
-		 listMap.clear();
-		 listMap=ParseThs.parseList2(html);
-		 try {
-				mongo.upsetManyMapByTableName(listMap, "ths_ask_shares");
-			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-		 
-		 System.out.println("...........");
-		 
+		}
 	}
 }

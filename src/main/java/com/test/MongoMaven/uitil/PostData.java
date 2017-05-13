@@ -42,7 +42,7 @@ public class PostData {
 		  String html="";
 		  CloseableHttpClient httpclient = null;
 		  CredentialsProvider credsProvider = new BasicCredentialsProvider();
-		  credsProvider.setCredentials(new AuthScope("proxy.abuyun.com",9010), new UsernamePasswordCredentials("HYN02A3L87U914YP","C497A086A8EDCED4"));
+//		  credsProvider.setCredentials(new AuthScope("proxy.abuyun.com",9010), new UsernamePasswordCredentials("HYN02A3L87U914YP","C497A086A8EDCED4"));
 		  httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
 			  HttpPost httpPost=new HttpPost(url);
 			  RequestConfig requestConfig = RequestConfig.custom(). setConnectTimeout(60000)
@@ -86,13 +86,13 @@ public class PostData {
 		      s.setContentEncoding("utf-8");
 		      s.setContentType("application/json");//发送json数据需要设置contentType
 		      httpPost.setEntity(s);
+		 try{
 	 		CloseableHttpResponse response= httpclient.execute(httpPost);
 	 		 HttpEntity entity = response.getEntity();
 	 		 int statusCode = response.getStatusLine().getStatusCode();
 	 		if(statusCode==200){
 				ContentType contentType = ContentType.getOrDefault(entity);
 				Charset defaultCharset = contentType.getCharset();
-				try{
 					if(entity!=null){
 //						if (defaultCharset == null) {
 						if (charset == null) {
@@ -110,17 +110,16 @@ public class PostData {
 						}
 					}
 			//这里关流????
-					response.close();
-					httpclient.close();
-				}catch(Exception es){
-					es.printStackTrace();
-				}finally{
 					
-				}
-		} else {
-			System.out.println("MyClient抓取页面失败： " + "执行的URL： " + url + " StatusCode: " + statusCode);
-	}
-	 	 		
+			} else {
+				System.out.println("MyClient抓取页面失败： " + "执行的URL： " + url + " StatusCode: " + statusCode);
+		    }
+		}catch(Exception es){
+			es.printStackTrace();
+		}finally{
+				httpclient.close();	
+		}
+	 		
 	 	return html;
 	}
 	  

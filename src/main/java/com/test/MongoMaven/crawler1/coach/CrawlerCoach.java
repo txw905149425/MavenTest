@@ -18,12 +18,12 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
-//股市教练-看直播
+//股市教练-看直播   直播数据  数据更新较快，1-2分钟一次
 public class CrawlerCoach {
 
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
-		MongoCollection<org.bson.Document> collection=mongo.getShardConn("ww_stock_coach_ask_online");	
+		MongoCollection<org.bson.Document> collection=mongo.getShardConn("ww_ask_online_all");	
 		String url="http://t.10jqka.com.cn/api.php?method=newcircle.getLives&mask=&brokerName=&sort=";
 		Map<String , String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 		String html=result.get("html");
@@ -38,7 +38,10 @@ public class CrawlerCoach {
 					 html=result.get("html");
 					 if(filter(html)){
 						 List<HashMap<String, Object>> records=parseDetail(html);
-						 mongo.upsetManyMapByCollection(records, collection, "ww_stock_coach_ask_online");
+						 if(!records.isEmpty()){
+							 mongo.upsetManyMapByCollection(records, collection, "ww_ask_online_all");
+							}
+						
 					 }
 				}
 			}
@@ -84,6 +87,12 @@ public class CrawlerCoach {
 		HashMap<String, Object > map=null;
 		for(int i=1;i<=num;i++){
 			Object tmp=IKFunction.array(array, i);
+			Object tt=IKFunction.keyVal(tmp, "time");
+			Object time=IKFunction.timeFormat(tt.toString());
+//			System.out.println(time);
+			if(!IKFunction.timeOK(time.toString())){
+				continue;
+			}
 			Object content=IKFunction.keyVal(tmp, "content");
 			if(content.toString().contains("@")&&content.toString().contains("---")){
 				map=new HashMap<String, Object>();
@@ -100,14 +109,15 @@ public class CrawlerCoach {
 					}
 					String question=s[0];
 					String answer=s[1];
-					Object time=timeFormat(IKFunction.keyVal(tmp, "time"));
+				
 					Object name=IKFunction.keyVal(tmp, "nickname");
-					map.put("id",question+time);
+					map.put("id",question+tt);
 					map.put("question", question);
 					map.put("name", name);
 					map.put("answer", answer);
 					map.put("time", time);
-					map.put("html", tmp.toString());
+					map.put("website", "股市教练");
+					map.put("json_str", tmp.toString());
 					list.add(map);
 				}
 				else{

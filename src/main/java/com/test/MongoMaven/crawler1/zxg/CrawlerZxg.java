@@ -20,12 +20,12 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
-//自选股App,股市直播问答数据（筛选有答案的，都会存）
+//自选股App,股市直播问答数据（筛选有答案的，都会存）   ，数据量普通。2分钟抓取左右一次
 public class CrawlerZxg {
 	
 	public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
-		 MongoCollection<Document> collection=mongo.getShardConn("ww_zxg_ask_online");		
+		 MongoCollection<Document> collection=mongo.getShardConn("ww_ask_online_all");		
 		String url="http://proxy.finance.qq.com/group/newstockgroup/Live/getSquareList3?check=0&_appName=android&_dev=HM+NOTE+1LTE&_devId=28ec48936b5a9d2b42feb837340121c6d4a090b2&_mid=28ec48936b5a9d2b42feb837340121c6d4a090b2&_md5mid=7473A582ACF122D5CF8466B2C6B21A5E&_omgid=2dc4062302a6154fc7d804bd8d3d2b5dbc5a001021070b&_omgbizid=a487cdcc46702543c7f8511f43c222dfd58f014021230a&_appver=5.4.1&_ifChId=119&_screenW=720&_screenH=1280&_osVer=4.4.4&_uin=10000&_wxuin=20000&_net=WIFI&__random_suffix=37667";
 		HashMap<String, String> map= new HashMap<String, String>();
 		map.put("Referer", "http://zixuanguapp.finance.qq.com");
@@ -44,7 +44,9 @@ public class CrawlerZxg {
 				list.add(new BasicNameValuePair("groupChatId", str));
 				html=HttpUtil.postHtml(durl, map, list, 100, 1);
 				List<HashMap<String, Object>> recordList=parseDetail(html);
-				mongo.upsetManyMapByCollection(recordList, collection, "ww_zxg_ask_online");
+				if(!recordList.isEmpty()){
+					mongo.upsetManyMapByCollection(recordList, collection, "ww_ask_online_all");
+				}
 			}
 			
 		} catch (ClientProtocolException e) {
@@ -90,6 +92,11 @@ public class CrawlerZxg {
 		for(int i=1;i<=num;i++){
 			map=new HashMap<String, Object>();
 			Object tmp=IKFunction.array(arr, i);
+			Object ctime=IKFunction.keyVal(tmp, "ctime");
+			time=IKFunction.timeFormat(ctime.toString());
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
 			if(tmp.toString().contains("parentInfo")){
 				Object que=IKFunction.keyVal(tmp, "parentInfo");
 				question=IKFunction.keyVal(que, "content");
@@ -98,17 +105,15 @@ public class CrawlerZxg {
 				question=IKFunction.keyVal(tmp, "content");
 			}
 			name=IKFunction.keyVal(tmp, "nickname");
-			Object ctime=IKFunction.keyVal(tmp, "ctime");
-			time=timeFormat(ctime);
-			map.put("id",question+time);
+			map.put("id",question+""+ctime);
 			map.put("question", question);
 			map.put("name", name);
 			if(answer!=null){
 				map.put("answer", answer);
 			}
-			
 			map.put("time", time);
-			map.put("html", tmp.toString());
+			map.put("website", "自选股");
+			map.put("json_str", tmp.toString());
 			list.add(map);
 		}
 		
@@ -116,13 +121,6 @@ public class CrawlerZxg {
 		
 	}
 	
-	public static  String timeFormat(Object ctime){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
-		String tmp=ctime.toString()+"000";
-		long mu=Long.parseLong(tmp);
-		Date date=new Date(mu);
-		String time = sdf.format(date);
-		return time;
-	}
+	
 	
 }

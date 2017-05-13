@@ -9,7 +9,7 @@ import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 
-
+//大智慧  抓取频率 普通2分钟一次
 public class CrawlerDzh {
 	
 	public static void main(String[] args) {
@@ -21,7 +21,10 @@ public class CrawlerDzh {
 					String html=resultMap.get("html");
 //					System.out.println(html);
 					List<HashMap<String, Object>> listMap=parseList(html);
-					mongo.upsetManyMapByTableName(listMap, "ww_dzh_ask_shares");
+					if(!listMap.isEmpty()){
+						mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
+					}
+					
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -39,24 +42,30 @@ public class CrawlerDzh {
 		for(int i=1;i<=num;i++){
 			map=new HashMap<String, Object>();
 			Object js=IKFunction.array(array1,i);
+			String time=IKFunction.keyVal(js, "d").toString();
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
 			Object question=IKFunction.keyVal(js, "t");
 			Object qq=IKFunction.JsoupDomFormat(question);
 			String que=IKFunction.jsoupTextByRowByDoc(qq, "body", 0);
-//			System.out.println(que);
 			Object name=IKFunction.keyVal(js, "tgnm");
-//			System.out.println(name);
-			Object time=IKFunction.keyVal(js, "d");
-//			System.out.println(time);
 			Object answer_array=IKFunction.keyVal(js, "comment");
 			Object answer_json=IKFunction.array(answer_array,1);
 			Object answer=IKFunction.keyVal(answer_json, "t");
-//			System.out.println(answer);
+			String ans=answer.toString();
+			if(ans.contains("<a")){
+				Object doc=IKFunction.JsoupDomFormat(ans);
+				 ans=IKFunction.jsoupTextByRowByDoc(doc, "body", 0);
+			}
+//			<a href='@min=SH600185' class='stockmin'>格力地产</a>可以继续持有。<a href='@min=SH601668' class='stockmin'>中国建筑</a>看半年线支撑，破了要控制仓位
 			map.put("id",que+time);
 			map.put("question", que);
 			map.put("name", name);
-			map.put("answer", answer);
+			map.put("answer", ans);
 			map.put("time", time);
-			map.put("html", js.toString());
+			map.put("website", "大智慧");
+			map.put("json_str", js.toString());
 			list.add(map);
 		}
 		return list;

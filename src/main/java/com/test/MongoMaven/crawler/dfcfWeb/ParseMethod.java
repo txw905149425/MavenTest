@@ -56,7 +56,7 @@ public class ParseMethod {
 				 se=""+second;
 			 }
 			String utime=year+"-"+IKFunction.jsoupTextByRowByDoc(doc, "span.l5", i+1)+":"+se;
-			if(!timeFilter(utime)){
+			if(!IKFunction.timeOK(utime)){
 				break;
 			}
 				//抓取评论详情页的内容
@@ -95,9 +95,9 @@ public class ParseMethod {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 	try{
-		String ucontent=doc.select("#zwconttbt").get(0).text();
-		String uname=doc.select("#zwconttbn>strong").get(0).text();
-		String utime=doc.select(".zwfbtime").get(0).text();
+		String ucontent=doc.select("#zwconttbt").get(0).text().trim();
+		String uname=doc.select("#zwconttbn>strong").get(0).text().trim();
+		String utime=doc.select(".zwfbtime").get(0).text().trim();
 		utime=IKFunction.regexp(utime, reg);
 		long ti=sdf.parse(utime).getTime();
 		timeList.add(ti);
@@ -145,6 +145,9 @@ public class ParseMethod {
 	 * */
 	public static boolean htmlFilter(String html,String css){
 		boolean flag=false;
+		if(StringUtil.isEmpty(html)){
+			return flag;
+		}
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 		Elements es = doc.select(css);
 		if (es.size() > 0) {		

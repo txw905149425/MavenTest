@@ -277,14 +277,22 @@ public class HttpUtil {
 		String url="http://www.ccgp-shanghai.gov.cn/news.do?method=purchasePracticeMore&ec_i=bulletininfotable&bulletininfotable_crd=10&treenum=09&title=%E6%BE%84%E6%B8%85%E5%85%AC%E5%91%8A&flag=cqgg&method=purchasePracticeMore&bulletininfotable_totalpages=6&bulletininfotable_totalrows=58&bulletininfotable_pg=1&bulletininfotable_rd=10&findAjaxZoneAtClient=false&&bulletininfotable_p=1";
 		url="http://www.yztz.com/trade/strategy/sim/getUserDetailInfo.htm";
 		url="http://gmv.cjzg.cn/Mv/get_more.html";
+		url="http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/search?callback=JSON_CALLBACK&type=ss_stock_json&terms=name:连云港";
+		url="http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/search?type=ss_stock_json_test&terms=name:%E5%9B%BD%E4%B8%AD%E6%B0%B4%E5%8A%A1";
+//		String tmp=IKFunction.charEncode("连云港", "utf8");
+//		System.out.println(tmp);
+//		url="http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/search?callback=JSON_CALLBACK&type=ss_stock_json&terms=id:000831";
 		HashMap< String, String> map=new HashMap<String, String>();
-		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
-		list.add(new BasicNameValuePair("loadingnum", "1"));
+		String html=getHtml(url, map, "utf8", 1, new HashMap<String, String>()).get("html");
+		System.out.println(IKFunction.jsonFmt(html));
+//		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
+//		list.add(new BasicNameValuePair("loadingnum", "1"));
 //		list.add(new BasicNameValuePair("pageSize", "10"));
-		String html=postHtml(url, map, list, 1000, 1);
+//		String html=postHtml(url, map, list, 1000, 1);
 		
 		System.out.println(html);
-		
+//		%E8%BF%9E%E4%BA%91%E6%B8%AF
+//		%E8%BF%9E%E4%BA%91%E6%B8%AF
 //		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
 //		keyword:中鼎
 //		searchtype:1

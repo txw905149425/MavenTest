@@ -21,11 +21,11 @@ public class CrawlerID {
 		map.put("Host", "app.55188.com");
 	try {
 		String url="http://app.55188.com/v330/live/recommendlist";
-		String data="version=3.3.3.0&total=20&offset=90&type=talk&loantoken=";
+		String data="version=3.3.3.0&total=20&offset=20&type=talk&loantoken=";
 //		             version=3.3.3.0&total=20&offset=20&type=comment&loantoken=
 //		              version=3.3.3.0&total=20&offset=20&type=pv&loantoken=
 		String html=post.postHtml(url, map,data,"utf8", 2);
-//		System.out.println(html);
+		System.out.println(html);
 		Object json=IKFunction.jsonFmt(html);
 		Object datas=IKFunction.keyVal(json, "data");
 		Object list=IKFunction.keyVal(datas, "list");

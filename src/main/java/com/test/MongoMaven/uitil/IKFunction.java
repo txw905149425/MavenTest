@@ -2009,7 +2009,7 @@ public  static String dateFmt(Object obj, String format) {
 			}
 			str=str.trim();
 			try{
-				int num=str.length();
+				int num=str.trim().length();
 				long time=Long.parseLong(str);
 				if(num==10){
 					time=time*1000L;
@@ -2039,6 +2039,15 @@ public  static String dateFmt(Object obj, String format) {
 				String tmp=str.replace("分钟前", "");
 				int num=Integer.parseInt(tmp);
 				long numMill=num*60*1000;
+				Long s =System.currentTimeMillis()-numMill;
+				Date date=new Date(s);
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+			     String dateNowStr = sdf.format(date); 
+				str=dateNowStr;
+			}else if(str.contains("秒前")){
+				String tmp=str.replace("秒前", "");
+				int num=Integer.parseInt(tmp);
+				long numMill=num*1000;
 				Long s =System.currentTimeMillis()-numMill;
 				Date date=new Date(s);
 			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
@@ -2125,6 +2134,30 @@ public  static String dateFmt(Object obj, String format) {
 		Elements es = doc.select(css);
 		if (es.size() > 0) {		
 			flag=true;
+		}
+		return flag;
+	}
+	
+	public static boolean timeOK(String timestr){
+		boolean flag=false;
+		if(StringUtil.isEmpty(timestr)){
+			return flag;
+		}
+		 try {
+		 Date date=new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+	     String today = sdf.format(date)+" 00:00:00"; 
+	     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+			long timeToday=sdf1.parse(today).getTime();
+			long time=sdf1.parse(timestr).getTime();
+			if(time>timeToday){
+				flag=true;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			System.err.println("传入时间字符串格式有错 <"+timestr+">");
+			return false;
 		}
 		return flag;
 	}

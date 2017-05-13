@@ -17,7 +17,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
  * 东方财富股吧数据
  * */
 public class CrawlerEastMoney {
-	static int threadNum=60;
+	static int threadNum=20;
 	public static void main(String[] args) {
 		ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 			 MongoDbUtil mongo=new MongoDbUtil();

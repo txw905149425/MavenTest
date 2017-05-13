@@ -12,7 +12,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 
 
 /***
- * 东方财富股吧数据
+ *牛股王  交易信息
  * */
 public class CrawlerJY {
 	static int threadNum=10;

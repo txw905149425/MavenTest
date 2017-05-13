@@ -42,7 +42,9 @@ public class Actions implements Runnable{
 				 List<HashMap<String,Object>> listJsonMap=ParseMethod.parseList2(html);
 				 oneJsonMap.put("code", code+name);
 				 oneJsonMap.put("name", name);
-				 oneJsonMap.put("list", listJsonMap);
+				 if(!listJsonMap.isEmpty()){
+					 oneJsonMap.put("list", listJsonMap);
+				 }
 //				JSONObject json=JSONObject.fromObject(oneJsonMap);
 //				String su=post.postHtml("http://gavinduan.mynetgear.com:8000/wf/import?type=talk_stock_json", json, "utf-8", 1);
 //				if(su.contains("exception")){

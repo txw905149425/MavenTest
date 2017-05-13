@@ -76,26 +76,26 @@ public class MongoDbUtil {
 				 */
 				collectionConn = db.getCollection(tableName)/*.withWriteConcern(WriteConcern.MAJORITY)*/;
 				mongoCollectionMap.put(tableName, collectionConn);
-				if(!collectionsUniqueIndex.contains(tableName)){
-					try{
-					ListIndexesIterable<Document> index = collectionConn.listIndexes() ;
-					boolean hasUniqueIndex = false ;
-						for(Document one : index){
-						if(one.getBoolean("id", true)){
-							hasUniqueIndex = true ;
-							break ;
-						}
-					}
-						if(!hasUniqueIndex){
-							Document key = new Document("id", 1) ;
-							collectionConn.createIndex(key, new IndexOptions().unique(true).background(true).name("id_unique")) ;	
-							collectionsUniqueIndex.add(tableName);
-						}else{
-							collectionsUniqueIndex.add(tableName);
-						}}catch(Exception es){
-							
-						}
-					}
+//				if(!collectionsUniqueIndex.contains(tableName)){
+//					try{
+//					ListIndexesIterable<Document> index = collectionConn.listIndexes() ;
+//					boolean hasUniqueIndex = false ;
+//						for(Document one : index){
+//						if(one.getBoolean("id", true)){
+//							hasUniqueIndex = true ;
+//							break ;
+//						}
+//					}
+//						if(!hasUniqueIndex){
+//							Document key = new Document("id", 1) ;
+//							collectionConn.createIndex(key, new IndexOptions().unique(true).background(true).name("id_unique")) ;	
+//							collectionsUniqueIndex.add(tableName);
+//						}else{
+//							collectionsUniqueIndex.add(tableName);
+//						}}catch(Exception es){
+//							
+//						}
+//					}
 			} catch (Exception e) {
 //				RedisApi.error(pool, "LogDBMongoConn", "Exceptions:" + StringUtil.getError(e), Constants.ERROR);
 				e.printStackTrace();

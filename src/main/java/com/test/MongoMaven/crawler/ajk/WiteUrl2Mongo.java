@@ -15,7 +15,7 @@ public class WiteUrl2Mongo {
 		 while(cursor.hasNext()){
 			 Document doc=cursor.next();
 			 Object uid=doc.get("uid");
-			 Object name=doc.get("community_name");
+//			 Object name=doc.get("community_name");
 			 Object rentNum=doc.get("rentNum");
 			 if(rentNum==null||"0".equals(rentNum.toString())||"".equals(rentNum.toString())){
 				 continue;
@@ -33,7 +33,7 @@ public class WiteUrl2Mongo {
 		    	rec =new HashMap<String, Object>();
 		    	String url="http://zh.anjuke.com/community/props/rent/"+uid+"/p"+i;
 		    	rec.put("id", url) ;
-		    	rec.put("name", name) ;
+//		    	rec.put("name", name) ;
 		    	rec.put("uid", uid) ;
 		    	mongo.upsertMapByTableName(rec, "ajk_list_url");
 		     }

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.StringUtil;
 
 public class Crawler {
 	
@@ -33,7 +34,13 @@ public class Crawler {
 				Object name=IKFunction.keyVal(json1, "ownerName");
 				Object timestr=IKFunction.keyVal(json1, "updateTime");
 				String time=IKFunction.timeFormat(timestr.toString());
+				if(!IKFunction.timeOK(time)){
+					continue;
+				}
 				Object des=IKFunction.keyVal(json1, "percentage");
+				if(StringUtil.isEmpty(des.toString())){
+					continue;
+				}
 				BigDecimal b1 = new BigDecimal(des.toString());
 				BigDecimal b2 = new BigDecimal("100");
 				Double d=b1.multiply(b2).doubleValue();
@@ -60,7 +67,7 @@ public class Crawler {
 					}else{
 						result.put("option", 1);
 					}
-					result.put("id",name+" "+type+" "+StockName+price+" "+time);
+					result.put("id",name+" "+type+" "+StockName+price+" "+timestr);
 					result.put("describe",describe);
 					result.put("StockCode", code);
 					result.put("StockName", StockName);
@@ -71,8 +78,7 @@ public class Crawler {
 					result.put("fromPosition", lastWeight);
 					result.put("toPosition", toWeight);
 					result.put("website","仙人掌股票");
-					mongo.upsertMapByTableName(result, "mm_xrz_deal_dynamic");
-					
+					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 				}
 			}
 			

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
@@ -14,6 +16,7 @@ import com.test.MongoMaven.uitil.DataUtil;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
 
@@ -32,9 +35,26 @@ public class ThreadActions implements Runnable{
 			String html=map.get("html");
 			if(html.length()>300){
 				MongoDbUtil mongo=new MongoDbUtil();
+				PostData post=new PostData();
 				List<HashMap<String, Object>> recordList=parseList(html,describe);
-				MongoCollection<Document> collection=mongo.getShardConn("mm_ngw_deal_dynamic");
-				mongo.upsetManyMapByCollection(recordList, collection, "mm_ngw_deal_dynamic");
+				if(!recordList.isEmpty()){
+					MongoCollection<Document> collection=mongo.getShardConn("mm_deal_dynamic_all");
+					mongo.upsetManyMapByCollection(recordList, collection, "mm_deal_dynamic_all");
+					for(HashMap<String, Object> result:recordList){
+						result.remove("html");
+						result.remove("quantity");
+						result.remove("AccountID");
+						result.remove("crawl_time");
+						JSONObject mm_data=JSONObject.fromObject(result);
+					   String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+						if(su.contains("exception")){
+							System.out.println(mm_data);
+							System.err.println("写入数据异常！！！！  < "+su+" >");
+						}
+					}
+					
+				}
+				
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -51,21 +71,24 @@ public class ThreadActions implements Runnable{
 		for(int i=1;i<=num;i++){
 //			map=new HashMap<String, Object>();
 			Object tmp=IKFunction.array(data, i);
+			Object timeStr=IKFunction.keyVal(tmp, "addTime");
+			String time=IKFunction.timeFormat(timeStr.toString());
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
 			Object code=IKFunction.keyVal(tmp, "stockCode");
 			Object stock=IKFunction.keyVal(tmp, "stockName");
 			Object name=IKFunction.keyVal(tmp, "userName");
 			Object uid=IKFunction.keyVal(tmp, "userID");
-			Object timeStr=IKFunction.keyVal(tmp, "addTime");
-			String time=IKFunction.timeFormat(timeStr.toString());
 			Object block=IKFunction.array(IKFunction.keyVal(tmp, "contentFormat"),1);
 			String str=IKFunction.keyVal(block, "content").toString();
 			HashMap<String, Object> map=parseTmp(str);
-			map.put("id",str);
+			map.put("id",name+""+timeStr+stock+code);
 			map.put("describe",describe);
 			map.put("StockCode", code);
 			map.put("StockName", stock);
 			map.put("UserName", name);
-			map.put("AccountID", uid);
+			map.put("AccountID", uid.toString());
 			map.put("AddTime", time);
 			map.put("html",tmp);
 			map.put("website","牛股王");
@@ -81,11 +104,11 @@ public class ThreadActions implements Runnable{
 			return map;
 		}
 		if(str.contains("买入")){
-			map.put("option", 0);
+			map.put("option", "0");
 		}else if(str.contains("卖出")){
-			map.put("option", 1);
+			map.put("option", "1");
 		}
-		String closing_cost="成交价"+IKFunction.regexp(str, "成交价(.*?),");
+		String closing_cost=IKFunction.regexp(str, "成交价(.*?),");
 		String proportion=IKFunction.regexp(str, "元,(.*)");
 		map.put("closing_cost",closing_cost);
 		map.put("quantity",proportion);

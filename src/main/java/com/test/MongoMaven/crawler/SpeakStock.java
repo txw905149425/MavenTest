@@ -25,7 +25,6 @@ import com.test.MongoMaven.uitil.PostData;
 public class SpeakStock {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
-//		str2TimeMuli("2017-04-17 22:17:15");
 		PostData post=new PostData();
 		 MongoDbUtil mongo=new MongoDbUtil();
 		 MongoCollection<Document>  collection=mongo.getShardConn("ss_ths_talk_stock_json");
@@ -34,16 +33,11 @@ public class SpeakStock {
 		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator(); 
 		 try{
 				 while(cursor.hasNext()){
-					 long t1=System.currentTimeMillis();
+//					 long t1=System.currentTimeMillis();
 					 HashMap<String, Object> records=new HashMap<String, Object>();
 					 Document doc=cursor.next();
 					 Object id=doc.get("id");
 					 Object name=doc.get("name");
-//					 System.out.println(id);
-					 if("300496".equals(id.toString())){
-						System.out.println(id); 
-					 }
-					 Document filter=new Document("id",id);
 					 List<HashMap<String, Object>> listMap=new ArrayList<HashMap<String,Object>>();
 					 if(doc.containsKey("list")){
 						 Object list=doc.get("list");
@@ -55,7 +49,7 @@ public class SpeakStock {
 							 listMap.add(map);
 						 }
 					 }
-					
+					 Document filter=new Document("id",id);
 					 Document doc1= collection1.find(filter).first();
 					 if(doc1!=null&&doc1.containsKey("list")){
 						 Object list1=doc1.get("list");
@@ -80,39 +74,38 @@ public class SpeakStock {
 //								 
 //							 }
 //						 } 
+					 Collections.sort(listMap, new Comparator<HashMap<String, Object >>() {
+				            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
+				                String  one =a.get("utime").toString();
+				                String two = b.get("utime").toString();
+				                int time=str2TimeMuli(one);
+				                int time1=str2TimeMuli(two);
+				                return time1 - time;
+				            }
+					 
+				        });
 					 records.put("id", id);
 					 records.put("name", name);
 					 records.put("code", id+""+name);
 					 records.put("list",listMap);
 					 mongo.upsertMapByTableName(records, "test");
 					 long t2=System.currentTimeMillis();
-					 System.out.println("插入到本地耗时：    "+(t2-t1));
-//					 JSONObject json=JSONObject.fromObject(records);
-						String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=ss_stock_json",new HashMap<String, String>(), records.toString(), "utf-8", 1);
-						if(su.contains("exception")){
-							System.err.println("写入数据异常！！！！  < "+su+" >");
-						}
+//					 System.out.println("插入到本地耗时：    "+(t2-t1));
+					 JSONObject json=JSONObject.fromObject(records);
+					 //必须要格式化成json才能写入到数据库
+//					 System.out.println(json.toString());
+				String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=ss_stock_json",new HashMap<String, String>(), json.toString(), "utf-8", 1);
+					if(su.contains("exception")){
+						System.err.println("写入数据异常！！！！  < "+su+" >");
+					}
 						long t3=System.currentTimeMillis();
 					 System.out.println("插入到gavinduan耗时：    "+(t3-t2));
-//					 txw@jiangcaijing.partner.onmschina.cn
-//					 Jcj2017666@
-		//			 Collections.sort(listMap, new Comparator<HashMap<String, Object >>() {
-		//		            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
-		//		                String  one =a.get("utime").toString();
-		//		                String two = b.get("utime").toString();
-		//		                int time=str2TimeMuli(one);
-		//		                int time1=str2TimeMuli(two);
-		//		                return time1 - time;
-		//		            }
-					 
-//					/go.asp?svid=4&id=4950674&tpages=3&ttimes=1&tzone=8&tcolor=24&sSize=1920,1080&referrer=https%3A//www.baidu.com/link%3Furl%3DodipX6AQ3SQ9-X7U05bfE5xetij_h_WSzzB98oQYKo7usPzkQROBOumhhIFv21Mb%26wd%3D%26eqid%3D871bcdef0001a28f0000000658f9a8d6&vpage=http%3A//www.justwinit.cn/post/6728/&vvtime=1492756710602 HTTP/1.1
-		//		        });
-		//			 
-		//			 for(HashMap<String, Object> map:listMap){
+					
+//					 
+//					 for(HashMap<String, Object> map:listMap){
 		//				 System.out.println(map.toString());
-		//			 }
+//					 }
 		//			 
-		//			 System.exit(1);
 				 }
 		 }catch(Exception e){
 			 System.out.println("哦哦哦，有网站没有评论哟！！");
@@ -151,6 +144,7 @@ public class SpeakStock {
 		}
 		return 0;
 	}
+	
 	
 	
 }

@@ -11,6 +11,7 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 
+//公牛炒股交易数据
 public class CrawlerTrade {
 
 	public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class CrawlerTrade {
 		map.put("Content-Type", "application/x-www-form-urlencoded");
 		map.put("Host", "api.gongniuchaogu.com");
 		map.put("Connection", "Keep-Alive");
-		map.put("X-Session-Token","11475a388eab151a85eaea83425d79d7");
+		map.put("X-Session-Token","c52b45e62112dce57fe2984ca513ab6d");
 		if(""!=session){
 			map.put("X-Session-Token",session);
 		}
@@ -64,13 +65,12 @@ public class CrawlerTrade {
 							}
 							Object member=IKFunction.keyVal(one, "member");
 							Object name=IKFunction.keyVal(member, "name");
-							BigDecimal b1 = new BigDecimal(IKFunction.keyVal(member, "avgWeekYieldRate").toString());
 							BigDecimal b2 = new BigDecimal(IKFunction.keyVal(member, "totalYieldRate").toString());
 							BigDecimal b4 = new BigDecimal(IKFunction.keyVal(trade, "rate").toString());
 							BigDecimal b3 = new BigDecimal("100");
-							Double d=b1.multiply(b3).doubleValue();
 							Double dd=b2.multiply(b3).doubleValue();
-							String  describe="周收益率:"+d+"% 总收益率:"+dd+"%";
+							String ddt=IKFunction.regexp(dd, "(.*?)\\.");
+							String  describe="总收益率:"+ddt+"%";
 							result.put("id",name+" "+type+StockName+price+" "+time);
 							result.put("earnings",b4.multiply(b3).doubleValue()+"%");
 							result.put("describe",describe);
@@ -86,7 +86,7 @@ public class CrawlerTrade {
 						}
 					}
 			if(!listresult.isEmpty()){
-				mongo.upsetManyMapByTableName(listresult, "mm_gncg_deal_dynamic");	
+				mongo.upsetManyMapByTableName(listresult, "mm_deal_dynamic_all");	
 			}
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

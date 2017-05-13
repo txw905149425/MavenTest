@@ -9,20 +9,34 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.test.MongoMaven.uitil.IKFunction;
+
 public class ParseMethod {
 	
 	public static List<HashMap<String, Object>> parseList(String html){
 		List<HashMap<String, Object>> list=new ArrayList<HashMap<String, Object>>();
 		HashMap<String, Object> map=null;
 		Document doc=Jsoup.parse(html);
-		Element block=doc.select("ul.P3").get(0);
-		Elements li=block.select("li>em");
+		Elements li=doc.select(".q-block.q-ques-item");
 		int num=li.size();
 		for(int i=0;i<num;i++){
 			map=new HashMap<String, Object>();
 			Element e=li.get(i);
-			String name=e.text().trim();
-			map.put("id", name);
+			String question=e.select(".q-ques-item-q>a").get(0).text();
+			String timeObject=e.select(".time.fr").get(0).text();
+			String time=IKFunction.timeFormat(timeObject);
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
+//			System.out.println(time);
+			String answer=e.select(".q-ques-item-a.mt20.middle").get(0).text();
+			String name=e.select(".name.fl").get(0).text();
+			map.put("id", question+timeObject);
+			map.put("question", question);
+			map.put("time", time);
+			map.put("answer", answer);
+			map.put("name", name);
+			map.put("website", "爱投顾");
 			list.add(map);
 		}
 		return list;

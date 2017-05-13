@@ -25,7 +25,7 @@ public class CrawlerAJK {
 	
 	public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
-		 MongoCollection<Document>  collection=mongo.getShardConn("ajk_detail_url");
+		 MongoCollection<Document>  collection=mongo.getShardConn("ajk_shanghai_detail_url");
 		 Bson filter = Filters.exists("crawl", false);
 		 MongoCursor<Document> cursor =collection.find(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
 		 try{

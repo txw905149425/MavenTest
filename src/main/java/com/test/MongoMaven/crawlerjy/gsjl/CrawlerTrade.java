@@ -18,14 +18,15 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
+//股市教练  历史 交易数据
 public class CrawlerTrade {
 	
 	public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
 		 MongoCollection<Document>  collection=mongo.getShardConn("stock_code");
-//		 Bson filter = Filters.exists("name", true);
-		 Bson filter1 = Filters.exists("gsjl_crawl", false);
-		 MongoCursor<Document> cursor =collection.find(filter1).batchSize(10000).noCursorTimeout(true).iterator(); 
+		 Bson filter = Filters.exists("name", true);
+//		 Bson filter1 = Filters.eq("gsjl_crawl", "1");
+		 MongoCursor<Document> cursor =collection.find(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
 		 Document doc=null;
 		 List<HashMap<String , Object>> listresult=new ArrayList<HashMap<String , Object>>();
 		 HashMap<String , Object> result = null;
@@ -44,11 +45,15 @@ public class CrawlerTrade {
 						 for(int i=1;i<=num;i++){
 							 result=new HashMap<String, Object>();
 							 Object one=IKFunction.array(list,i);
-							 Object name=IKFunction.keyVal(one, "strategyname");
-							 Object totalrate=IKFunction.keyVal(IKFunction.array(IKFunction.keyVal(one, "totalrate"),2),"text");
 							 Object date=IKFunction.array(IKFunction.keyVal(one, "list"),1);
 							 String  mm=IKFunction.keyVal(date, "date")+" "+IKFunction.keyVal(date, "time");
 							 String time=IKFunction.timeFormat(mm);
+							 if(!IKFunction.timeOK(time)){
+								 break;
+							 }
+							 Object name=IKFunction.keyVal(one, "strategyname");
+							 Object totalrate=IKFunction.keyVal(IKFunction.array(IKFunction.keyVal(one, "totalrate"),2),"text");
+							 String rate=IKFunction.regexp(totalrate, "(.*?)\\.");
 							 Object info=IKFunction.keyVal(date, "info");
 							 Object price=IKFunction.keyVal(IKFunction.array(info,1),"text").toString().replace("以", "").replace("元","");
 							 Object type=IKFunction.keyVal(IKFunction.array(info,2),"text");
@@ -58,8 +63,8 @@ public class CrawlerTrade {
 								}else if("卖出".equals(type.toString())){
 									result.put("option", 1);
 								}
-							 	result.put("id",name+" "+type+code_name+price+" "+time);
-								result.put("describe","总收益："+totalrate);
+							 	result.put("id",name+" "+mm+type+code_name);
+								result.put("describe","总收益："+rate+"%");
 								result.put("quantity",nums);
 								result.put("StockCode", code);
 								result.put("StockName", code_name);
@@ -68,19 +73,19 @@ public class CrawlerTrade {
 								result.put("AddTime", time);
 								result.put("html",one);
 								result.put("website","股市教练");
-								mongo.upsertMapByTableName(result, "mm_gsjl_deal_dynamic");
+//								mongo.upsertMapByTableName(result, "mm_gsjl_deal_dynamic");
 								listresult.add(result);
 						 }
 						 Document doc1=new Document();
 						 doc1.put("id",code);
 						 doc1.put("gsjl_crawl", "1");
 						 mongo.upsertDocByTableName(doc1, "stock_code");
-						 System.out.println(code_name);
+//						 System.out.println(code_name);
 					}else{
 						Object json=IKFunction.jsonFmt(html);
 						Object mes=IKFunction.keyVal(json, "errorMsg");
 						if("无数据".equals(mes.toString())){
-							System.out.println(mes);
+//							System.out.println(mes);
 							Document doc1=new Document();
 							 doc1.put("id",code);
 							 doc1.put("gsjl_crawl", "无数据");
@@ -88,10 +93,10 @@ public class CrawlerTrade {
 						}
 					}
 			 }
-			 System.out.println("---");
 //			 if(!listresult.isEmpty()){
-//					mongo.upsetManyMapByTableName(listresult, "mm_gsjl_deal_dynamic");	
+//					mongo.upsetManyMapByTableName(listresult, "mm_deal_dynamic_all");	
 //				}
+			 System.out.println("---");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
