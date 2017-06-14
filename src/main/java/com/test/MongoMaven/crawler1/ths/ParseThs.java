@@ -36,8 +36,12 @@ public class ParseThs {
 			if(!IKFunction.timeOK(time)){
 				continue;
 			}
-//			System.out.println(i+"    "+question+"  < "+answer+" >  "+name+"   "+time+"    "+timeStr);
-			map.put("id",question+time);
+			if(!StringUtil.isEmpty(answer)){
+				map.put("ifanswer","1");
+			}else{
+				map.put("ifanswer","0");
+			}
+			map.put("id",question+timeStr);
 			map.put("question", question);
 			map.put("name", name);
 			map.put("answer", answer);
@@ -79,7 +83,12 @@ public class ParseThs {
 		String timeStr=doc.select(".answer-time").get(0).text();
 		String time=IKFunction.timeFormat(timeStr);
 		if(IKFunction.timeOK(time)){
-		map.put("id",question+time);
+			if(!StringUtil.isEmpty(answer)){
+				map.put("ifanswer","1");
+			}else{
+				map.put("ifanswer","0");
+			}
+			map.put("id",question+time);
 			map.put("question", question);
 			map.put("name", name);
 			map.put("answer", answer);

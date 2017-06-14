@@ -54,15 +54,16 @@ public class CrawlerAtg {
 					result.put("UserName", name);
 	//				result.put("fromPosition", fromPosition);
 	//				result.put("toPosition", toPosition);
-					result.put("closing_cost", price);
+					result.put("closing_cost", price.toString());
 					result.put("AddTime", time);
 					result.put("html",one);
-					result.put("option",type);
+					result.put("option",type.toString());
 					result.put("website","爱投顾");
 					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 					result.remove("html");
 					JSONObject mm_data=JSONObject.fromObject(result);
-				   String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//					System.out.println(mm_data.toString());
+				   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import net.sf.json.JSONObject;
+
 import org.apache.http.client.ClientProtocolException;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -73,7 +75,12 @@ public class CrawlerAsk {
 					if(que==null){
 						continue;
 					}
-					Object answer=IKFunction.keyVal(one, "reply");
+					String  answer=IKFunction.keyVal(one, "reply").toString();
+					if(!StringUtil.isEmpty(answer)){
+						result.put("ifanswer","1");
+					}else{
+						result.put("ifanswer","0");
+					}
 					result.put("name",name);
 					result.put("id",que+""+time);
 					result.put("question", que);
@@ -85,8 +92,14 @@ public class CrawlerAsk {
 		 }
 		 if(!listresult.isEmpty()){
 			 mongo.upsetManyMapByTableName(listresult, "ww_ask_online_all");
+			 for(HashMap<String, Object> one:listresult){
+					String ttmp=JSONObject.fromObject(one).toString();
+					 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+						if(su.contains("exception")){
+							System.err.println("写入数据异常！！！！  < "+su+" >");
+						}
+			     }
 		 }
-		System.out.println("........");
 	} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -19,8 +19,10 @@ import com.test.MongoMaven.uitil.StringUtil;
 
 public class Actions implements Runnable{
 	private DataUtil util;
-	public Actions(DataUtil util){
+	private MongoDbUtil mongo;
+	public Actions(DataUtil util,MongoDbUtil mongo){
 		this.util=util;
+		this.mongo=mongo;
 	}
 	
 	
@@ -32,14 +34,14 @@ public class Actions implements Runnable{
 		Map<String, String> resultmap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 		String html=resultmap.get("html");
 	try{
+		long t1=System.currentTimeMillis();
 		if(!StringUtil.isEmpty(html)&&ParseMethod.htmlFilter(html,"div.articleh")){
 			String id=IKFunction.md5(html);
 			//页面抓取正常的，写入3张表
-				MongoDbUtil mongo=new MongoDbUtil();
-				 MongoCollection<Document> collection=mongo.getShardConn("ss_east_money_stock_json");
-//				PostData post=new PostData();
 				 HashMap<String, Object> oneJsonMap=new HashMap<String, Object>();
 				 List<HashMap<String,Object>> listJsonMap=ParseMethod.parseList2(html);
+				 long t2=System.currentTimeMillis();
+				 System.out.println("111：   "+(t2-t1));
 				 oneJsonMap.put("code", code+name);
 				 oneJsonMap.put("name", name);
 				 if(!listJsonMap.isEmpty()){
@@ -53,12 +55,9 @@ public class Actions implements Runnable{
 //				System.err.println(su);
 				oneJsonMap.put("id",code);
 				//最新数据表
-				 mongo.upsertMapByCollection(oneJsonMap,collection,"ss_east_money_stock_json");
-				 //更新任务表
-//				 Document doc=new Document();
-//				 doc.append("id", code);
-//				 doc.append("east_crawl", "2");
-//				 mongo.upsertDocByTableName(doc, "stock_code");
+				mongo.upsertMapByTableName(oneJsonMap, "ss_east_money_stock_json");
+				 long t3=System.currentTimeMillis();
+				 System.out.println(t3-t2);
 				 //插入汇总表
 				 oneJsonMap.put("id",id );
 				 oneJsonMap.put("stock_code",code );

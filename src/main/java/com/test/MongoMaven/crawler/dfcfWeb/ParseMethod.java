@@ -39,26 +39,19 @@ public class ParseMethod {
 		List<HashMap<String,Object>> listDbMap=new ArrayList<HashMap<String,Object>>();
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 		int num=IKFunction.jsoupRowsByDoc(doc, ".l3>a");
-		for(int i=1;i<num;i++){
+		for(int i=3;i<num;i++){
+			 long t1=System.currentTimeMillis();
 			Element es=doc.select("span.l3").get(i);
 			Elements ttt= es.select("span>em");
 			if(ttt.size()>0){
 				continue;
 			}
-			Calendar now = Calendar.getInstance();  
-		    int year=now.get(Calendar.YEAR); 
-		    Random r = new Random();
-			 int second= r.nextInt(60);
-			 String se="";
-			 if(Integer.toString(second).length()<2){
-				 se="0"+second;
-			 }else{
-				 se=""+second;
-			 }
-			String utime=year+"-"+IKFunction.jsoupTextByRowByDoc(doc, "span.l5", i+1)+":"+se;
+			String timestr=IKFunction.jsoupTextByRowByDoc(doc, "span.l5", i+1);
+			String utime=IKFunction.timeFormat(timestr);
 			if(!IKFunction.timeOK(utime)){
 				break;
 			}
+			
 				//抓取评论详情页的内容
 				String tmp=IKFunction.jsoupListAttrByDoc(doc, ".l3>a","href",i);
 				if(!StringUtil.isEmpty(tmp)){
@@ -70,13 +63,14 @@ public class ParseMethod {
 					}else{
 						url="http://guba.eastmoney.com/"+tmp;
 					}
-					resultmap=HttpUtil.getHtml(url, map1, "utf8", 1,new HashMap<String, String>());
-					html=resultmap.get("html");
-					if(htmlFilter(html,"#zwconttbt")){
-						HashMap<String,Object> jsonMap=ParseMethod.parseDetail2(html);//flist
+					String dhtml=HttpUtil.getHtml(url, map1, "utf8", 1,new HashMap<String, String>()).get("html");
+					if(htmlFilter(dhtml,"#zwconttbt")){
+						HashMap<String,Object> jsonMap=ParseMethod.parseDetail2(dhtml);//flist
 						listDbMap.add(jsonMap);
 					}
 				}
+				 long t2=System.currentTimeMillis();
+				 System.out.println("two:  "+(t2-t1));
 		}
 //		oneMapRecord.put("list", listDbMap);
 		return listDbMap;

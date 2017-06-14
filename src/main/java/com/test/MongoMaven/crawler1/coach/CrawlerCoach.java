@@ -11,11 +11,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.mongodb.client.MongoCollection;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
 //股市教练-看直播   直播数据  数据更新较快，1-2分钟一次
@@ -23,6 +25,7 @@ public class CrawlerCoach {
 
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
+		PostData post=new PostData();
 		MongoCollection<org.bson.Document> collection=mongo.getShardConn("ww_ask_online_all");	
 		String url="http://t.10jqka.com.cn/api.php?method=newcircle.getLives&mask=&brokerName=&sort=";
 		Map<String , String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
@@ -39,8 +42,17 @@ public class CrawlerCoach {
 					 if(filter(html)){
 						 List<HashMap<String, Object>> records=parseDetail(html);
 						 if(!records.isEmpty()){
-							 mongo.upsetManyMapByCollection(records, collection, "ww_ask_online_all");
+							mongo.upsetManyMapByCollection(records, collection, "ww_ask_online_all");
+							  for(HashMap<String, Object> one:records){
+								one.remove("json_str");
+								String ttmp=JSONObject.fromObject(one).toString();
+								 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+									if(su.contains("exception")){
+										System.err.println("写入数据异常！！！！  < "+su+" >");
+									}
+								}
 							}
+							
 						
 					 }
 				}
@@ -109,7 +121,11 @@ public class CrawlerCoach {
 					}
 					String question=s[0];
 					String answer=s[1];
-				
+					if(!StringUtil.isEmpty(answer)){
+						map.put("ifanswer","1");
+					}else{
+						map.put("ifanswer","0");
+					}
 					Object name=IKFunction.keyVal(tmp, "nickname");
 					map.put("id",question+tt);
 					map.put("question", question);
@@ -120,10 +136,10 @@ public class CrawlerCoach {
 					map.put("json_str", tmp.toString());
 					list.add(map);
 				}
-				else{
-					System.out.println(str);
+//				else{
+//					System.out.println(str);
 //					System.exit(1);
-				}
+//				}
 			}
 		}
 		return list;

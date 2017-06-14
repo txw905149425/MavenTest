@@ -15,7 +15,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
  *牛股王  交易信息
  * */
 public class CrawlerJY {
-	static int threadNum=10;
+	static int threadNum=3;
 	public static void main(String[] args) {
 		ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 			 MongoDbUtil mongo=new MongoDbUtil();
@@ -34,7 +34,7 @@ public class CrawlerJY {
 				 util.setCode(id.toString());
 				 util.setUrl(url);
 				 util.setDescribe(doc.get("describe").toString());
-				 executor.execute(new ThreadActions(util)); 
+				 executor.execute(new ThreadActions(util,mongo)); 
 			 }
 		   cursor.close();
 		  executor.shutdown();

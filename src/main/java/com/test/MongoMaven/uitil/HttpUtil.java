@@ -55,6 +55,7 @@ public class HttpUtil {
      */ 
 	@SuppressWarnings("resource")
 	public static Map<String,String> getHtml(String url,HashMap<String,String> map,String charset,int time,HashMap<String,String> proxyMap){
+		    url=url.trim();
 			Map<String,String> resultMap=new HashMap<String,String>();
 			String html="";
 		  	CloseableHttpClient httpclient = null;
@@ -92,7 +93,7 @@ public class HttpUtil {
 							configBuilder.setProxy(proxyer);					   }
 			   }
 			   if(time<10000){
-				   requestConfig=configBuilder.setConnectTimeout(10000).setConnectionRequestTimeout(8000).setSocketTimeout(8000).build();
+				   requestConfig=configBuilder.setConnectTimeout(18000).setConnectionRequestTimeout(15000).setSocketTimeout(15000).build();
 			   }else{
 				   requestConfig=configBuilder.setConnectTimeout(time).setConnectionRequestTimeout(time).setSocketTimeout(time).build();
 			   }
@@ -142,19 +143,19 @@ public class HttpUtil {
 					ContentType contentType = ContentType.getOrDefault(entity);
 					Charset defaultCharset = contentType.getCharset();
 					//获取本次访问的cookie
-//					 Header[] header = response.getAllHeaders(); 
+					 Header[] header = response.getAllHeaders(); 
 //					 resultMap.put("cookie",response.getFirstHeader("Set-Cookie").toString());
 //					 System.out.println(response.getFirstHeader("Set-Cookie"));
-//					 if (header != null){ 
-//					    for (int i = 0; i < header.length; i++){ 
-////					    	System.out.println(header[i].getName() + ":" + header[i].getValue()); 
-//						    if (header[i].getName().equalsIgnoreCase("Set-Cookie")){ 
-//						     	resultMap.put("setCookie",header[i].getValue());
-//						    }else if(header[i].getName().equalsIgnoreCase("cookie")){
-//						    	resultMap.put("cookie",header[i].getValue());
-//						    }
-//					    } 
-//					 } 
+					 if (header != null){ 
+					    for (int i = 0; i < header.length; i++){ 
+//					    	System.out.println(header[i].getName() + ":" + header[i].getValue()); 
+						    if (header[i].getName().equalsIgnoreCase("Set-Cookie")){ 
+						     	resultMap.put("setCookie",header[i].getValue());
+						    }else if(header[i].getName().equalsIgnoreCase("cookie")){
+						    	resultMap.put("cookie",header[i].getValue());
+						    }
+					    } 
+					 } 
 					try{
 						if(entity!=null){
 							if (defaultCharset == null) {

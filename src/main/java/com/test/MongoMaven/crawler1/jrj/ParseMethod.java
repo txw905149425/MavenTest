@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.test.MongoMaven.uitil.IKFunction;
+import com.test.MongoMaven.uitil.StringUtil;
 
 public class ParseMethod {
 	
@@ -28,8 +29,12 @@ public class ParseMethod {
 			if(!IKFunction.timeOK(time)){
 				continue;
 			}
-//			System.out.println(time);
 			String answer=e.select(".q-ques-item-a.mt20.middle").get(0).text();
+			if(!StringUtil.isEmpty(answer.toString())){
+				map.put("ifanswer","1");
+			}else{
+				map.put("ifanswer","0");
+			}
 			String name=e.select(".name.fl").get(0).text();
 			map.put("id", question+timeObject);
 			map.put("question", question);

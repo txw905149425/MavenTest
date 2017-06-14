@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -18,6 +19,7 @@ import com.mongodb.client.MongoCollection;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
 //自选股App,股市直播问答数据（筛选有答案的，都会存）   ，数据量普通。2分钟抓取左右一次
@@ -25,6 +27,7 @@ public class CrawlerZxg {
 	
 	public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
+		 PostData post=new PostData();
 		 MongoCollection<Document> collection=mongo.getShardConn("ww_ask_online_all");		
 		String url="http://proxy.finance.qq.com/group/newstockgroup/Live/getSquareList3?check=0&_appName=android&_dev=HM+NOTE+1LTE&_devId=28ec48936b5a9d2b42feb837340121c6d4a090b2&_mid=28ec48936b5a9d2b42feb837340121c6d4a090b2&_md5mid=7473A582ACF122D5CF8466B2C6B21A5E&_omgid=2dc4062302a6154fc7d804bd8d3d2b5dbc5a001021070b&_omgbizid=a487cdcc46702543c7f8511f43c222dfd58f014021230a&_appver=5.4.1&_ifChId=119&_screenW=720&_screenH=1280&_osVer=4.4.4&_uin=10000&_wxuin=20000&_net=WIFI&__random_suffix=37667";
 		HashMap<String, String> map= new HashMap<String, String>();
@@ -46,6 +49,14 @@ public class CrawlerZxg {
 				List<HashMap<String, Object>> recordList=parseDetail(html);
 				if(!recordList.isEmpty()){
 					mongo.upsetManyMapByCollection(recordList, collection, "ww_ask_online_all");
+					for(HashMap<String, Object> one:recordList){
+						one.remove("json_str");
+						String ttmp=JSONObject.fromObject(one).toString();
+						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+							if(su.contains("exception")){
+								System.err.println("写入数据异常！！！！  < "+su+" >");
+							}
+						}
 				}
 			}
 			
@@ -110,6 +121,9 @@ public class CrawlerZxg {
 			map.put("name", name);
 			if(answer!=null){
 				map.put("answer", answer);
+				map.put("ifanswer","1");
+			}else{
+				map.put("ifanswer","0");
 			}
 			map.put("time", time);
 			map.put("website", "自选股");

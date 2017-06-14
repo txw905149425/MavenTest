@@ -22,8 +22,10 @@ import com.test.MongoMaven.uitil.StringUtil;
 
 public class ThreadActions implements Runnable{
 	private DataUtil util;
-	public ThreadActions(DataUtil util){
+	private MongoDbUtil mongo;
+	public  ThreadActions(DataUtil util,MongoDbUtil mongo){
 		this.util=util;
+		this.mongo=mongo;
 	}
 	
 	public void run() {
@@ -34,21 +36,19 @@ public class ThreadActions implements Runnable{
 			Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 			String html=map.get("html");
 			if(html.length()>300){
-				MongoDbUtil mongo=new MongoDbUtil();
 				PostData post=new PostData();
 				List<HashMap<String, Object>> recordList=parseList(html,describe);
 				if(!recordList.isEmpty()){
-					MongoCollection<Document> collection=mongo.getShardConn("mm_deal_dynamic_all");
-					mongo.upsetManyMapByCollection(recordList, collection, "mm_deal_dynamic_all");
+					mongo.upsetManyMapByTableName(recordList, "mm_deal_dynamic_all");
 					for(HashMap<String, Object> result:recordList){
 						result.remove("html");
 						result.remove("quantity");
 						result.remove("AccountID");
 						result.remove("crawl_time");
 						JSONObject mm_data=JSONObject.fromObject(result);
-					   String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+					   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 						if(su.contains("exception")){
-							System.out.println(mm_data);
+							System.out.println(mm_data.toString());
 							System.err.println("写入数据异常！！！！  < "+su+" >");
 						}
 					}
@@ -108,7 +108,7 @@ public class ThreadActions implements Runnable{
 		}else if(str.contains("卖出")){
 			map.put("option", "1");
 		}
-		String closing_cost=IKFunction.regexp(str, "成交价(.*?),");
+		String closing_cost=IKFunction.regexp(str, "成交价(.*?)元,");
 		String proportion=IKFunction.regexp(str, "元,(.*)");
 		map.put("closing_cost",closing_cost);
 		map.put("quantity",proportion);

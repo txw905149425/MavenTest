@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
 
@@ -14,16 +17,35 @@ import com.test.MongoMaven.uitil.StringUtil;
 public class Crawler {
 	
 	public static void main(String[] args) {
-		String url="http://www.p5w.net/stock/news/gsxw/";  //全景网 股票公司信息
-//		String url="http://www.p5w.net/stock/gpyb/hyfx/";//全景网股票  行业信息
-		url="http://www.p5w.net/stock/gpyb/ggjj/";//全景网 股票 个股研究
-		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-		try {
-			List<HashMap<String, Object>> list=parse(html);
-			if(!list.isEmpty()){
-				MongoDbUtil mongo=new MongoDbUtil();
-				mongo.upsetManyMapByTableName(list, "tt_qjw_xiaoxi");
+	  try {
+		  MongoDbUtil mongo=new MongoDbUtil();
+		  PostData post=new PostData();
+		  for(int i=1;i<=3;i++){
+		   String url="";
+			if(i==1){
+			   url="http://www.p5w.net/stock/news/gsxw/";  //全景网 股票公司信息
+			}else if(i==2){
+				 url="http://www.p5w.net/stock/gpyb/hyfx/";//全景网股票  行业信息
+			}else {
+				url="http://www.p5w.net/stock/gpyb/ggjj/";//全景网 股票 个股研究
 			}
+			String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
+			if(!StringUtil.isEmpty(html)&&html.length()>200){	
+			List<HashMap<String, Object>> list=parse(html);
+				if(!list.isEmpty()){
+					mongo.upsetManyMapByTableName(list, "tt_json_all");
+					for(HashMap<String, Object> result:list){
+						result.remove("crawl_time");
+						JSONObject mm_data=JSONObject.fromObject(result);
+					   String su=post.postHtml("http://localhost:8888/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+						if(su.contains("exception")){
+							System.out.println(mm_data.toString());
+							System.err.println("写入数据异常！！！！  < "+su+" >");
+						}
+					}
+				}
+			}	
+		 }
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,9 +69,9 @@ public class Crawler {
 				HashMap<String, Object> map=parseDetail(durl);
 				if(!map.isEmpty()){
 					map.put("id", title);
-					map.put("class", "新闻");
+					map.put("newsClass", "新闻");
 					map.put("source", "全景网");
-					map.put("related", "");
+//					map.put("related", "");
 					map.put("abs", abs);
 					map.put("time", time);
 					map.put("durl", durl);

@@ -10,6 +10,8 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
+
+//投资赢家
 public class Crawler {
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
@@ -43,7 +45,7 @@ public class Crawler {
 			Object list=IKFunction.keyVal(one, "list");
 			Object tmp=IKFunction.array(list, 1);
 			String url="https://xuangu.hsmdb.com/stockSelection/policy/getStocks.do?policyId="+lid+"&pageSize=3000&pageNum=1";
-			System.out.println(url);
+//			System.out.println(url);
 			Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>());
 			String xml=map.get("html");
 			Object json1=IKFunction.jsonFmt(xml);
@@ -86,19 +88,19 @@ public class Crawler {
 	}
 	
 	
-	public void parse2(String url){
-		Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>());
-		String html=map.get("html");
-		Object json=IKFunction.jsonFmt(html);
-		Object data=IKFunction.keyVal(json, "data");
-		int num=IKFunction.rowsArray(data);
-		for(int i=1;i<=num;i++){
-			Object one=IKFunction.array(data, i);
-			Object name=IKFunction.keyVal(one, "strStockName");
-			Object code=IKFunction.keyVal(one, "strStockCode");
-		}
-		
-		
-	}
+//	public void parse2(String url){
+//		Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>());
+//		String html=map.get("html");
+//		Object json=IKFunction.jsonFmt(html);
+//		Object data=IKFunction.keyVal(json, "data");
+//		int num=IKFunction.rowsArray(data);
+//		for(int i=1;i<=num;i++){
+//			Object one=IKFunction.array(data, i);
+//			Object name=IKFunction.keyVal(one, "strStockName");
+//			Object code=IKFunction.keyVal(one, "strStockCode");
+//		}
+//		
+//		
+//	}
 	
 }

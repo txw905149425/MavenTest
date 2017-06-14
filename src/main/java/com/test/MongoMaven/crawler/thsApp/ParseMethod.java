@@ -76,7 +76,7 @@ public class ParseMethod {
 			
 		}else if(json.toString().contains("该论股堂暂时不支持讨论")){
 			htmlCode=14;
-			System.out.println(json);
+//			System.out.println(json);
 		}else{
 			htmlCode=8888;
 		}
@@ -85,12 +85,14 @@ public class ParseMethod {
 	}
 	
 	public static void main(String[] args) {
-		MongoDbUtil mongo=new MongoDbUtil();
-		String html=IKFunction.read("txt");
-		HashMap<String,Object> map=parseJson(html);
-//		map.put("id", "11111");
-		mongo.upsertMapByTableName(map, "test");
-//		System.out.println(parseJson(html).toString());
+		String str="僵尸股……<begin>{\"type\":\"br\", \"content\":\"\", \"action\":\"\"}<end>跟跌，不跟涨！";
+		int first=str.indexOf("<");
+		int last=str.lastIndexOf(">")+1;
+		System.out.println(first+"  "+last);
+		String tmp=str.substring(first, last);
+		System.out.println(str.replace(tmp, ""));
+		System.out.println(tmp);
+		
 	}
 	
 	
@@ -112,10 +114,23 @@ public class ParseMethod {
 			Object utime=IKFunction.keyVal(block,"ctime");
 			long timel=Long.parseLong(utime.toString());
 			timeList.add(timel);
-			String ttt=sdf.format(new Date(timel*1000L));  
+			String ttt=IKFunction.timeFormat(utime.toString());  
 			Object ucontent=IKFunction.keyVal(block,"content");
-			Object comment=IKFunction.keyVal(block,"comment");
+			String comment=IKFunction.keyVal(block,"comment").toString();
+			
 			if(!StringUtil.isEmpty(comment.toString())){
+				
+				//判断情况不确定，以后估计还有其他情况！！！！ 2017-06-13   唐
+				if(comment.contains("<begin>")){//僵尸股……<begin>{"type":"br", "content":"", "action":""}<end>跟跌，不跟涨！
+					int first=comment.indexOf("<");
+					int last=comment.lastIndexOf(">")+1;
+					String tmp=comment.substring(first, last);
+					comment=comment.replace(tmp, "");
+					
+					
+				}
+				
+				
 				List<HashMap<String,Object>> jsonMap=new ArrayList<HashMap<String,Object>>();
 				JSONObject js=JSONObject.fromObject(comment);
 				Iterator it = js.keys(); 
@@ -129,7 +144,7 @@ public class ParseMethod {
 	               Object time=IKFunction.keyVal(comm,"ctime");
 	               long timel1=Long.parseLong(time.toString());
 	               timeList.add(timel1);
-	               String ttt1=sdf.format(new Date(timel1*1000L));  
+	               String ttt1=IKFunction.timeFormat(time.toString());  
 	               Object content=IKFunction.keyVal(comm,"content");
 //	               System.out.println("评论：    "+name+"   "+time+"   "+content);
 	            dbMap.put("name", name);
@@ -142,7 +157,7 @@ public class ParseMethod {
 				}
 			}
 			Collections.sort(timeList);
-			result.put("lastCommentTime", sdf.format(new Date(timeList.get(timeList.size()-1)*1000L)));
+			result.put("lastCommentTime", IKFunction.timeFormat(timeList.get(timeList.size()-1).toString()));
 			result.put("uname", uname);
 			result.put("utime", ttt);
 			result.put("ucontent", ucontent);
@@ -153,5 +168,6 @@ public class ParseMethod {
 		return records;
 		
 	}
+	
 	
 }

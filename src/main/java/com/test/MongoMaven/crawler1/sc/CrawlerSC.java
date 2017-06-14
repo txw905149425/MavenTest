@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.Jsoup;
@@ -14,6 +16,8 @@ import org.jsoup.select.Elements;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
+import com.test.MongoMaven.uitil.StringUtil;
 
 //全球市场直播http://gmv.cjzg.cn/Mv/faq_list
 //数据量比较少 更新较慢  抓取频率低  5分钟左右一次
@@ -26,13 +30,21 @@ public class CrawlerSC {
 		String html=null;
 		try {
 			 MongoDbUtil mongo=new MongoDbUtil();
+			 PostData post=new PostData();
 			for(int i=0;i<5;i++){
 				list.add(new BasicNameValuePair("loadingnum", i+""));
 				html = HttpUtil.postHtml(url, map, list, 1000, 1);
 				List<HashMap<String, Object>> listMap=parseList(html);
 					if(!listMap.isEmpty()){
 						mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
-						System.out.println("...........");
+						for(HashMap<String, Object> one:listMap){
+							String ttmp=JSONObject.fromObject(one).toString();
+							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+								if(su.contains("exception")){
+									System.err.println("写入数据异常！！！！  < "+su+" >");
+								}
+						 }
+						
 					}
 				}
 		} catch(Exception e) {
@@ -60,6 +72,11 @@ public class CrawlerSC {
 			String question=doc.select(".wangyou-txt").get(i).text();
 			String name=doc.select(".zhuanjia-title").get(i).text();
 			String answer=IKFunction.regexp(tmp, "(.*)\\[");
+			if(!StringUtil.isEmpty(answer)){
+				map.put("ifanswer","1");
+			}else{
+				map.put("ifanswer","0");
+			}
 			map.put("id",question+time);
 			map.put("question", question);
 			map.put("name", name);

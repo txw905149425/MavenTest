@@ -43,8 +43,10 @@ public class MongoDbUtil {
 		String userdb = "crawler"; // Mongodb认证库
 		String username = "group2017"; // Mongodb用户名
 		String password = "group2017666"; // Mongodb密码
-		String host = "localhost"; // Mongodb服务器地址
+		String host = "127.0.0.1"; // Mongodb服务器地址
+//		
 		Integer port = 27017; // Mongodb端口
+//		port=27071;
 		String dbname = "crawler"; // 使用的数据库名
 		ServerAddress svrAddr = new ServerAddress(host, port);
 		MongoCredential credential = MongoCredential.createCredential(username,userdb, password.toCharArray());
@@ -76,26 +78,26 @@ public class MongoDbUtil {
 				 */
 				collectionConn = db.getCollection(tableName)/*.withWriteConcern(WriteConcern.MAJORITY)*/;
 				mongoCollectionMap.put(tableName, collectionConn);
-//				if(!collectionsUniqueIndex.contains(tableName)){
-//					try{
-//					ListIndexesIterable<Document> index = collectionConn.listIndexes() ;
-//					boolean hasUniqueIndex = false ;
-//						for(Document one : index){
-//						if(one.getBoolean("id", true)){
-//							hasUniqueIndex = true ;
-//							break ;
-//						}
-//					}
-//						if(!hasUniqueIndex){
-//							Document key = new Document("id", 1) ;
-//							collectionConn.createIndex(key, new IndexOptions().unique(true).background(true).name("id_unique")) ;	
-//							collectionsUniqueIndex.add(tableName);
-//						}else{
-//							collectionsUniqueIndex.add(tableName);
-//						}}catch(Exception es){
-//							
-//						}
-//					}
+				if(!collectionsUniqueIndex.contains(tableName)){
+					try{
+					ListIndexesIterable<Document> index = collectionConn.listIndexes() ;
+					boolean hasUniqueIndex = false ;
+						for(Document one : index){
+						if(one.getBoolean("id", true)){
+							hasUniqueIndex = true ;
+							break ;
+						}
+					}
+						if(!hasUniqueIndex){
+							Document key = new Document("id", 1) ;
+							collectionConn.createIndex(key, new IndexOptions().unique(true).background(true).name("id_unique")) ;	
+							collectionsUniqueIndex.add(tableName);
+						}else{
+							collectionsUniqueIndex.add(tableName);
+						}}catch(Exception es){
+							
+						}
+					}
 			} catch (Exception e) {
 //				RedisApi.error(pool, "LogDBMongoConn", "Exceptions:" + StringUtil.getError(e), Constants.ERROR);
 				e.printStackTrace();
@@ -345,6 +347,22 @@ public class MongoDbUtil {
 //			RedisApi.error(pool, "LogDBMongoQuery", "Exceptions:" + StringUtil.getError(e), log_level);
 		}
 		return isExists;
+	}
+	
+	public static void main(String[] args) {
+		String userdb = "crawler"; // Mongodb认证库
+		String username = "group2017"; // Mongodb用户名
+		String password = "group2017666"; // Mongodb密码
+		String host = "42.159.196.68"; // Mongodb服务器地址
+		Integer port = 27071; // Mongodb端口
+		String dbname = "crawler"; // 使用的数据库名
+		ServerAddress svrAddr = new ServerAddress(host, port);
+		MongoCredential credential = MongoCredential.createCredential(username,userdb, password.toCharArray());
+		@SuppressWarnings("resource")
+		MongoClient mongoClient = new MongoClient(svrAddr,Arrays.asList(credential));
+		MongoDatabase mongo = mongoClient.getDatabase(dbname);
+		mongo.createCollection("test");
+		System.out.println("**********");
 	}
 	
 	

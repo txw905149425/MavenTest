@@ -11,8 +11,10 @@ import com.test.MongoMaven.uitil.StringUtil;
 
 public class Actions implements Runnable{
 	private DataUtil util;
-	public Actions(DataUtil util){
+	private MongoDbUtil mongo;
+	public Actions(DataUtil util,MongoDbUtil mongo){
 		this.util=util;
+		this.mongo=mongo;
 	}
 	
 	public void run() {
@@ -23,18 +25,11 @@ public class Actions implements Runnable{
 	     String url=util.getUrl();
 	     String code=util.getCode();
 	     String html=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>()).get("html");
+//	     System.out.println(html);
 		if(!StringUtil.isEmpty(html)&&html.length()>200){
 			String id=IKFunction.md5(html);
-			MongoDbUtil mongo=new MongoDbUtil();
+//			MongoDbUtil mongo=new MongoDbUtil();
 //				 //数据源表
-//				 jsonResult.remove("id");
-//				 jsonResult.remove("code");
-//				 jsonResult.remove("html");
-//				 jsonResult.put("id", code);
-//				 jsonResult.put("ths_crawl", "1");
-//				 mongo.upsertMapByTableName(jsonResult,tableName3);
-				 //最新数据表
-//				 jsonResult.clear();
 				 HashMap<String,Object> jsonResult=ParseMethod.parseJson(html);
 				 mongo.upsertMapByTableName(jsonResult, "ss_ths_talk_stock_json");
 				//总数据表
@@ -42,7 +37,7 @@ public class Actions implements Runnable{
 				 jsonResult.put("stock_code",code );
 				 jsonResult.put("website","同花顺" );
 				 mongo.upsertMapByTableName(jsonResult, "ss_all_stock_json_count");
-				 System.out.println("OoO");
+//				 System.out.println("OoO");
 		  
 		}
 		

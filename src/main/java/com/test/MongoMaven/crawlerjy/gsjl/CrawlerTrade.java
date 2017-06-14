@@ -96,7 +96,7 @@ public class CrawlerTrade {
 //			 if(!listresult.isEmpty()){
 //					mongo.upsetManyMapByTableName(listresult, "mm_deal_dynamic_all");	
 //				}
-			 System.out.println("---");
+//			 System.out.println("---");
 		}catch(Exception e){
 			e.printStackTrace();
 		}

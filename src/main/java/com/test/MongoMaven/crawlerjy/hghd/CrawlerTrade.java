@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import net.sf.json.JSONObject;
+
 import org.apache.http.client.ClientProtocolException;
 
 import com.test.MongoMaven.uitil.IKFunction;
@@ -40,7 +43,8 @@ public class CrawlerTrade {
 	try {
 				String data="{'sign':'pQQvewCK+r0xR6TMHx5xERstD84=','ver':'5.3.0','oauth_token':'e7d60c4c-e7fd-4113-b5d4-7c05d04e87e7'}";
 					String html=post.postHtml(url, map,data, "utf8", 2);
-					System.out.println(html);
+//					System.out.println(html);
+//					System.exit(1);
 					if(html.length()>100){
 						Object json=IKFunction.jsonFmt(html);
 						Object js=IKFunction.keyVal(json, "data");
@@ -77,6 +81,12 @@ public class CrawlerTrade {
 							result.put("html",one);
 							result.put("website","好股互动");
 							mongo.upsertMapByTableName(result, "mm_hghd_deal_dynamic");
+							result.remove("html");
+							JSONObject mm_data=JSONObject.fromObject(result);
+						   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+							if(su.contains("exception")){
+								System.err.println("写入数据异常！！！！  < "+su+" >");
+							}
 						}
 					}
 //			if(!listresult.isEmpty()){

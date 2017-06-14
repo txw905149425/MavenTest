@@ -1,1 +1,0 @@
-java -cp MongoMaven-0.0.1-SNAPSHOT.jar com.test.MongoMaven.crawlerjy.niu.CrawlerNiuRen  

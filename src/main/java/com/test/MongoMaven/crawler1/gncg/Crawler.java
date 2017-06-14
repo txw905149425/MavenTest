@@ -74,11 +74,12 @@ public class Crawler {
 							listresult.add(result);
 						}
 						mongo.upsertDocByTableName(new Document("id",i), "ww_gncg_genius_id");
-						System.out.println("id:"+i);
+//						System.out.println("id:"+i);
 					
 			}
 			if(!listresult.isEmpty()){
 				mongo.upsetManyMapByTableName(listresult, "ww_ask_online_all");	
+//				http://localhost:8888/import?type=ss_stock_json
 			}
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

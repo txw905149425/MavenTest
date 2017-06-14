@@ -4,24 +4,48 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
+//中信建投 公告
 public class Crawler {
 	
 		public static void main(String[] args) {
-			String url="https://www.csc108.com/resourceCenter/things.jspx?pageNo=1"; //上市企业公告
-//			url="https://www.csc108.com/messageinfo/tfpList.jspx"; //停复牌公告
+			
+			 String flag="";
+			 for(String arg:args){
+				if(arg.startsWith("flag=")){
+					flag=arg.substring(5);
+				}
+			 }
+			 String url="";
+			if("1".equals(flag)){
+				 url="https://www.csc108.com/resourceCenter/things.jspx?pageNo=1"; //上市企业公告
+			}else if("2".equals(flag)){
+				url="https://www.csc108.com/messageinfo/tfpList.jspx"; //停复牌公告
+			}
 			String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-//			System.out.println(html);
-//			System.exit(1);
 			try{
 				List<HashMap<String, Object>> list=parse(html);
 				if(!list.isEmpty()){
 					MongoDbUtil mongo=new MongoDbUtil();
-					mongo.upsetManyMapByTableName(list, "tt_zxtj_gonggao");
+					PostData post=new PostData();
+					mongo.upsetManyMapByTableName(list, "tt_json_all");
+					for(HashMap<String, Object> result:list){
+						result.remove("crawl_time");
+						JSONObject mm_data=JSONObject.fromObject(result);
+					   String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=tt_stock_json_test",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+						if(su.contains("exception")){
+							System.out.println(mm_data.toString());
+							System.err.println("写入数据异常！！！！  < "+su+" >");
+						}
+					}
+					
 				}
 			}catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -52,7 +76,7 @@ public class Crawler {
 						continue;
 					}
 					map.put("title", title);
-					map.put("class", "公告");
+					map.put("newsClass", "公告");
 					map.put("source", "中信建投证券");
 					map.put("time", time);
 					List<HashMap<String, Object>> list1=new ArrayList<HashMap<String,Object>>();
@@ -63,7 +87,8 @@ public class Crawler {
 						map1.put("code", code);
 						map1.put("name", name);
 						list1.add(map1);
-						map.put("related",list1);
+						map.put("code_list",list1);
+						map.put("related",code);
 					}
 					list.add(map);
 					
@@ -82,8 +107,11 @@ public class Crawler {
 			if(!StringUtil.isEmpty(html)&&IKFunction.htmlFilter(html, ".metal_content")){
 				Object doc=IKFunction.JsoupDomFormat(html);
 				String context=IKFunction.jsoupTextByRowByDoc(doc, ".metal_content", 0);
+				if(context.isEmpty()){
+					return map;
+				}
 				map.put("content", context);
-				map.put("id", IKFunction.md5(context));
+				map.put("id", url);
 			}
 			return map;
 		}

@@ -4,9 +4,12 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
 public class Crawler {
@@ -15,8 +18,10 @@ public class Crawler {
 		String url="http://app.icaikee.com/xrz-app-web/portfolio/list.json?userId=127f1cb3-1f34-408e-b7bb-47245d592391&sys=19&version=3.9.5&device=HM%2BNOTE%2B1LTE_Xiaomi&page=Tabbar2Fragment&clientId=866401022288545&clientName=android&type=2";
 		Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new  HashMap<String, String>());
 		String html=map.get("html");
-		if(html.length()>100){
+	try{
+		if(!StringUtil.isEmpty(html)&&html.length()>100){
 			MongoDbUtil mongo=new MongoDbUtil();
+			PostData post=new PostData();
 			Object json=IKFunction.jsonFmt(html);
 			Object list=IKFunction.keyVal(json, "portfolios");
 			int num=IKFunction.rowsArray(list);
@@ -63,9 +68,9 @@ public class Crawler {
 					Object price=IKFunction.keyVal(two, "dealPrice");
 					if("买入".equals(type.toString())){
 						//1是买入，其他什么事卖出不知道
-						result.put("option", 0);
+						result.put("option", "0");
 					}else{
-						result.put("option", 1);
+						result.put("option", "1");
 					}
 					result.put("id",name+" "+type+" "+StockName+price+" "+timestr);
 					result.put("describe",describe);
@@ -79,11 +84,21 @@ public class Crawler {
 					result.put("toPosition", toWeight);
 					result.put("website","仙人掌股票");
 					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
+					result.remove("html");
+					JSONObject mm_data=JSONObject.fromObject(result);
+				   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+					if(su.contains("exception")){
+//						System.out.println(mm_data.toString());
+						System.err.println("写入数据异常！！！！  < "+su+" >");
+					}
 				}
 			}
-			
-			System.out.println("..............");
 		}
+	  }catch(Exception e){
+		  e.printStackTrace();
+	  }
+		
+		
 	}
 	
 }

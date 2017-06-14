@@ -105,13 +105,16 @@ public class FileUtil {
 			 return list;
 	   }
 		
-		public static void main(String[] args) {
-			ArrayList<String> list=readFileReturn("txt");
-//			4:a.conn.run:37768,-,1
+		public static void main(String[] args) throws FileNotFoundException {
+			ArrayList<String> list=readFileReturn("d:/stock_code.csv");
+			PrintWriter pw=new PrintWriter(new File("d:/last1.json"));
 			for(String str:list){
-				String last="4:"+str+",-,1";
-				System.out.println(last);
+				String tmp="\""+str+"\",";
+				pw.println(tmp);
+//				System.out.println(tmp);
+				
 			}
+			pw.close();
 		}
 		
 		

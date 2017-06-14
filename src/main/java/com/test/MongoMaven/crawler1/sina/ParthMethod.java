@@ -27,14 +27,17 @@ public class ParthMethod {
 			}
 			Object name=IKFunction.keyVal(js, "p_name");
 			if(!StringUtil.isEmpty(answer.toString())){
-				map.put("answer", answer);
+				map.put("ifanswer","1");
+			}else{
+				map.put("ifanswer","0");
 			}
+			map.put("answer", answer);
 			map.put("id", question+""+time);
 			map.put("question", question);
 			map.put("time", time);
 			map.put("name", name);
 			map.put("website", "新浪");
-			map.put("json_str", js);
+			map.put("json_str", js.toString());
 //			System.out.println(i+"  "+question+" < "+answer+" > "+time+"   "+name);
 			list.add(map);
 		}

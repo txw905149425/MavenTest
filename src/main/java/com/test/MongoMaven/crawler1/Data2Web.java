@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.message.BasicNameValuePair;
@@ -34,8 +36,10 @@ public class Data2Web {
 				}
 				doc.remove("json_str");
 				doc.remove("_id");
+				doc.remove("crawl_time");
 				mongo.upsertDocByTableName(doc, "ww_test");
-				String su= post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=ww_stock_json",new HashMap<String, String>(),doc.toJson(), "utf-8", 1);
+				 JSONObject json=JSONObject.fromObject(doc);
+				String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json",new HashMap<String, String>(),json.toString(), "utf-8", 1);
 				if(su.contains("exception")){
 					System.err.println("写入数据异常！！！！  < "+su+" >");
 				}

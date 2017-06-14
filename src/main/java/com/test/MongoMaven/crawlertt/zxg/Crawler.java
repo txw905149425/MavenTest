@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
+//自选股  一天固定只给4个
 public class Crawler {
 	
 	public static void main(String[] args) {
 		String url="http://61.135.157.158/ifzq.gtimg.cn/appstock/app/invest/get?limit=5&start=0&r=0.2611330155138889&publish=1&&_callback=jsonp_1493969889779_91057";
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-		if(!StringUtil.isEmpty(html)){
+		if(!StringUtil.isEmpty(html)&&html.length()>200){
 			Object json=IKFunction.jsonFmt(html);
 			Object data=IKFunction.keyVal(json, "data");
 			Object arry=IKFunction.keyVal(data, "invest");
@@ -22,22 +26,28 @@ public class Crawler {
 			Object year=IKFunction.keyVal(one, "date");
 			Object inverst=IKFunction.keyVal(one, "invest");
 			int num=IKFunction.rowsArray(inverst);
+			MongoDbUtil mongo=new MongoDbUtil();
+			PostData post=new PostData();
 			List<HashMap<String, Object>> list=new ArrayList<HashMap<String,Object>>();
 			for(int i=1;i<=num;i++){
 				Object records=IKFunction.array(inverst, i);
 				Object title=IKFunction.keyVal(records, "title");
 				Object industry=IKFunction.keyVal(IKFunction.array(IKFunction.keyVal(records, "relate_bankuai"),1),"name");
 				Object time=year+" "+IKFunction.keyVal(records, "create_time");
+				String tt=IKFunction.timeFormat(time.toString());
 				Object abs=IKFunction.keyVal(records, "reason");
 				Object id=IKFunction.keyVal(records, "id");
 				Object relate_stocks=IKFunction.keyVal(records, "relate_stocks");
 				int size=IKFunction.rowsArray(relate_stocks);
 				List<HashMap<String, Object >> list1=new ArrayList<HashMap<String,Object>>();
+				String clist="";
 				for(int j=1;j<=size;j++){
 					HashMap<String,Object> map1=new HashMap<String, Object>();
 					Object stock=IKFunction.array(relate_stocks, j);
-					Object code=IKFunction.keyVal(stock,"code");
+					String code=IKFunction.keyVal(stock,"code").toString();
+					code=code.substring(2, 8);
 					Object name=IKFunction.keyVal(stock,"name");
+					clist=clist+code+" ";
 					map1.put("code", code);
 					map1.put("name", name);
 					list1.add(map1);
@@ -49,23 +59,31 @@ public class Crawler {
 				}
 				map.put("id",title+""+time);
 				map.put("title",title);
-				map.put("industry",industry);
+				map.put("industry",industry);//产业
 				map.put("abs",abs);
-				map.put("class", "题材");
+				map.put("newsClass", "题材");
 				map.put("source", "自选股");
-				map.put("time", time);
-				map.put("related", list1);
+				map.put("time", tt);
+				map.put("related", clist.trim());
+				map.put("code_list", list1);
 				list.add(map);
 			}
-			
-			if(!list.isEmpty()){
-				MongoDbUtil mongo=new MongoDbUtil();
-				try {
-					mongo.upsetManyMapByTableName(list, "tt_zxg_ticai");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			try {
+				if(!list.isEmpty()){
+					mongo.upsetManyMapByTableName(list, "tt_json_all");
+					for(HashMap<String, Object> result:list){
+						result.remove("crawl_time");
+						JSONObject mm_data=JSONObject.fromObject(result);
+					   String su=post.postHtml("http://localhost:8888/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+						if(su.contains("exception")){
+							System.out.println(mm_data.toString());
+							System.err.println("写入数据异常！！！！  < "+su+" >");
+						}
+					}
 				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}

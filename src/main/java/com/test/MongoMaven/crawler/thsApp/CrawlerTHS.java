@@ -22,7 +22,8 @@ public class CrawlerTHS {
 			 MongoDbUtil mongo=new MongoDbUtil();
 			 MongoCollection<Document>  collection=mongo.getShardConn("stock_code");
 			 Bson filter = Filters.exists("name", true);
-//			 Bson filter1 = new Document("id","601206");
+//			 new Document().append("id", "601008")
+//			 Bson filter1 = new Document("id","601008");
 			 MongoCursor<Document> cursor =collection.find(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
 			 DataUtil util=null;
 			 while(cursor.hasNext()){
@@ -32,7 +33,7 @@ public class CrawlerTHS {
 				 util=new DataUtil();
 				 util.setCode(code.toString());
 				 util.setUrl(url);
-				 executor.execute(new Actions(util)); 
+				 executor.execute(new Actions(util,mongo)); 
 			 }
 		  cursor.close();
 		  executor.shutdown();

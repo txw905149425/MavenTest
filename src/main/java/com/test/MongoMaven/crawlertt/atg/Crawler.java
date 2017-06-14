@@ -6,26 +6,50 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.junit.runners.ParentRunner;
 
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
+//爱投顾
 public class Crawler {
 	public static void main(String[] args) {
 		 Date date=new Date();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
 	     String dd = sdf.format(date); 
-		String url="http://stock.jrj.com.cn/share/news/itougu/zhangting/"+dd+".js";
-		//http://stock.jrj.com.cn/share/news/itougu/qingbao/2017-05-05.js
+		 String flag="";
+		 for(String arg:args){
+			if(arg.startsWith("flag=")){
+				flag=arg.substring(5);
+			}
+		}
+		String url="";
+		if("1".equals(flag)){
+			url="http://stock.jrj.com.cn/share/news/itougu/zhangting/"+dd+".js";
+		}else if("2".equals(flag)){
+			url="http://stock.jrj.com.cn/share/news/itougu/qingbao/"+dd+".js";
+		}
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		try{
 			List<HashMap<String, Object>> list=parseList(html);
 			if(!list.isEmpty()){
 				MongoDbUtil mongo=new MongoDbUtil();
-				mongo.upsetManyMapByTableName(list, "tt_atg_zixun");
+				PostData post=new PostData();
+				mongo.upsetManyMapByTableName(list, "tt_json_all");
+				for(HashMap<String, Object> result:list){
+					result.remove("crawl_time");
+					JSONObject mm_data=JSONObject.fromObject(result);
+				   String su=post.postHtml("http://localhost:8888/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+					if(su.contains("exception")){
+						System.out.println(mm_data.toString());
+						System.err.println("写入数据异常！！！！  < "+su+" >");
+					}
+				}
 			}
 		}catch (Exception e){
 			e.printStackTrace();
@@ -65,16 +89,20 @@ public class Crawler {
 						map1.put("code", scode);
 						list1.add(map1);
 					}
+					code=code.toString().replace(",", " ");
 				}else{
 					HashMap<String, Object > map1=new HashMap<String, Object>();
 					map1.put("name", name);
 					map1.put("code", code);
 					list1.add(map1);
 				}
-				map.put("id", title);
-				map.put("class", "资讯");
+			
+				map.put("id", title+""+time);
+				map.put("title", title);
+				map.put("newsClass", "资讯");
 				map.put("source", "爱投顾");
-				map.put("related", list1);
+				map.put("code_list", list1);
+				map.put("related",code );
 				map.put("abs", abs);
 				map.put("time", time);
 				map.put("durl", durl);

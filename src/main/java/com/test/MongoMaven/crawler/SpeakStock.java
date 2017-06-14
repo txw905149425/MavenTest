@@ -31,6 +31,7 @@ public class SpeakStock {
 		 MongoCollection<Document>  collection1=mongo.getShardConn("ss_east_money_stock_json");
 //		 MongoCollection<Document>  collection2=mongo.getShardConn("ss_sina_talk_stock_json");
 		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator(); 
+//		 System.out.println("OK!!");
 		 try{
 				 while(cursor.hasNext()){
 //					 long t1=System.currentTimeMillis();
@@ -76,39 +77,34 @@ public class SpeakStock {
 //						 } 
 					 Collections.sort(listMap, new Comparator<HashMap<String, Object >>() {
 				            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
-				                String  one =a.get("utime").toString();
-				                String two = b.get("utime").toString();
+				                String  one =a.get("lastCommentTime").toString();
+				                String two = b.get("lastCommentTime").toString();
 				                int time=str2TimeMuli(one);
 				                int time1=str2TimeMuli(two);
 				                return time1 - time;
 				            }
-					 
 				        });
 					 records.put("id", id);
 					 records.put("name", name);
 					 records.put("code", id+""+name);
 					 records.put("list",listMap);
-					 mongo.upsertMapByTableName(records, "test");
-					 long t2=System.currentTimeMillis();
+					 mongo.upsertMapByTableName(records, "test1");
+//					 long t2=System.currentTimeMillis();
 //					 System.out.println("插入到本地耗时：    "+(t2-t1));
 					 JSONObject json=JSONObject.fromObject(records);
 					 //必须要格式化成json才能写入到数据库
 //					 System.out.println(json.toString());
-				String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=ss_stock_json",new HashMap<String, String>(), json.toString(), "utf-8", 1);
+//					 http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ss_stock_json
+//					 http://localhost:8888/import?type=ss_stock_json
+				String su=post.postHtml("http://localhost:8888/import?type=ss_stock_json",new HashMap<String, String>(), json.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
-						long t3=System.currentTimeMillis();
-					 System.out.println("插入到gavinduan耗时：    "+(t3-t2));
-					
-//					 
-//					 for(HashMap<String, Object> map:listMap){
-		//				 System.out.println(map.toString());
-//					 }
-		//			 
+//					long t3=System.currentTimeMillis();
+//					 System.out.println("插入到gavinduan耗时：    "+(t3-t2));
 				 }
 		 }catch(Exception e){
-			 System.out.println("哦哦哦，有网站没有评论哟！！");
+//			 System.out.println("哦哦哦，有网站没有评论哟！！");
 			 e.printStackTrace();
 		 }
 	}

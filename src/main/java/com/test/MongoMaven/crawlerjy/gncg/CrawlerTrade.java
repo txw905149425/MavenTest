@@ -11,7 +11,7 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 
-//公牛炒股交易数据
+//公牛炒股交易数据   相关模块已经下线
 public class CrawlerTrade {
 
 	public static void main(String[] args) {

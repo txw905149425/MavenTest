@@ -4,33 +4,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 
 
 //金融界 -问股   （爱投顾） 更新较快，抓取频率要高  1-2分钟左右抓一次
 public class CrawlerJrj {
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
+		 PostData post=new PostData();
 		String url="http://itougu.jrj.com.cn/ques/na.shtml";
 		HashMap<String , String> map =new HashMap<String, String>();
 		 Map<String, String> resultMap=null;
-		 for(int i=1;i<11;i++){
+		 for(int i=1;i<5;i++){
 			 if(i!=1){
 				url="http://itougu.jrj.com.cn/ques/na_"+i+".shtml";
-			}
+			 }
 			 resultMap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 			 String html=resultMap.get("html");
 			 List<HashMap<String, Object>> list= ParseMethod.parseList(html);
 			 try {
 				 if(!list.isEmpty()){
-					 mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+					mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+					for(HashMap<String, Object> one:list){
+						String ttmp=JSONObject.fromObject(one).toString();
+						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+							if(su.contains("exception")){
+								System.err.println("写入数据异常！！！！  < "+su+" >");
+							}
+				     }
 				 }
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 }
-		 System.out.println(".....................");
+//		 System.out.println(".....................");
 	}
 }

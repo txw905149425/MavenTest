@@ -2044,6 +2044,10 @@ public  static String dateFmt(Object obj, String format) {
 			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 			     String dateNowStr = sdf.format(date); 
 				str=dateNowStr;
+			}else if(str.contains("刚刚")){
+				Date date=new Date();
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+			     str= sdf.format(date); 
 			}else if(str.contains("秒前")){
 				String tmp=str.replace("秒前", "");
 				int num=Integer.parseInt(tmp);
@@ -2097,10 +2101,37 @@ public  static String dateFmt(Object obj, String format) {
 				System.err.println("*******====>  时间转换出现新情况："+str);
 				return "1";
 			}
+			
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+				long time=sdf.parse(str).getTime();
+				long now=System.currentTimeMillis();
+				if(time>now){
+					String year=str.substring(0, 4);
+					int last=Integer.parseInt(year)-1;
+					str=last+str.substring(4);
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 			return  str;
 			
 		}
 		
+		
+	public static long  getTimestamp(String timestr){
+		long time=0;
+		try{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		    time=sdf.parse(timestr).getTime();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return time;
+	}
 	   
 	public static String judgeResultByLenth(Object results,Object index){
 		String rs = results.toString().trim();
@@ -2143,13 +2174,23 @@ public  static String dateFmt(Object obj, String format) {
 		if(StringUtil.isEmpty(timestr)){
 			return flag;
 		}
-		 try {
+		timestr=timestr.trim();
+		try {
 		 Date date=new Date();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
 	     String today = sdf.format(date)+" 00:00:00"; 
 	     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-			long timeToday=sdf1.parse(today).getTime();
-			long time=sdf1.parse(timestr).getTime();
+		 long timeToday=sdf1.parse(today).getTime();
+		 int num=timestr.length();
+		 long time=0;
+		 try{
+		   time=Long.parseLong(timestr);
+		   if(num==10){
+			time=time*1000L;
+		   }
+		 }catch(Exception e){
+		   time=sdf1.parse(timestr).getTime();
+		 }
 			if(time>timeToday){
 				flag=true;
 			}
@@ -2160,6 +2201,23 @@ public  static String dateFmt(Object obj, String format) {
 			return false;
 		}
 		return flag;
+	}
+	
+	public static String getTimeNowByStr(String format){
+		if(StringUtil.isEmpty(format)){
+			return "";
+		}
+		String time="";
+		try {
+			Date date=new Date();//"yyyy-MM-dd HH:mm:ss"
+			SimpleDateFormat sdf1 = new SimpleDateFormat(format);  
+			 time=sdf1.format(date);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.err.println("传入时间字符串格式有错 <"+format+">");
+			return "";
+		}
+		return time;
 	}
 	
 	public static HashMap<String, Object> parseSina(String html){
@@ -2241,6 +2299,7 @@ public  static String dateFmt(Object obj, String format) {
 	}
 	
 	public static void main(String[] args) throws Exception {
+		System.out.println(timeFormat("1496998173"));
 //		System.out.println(java.net.URLDecoder.decode("http://weixin.sogou.com/weixin?type=2&query=%E4%B8%AD%E5%9B%BD%E9%93%B6%E8%A1%8C", "utf-8"));
 		//testRegex();
 		//	String rs =	judgeResultValid("不好意思！系统暂无“坐位背部探查”的相关知识。","不好意思;系统暂无;相关知识");
@@ -2257,10 +2316,8 @@ public  static String dateFmt(Object obj, String format) {
 //		String sss="/pages/show/indexNotice.jsp?GGID=aMdnTtK9Sw6GvFx2&HTMLPATH=htmlPage//201612//aMdnTtK9Sw6GvFx2.html";
 //		System.out.println(regexp(sss,"GGID=(.*)&"));
 //		System.out.println(regexp(sss,"HTMLPATH=(.*)"));
-
-		System.out.println(timeFormat("1567988764"));
-		
-		
+	
+		System.out.println(timeFormat("05-15 15:23"));
 //		Document d=Jsoup.parse(html);
 //		int num=jsoupRows(d, "li[class]>a");
 //		tmpNeed();

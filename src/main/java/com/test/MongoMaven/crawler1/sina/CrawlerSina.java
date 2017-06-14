@@ -10,16 +10,20 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import net.sf.json.JSONObject;
+
 import org.apache.storm.shade.org.eclipse.jetty.util.UrlEncoded;
 
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 
 //新浪理财师   更新一般，基本上需要付费才能查看，2分钟一次
 public class CrawlerSina {
 	 public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
+		 PostData post=new PostData();
 		 Date d = new Date();  
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 	     String dateNowStr = sdf.format(d); 
@@ -33,15 +37,24 @@ public class CrawlerSina {
 				 List<HashMap<String, Object>> list= ParthMethod.parseList(html);
 				 if(!list.isEmpty()){
 					 mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+					 for(HashMap<String, Object> one:list){
+						 one.remove("json_str");
+						 String ttmp=JSONObject.fromObject(one).toString();
+//							http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json
+							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+								if(su.contains("exception")){
+									System.err.println("写入数据异常！！！！  < "+su+" >");
+								}
+						 }
 					 Object obj=list.get(list.size()-1).get("time");
 					 urltmp=IKFunction.charEncode(obj,"utf8");
-					 url="http://licaishi.sina.com.cn/api/askList?page=null&ind_id=1&is_p=null&u_time="+urltmp+"&__t="+d.getTime();   
+					 url="http://licaishi.sina.com.cn/api/askList?page=null&ind_id=1&is_p=null&u_time="+urltmp+"&__t="+d.getTime();
 				 }
 			 }
 		} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 		}
-		 System.out.println(".......................");
+//		 System.out.println(".......................");
 	}
 }
