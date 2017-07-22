@@ -44,9 +44,9 @@ public class MongoDbUtil {
 		String username = "group2017"; // Mongodb用户名
 		String password = "group2017666"; // Mongodb密码
 		String host = "127.0.0.1"; // Mongodb服务器地址
-//		
 		Integer port = 27017; // Mongodb端口
-//		port=27071;
+		host="42.159.196.68";
+		port=27071;
 		String dbname = "crawler"; // 使用的数据库名
 		ServerAddress svrAddr = new ServerAddress(host, port);
 		MongoCredential credential = MongoCredential.createCredential(username,userdb, password.toCharArray());
@@ -55,8 +55,6 @@ public class MongoDbUtil {
 		mongoDataBase = mongoClient.getDatabase(dbname);
 		return mongoDataBase;
 	}
-	
-	
 	
 	public MongoCollection<Document> getShardConn(String tableName) {
 		MongoCollection<Document> collectionConn = mongoCollectionMap.get(tableName);

@@ -40,6 +40,10 @@ public class HaveData {
 		 while(cursor.hasNext()){
 			 doc=cursor.next();
 			 String code=doc.get("code").toString();
+			 String name=doc.get("name").toString();
+			 if(name.contains("ST")||name.contains("st")){
+				 continue;
+			 }
 			 if(map.containsKey(code)){
 				 int num=map.get(code)+1;
 				 map.put(code, num);
@@ -55,7 +59,6 @@ public class HaveData {
 			 mongo.upsertDocByTableName(doc, "xuangu_model_sort");
 		 }
 	}
-	
 	
 	public static void getBaiduData(){
 		String url="https://gupiao.baidu.com/concept/";

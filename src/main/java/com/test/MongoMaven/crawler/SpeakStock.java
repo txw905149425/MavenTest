@@ -63,18 +63,6 @@ public class SpeakStock {
 						 }
 					 }
 					
-//						 Document doc2=collection2.find(filter).first();
-//						 if(doc2!=null&&doc2.containsKey("list")){
-//							 Object list2=doc2.get("list");
-//							 JSONArray js2=JSONArray.fromObject(list2);
-//							int  num=js2.size();
-//							 for(int i=0;i<num;i++){
-//								 Object  block=js2.get(i);
-//								 HashMap<String, Object> map=toHashMap(block);
-//								 listMap.add(map);
-//								 
-//							 }
-//						 } 
 					 Collections.sort(listMap, new Comparator<HashMap<String, Object >>() {
 				            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
 				                String  one =a.get("lastCommentTime").toString();
@@ -88,7 +76,6 @@ public class SpeakStock {
 					 records.put("name", name);
 					 records.put("code", id+""+name);
 					 records.put("list",listMap);
-					 mongo.upsertMapByTableName(records, "test1");
 //					 long t2=System.currentTimeMillis();
 //					 System.out.println("插入到本地耗时：    "+(t2-t1));
 					 JSONObject json=JSONObject.fromObject(records);
@@ -100,6 +87,7 @@ public class SpeakStock {
 					if(su.contains("exception")){
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
+					mongo.upsertMapByTableName(records, "test1");
 //					long t3=System.currentTimeMillis();
 //					 System.out.println("插入到gavinduan耗时：    "+(t3-t2));
 				 }

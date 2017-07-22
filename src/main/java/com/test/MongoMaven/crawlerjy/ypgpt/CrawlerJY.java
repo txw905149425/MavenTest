@@ -42,7 +42,7 @@ public class CrawlerJY {
 				 doc=cursor.next();
 				 Object id=doc.get("id");
 				 Object name=doc.get("name");
-				 System.out.println(name);
+//				 System.out.println(name);
 				 String url1="http://cgdsm.upchina.com/center/1/"+id;
 				 String html1=HttpUtil.getHtml(url1, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>()).get("html");
 				 String describe=IKFunction.jsoupTextByRowByDoc(IKFunction.JsoupDomFormat(html1),".profits>span",2);
@@ -50,7 +50,6 @@ public class CrawlerJY {
 				 String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>()).get("html");
 				 List<HashMap<String, Object>> list=parse(html,describe,name.toString());
 				 if(!list.isEmpty()){
-					 mongo.upsetManyMapByTableName(list, "mm_ypgpt_deal_dynamic");
 					 for(HashMap<String, Object> result:list){
 //							result.remove("html");
 							result.remove("quality");
@@ -61,7 +60,8 @@ public class CrawlerJY {
 								System.out.println(mm_data.toString());
 								System.err.println("写入数据异常！！！！  < "+su+" >");
 							}
-						}
+					 }
+					 mongo.upsetManyMapByTableName(list, "mm_ypgpt_deal_dynamic");
 				 }
 			 }
 		   cursor.close();
@@ -91,7 +91,8 @@ public class CrawlerJY {
 			Object stockCode=IKFunction.keyVal(js, "secucode");
 			Object nums=IKFunction.keyVal(js, "matchedqty");
 			Object cost=IKFunction.keyVal(js, "matchedamt");
-			map.put("id",timeObj+""+option+stockName);
+			map.put("id",IKFunction.md5(timeObj+""+option+stockName));
+			map.put("tid",timeObj+""+option+stockName);
 			map.put("AddTime", timeObj);
 			map.put("closing_cost", closing_cost);
 			map.put("StockName", stockName);

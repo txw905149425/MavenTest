@@ -47,7 +47,12 @@ public class Actions implements Runnable{
 						 }
 						 Object uname=IKFunction.keyVal(one, "strategyname");
 						 Object totalrate=IKFunction.keyVal(IKFunction.array(IKFunction.keyVal(one, "totalrate"),2),"text");
-						 String rate=IKFunction.regexp(totalrate, "(.*?)\\.");
+						 String rate="";
+						 if(totalrate.toString().length()>5){
+							 rate=totalrate.toString().substring(0,5);
+						 }else{
+							 rate=IKFunction.regexp(totalrate, "(.*?)\\.");
+						 }
 						 Object info=IKFunction.keyVal(date, "info");
 						 String price=IKFunction.keyVal(IKFunction.array(info,1),"text").toString().replace("以", "").replace("元","");
 						 if(StringUtil.isEmpty(price)){
@@ -60,7 +65,8 @@ public class Actions implements Runnable{
 							}else if("卖出".equals(type.toString())){
 								result.put("option", "1");
 							}
-						 	result.put("id",name+" "+mm+type+uname);
+						 	result.put("tid",name+" "+mm+type+uname);
+						 	result.put("id",IKFunction.md5(name+" "+mm+type+uname));
 							result.put("describe","总收益："+rate+"%");
 							result.put("quantity",nums);
 							result.put("StockCode", code);
@@ -68,15 +74,17 @@ public class Actions implements Runnable{
 							result.put("UserName", uname);
 							result.put("closing_cost", price);
 							result.put("AddTime", time);
-							result.put("html",one);
+//							result.put("html",one);
 							result.put("website","股市教练");
-							mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
-							result.remove("html");
+//							result.remove("html");
 							JSONObject mm_data=JSONObject.fromObject(result);
-						   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//							http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//							http://localhost:8888/import?type=mm_stock_json
+						   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 							if(su.contains("exception")){
 								System.err.println("写入数据异常！！！！  < "+su+" >");
 							}
+							mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 					 }
 				}
 			}catch(Exception es){

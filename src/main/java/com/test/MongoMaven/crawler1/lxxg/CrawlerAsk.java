@@ -82,7 +82,8 @@ public class CrawlerAsk {
 						result.put("ifanswer","0");
 					}
 					result.put("name",name);
-					result.put("id",que+""+time);
+					result.put("id",IKFunction.md5(que+""+answer));
+					result.put("tid",que+""+time);
 					result.put("question", que);
 					result.put("answer", answer);
 					result.put("time", timestr);
@@ -90,15 +91,16 @@ public class CrawlerAsk {
 					listresult.add(result);
 				}
 		 }
+		 
 		 if(!listresult.isEmpty()){
 			 mongo.upsetManyMapByTableName(listresult, "ww_ask_online_all");
-			 for(HashMap<String, Object> one:listresult){
-					String ttmp=JSONObject.fromObject(one).toString();
-					 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-						if(su.contains("exception")){
-							System.err.println("写入数据异常！！！！  < "+su+" >");
-						}
-			     }
+//			 for(HashMap<String, Object> one:listresult){
+//					String ttmp=JSONObject.fromObject(one).toString();
+//					 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//						if(su.contains("exception")){
+//							System.err.println("写入数据异常！！！！  < "+su+" >");
+//						}
+//			     }
 		 }
 	} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block

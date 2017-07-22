@@ -16,9 +16,8 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
  *  优化代码(1.循环创建对象)
  * */
 public class CrawlerTHS {
-	static int threadNum=20;
 	public static void main(String[] args) {
-		  ExecutorService executor = Executors.newFixedThreadPool(threadNum);
+		  ExecutorService executor = Executors.newFixedThreadPool(10);
 			 MongoDbUtil mongo=new MongoDbUtil();
 			 MongoCollection<Document>  collection=mongo.getShardConn("stock_code");
 			 Bson filter = Filters.exists("name", true);

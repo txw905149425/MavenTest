@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.Document;
+
+import com.mongodb.client.model.Filters;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -19,6 +22,8 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 public class Test {
 	
 	public static void main(String[] args) {
+		MongoDbUtil mongo=new MongoDbUtil();
+		mongo.getShardConn("xg_gpdt_stock").deleteMany(Filters.exists("id"));
 		for(int p=1;p<=5;p++){
 			String url="";
 			if(p==1){
@@ -32,16 +37,14 @@ public class Test {
 			}else if(p==5){
 				url="https://sec.wedengta.com/getIntelliStock?action=CategoryDetail&AID=0&GUID=fbdfc7ee748c90e99d782e4ed8b15a35&DUA=SN%3DADRCJPH24_GA%26VN%3D242041111%26BN%3D0%26VC%3DXiaomi%26MO%3DHM%20NOTE%201LTE%26RL%3D720_1280%26CHID%3D10003_10003%26LCID%3D%26RV%3D%26OS%3DAndroid4.4.4%26DV%3DV1&IMEI=866401022288545&ticket=&dtCellphoneState=0&dtnickname=&dtheadimgurl=&dtMemberType=0&dtMemberEndTime=0&id=33&_=1493644924459";
 			}
-			
 			Map<String , String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>());
 			String html=result.get("html");
-			MongoDbUtil mongo=new MongoDbUtil();
 			HashMap<String, Object > records=null;
 			HashMap<String, Object> stockList=null;
 			List<HashMap<String, Object>> listMap=null;
 			Object json=IKFunction.jsonFmt(html);
 			Object js=IKFunction.keyVal(json, "content");
-			System.out.println(js);
+//			System.out.println(js);
 			Object list=IKFunction.keyVal(js, "vtDaySec");
 			int num=IKFunction.rowsArray(list);
 			for(int i=1;i<=num;i++){
@@ -49,6 +52,7 @@ public class Test {
 				Object one=IKFunction.array(list, i);
 				Object title=IKFunction.keyVal(one, "sTitle");
 				Object time=IKFunction.keyVal(one, "sDate");
+				Object sDescription=IKFunction.keyVal(one, "sDescription");
 				Object vtIntelliStock=IKFunction.keyVal(one, "vtIntelliStock");
 				int nums=IKFunction.rowsArray(vtIntelliStock);
 				String str="";
@@ -94,7 +98,9 @@ public class Test {
 				records.put("time", time);
 				records.put("id", time+""+title);
 				records.put("list", listMap);
+				records.put("describe", sDescription);
 				mongo.upsertMapByTableName(records, "xg_gpdt_stock");
+				mongo.upsertMapByTableName(records, "xg_stock_json_all");
 			}
 		}
 	}

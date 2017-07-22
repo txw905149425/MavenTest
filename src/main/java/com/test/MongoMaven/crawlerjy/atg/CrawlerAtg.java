@@ -36,7 +36,9 @@ public class CrawlerAtg {
 					Object price=IKFunction.keyVal(one, "commissionPrice");
 					String totalrate=IKFunction.keyVal(one, "curProfit").toString();
 					String rate="";
-					if(totalrate.contains(".")){
+					if(totalrate.length()>5){
+						rate=totalrate.substring(0, 5);
+					}else{
 						rate=IKFunction.regexp(totalrate, "(.*?)\\.");
 					}
 	//				BigDecimal b1 = new BigDecimal(totalrate.toString());
@@ -47,7 +49,8 @@ public class CrawlerAtg {
 					Object type=IKFunction.keyVal(one, "commissionType");
 					Object timestr=IKFunction.keyVal(one, "concludeTime");
 					String time=IKFunction.timeFormat(timestr.toString());
-					result.put("id",name+"[0入1出]"+type+code_name+timestr);
+					result.put("id",IKFunction.md5(name+"[0入1出]"+type+code_name+timestr));
+					result.put("tid",name+"[0入1出]"+type+code_name+timestr);
 					result.put("describe","收益："+rate+"%");
 					result.put("StockCode", code);
 					result.put("StockName", code_name);
@@ -56,17 +59,19 @@ public class CrawlerAtg {
 	//				result.put("toPosition", toPosition);
 					result.put("closing_cost", price.toString());
 					result.put("AddTime", time);
-					result.put("html",one);
+//					result.put("html",one);
 					result.put("option",type.toString());
 					result.put("website","爱投顾");
-					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
-					result.remove("html");
+//					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 					JSONObject mm_data=JSONObject.fromObject(result);
 //					System.out.println(mm_data.toString());
-				   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//					http://localhost:8888/import?type=mm_stock_json
+				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
+					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 				}
 			}
 		}catch(Exception e){

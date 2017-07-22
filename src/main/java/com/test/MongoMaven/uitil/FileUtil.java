@@ -1,10 +1,12 @@
 package com.test.MongoMaven.uitil;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -105,18 +107,40 @@ public class FileUtil {
 			 return list;
 	   }
 		
-		public static void main(String[] args) throws FileNotFoundException {
-			ArrayList<String> list=readFileReturn("d:/stock_code.csv");
-			PrintWriter pw=new PrintWriter(new File("d:/last1.json"));
-			for(String str:list){
-				String tmp="\""+str+"\",";
-				pw.println(tmp);
-//				System.out.println(tmp);
-				
+		public static String read(String filename) {
+			try {
+				BufferedReader in = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(filename)), "utf-8"));
+				String s;
+				StringBuilder sb = new StringBuilder();
+				while ((s = in.readLine()) != null) {
+					sb.append(s + "\n");
+				}
+				in.close();
+				return sb.toString();
+			} catch (Exception ec) {
+				return "";
 			}
-			pw.close();
 		}
-		
+
+		public static void writeFile(String str,String file){
+			byte bt[] = new byte[str.length()];  
+	        bt = str.getBytes(); 
+	        try {  
+	            FileOutputStream in = new FileOutputStream(new File(file));  
+	            try {  
+	                in.write(bt, 0, bt.length);  
+	                in.close();  
+	                // boolean success=true;  
+	                // System.out.println("写入文件成功");  
+	            } catch (IOException e) {  
+	                // TODO Auto-generated catch block  
+	                e.printStackTrace();  
+	            }  
+	        } catch (FileNotFoundException e) {  
+	            // TODO Auto-generated catch block  
+	            e.printStackTrace();  
+	        }  
+		}
 		
 		
 }

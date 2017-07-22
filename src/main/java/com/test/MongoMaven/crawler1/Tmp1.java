@@ -3,64 +3,61 @@ package com.test.MongoMaven.crawler1;
 import java.io.IOException;
 import java.util.HashMap;
 
+import net.sf.json.JSONObject;
+
 import org.apache.http.client.ClientProtocolException;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.jsoup.Jsoup;
+
 import java.security.MessageDigest;  
 import java.security.NoSuchAlgorithmException;  
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import com.test.MongoMaven.uitil.IKFunction;
+import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 
 public class Tmp1 {
 	public static void main(String[] args) {
 		PostData post=new PostData();
-		HashMap<String , String> map=new HashMap<String, String>();
-//		map.put("User-Agent", "model/HM NOTE 1LTE version/android4.4.4 okhttp/3.1.2");
-//		map.put("Content-Type", "application/x-www-form-urlencoded");
-//		map.put("Host", "stockapp.nicaifu.com");
-//		map.put("Connection", "Keep-Alive");
-		
-		
-//		brand: Xiaomi
-//		net: Wi-Fi
-//		osversion: 4.4.4
-//		Connection: close
-//		version: 5.8.0
-		map.put("htgtype","0");
-		map.put("os","3");
-		map.put("model","HM NOTE 1LTE");
-		map.put("htgchannel","android");
-		map.put("Cookie","htg_session=afd057cb2c9826a37c799a486492531bce300fc9");
-		map.put("deviceToken","866401022288545");
-		map.put("Content-Type","application/x-www-form-urlencoded");
-		map.put("User-Agent","okhttp/3.3.0");
-		map.put("Host","app.haotougu.com");
-		map.put("Connection","Keep-Alive");
-	try {
-		String url="https://stockapp.nicaifu.com/stock/ox/recommendation_list";
-		url="https://stockapp.nicaifu.com/stock/viewpoint/get_viewpoint_select";
-		url="https://app.haotougu.com/message/tradeBoardv3";
-		long time=System.currentTimeMillis();
-		System.out.println(time);
-		String ttt="a698979f6f470e06622bf8032077c8267906c689"+time;
-//		System.out.println(ttt);
-//		IKFunction.md5(ttt);
-		String taken=getMd5Value(ttt);
-		System.out.println(taken);
-		String data="token="+taken+"&tm="+time;
-		System.out.println(data);
-		System.err.println("token=3b107722787d3490a02f83f892f5c7d8&tm=1495600542225");
-		String html=post.postHtml(url, map,data,"utf8", 2);
-		System.out.println(html);
-		
-	} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 MongoDbUtil mongo=new MongoDbUtil();
+		 MongoCollection<Document>  collection=mongo.getShardConn("ww_test");
+//		 Bson filter1 = Filters.eq("website", "牛仔网");
+		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator();
+		 try {
+			 Document doc=null;
+			 while(cursor.hasNext()){
+				 doc=cursor.next();
+				if(!doc.containsKey("answer")){
+					continue;
+				}
+//				doc.append("timedel", IKFunction.getTimeNowByStr("yyyy-MM-dd"));
+				doc.remove("_id");
+				doc.remove("crawl_time");
+				Object answer=doc.get("answer");
+				doc.remove("answer");
+				if(answer.toString().length()<4){
+					answer="";
+					doc.remove("ifanswer");
+					doc.append("ifanswer", "0");
+				}
+				doc.append("answer", answer);
+				JSONObject json=JSONObject.fromObject(doc);
+//				http://localhost:8888/import?type=ww_stock_json
+//				 http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww_stock_json
+				String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),json.toString(), "utf-8", 1);
+				if(su.contains("exception")){
+					System.err.println("写入数据异常！！！！  < "+su+" >");
+				}
+				mongo.upsertDocByTableName(doc, "ww_test");
+			 }
+		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} 
 	}
 	
 	public static String exChange(String str){  

@@ -74,16 +74,14 @@ public class MongodbImg {
 		 HttpEntity entity = response.getEntity();
 		 InputStream is = entity.getContent();
 //		 saveImage(is,fileName);
-		 
 		 FileOutputStream fos = new FileOutputStream(new File(savePath+File.separator+fileName));
-		 byte[] buffer = new byte[3*1024]; 
+		 byte[] buffer = new byte[3*1024];
 		 int inByte=0;
 		 while ((inByte = is.read(buffer)) != -1) {
 		     fos.write(buffer,0,inByte);
 		 }
 		 is.close();
 		 fos.close();
-   
      }  
 	 
 	 
@@ -93,7 +91,7 @@ public class MongodbImg {
 		 DBObject query=new BasicDBObject();
 		 gfsPhoto=new GridFS(db,collection);
      //查询的结果：  
-      List<GridFSDBFile> listfiles=gfsPhoto.find(query);  
+      List<GridFSDBFile> listfiles=gfsPhoto.find(query);
      GridFSDBFile gridDBFile=listfiles.get(0);
      InputStream in=gridDBFile.getInputStream();
      int size=(int)gridDBFile.getLength();

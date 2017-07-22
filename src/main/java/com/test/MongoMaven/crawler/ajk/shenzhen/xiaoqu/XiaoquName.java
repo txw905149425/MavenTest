@@ -18,11 +18,17 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 public class XiaoquName {
 	 public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
-			
 			HashMap<String , String> map =new HashMap<String, String>();
 			 Map<String, String> resultMap=null;
-			 for(int i=1;i<=35;i++){
-				 String url="https://www.anjuke.com/shenzhen/cm/p"+i+"/";
+			 String furl="http://www.anjuke.com/shenzhen/cm/p1/";
+			String fhtml= HttpUtil.getHtml(furl, map, "utf8", 1,new HashMap<String, String>()).get("html");
+			Object doc=IKFunction.JsoupDomFormat(fhtml);
+			int num=IKFunction.jsoupRowsByDoc(doc, ".P2a");
+	 try{
+	     for(int i=0;i<num;i++){
+			String tmp=IKFunction.jsoupListAttrByDoc(doc, ".P2a", "href", i).trim()+"p";
+			 for(int j=1;j<=35;j++){
+				 String url=tmp+j+"/".trim();
 				 resultMap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 				 String html=resultMap.get("html");
 				 List<HashMap<String, Object>> list=parseList(html);
@@ -33,6 +39,8 @@ public class XiaoquName {
 					e.printStackTrace();
 				}
 			 }
+	     }
+	 }catch(Exception e){	}
 			 System.out.println(".....................");
 	}
 	 

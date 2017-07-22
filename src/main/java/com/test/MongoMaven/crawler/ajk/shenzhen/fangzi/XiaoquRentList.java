@@ -29,7 +29,6 @@ public class XiaoquRentList {
 		     }else{
 		    	 page=rent/20+1;
 		     }
-		     System.out.println(page);
 		     many=many+page;
 		     for(int i=1;i<=page;i++){
 		    	rec =new HashMap<String, Object>();

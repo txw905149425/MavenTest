@@ -35,6 +35,19 @@ public class CrawlerUrl {
 				 Document doc=new Document();
 				 doc.append("_id", -1);
 				 cursor=collection.find().sort(doc).batchSize(10000).noCursorTimeout(true).iterator(); 
+			 }else if("4".equals(flag)){
+				 Bson filter = Filters.eq("crawl_all", "1");
+				 Document doc=new Document();
+				 doc.append("_id", -1);
+				 cursor=collection.find().filter(filter).sort(doc).batchSize(10000).noCursorTimeout(true).iterator(); 
+			 }else if("5".equals(flag)){
+				 Bson filter = Filters.eq("crawl_all", "1");
+				 Document doc=new Document();
+				 doc.append("_id", -1);
+				 cursor=collection.find().filter(filter).sort(doc).batchSize(10000).noCursorTimeout(true).iterator(); 
+			 }else if("6".equals(flag)){
+				 Bson filter = Filters.eq("crawl_all", "2");
+				 cursor=collection.find().filter(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
 			 }
 			 try{
 				 DataUtil util=null;
@@ -48,7 +61,7 @@ public class CrawlerUrl {
 						 util=new DataUtil();
 						 util.setUrl(url);
 						 util.setCode(uid.toString());
-						 executor.execute(new Actions(util));
+						 executor.execute(new Actions(util,mongo));
 				     }
 				 }
 				 cursor.close();

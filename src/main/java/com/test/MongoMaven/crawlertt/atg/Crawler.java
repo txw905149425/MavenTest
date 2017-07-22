@@ -31,6 +31,7 @@ public class Crawler {
 		String url="";
 		if("1".equals(flag)){
 			url="http://stock.jrj.com.cn/share/news/itougu/zhangting/"+dd+".js";
+			System.out.println(url);
 		}else if("2".equals(flag)){
 			url="http://stock.jrj.com.cn/share/news/itougu/qingbao/"+dd+".js";
 		}
@@ -40,15 +41,17 @@ public class Crawler {
 			if(!list.isEmpty()){
 				MongoDbUtil mongo=new MongoDbUtil();
 				PostData post=new PostData();
-				mongo.upsetManyMapByTableName(list, "tt_json_all");
 				for(HashMap<String, Object> result:list){
 					result.remove("crawl_time");
 					JSONObject mm_data=JSONObject.fromObject(result);
-				   String su=post.postHtml("http://localhost:8888/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
+//					http://localhost:8888/import?type=tt_stock_json
+				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.out.println(mm_data.toString());
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
+					mongo.upsetManyMapByTableName(list, "tt_json_all");
 				}
 			}
 		}catch (Exception e){
@@ -74,7 +77,7 @@ public class Crawler {
 				}
 				Object title=IKFunction.keyVal(one, "title");
 				Object time=IKFunction.keyVal(one, "makedate");
-				Object abs=IKFunction.keyVal(one, "content");
+//				Object abs=IKFunction.keyVal(one, "content");
 				Object name=IKFunction.keyVal(one, "stockname");
 				Object code=IKFunction.keyVal(one, "stockcode");
 				List<HashMap<String, Object>> list1=new ArrayList<HashMap<String,Object>>();
@@ -96,16 +99,17 @@ public class Crawler {
 					map1.put("code", code);
 					list1.add(map1);
 				}
-			
-				map.put("id", title+""+time);
+//				map.put("id", IKFunction.md5(title+"爱投顾"));
+				map.put("tid", title+""+time);
 				map.put("title", title);
 				map.put("newsClass", "资讯");
 				map.put("source", "爱投顾");
 				map.put("code_list", list1);
 				map.put("related",code );
-				map.put("abs", abs);
+//				map.put("abs", abs);
 				map.put("time", time);
 				map.put("durl", durl);
+				map.put("timedel", IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				list.add(map);
 		}
 		return list;
@@ -120,7 +124,12 @@ public class Crawler {
 		if(IKFunction.htmlFilter(html, ".tbox")){
 			Object doc=IKFunction.JsoupDomFormat(html);
 			String content=IKFunction.jsoupTextByRowByDoc(doc, ".tbox", 0);
+			if(content.contains("你的浏览器不支持html5哟")){
+				content=content.replace("你的浏览器不支持html5哟", "");
+			}
 			map.put("content", content);
+			String id=content.substring(5, 20);
+			map.put("id", IKFunction.md5(id));
 		}
 		return map;
 	}

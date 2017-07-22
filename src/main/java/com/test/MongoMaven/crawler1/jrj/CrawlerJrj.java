@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
+import com.test.MongoMaven.uitil.StringUtil;
 
 
 //金融界 -问股   （爱投顾） 更新较快，抓取频率要高  1-2分钟左右抓一次
@@ -25,17 +26,21 @@ public class CrawlerJrj {
 			 }
 			 resultMap=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>());
 			 String html=resultMap.get("html");
+			 if(StringUtil.isEmpty(html)){
+				 continue;
+			 }
 			 List<HashMap<String, Object>> list= ParseMethod.parseList(html);
 			 try {
 				 if(!list.isEmpty()){
 					mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-					for(HashMap<String, Object> one:list){
-						String ttmp=JSONObject.fromObject(one).toString();
-						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-							if(su.contains("exception")){
-								System.err.println("写入数据异常！！！！  < "+su+" >");
-							}
-				     }
+//					for(HashMap<String, Object> one:list){
+//						String ttmp=JSONObject.fromObject(one).toString();
+//						System.out.println(ttmp);
+//						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//							if(su.contains("exception")){
+//								System.err.println("写入数据异常！！！！  < "+su+" >");
+//							}
+//				     }
 				 }
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

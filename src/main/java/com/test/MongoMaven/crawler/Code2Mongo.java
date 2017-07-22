@@ -30,7 +30,6 @@ import clojure.main;
 public class Code2Mongo {
 	 public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
-//		 MongoCollection<Document>  collection=mongo.getShardConn("stock_code");
 		 ArrayList<String> list=FileUtil.readFileReturn("d:/code.txt");
 		 List<Document> list1=new ArrayList<Document>();
 		 Document doc=null;
@@ -38,11 +37,11 @@ public class Code2Mongo {
 			doc=new Document();
 			doc.append("id", code);
 			list1.add(doc);
-//			collection.insertOne(doc);
+			mongo.upsertDocByTableName(doc, "stock_code");
 		 }
-		for(Document d:list1){
-			System.out.println(d.toString());
-		}
+//		for(Document d:list1){
+//			System.out.println(d.toString());
+//		}
 	}
 		 
 	 

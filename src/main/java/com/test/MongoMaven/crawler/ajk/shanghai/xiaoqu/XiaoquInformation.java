@@ -18,7 +18,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
 public class XiaoquInformation {
-	static int threadNum=20;
+	static int threadNum=50;
 	public static void main(String[] args) {
 		 ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 		 MongoDbUtil mongo=new MongoDbUtil();
@@ -37,7 +37,7 @@ public class XiaoquInformation {
 				 util=new DataUtil();
 				 util.setUrl(url.toString());
 				 util.setCode(code.toString());
-				 executor.execute(new Actions(util));
+				 executor.execute(new Actions(util,mongo));
 			 }
 			 cursor.close();
 			 executor.shutdown();	

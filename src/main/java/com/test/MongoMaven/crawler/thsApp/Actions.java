@@ -23,25 +23,24 @@ public class Actions implements Runnable{
 	     map.put("Host","t.10jqka.com.cn");
 	     map.put("If-Modified-Since","29 Mar 2017 07:44:28 UTC");
 	     String url=util.getUrl();
-	     String code=util.getCode();
+//	     String code=util.getCode();
 	     String html=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>()).get("html");
 //	     System.out.println(html);
 		if(!StringUtil.isEmpty(html)&&html.length()>200){
 			String id=IKFunction.md5(html);
 //			MongoDbUtil mongo=new MongoDbUtil();
-//				 //数据源表
+//				 //数据表
 				 HashMap<String,Object> jsonResult=ParseMethod.parseJson(html);
 				 mongo.upsertMapByTableName(jsonResult, "ss_ths_talk_stock_json");
 				//总数据表
-				 jsonResult.put("id", id);
-				 jsonResult.put("stock_code",code );
-				 jsonResult.put("website","同花顺" );
-				 mongo.upsertMapByTableName(jsonResult, "ss_all_stock_json_count");
+//				 jsonResult.put("id", id);
+//				 jsonResult.put("stock_code",code );
+//				 jsonResult.put("website","同花顺" );
+//				 mongo.upsertMapByTableName(jsonResult, "ss_all_stock_json_count");
 //				 System.out.println("OoO");
-		  
 		}
 		
 		
 	}
-
+	
 }

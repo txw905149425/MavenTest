@@ -31,7 +31,6 @@ public class Crawler {
 			for(int i=117;i<200;i++){
 				String data="t=1493184600&token=eb717c98c40d236dbf054c1e8875387eace3021a&h_id="+i+"&machine=HM+NOTE+1LTE&os=4.4.4&platform=2&protocolVersion=2.0&qudao=1000001&resolution=720*1280&type=new&uuid=866401022288545&version=2.4.4";
 					String html=post.postHtml(url, map,data, "utf8", 2);
-					System.out.println(html);
 					if(html.length()<100){
 						continue;
 					}
@@ -57,7 +56,7 @@ public class Crawler {
 								result.put("time", tt);
 								result.put("name", name);
 								result.put("website", "公牛炒股");
-								result.put("json_str", one);
+//								result.put("json_str", one);
 							}else{
 								Object tmp=IKFunction.keyVal(one, "user");
 								Object name=IKFunction.keyVal(tmp, "name");
@@ -69,7 +68,7 @@ public class Crawler {
 								result.put("time", tt);
 								result.put("name", name);
 								result.put("website", "公牛炒股");
-								result.put("json_str", one);
+//								result.put("json_str", one);
 							}
 							listresult.add(result);
 						}

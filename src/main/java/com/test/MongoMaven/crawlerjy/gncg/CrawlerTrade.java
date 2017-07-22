@@ -37,7 +37,6 @@ public class CrawlerTrade {
 	try {
 				String data="t=1493177400&token=eb717c98c40d236dbf054c1e8875387eace3021a&date=0&id=0&machine=HM+NOTE+1LTE&number=20&os=4.4.4&platform=2&protocolVersion=2.0&qudao=1000001&resolution=720*1280&type=niuren&uuid=866401022288545&version=2.4.4";
 					String html=post.postHtml(url, map,data, "utf8", 2);
-					System.out.println(html);
 					if(html.length()>100){
 						Object json=IKFunction.jsonFmt(html);
 						Object js=IKFunction.keyVal(json, "data");
@@ -71,7 +70,8 @@ public class CrawlerTrade {
 							Double dd=b2.multiply(b3).doubleValue();
 							String ddt=IKFunction.regexp(dd, "(.*?)\\.");
 							String  describe="总收益率:"+ddt+"%";
-							result.put("id",name+" "+type+StockName+price+" "+time);
+							result.put("id",IKFunction.md5(name+" "+type+StockName+price+" "+time));
+							result.put("tid",name+" "+type+StockName+price+" "+time);
 							result.put("earnings",b4.multiply(b3).doubleValue()+"%");
 							result.put("describe",describe);
 							result.put("quantity",nums);

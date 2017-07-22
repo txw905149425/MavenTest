@@ -34,17 +34,18 @@ public class Crawler {
 			if(!list.isEmpty()){
 				MongoDbUtil mongo=new MongoDbUtil();
 				PostData post=new PostData();
-				mongo.upsetManyMapByTableName(list, "tt_json_all");
 				for(HashMap<String, Object> result:list){
 					result.remove("crawl_time");
 					JSONObject mm_data=JSONObject.fromObject(result);
-				   String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=tt_stock_json_test",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
+//					http://localhost:8888/import?type=tt_stock_json
+				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.out.println(mm_data.toString());
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
 				}
-				
+				mongo.upsetManyMapByTableName(list, "tt_json_all");
 			}
 		}catch (Exception e){
 			e.printStackTrace();
@@ -89,7 +90,7 @@ public class Crawler {
 				map1.put("name", name);
 				list1.add(map1);
 			}
-			map.put("id",title);
+			map.put("id",IKFunction.md5(title+"涨跌福"));
 			map.put("title",title);
 			map.put("newsClass", "新闻");
 			map.put("source", "涨跌福");

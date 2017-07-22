@@ -26,16 +26,18 @@ public class Crawler {
 				if(!list.isEmpty()){
 					MongoDbUtil mongo=new MongoDbUtil();
 					PostData post=new PostData();
-					mongo.upsetManyMapByTableName(list, "tt_json_all");
 					for(HashMap<String, Object> result:list){
 						result.remove("crawl_time");
 						JSONObject mm_data=JSONObject.fromObject(result);
-					   String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=tt_stock_json_test",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//						http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
+//						http://localhost:8888/import?type=tt_stock_json
+					   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 						if(su.contains("exception")){
 							System.out.println(mm_data.toString());
 							System.err.println("写入数据异常！！！！  < "+su+" >");
 						}
 					}
+					mongo.upsetManyMapByTableName(list, "tt_json_all");
 				}
 			}catch (Exception e){
 				e.printStackTrace();
@@ -75,7 +77,8 @@ public class Crawler {
 			map1.put("code", code);
 			map1.put("name", name);
 			list1.add(map1);
-			map.put("id",url);
+			map.put("tid",url);
+			map.put("timedel", IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("title",title);
 			map.put("newsClass", "负面快报");
 			map.put("source", source);
@@ -101,6 +104,7 @@ public class Crawler {
 			Object doc=IKFunction.JsoupDomFormat(content);
 			String content1=IKFunction.jsoupTextByRowByDoc(doc,"body", 0);
 			map.put("content", content1);
+			map.put("id",IKFunction.md5(content1));
 		}
 		return map;
 	}

@@ -19,7 +19,7 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
-//云财经-市场热点
+//云财经-市场热点  30分钟左右执行一次
 public class Crawler {
 	static MongoDbUtil mongo=new MongoDbUtil();
 	public static void main(String[] args) {
@@ -31,16 +31,18 @@ public class Crawler {
 			if(!list.isEmpty()){
 				MongoDbUtil mongo=new MongoDbUtil();
 				PostData post=new PostData();
-				mongo.upsetManyMapByTableName(list, "tt_json_all");
 				for(HashMap<String, Object> result:list){
 					result.remove("crawl_time");
 					JSONObject mm_data=JSONObject.fromObject(result);
-				   String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=tt_stock_json_test",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
+//					http://localhost:8888/import?type=tt_stock_json
+				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.out.println(mm_data.toString());
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
 				}
+				mongo.upsetManyMapByTableName(list, "tt_json_all");
 			}
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -78,11 +80,13 @@ public class Crawler {
 				map.put("code", code1);
 				list1.add(map);
 			}
-			records.put("id", title+time);
+			records.put("id",IKFunction.md5(title+"云财经"));
+			records.put("tid", title);
 			records.put("industry",industry);
 			records.put("newsClass", "消息");
 			records.put("source", "云财经");
 			records.put("title", title);
+			records.put("timedel", IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			records.put("time", ttime);
 			records.put("related", code_list.trim());
 			records.put("code_list", list1);
@@ -103,6 +107,7 @@ public class Crawler {
 			Object doc=IKFunction.JsoupDomFormat(html);
 			String content=IKFunction.jsoupTextByRowByDoc(doc, "#news-content", 0);
 			map.put("content", content);
+//			map.put("id",IKFunction.md5(content));
 		}
 		return map;
 	}

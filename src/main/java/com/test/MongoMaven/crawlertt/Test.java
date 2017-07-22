@@ -1,65 +1,66 @@
 package com.test.MongoMaven.crawlertt;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import net.sf.json.JSONObject;
 
-import com.test.MongoMaven.uitil.HttpUtil;
-import com.test.MongoMaven.uitil.IKFunction;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.PostData;
 
 public class Test {
+	static MongoDbUtil mongo=new MongoDbUtil();
 	public static void main(String[] args) {
-		MongoDbUtil mongo=new MongoDbUtil();
-		HashMap<String, Object > records=null;
-		String url="http://www.yuncaijing.com/insider/main.html";
-		Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>());
-		String html=map.get("html");
-		Document doc=Jsoup.parse(html);
-		int num=IKFunction.jsoupRowsByDoc(doc, ".main.pa>ul>li");
-		for(int i=0;i<num-2;i++){
-		Element block=doc.select(".main.pa>ul>li>.nc-arc-wrap").get(i);	
-		Elements stock_list=block.select(".stock-list>a");
-		if(stock_list.size()<1){
-			continue;
-		}
-		records=new HashMap<String, Object>();
-		String time=doc.select(".main.pa>ul>li>time").get(i).text();
-		if(time.length()==5){
-			Date d = new Date();  
-			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");  
-		    String dateNowStr = sdf.format(d); 
-			time=dateNowStr+" "+time;
-		}else if(time.length()==11){
-			String[] str=time.split(" ");
-			time=str[1]+" "+str[0];
-		}
-		String stockstr="";
-		for(int j=0;j<stock_list.size();j++){
-			Element one=stock_list.get(j);
-			String stockName=one.attr("title");
-			String stockCode=one.attr("data-wscode");
-			stockstr=stockstr+stockName+stockCode+" ";
-		}
-		System.out.println(stockstr.trim());
-		String title=IKFunction.jsoupTextByRowByDoc(doc, ".nc-arc-wrap>h4>a", i);
-		String content=block.select("p").get(0).text();
-		records.put("id", title+time);
-		records.put("class", "消息");
-		records.put("source", "云财经");
-		records.put("title", title);
-		records.put("content", content);
-		records.put("time", time);
-		records.put("related", stockstr);
-		mongo.upsertMapByTableName(records, "tt_ycj_xiaoxi");
-		
-		}
-	
+		PostData post=new PostData();
+		 MongoDbUtil mongo=new MongoDbUtil();
+		 MongoCollection<Document>  collection=mongo.getShardConn("tt_json_all");
+		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator();
+		 try {
+			 Document doc=null;
+			 while(cursor.hasNext()){
+				 doc=cursor.next();
+				doc.remove("_id");
+				doc.remove("crawl_time");
+				JSONObject json=JSONObject.fromObject(doc);
+//				http://localhost:8888/import?type=ww_stock_json
+//				 http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww_stock_json
+				String su= post.postHtml("http://localhost:8888/import?type=tt_stock_json",new HashMap<String, String>(),json.toString(), "utf-8", 1);
+				if(su.contains("exception")){
+					System.err.println("写入数据异常！！！！  < "+su+" >");
+				}
+				mongo.upsertDocByTableName(doc, "tt_json_all");
+			 }
+		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} 
 	}
+	public static List<HashMap<String, Object>>  getIndexInformation(String table){
+		List<HashMap<String, Object>> list=new ArrayList<HashMap<String,Object>>();
+		MongoCollection<Document>  collection=mongo.getShardConn(table);
+		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator();
+		 while(cursor.hasNext()){
+			 HashMap<String, Object> map=new HashMap<String, Object>();
+			 Document doc=cursor.next();
+			Object describe= doc.get("describe");
+			Object website= doc.get("website");
+			Object id= doc.get("title");
+			map.put("id",id);
+			map.put("describe", describe);
+			map.put("website", website);
+			list.add(map);
+		 }
+		 return list;
+	} 
+	
+	
+	
 }
+
+

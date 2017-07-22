@@ -36,7 +36,8 @@ public class ParseMethod {
 				map.put("ifanswer","0");
 			}
 			String name=e.select(".name.fl").get(0).text();
-			map.put("id", question+timeObject);
+			map.put("id", IKFunction.md5(question+answer));
+			map.put("tid", question+timeObject);
 			map.put("question", question);
 			map.put("time", time);
 			map.put("answer", answer);

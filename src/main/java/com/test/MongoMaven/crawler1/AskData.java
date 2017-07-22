@@ -17,37 +17,50 @@ import org.bson.conversions.Bson;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.test.MongoMaven.uitil.HttpUtil;
+import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 
-public class Data2Web {
+public class AskData {
 	public static void main(String[] args){
 		 PostData post=new PostData();
-		MongoDbUtil mongo=new MongoDbUtil();
+		 MongoDbUtil mongo=new MongoDbUtil();
 		 MongoCollection<Document>  collection=mongo.getShardConn("ww_ask_online_all");
-		 Document sort=new Document("time",-1);
+		 Document sort=new Document("_id",-1);
 	  try {
 			 MongoCursor<Document> cursor =collection.find().sort(sort).batchSize(10000).noCursorTimeout(true).iterator();
 			 Document doc=null;
+			 int size=1;
 			 while(cursor.hasNext()){
+				 if(size==700){
+					break;
+				 }
 				 doc=cursor.next();
 				if(!doc.containsKey("answer")){
 					continue;
 				}
-				doc.remove("json_str");
+				String timedel=doc.get("time").toString();
+				if(!IKFunction.timeOK(timedel)){
+					size++;
+					continue;
+				}
+				timedel=timedel.split(" ")[0];
+//				System.out.println(timedel);
+				doc.append("timedel", timedel);
+//				doc.remove("json_str");
 				doc.remove("_id");
 				doc.remove("crawl_time");
-				mongo.upsertDocByTableName(doc, "ww_test");
 				 JSONObject json=JSONObject.fromObject(doc);
-				String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json",new HashMap<String, String>(),json.toString(), "utf-8", 1);
+//				 http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww_stock_json
+//				 http://localhost:8888/import?type=ww_stock_json
+				String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),json.toString(), "utf-8", 1);
 				if(su.contains("exception")){
 					System.err.println("写入数据异常！！！！  < "+su+" >");
 				}
+				mongo.upsertDocByTableName(doc, "ww_test");
+				size++;
 			 }
-		} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		} catch (IOException e) {
+	  }catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}

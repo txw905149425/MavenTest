@@ -49,7 +49,8 @@ public class Crawler {
 						content=content+"。"+tmp;
 					}
 					
-					map.put("id", text);
+					map.put("id", IKFunction.timeFormat(text));
+					map.put("tid", text);
 					map.put("time", text);
 					map.put("content", content);
 					map.put("newsClass", "资讯");

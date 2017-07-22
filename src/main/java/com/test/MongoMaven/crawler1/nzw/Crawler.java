@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.jsoup.Jsoup;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -38,18 +39,18 @@ public class Crawler {
 				String dhtml=HttpUtil.getHtml(durl,new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 				String rid=IKFunction.regexp(dhtml, "\"rid\":(\\d+)");
 				if(!"".equals(rid)){
-					String lurl="http://liven.9666.info/others.php?rid="+rid;
+					String lurl="http://liven.9666.info/others.php?rid=335893";//+rid;
 					 String lhtml=HttpUtil.getHtml(lurl, new HashMap<String, String>(), "utf8",1, new HashMap<String, String>()).get("html");
 					 List<HashMap<String, Object>> list= parse(lhtml);
 					 if(!list.isEmpty()){
 						 mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-						 for(HashMap<String, Object> one:list){
-							String ttmp=JSONObject.fromObject(one).toString();
-							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-								if(su.contains("exception")){
-									System.err.println("写入数据异常！！！！  < "+su+" >");
-								}
-						 }
+//						 for(HashMap<String, Object> one:list){
+//							String ttmp=JSONObject.fromObject(one).toString();
+//							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//								if(su.contains("exception")){
+//									System.err.println("写入数据异常！！！！  < "+su+" >");
+//								}
+//						 }
 				
 					 }
 				}
@@ -75,20 +76,37 @@ public class Crawler {
 			Object one=IKFunction.array(list, i);
 			Object stockName=IKFunction.keyVal(one, "stockName");
 			Object stockCode=IKFunction.keyVal(one, "stockCode");
-			Object objtime=IKFunction.getTimeNowByStr("yyyy-MM-dd")+" "+IKFunction.keyVal(one, "at");
+			Object objtime=IKFunction.keyVal(one, "at");
 			String time=IKFunction.timeFormat(objtime.toString());
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
 			Object que=IKFunction.keyVal(one, "qc");
+			String quest="";
+			if(que.toString().contains("<span")){
+				org.jsoup.nodes.Document obj=Jsoup.parse(que.toString());
+				obj.select("span").remove();
+				quest=obj.select("body").text();
+			}else{
+				quest=que.toString();
+			}
+			String question=stockName+"("+stockCode+")"+quest;
 			Object name=IKFunction.keyVal(one, "ann");
 			Object answer=IKFunction.keyVal(one, "ac");
-			String question=stockName+"("+stockCode+")"+que;
+			if(answer.toString().contains("<span")){
+				org.jsoup.nodes.Document obj=Jsoup.parse(answer.toString());
+				obj.select("span").remove();
+				answer=obj.select("body").text();
+			}
 			if(!StringUtil.isEmpty(answer.toString())){
 				map.put("ifanswer","1");
 			}else{
 				map.put("ifanswer","0");
 			}
-			map.put("id",question+objtime);
+			map.put("id",IKFunction.md5(question+answer));
+			map.put("tid",question+objtime);
 			map.put("time",time);
-			map.put("que",question);
+			map.put("question",question);
 			map.put("name",name);
 			map.put("answer",answer);
 			map.put("website","牛仔网");

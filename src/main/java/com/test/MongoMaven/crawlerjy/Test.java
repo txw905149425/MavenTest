@@ -4,39 +4,47 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.client.ClientProtocolException;
+import net.sf.json.JSONObject;
 
+import org.apache.http.client.ClientProtocolException;
+import org.bson.conversions.Bson;
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import com.test.MongoMaven.uitil.HttpUtil;
+import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 
 public class Test {
 	
 	//https://gupiao.nicaifu.com/app/game/trading
 		public static void main(String[] args) {
-		    PostData post=new PostData();
-			String url="https://gupiao.nicaifu.com/api/stock_router/post";//data[lastId]:6478419
-			String data="path=/stock/game/list_dealrecord&data[marker]=game_long&reqtoken=9f2561da1f8602889887df1860ca76ab59e59baf1c6396733d1da1cc4758f0c9";
-			try {
-				HashMap<String, String> map=new HashMap<String, String>();
-				map.put("Cookie", "UM_distinctid=15c3481705ab2-0b592f5382a094-38385702-1fa400-15c3481705b199; __GUID__=95660457014955299141530842493161; gr_user_id=e320c452-3917-42de-810b-def20f86fdd5; NCFTCK=oqg8tg6qpkeq1ftx3kjrc7tit1oz7lqg; CNZZDATA1258733443=1238623131-1495528309-%7C1495615253");
-				map.put("Accept-Encoding","gzip, deflate, br");
-				map.put("Accept-Language","zh-CN,zh;q=0.8");
-				map.put("Connection","keep-alive");
-				map.put("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
-				map.put("Host", "gupiao.nicaifu.com");
-				map.put("Origin", "https://gupiao.nicaifu.com");
-				map.put("Referer", "https://gupiao.nicaifu.com/app/game/trading");
-				map.put("X-Requested-With","XMLHttpRequest");
-				String html=post.postHtml(url,map, data, "utf8", 1);
-				System.out.println(html);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			MongoDbUtil mongo=new MongoDbUtil();
+			 PostData post=new PostData();
+			MongoCollection<org.bson.Document>  collection=mongo.getShardConn("mm_deal_dynamic_all");
+			Bson filter = Filters.eq("AddTime", "2017-06-19 09:31:51");
+//			org.bson.Document  sort=new org.bson.Document("_id",-1);
+			MongoCursor<org.bson.Document> cursor =collection.find(filter)/*.sort(sort)*/.batchSize(10000).noCursorTimeout(true).iterator();
+			org.bson.Document doc=null;
+			try{
+			while(cursor.hasNext()){
+				 doc=cursor.next();
+				doc.remove("_id");
+				doc.remove("crawl_time");
+				 JSONObject json=JSONObject.fromObject(doc);
+//				 http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww_stock_json
+				String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(),json.toString(), "utf-8", 1);
+				if(su.contains("exception")){
+					System.err.println("写入数据异常！！！！  < "+su+" >");
+				}
+//				mongo.upsertDocByTableName(doc, "ww_test");
+				System.out.println("000000");
+			 }
+			}catch(Exception e){
 				e.printStackTrace();
 			}
-			
+			System.out.println("*****");
 		}
 		
 		

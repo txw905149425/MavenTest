@@ -38,14 +38,16 @@ public class Crawler {
 				List<HashMap<String , Object >> list=parse(html);
 				if(!list.isEmpty()){
 //					mongo.upsetManyMapByTableName(list, "mm_gp360_deal_dynamic");
-					mongo.upsetManyMapByTableName(list, "mm_deal_dynamic_all");
 					for(HashMap<String, Object> one:list){
 						String ttmp=JSONObject.fromObject(one).toString();
+//						http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//						http://localhost:8888/import?type=mm_stock_json
 						 String su= post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
 							if(su.contains("exception")){
 								System.err.println("写入数据异常！！！！  < "+su+" >");
 							}
 					}
+					mongo.upsetManyMapByTableName(list, "mm_deal_dynamic_all");
 					Object id=list.get((list.size()-1)).get("next");
 				    data="path=/stock/game/list_dealrecord&data[marker]=game_long&data[lastId]="+id+"&reqtoken=9f2561da1f8602889887df1860ca76ab59e59baf1c6396733d1da1cc4758f0c9";
 				}
@@ -104,7 +106,8 @@ public class Crawler {
 			map.put("UserName", name);
 			map.put("website", "360股票");
 			map.put("url", url);
-			map.put("id", name+time+stockName+option);
+			map.put("tid", name+time+stockName+option);
+			map.put("id", IKFunction.md5(name+time+stockName+option));
 			listmap.add(map);
 		}
 		return listmap;

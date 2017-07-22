@@ -1,4 +1,4 @@
-package com.test.MongoMaven.crawlerjy.niu;
+package com.test.MongoMaven.crawlerjy.ngw;
 
 import java.util.ArrayList;
 import java.util.HashMap;

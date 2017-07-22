@@ -19,7 +19,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
 //股市教练  历史 交易数据
-public class CrawlerTrade {
+public class CrawlerAll {
 	
 	public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();

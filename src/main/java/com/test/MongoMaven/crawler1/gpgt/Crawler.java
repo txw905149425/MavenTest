@@ -25,13 +25,13 @@ public class Crawler {
 					MongoDbUtil mongo=new MongoDbUtil();
 					mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
 					PostData post=new PostData();
-					for(HashMap<String, Object> one:list){
-						String ttmp=JSONObject.fromObject(one).toString();
-						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-							if(su.contains("exception")){
-								System.err.println("写入数据异常！！！！  < "+su+" >");
-							}
-				     }
+//					for(HashMap<String, Object> one:list){
+//						String ttmp=JSONObject.fromObject(one).toString();
+//						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//							if(su.contains("exception")){
+//								System.err.println("写入数据异常！！！！  < "+su+" >");
+//							}
+//				     }
 				}
 			}
 		} catch (Exception e) {
@@ -50,9 +50,9 @@ public class Crawler {
 			Object one=IKFunction.array(data, i);
 			Object timeObj=IKFunction.keyVal(one, "timestamp");
 			String time=IKFunction.timeFormat(timeObj.toString());
-//			if(!IKFunction.timeOK(timeObj.toString())){
-//				continue;
-//			}
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
 			String content=IKFunction.keyVal(one, "content").toString();
 			if(!content.contains("回复了你")){
 				continue;
@@ -68,7 +68,8 @@ public class Crawler {
 			}else{
 				map.put("ifanswer","0");
 			}
-			map.put("id",timeObj+""+answer);
+			map.put("id",IKFunction.md5(question+""+answer));
+			map.put("tid",timeObj+""+answer);
 			map.put("question",question);
 			map.put("answer",answer);
 			map.put("name",name);

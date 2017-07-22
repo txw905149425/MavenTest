@@ -16,17 +16,17 @@ import com.test.MongoMaven.uitil.StringUtil;
 
 public class Actions implements Runnable{
 	private DataUtil util;
-	
-	public Actions(DataUtil util){
+	private MongoDbUtil mongo;
+	public Actions(DataUtil util,MongoDbUtil mongo){
 		this.util=util;
+		this.mongo=mongo;
 	}
 	public void run() {
 		// TODO Auto-generated method stub
 		String url=util.getUrl();
 		String code=util.getCode();
 		try{
-			String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,/*applyProxy()*/new HashMap<String, String>()).get("html");
-				 MongoDbUtil mongo=new MongoDbUtil();
+			String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,applyProxy()).get("html");
 				 if(htmlFilter(html, ".basic-parms-mod>dd")){
 					 HashMap<String, Object> records= parse(html);
 					 if(!records.isEmpty()){
@@ -62,8 +62,8 @@ public class Actions implements Runnable{
 		HashMap<String, String> map=new HashMap<String, String>();
 		map.put("ip", "proxy.abuyun.com");
 		map.put("port", "9020");
-		map.put("user", "H82OD0G5138892VD");
-		map.put("pwd", "D2FA69ADD68A4853");
+		map.put("user", "HT28G37A1W31A32D");
+		map.put("pwd", "C7AD181122430DC6");
 		map.put("need", "need");
 		return map;	
 	}

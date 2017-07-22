@@ -23,14 +23,16 @@ public class CrawlerOnline {
 			   if(!listMap.isEmpty()){
 			    MongoDbUtil mongo=new MongoDbUtil();
 			    PostData post=new PostData();
-		    	mongo.upsetManyMapByTableName(listMap, "mm_deal_dynamic_all");
 		    	for(HashMap<String, Object> one:listMap){
 					String ttmp=JSONObject.fromObject(one).toString();
-					 String su= post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//					http://localhost:8888/import?type=mm_stock_json
+					 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
 						if(su.contains("exception")){
 							System.err.println("写入数据异常！！！！  < "+su+" >");
 						}
 				}
+		    	mongo.upsetManyMapByTableName(listMap, "mm_deal_dynamic_all");
 			   }
 			
 			}
@@ -83,7 +85,8 @@ public class CrawlerOnline {
 				Object stockName=IKFunction.keyVal(js, "sName");
 				String stockCode=IKFunction.keyVal(js, "sCode").toString();
 				String code=stockCode.substring(4);
-				map.put("id",timestr+""+id+stockName);
+				map.put("id",IKFunction.md5(timestr+""+option+stockName));
+				map.put("tid",timestr+""+option+stockName);
 				map.put("AddTime", time);
 				map.put("closing_cost", closing_cost);
 				map.put("StockName", stockName);

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mongodb.client.model.Filters;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -15,12 +16,14 @@ import com.test.MongoMaven.uitil.StringUtil;
 public class Crawler {
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
+		mongo.getShardConn("xg_tzyj_stock").deleteMany(Filters.exists("id"));
 		String url="https://xuangu.hsmdb.com/stockSelection/policy/getPolicys.do?pageSize=20&pageNum=1";
 		Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>());
 		String html=map.get("html");
 		List<HashMap<String,Object>> list=parse1(html);
 		try {
 			mongo.upsetManyMapByTableName(list, "xg_tzyj_stock");
+			mongo.upsetManyMapByTableName(list, "xg_stock_json_all");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,8 +46,9 @@ public class Crawler {
 			Object lid=IKFunction.keyVal(one, "strPolicyId");
 			Object title=IKFunction.keyVal(one, "strPolicyName");
 			Object list=IKFunction.keyVal(one, "list");
+			Object describe=IKFunction.keyVal(one, "strPolicyDesc");
 			Object tmp=IKFunction.array(list, 1);
-			String url="https://xuangu.hsmdb.com/stockSelection/policy/getStocks.do?policyId="+lid+"&pageSize=3000&pageNum=1";
+			String url="https://xuangu.hsmdb.com/stockSelection/policy/getStocks.do?policyId="+lid+"&pageSize=50&pageNum=1";
 //			System.out.println(url);
 			Map<String, String> map=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>());
 			String xml=map.get("html");
@@ -58,11 +62,12 @@ public class Crawler {
 				Object name=IKFunction.keyVal(two, "strStockName");
 				Object code=IKFunction.keyVal(two, "strStockCode");
 				stockmap.put("stockName", name);
+				stockmap.put("selecprice", "");
 				stockmap.put("code", code);
 				listmap.add(stockmap);
 			}
 			if(listmap.isEmpty()){
-				System.err.println(url);
+//				System.err.println(url);
 				continue;
 			}
 			if(!StringUtil.isEmpty(tmp.toString())){
@@ -78,6 +83,8 @@ public class Crawler {
 				}
 				
 			}
+			records.put("url", url);
+			records.put("describe", describe);
 			records.put("title", title);
 			records.put("list", listmap);
 			records.put("website", "投资赢家");

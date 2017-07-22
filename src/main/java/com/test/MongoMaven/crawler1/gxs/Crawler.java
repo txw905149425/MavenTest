@@ -26,13 +26,13 @@ public class Crawler {
 					List<HashMap<String, Object>> list=parse(html);
 					if(!list.isEmpty()){
 						mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-						for(HashMap<String, Object> one:list){
-							String ttmp=JSONObject.fromObject(one).toString();
-							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-								if(su.contains("exception")){
-									System.err.println("写入数据异常！！！！  < "+su+" >");
-								}
-					     }
+//						for(HashMap<String, Object> one:list){
+//							String ttmp=JSONObject.fromObject(one).toString();
+//							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//								if(su.contains("exception")){
+//									System.err.println("写入数据异常！！！！  < "+su+" >");
+//								}
+//					     }
 					}
 				}
 			}
@@ -65,12 +65,21 @@ public class Crawler {
 				timestr=IKFunction.keyVal(one, "question_time").toString();
 			}
 			if(!StringUtil.isEmpty(answer.toString())){
-				map.put("ifanswer","1");
+				if(answer.toString().contains("快来跟上明日牛股操作")||answer.toString().contains("每天更新最新的资讯信息及优质股")){
+					answer="";
+					map.put("ifanswer","0");
+				}else{
+					map.put("ifanswer","1");
+				}
 			}else{
 				map.put("ifanswer","0");
 			}
 			String time=IKFunction.timeFormat(timestr);
-			map.put("id", question+timestr+name);
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
+			map.put("id", IKFunction.md5(question+""+answer));
+			map.put("tid", question+timestr);
 			map.put("question", question);
 			map.put("time",time);
 			map.put("name", name);

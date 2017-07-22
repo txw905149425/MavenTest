@@ -1,4 +1,4 @@
-package com.test.MongoMaven.crawlerjy.niu;
+package com.test.MongoMaven.crawlerjy.ngw;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

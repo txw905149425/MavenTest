@@ -79,7 +79,8 @@ public class Crawler {
 			}else{
 				map.put("ifanswer","0");
 			}
-			map.put("id", question+time);
+			map.put("id", IKFunction.md5(question+answer));
+			map.put("tid", question+time);
 			map.put("question", question);
 			map.put("time", time);
 			map.put("answer",answer);

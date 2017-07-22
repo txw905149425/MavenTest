@@ -47,15 +47,17 @@ public class Crawler {
 					if(!StringUtil.isEmpty(dhtml)&&dhtml.length()>200){
 						List<HashMap<String, Object>> list=parseDetail(dhtml,describe,name);
 						if(!list.isEmpty()){
-							mongo.upsetManyMapByTableName(list, "mm_deal_dynamic_all");
 //							mongo.upsetManyMapByTableName(list, "mm_hexun_deal_dynamic");
 							for(HashMap<String, Object> two:list){
 								String ttmp=JSONObject.fromObject(two).toString();
-								 String su= post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//								http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//								http://localhost:8888/import?type=mm_stock_json
+								 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
 									if(su.contains("exception")){
 										System.err.println("写入数据异常！！！！  < "+su+" >");
 									}
 							}
+							mongo.upsetManyMapByTableName(list, "mm_deal_dynamic_all");
 						}
 					}
 				}
@@ -81,6 +83,9 @@ public class Crawler {
 			if(time.contains("/")){
 				time=time.replaceAll("/", "-");
 			}
+			if(!IKFunction.timeOK(time)){
+				break;
+			}
 			String tmp=IKFunction.keyVal(one, "HistoryType").toString();
 			String option="";
 			if(tmp.contains("买入")){
@@ -97,7 +102,8 @@ public class Crawler {
 			map.put("option", option);
 			map.put("UserName", name);
 			map.put("website", "和讯股票");
-			map.put("id", name+time+StockName+option);
+			map.put("tid", name+time+StockName+option);
+			map.put("id", IKFunction.md5(name+time+StockName+option));
 			list.add(map);
 		}
 		return list;

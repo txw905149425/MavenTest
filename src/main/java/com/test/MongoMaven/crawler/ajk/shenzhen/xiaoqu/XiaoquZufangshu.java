@@ -43,7 +43,6 @@ public class XiaoquZufangshu {
 				 }else {
 					 System.err.println(html);
 				 }
-				 
 			 }
 		}
 

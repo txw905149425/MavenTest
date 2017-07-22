@@ -37,13 +37,13 @@ public class CrawlerSC {
 				List<HashMap<String, Object>> listMap=parseList(html);
 					if(!listMap.isEmpty()){
 						mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
-						for(HashMap<String, Object> one:listMap){
-							String ttmp=JSONObject.fromObject(one).toString();
-							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-								if(su.contains("exception")){
-									System.err.println("写入数据异常！！！！  < "+su+" >");
-								}
-						 }
+//						for(HashMap<String, Object> one:listMap){
+//							String ttmp=JSONObject.fromObject(one).toString();
+//							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//								if(su.contains("exception")){
+//									System.err.println("写入数据异常！！！！  < "+su+" >");
+//								}
+//						 }
 						
 					}
 				}
@@ -77,7 +77,8 @@ public class CrawlerSC {
 			}else{
 				map.put("ifanswer","0");
 			}
-			map.put("id",question+time);
+			map.put("id",IKFunction.md5(question+answer));
+			map.put("tid",question+time);
 			map.put("question", question);
 			map.put("name", name);
 			map.put("answer", answer);

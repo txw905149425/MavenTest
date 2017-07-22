@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.mongodb.client.model.Filters;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -13,6 +14,7 @@ public class Crawler {
 		
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
+		mongo.getShardConn("xg_ypgpt_stock").deleteMany(Filters.exists("id"));
 		String url="https://gpc.upchina.com/getStrategyInfoList?pagesize=30&categoryId=0&page=1";
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		if(!StringUtil.isEmpty(html)){
@@ -31,11 +33,12 @@ public class Crawler {
 				if(date.toString().length()==8){
 					 time=date.toString().substring(0, 4)+"-"+date.toString().substring(4, 6)+"-"+date.toString().substring(6, 8);
 				}
-				if("".equals(time)){
-					System.err.println("sss  "+date);
-				}
+//				if("".equals(time)){
+//					System.err.println("sss  "+date);
+//				}
 				Object title=IKFunction.keyVal(one, "gsName");
 				Object abs=IKFunction.keyVal(one, "gsStyle");
+				Object describe=IKFunction.keyVal(one, "reviewDesc");
 				String durl="https://gpc.upchina.com/getInfoStagySingal?gscode="+gscode+"&ymd="+date;
 				String xml=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 				int size=IKFunction.rowsArray(xml);
@@ -51,20 +54,26 @@ public class Crawler {
 						continue;
 					}
 					Object name=IKFunction.keyVal(two, "gpName");
+					Object selecprice=IKFunction.keyVal(two, "price");
 					stockmap.put("code", code);
+					stockmap.put("selecprice", selecprice);
 					stockmap.put("stockName", name);
 					listmap.add(stockmap);
 				}
 				if(listmap.isEmpty()){
-					System.err.println(durl+"   "+title);
+//					System.err.println(durl+"   "+title);
 					continue;
 				}
+				records.put("url", durl);
 				records.put("id", title+""+date);
 				records.put("title", title);
 				records.put("time", time);
+				records.put("website","优品股票通");
 				records.put("ads", abs);
+				records.put("describe", describe);
 				records.put("list", listmap);
 				mongo.upsertMapByTableName(records, "xg_ypgpt_stock");
+				mongo.upsertMapByTableName(records, "xg_stock_json_all");
 			}
 		}
 	}

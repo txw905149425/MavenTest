@@ -1,4 +1,4 @@
-package com.test.MongoMaven.crawlerjy.niu;
+package com.test.MongoMaven.crawlerjy.ngw;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,20 +39,21 @@ public class ThreadActions implements Runnable{
 				PostData post=new PostData();
 				List<HashMap<String, Object>> recordList=parseList(html,describe);
 				if(!recordList.isEmpty()){
-					mongo.upsetManyMapByTableName(recordList, "mm_deal_dynamic_all");
 					for(HashMap<String, Object> result:recordList){
 						result.remove("html");
 						result.remove("quantity");
 						result.remove("AccountID");
 						result.remove("crawl_time");
 						JSONObject mm_data=JSONObject.fromObject(result);
-					   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//						http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//						http://localhost:8888/import?type=mm_stock_json
+					   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 						if(su.contains("exception")){
 							System.out.println(mm_data.toString());
 							System.err.println("写入数据异常！！！！  < "+su+" >");
 						}
 					}
-					
+					mongo.upsetManyMapByTableName(recordList, "mm_deal_dynamic_all");
 				}
 				
 			}
@@ -83,14 +84,15 @@ public class ThreadActions implements Runnable{
 			Object block=IKFunction.array(IKFunction.keyVal(tmp, "contentFormat"),1);
 			String str=IKFunction.keyVal(block, "content").toString();
 			HashMap<String, Object> map=parseTmp(str);
-			map.put("id",name+""+timeStr+stock+code);
+			map.put("id",IKFunction.md5(name+""+timeStr+stock+code));
+			map.put("tid",name+""+timeStr+stock+code);
 			map.put("describe",describe);
 			map.put("StockCode", code);
 			map.put("StockName", stock);
 			map.put("UserName", name);
 			map.put("AccountID", uid.toString());
 			map.put("AddTime", time);
-			map.put("html",tmp);
+//			map.put("html",tmp);
 			map.put("website","牛股王");
 			list.add(map);
 		}

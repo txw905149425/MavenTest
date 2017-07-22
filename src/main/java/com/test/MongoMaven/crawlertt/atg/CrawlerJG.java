@@ -21,7 +21,7 @@ public class CrawlerJG {
 			PostData post=new PostData();
 			MongoDbUtil mongo=new MongoDbUtil();
 			try {
-			 for(int i=1;i<=20;i++){
+			 for(int i=1;i<=10;i++){
 				 if(i!=1){
 					 url="http://itougu.jrj.com.cn/rstock/recstock-"+i+".shtml";
 				 }
@@ -29,18 +29,18 @@ public class CrawlerJG {
 				if(!StringUtil.isEmpty(html)&&IKFunction.htmlFilter(html,".vp-list-item.mt20")){
 					List<HashMap<String, Object>> list=parse(html);
 					if(!list.isEmpty()){
-//						mongo.upsetManyMapByTableName(list, "tt_atg_jiangu");
-						mongo.upsetManyMapByTableName(list, "tt_json_all");
 						for(HashMap<String, Object> result:list){
 							result.remove("crawl_time");
 							JSONObject mm_data=JSONObject.fromObject(result);
-						   String su=post.postHtml("http://localhost:8888/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//							http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
+//							http://localhost:8888/import?type=tt_stock_json
+						   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 							if(su.contains("exception")){
 								System.out.println(mm_data.toString());
 								System.err.println("写入数据异常！！！！  < "+su+" >");
 							}
 						}
-						
+						mongo.upsetManyMapByTableName(list, "tt_json_all");
 					}
 				}
 			  }
@@ -65,7 +65,8 @@ public class CrawlerJG {
 				String timestr=IKFunction.jsoupTextByRowByDoc(doc, "span.time",i);//时间
 				String time=IKFunction.timeFormat(timestr);
 				String reason=IKFunction.jsoupTextByRowByDoc(doc, ".desc",i);//理由
-				map.put("id", title+timestr);
+				map.put("id", IKFunction.md5(title+timestr));
+				map.put("tid", title+timestr);
 				map.put("title", title);
 				map.put("stockName", stockName);
 				map.put("stockCode", stockCode);

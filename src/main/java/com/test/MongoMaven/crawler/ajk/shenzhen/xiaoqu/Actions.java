@@ -16,9 +16,11 @@ import com.test.MongoMaven.uitil.StringUtil;
 
 public class Actions implements Runnable{
 	private DataUtil util;
+	private MongoDbUtil mongo;
 	
-	public Actions(DataUtil util){
+	public Actions(DataUtil util,MongoDbUtil mongo){
 		this.util=util;
+		this.mongo=mongo;
 	}
 	public void run() {
 		// TODO Auto-generated method stub
@@ -26,7 +28,6 @@ public class Actions implements Runnable{
 		String code=util.getCode();
 		try{
 			String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,applyProxy()).get("html");
-				 MongoDbUtil mongo=new MongoDbUtil();
 				 if(htmlFilter(html, ".comm-list.clearfix>dl>dd")){
 					 HashMap<String, Object> records= parse(html);
 					 if(!records.isEmpty()){
@@ -57,13 +58,12 @@ public class Actions implements Runnable{
 		 
 	 }
 
-	
 	public static HashMap<String, String> applyProxy(){
 		HashMap<String, String> map=new HashMap<String, String>();
 		map.put("ip", "proxy.abuyun.com");
 		map.put("port", "9020");
-		map.put("user", "HD7WZ57850C8X24D");
-		map.put("pwd", "71C9C56D5EA523E8");
+		map.put("user", "HT28G37A1W31A32D");
+		map.put("pwd", "C7AD181122430DC6");
 		map.put("need", "need");
 		return map;	
 	}

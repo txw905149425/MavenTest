@@ -46,12 +46,16 @@ public class Crawler {
 			if("0".equals(answernum)){
 				records=new HashMap<String, Object>();
 				Object time=IKFunction.keyVal(one, "create_time");
+				if(!IKFunction.timeOK(time.toString())){
+					continue;
+				}
 				Object uname=IKFunction.keyVal(one, "nickname");
-				records.put("id", question+time);
+				records.put("id", IKFunction.md5(question));
+				records.put("tid", question+time);
 				records.put("name", uname);
 				records.put("time", time);
 				records.put("question", question);
-				records.put("answer", "jcj");
+				records.put("answer", "");
 				records.put("ifanswer","0");
 				records.put("website", "看财经");
 				listn.add(records);
@@ -74,24 +78,10 @@ public class Crawler {
 			if(!StringUtil.isEmpty(dhtml)&&dhtml.length()>200){
 				List<HashMap<String, Object>> list=parse(dhtml,listq);
 					mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-					for(HashMap<String, Object> one:list){
-						String ttmp=JSONObject.fromObject(one).toString();
-						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-							if(su.contains("exception")){
-								System.err.println("写入数据异常！！！！  < "+su+" >");
-							}
-				     }
 			}
 		}
 		if(!listn.isEmpty()){
 		   mongo.upsetManyMapByTableName(listn, "ww_ask_online_all");
-		   for(HashMap<String, Object> one:listn){
-				String ttmp=JSONObject.fromObject(one).toString();
-				 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-					if(su.contains("exception")){
-						System.err.println("写入数据异常！！！！  < "+su+" >");
-					}
-		     }
 		}
 	 } catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -146,7 +136,8 @@ public class Crawler {
 					}else{
 						records.put("ifanswer","0");
 					}
-		            records.put("id", question+time);
+		            records.put("id", IKFunction.md5(question+time));
+		            records.put("tid", question+time);
 					records.put("name", uname);
 					records.put("time", time);
 					records.put("question", question);

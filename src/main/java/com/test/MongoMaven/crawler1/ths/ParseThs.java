@@ -41,7 +41,8 @@ public class ParseThs {
 			}else{
 				map.put("ifanswer","0");
 			}
-			map.put("id",question+timeStr);
+			map.put("id",IKFunction.md5(question+answer));
+			map.put("tid",question+answer);
 			map.put("question", question);
 			map.put("name", name);
 			map.put("answer", answer);
@@ -81,14 +82,18 @@ public class ParseThs {
 		String name=doc.select(".bo-user-nickname").get(0).text();
 		String answer=doc.select(".answer-question.rem16.c666.wdwrap").get(0).text();
 		String timeStr=doc.select(".answer-time").get(0).text();
+		String askname=doc.select("div.ask-user").get(0).text();
+		
 		String time=IKFunction.timeFormat(timeStr);
 		if(IKFunction.timeOK(time)){
-			if(!StringUtil.isEmpty(answer)){
+			if(!StringUtil.isEmpty(answer)&&!answer.contains("帮你详细讲解")&&!answer.contains("这里不能截图")){
 				map.put("ifanswer","1");
 			}else{
+				answer="";
 				map.put("ifanswer","0");
 			}
-			map.put("id",question+time);
+			map.put("id",IKFunction.md5(question+answer));
+			map.put("tid",askname+question+name);
 			map.put("question", question);
 			map.put("name", name);
 			map.put("answer", answer);
@@ -97,5 +102,4 @@ public class ParseThs {
 		}
 		return map;
 	}
-	
 }

@@ -20,24 +20,30 @@ public class ParthMethod {
 			map=new HashMap<String, Object>();
 			Object js=IKFunction.array(array, i);
 			Object question=IKFunction.keyVal(js, "q_content");
-			Object answer=IKFunction.keyVal(js, "a_content");
+			String answer=IKFunction.keyVal(js, "a_content").toString();
+			String name=IKFunction.keyVal(js, "p_name").toString();
 			Object time=IKFunction.keyVal(js, "u_time");
 			if(!IKFunction.timeOK(time.toString())){
 				continue;
 			}
-			Object name=IKFunction.keyVal(js, "p_name");
+			
 			if(!StringUtil.isEmpty(answer.toString())){
-				map.put("ifanswer","1");
+				if("黎博".equals(name)&&answer.length()<=4){
+					map.put("ifanswer","0");
+				}else{
+					map.put("ifanswer","1");
+				}
 			}else{
 				map.put("ifanswer","0");
 			}
 			map.put("answer", answer);
-			map.put("id", question+""+time);
+			map.put("id", IKFunction.md5(question+""+answer));
+			map.put("tid",question+""+time);
 			map.put("question", question);
 			map.put("time", time);
 			map.put("name", name);
 			map.put("website", "新浪");
-			map.put("json_str", js.toString());
+//			map.put("json_str", js.toString());
 //			System.out.println(i+"  "+question+" < "+answer+" > "+time+"   "+name);
 			list.add(map);
 		}

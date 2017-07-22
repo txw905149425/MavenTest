@@ -71,22 +71,24 @@ public class CrawlerTrade {
 								System.out.println("股市互动卖出用： ["+type+"]表示");
 								result.put("option", 1);
 							}
-							result.put("id",name+" "+type+"[相反]"+StockName+price+" "+time);
+							result.put("id",IKFunction.md5(name+" "+type+StockName+price+" "+time));
+							result.put("tid",name+" "+type+StockName+price+" "+time);
 							result.put("describe",describe);
 							result.put("StockCode", StockCode);
 							result.put("StockName", StockName);
 							result.put("UserName", name);
 							result.put("closing_cost", price);
 							result.put("AddTime", time);
-							result.put("html",one);
+//							result.put("html",one);
 							result.put("website","好股互动");
-							mongo.upsertMapByTableName(result, "mm_hghd_deal_dynamic");
-							result.remove("html");
 							JSONObject mm_data=JSONObject.fromObject(result);
-						   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//							http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//							http://localhost:8888/import?type=mm_stock_json
+						   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 							if(su.contains("exception")){
 								System.err.println("写入数据异常！！！！  < "+su+" >");
 							}
+							mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 						}
 					}
 //			if(!listresult.isEmpty()){

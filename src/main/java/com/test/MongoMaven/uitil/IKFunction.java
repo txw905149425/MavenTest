@@ -50,6 +50,9 @@ import org.jsoup.select.Elements;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 
 public class IKFunction {
 	private static Map<String, XPathExpression> xPathExpressMap = new WeakHashMap<String, XPathExpression>();
@@ -2034,7 +2037,7 @@ public  static String dateFmt(Object obj, String format) {
 				 }
 			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
 			     String dateNowStr = sdf.format(d); 
-				 str=dateNowStr+" "+str.replace("今天", "")+":"+se;
+				 str=dateNowStr+" "+str.replace("今天", "").trim()+":"+se;
 			}else if(str.contains("分钟前")){
 				String tmp=str.replace("分钟前", "");
 				int num=Integer.parseInt(tmp);
@@ -2074,6 +2077,9 @@ public  static String dateFmt(Object obj, String format) {
 					 se=""+second;
 				 }
 				 str=dateNowStr+" "+str+":"+se;
+			}else if(str.length()==8){
+				String tt=IKFunction.getTimeNowByStr("yyyy-MM-dd");
+				str=tt+" "+str;
 			}else if(str.length()==11){
 				 Random r = new Random();
 				 int second= r.nextInt(60);
@@ -2086,6 +2092,10 @@ public  static String dateFmt(Object obj, String format) {
 				 Calendar now = Calendar.getInstance();  
 			      int year=now.get(Calendar.YEAR); 
 				 str=year+"-"+str+":"+se;
+			}else if(str.length()==14){
+				 Calendar now = Calendar.getInstance();  
+			      int year=now.get(Calendar.YEAR); 
+				 str=year+"-"+str;
 			}else if(str.length()==16){
 				 Random r = new Random();
 				 int second= r.nextInt(60);
@@ -2105,7 +2115,7 @@ public  static String dateFmt(Object obj, String format) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 				long time=sdf.parse(str).getTime();
-				long now=System.currentTimeMillis();
+				long now=System.currentTimeMillis()+1000;
 				if(time>now){
 					String year=str.substring(0, 4);
 					int last=Integer.parseInt(year)-1;
@@ -2192,7 +2202,11 @@ public  static String dateFmt(Object obj, String format) {
 		   time=sdf1.parse(timestr).getTime();
 		 }
 			if(time>timeToday){
+				long now=System.currentTimeMillis()+1000;
 				flag=true;
+				if(time>now){
+					flag=false;
+				}
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -2202,6 +2216,16 @@ public  static String dateFmt(Object obj, String format) {
 		}
 		return flag;
 	}
+	
+	 // BASE64解密  
+    public static byte[] deBase64(String key) throws Exception {   
+        return (new BASE64Decoder()).decodeBuffer(key);   
+    }   
+      
+    // BASE64加密  
+    public static String enBase64(byte[] key) throws Exception {   
+        return (new BASE64Encoder()).encodeBuffer(key);   
+    }
 	
 	public static String getTimeNowByStr(String format){
 		if(StringUtil.isEmpty(format)){
@@ -2358,5 +2382,6 @@ public  static String dateFmt(Object obj, String format) {
 //		System.out.println(tmp);
 //		Object obj=split(tmp, ",");
 //		System.out.println(array(obj, 1));
+		System.out.println(timeFormat("07:53:45"));
 	}
 }

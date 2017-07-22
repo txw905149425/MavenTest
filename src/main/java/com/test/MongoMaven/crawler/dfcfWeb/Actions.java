@@ -40,8 +40,6 @@ public class Actions implements Runnable{
 			//页面抓取正常的，写入3张表
 				 HashMap<String, Object> oneJsonMap=new HashMap<String, Object>();
 				 List<HashMap<String,Object>> listJsonMap=ParseMethod.parseList2(html);
-				 long t2=System.currentTimeMillis();
-				 System.out.println("111：   "+(t2-t1));
 				 oneJsonMap.put("code", code+name);
 				 oneJsonMap.put("name", name);
 				 if(!listJsonMap.isEmpty()){
@@ -57,12 +55,12 @@ public class Actions implements Runnable{
 				//最新数据表
 				mongo.upsertMapByTableName(oneJsonMap, "ss_east_money_stock_json");
 				 long t3=System.currentTimeMillis();
-				 System.out.println(t3-t2);
+				 System.out.println(t3-t1);
 				 //插入汇总表
-				 oneJsonMap.put("id",id );
-				 oneJsonMap.put("stock_code",code );
-				 oneJsonMap.put("website","东方财富" );
-				 mongo.upsertMapByTableName(oneJsonMap, "ss_all_stock_json_count");
+//				 oneJsonMap.put("id",id );
+//				 oneJsonMap.put("stock_code",code );
+//				 oneJsonMap.put("website","东方财富" );
+//				 mongo.upsertMapByTableName(oneJsonMap, "ss_all_stock_json_count");
 			 }else{
 				 //未知信息！！  更新数据源张表  ？待定   （定义换IP重抓）
 //				 System.out.println(html);

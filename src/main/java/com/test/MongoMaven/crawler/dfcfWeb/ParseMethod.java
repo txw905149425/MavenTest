@@ -35,7 +35,7 @@ public class ParseMethod {
 	 * */
 	public static List<HashMap<String,Object>> parseList2(String html) throws Exception{
 		HashMap<String, String> map1=new HashMap<String, String>();
-		Map<String, String> resultmap=null;
+//		Map<String, String> resultmap=null;
 		List<HashMap<String,Object>> listDbMap=new ArrayList<HashMap<String,Object>>();
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 		int num=IKFunction.jsoupRowsByDoc(doc, ".l3>a");
@@ -66,6 +66,9 @@ public class ParseMethod {
 					String dhtml=HttpUtil.getHtml(url, map1, "utf8", 1,new HashMap<String, String>()).get("html");
 					if(htmlFilter(dhtml,"#zwconttbt")){
 						HashMap<String,Object> jsonMap=ParseMethod.parseDetail2(dhtml);//flist
+						if(jsonMap.isEmpty()){
+							continue;
+						}
 						listDbMap.add(jsonMap);
 					}
 				}
@@ -89,7 +92,10 @@ public class ParseMethod {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 	try{
-		String ucontent=doc.select("#zwconttbt").get(0).text().trim();
+		String ucontent=doc.select(".stockcodec").get(0).text().trim();
+		if(ucontent.length()>300){
+			return records;
+		}
 		String uname=doc.select("#zwconttbn>strong").get(0).text().trim();
 		String utime=doc.select(".zwfbtime").get(0).text().trim();
 		utime=IKFunction.regexp(utime, reg);

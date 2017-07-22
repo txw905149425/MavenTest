@@ -12,11 +12,11 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 import com.test.MongoMaven.uitil.StringUtil;
 
-//自选股  一天固定只给4个
+//自选股  一天固定只给4个   //一天一次
 public class Crawler {
 	
 	public static void main(String[] args) {
-		String url="http://61.135.157.158/ifzq.gtimg.cn/appstock/app/invest/get?limit=5&start=0&r=0.2611330155138889&publish=1&&_callback=jsonp_1493969889779_91057";
+		String url="http://61.135.157.158/ifzq.gtimg.cn/appstock/app/invest/get?limit=5&start=0&r=0.2611330155138889&publish=1";
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		if(!StringUtil.isEmpty(html)&&html.length()>200){
 			Object json=IKFunction.jsonFmt(html);
@@ -57,10 +57,11 @@ public class Crawler {
 				if(map.isEmpty()){
 					continue;
 				}
-				map.put("id",title+""+time);
+				map.put("tid",title+""+time);
 				map.put("title",title);
 				map.put("industry",industry);//产业
-				map.put("abs",abs);
+//				map.put("abs",abs);
+				map.put("timedel", IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				map.put("newsClass", "题材");
 				map.put("source", "自选股");
 				map.put("time", tt);
@@ -70,16 +71,18 @@ public class Crawler {
 			}
 			try {
 				if(!list.isEmpty()){
-					mongo.upsetManyMapByTableName(list, "tt_json_all");
 					for(HashMap<String, Object> result:list){
 						result.remove("crawl_time");
 						JSONObject mm_data=JSONObject.fromObject(result);
-					   String su=post.postHtml("http://localhost:8888/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//						http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
+//						http://localhost:8888/import?type=tt_stock_json
+					   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 						if(su.contains("exception")){
 							System.out.println(mm_data.toString());
 							System.err.println("写入数据异常！！！！  < "+su+" >");
 						}
 					}
+					mongo.upsetManyMapByTableName(list, "tt_json_all");
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -101,6 +104,7 @@ public class Crawler {
 			Object one=IKFunction.array(data, 1);
 			Object content=IKFunction.keyVal(one, "content");
 			map.put("content", content);
+			map.put("id",IKFunction.md5(content));
 		}
 		return map;
 	

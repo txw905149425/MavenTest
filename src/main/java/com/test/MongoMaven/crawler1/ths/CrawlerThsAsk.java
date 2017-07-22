@@ -24,13 +24,13 @@ public class CrawlerThsAsk {
 		 try {
 			 if(!listMap.isEmpty()){
 			   mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
-			   for(HashMap<String, Object> one:listMap){
-					String ttmp=JSONObject.fromObject(one).toString();
-					 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-						if(su.contains("exception")){
-							System.err.println("写入数据异常！！！！  < "+su+" >");
-						}
-					}
+//			   for(HashMap<String, Object> one:listMap){
+//					String ttmp=JSONObject.fromObject(one).toString();
+//					 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//						if(su.contains("exception")){
+//							System.err.println("写入数据异常！！！！  < "+su+" >");
+//						}
+//					}
 			 }
 			 listMap.clear();
 			 listMap=ParseThs.parseList2(html);

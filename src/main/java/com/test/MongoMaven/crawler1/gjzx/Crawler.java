@@ -32,14 +32,16 @@ public class Crawler {
 				int size=d.select("ul>li").size()-1;
 				List<HashMap<String, Object>> list=parse(html);
 				if(!list.isEmpty()){
-					mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+					
 					 for(HashMap<String, Object> one:list){
 							String ttmp=JSONObject.fromObject(one).toString();
-							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+							 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
 								if(su.contains("exception")){
 									System.err.println("写入数据异常！！！！  < "+su+" >");
 								}
 					 }
+//					 System.out.println("........");
+					 mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
 				}
 				if(size>1){
 					for(int i=2;i<=size;i++){
@@ -48,13 +50,13 @@ public class Crawler {
 					     List<HashMap<String, Object>> list1=parse(html);
 						if(!list1.isEmpty()){
 							mongo.upsetManyMapByTableName(list1, "ww_ask_online_all");
-							 for(HashMap<String, Object> one:list1){
-									String ttmp=JSONObject.fromObject(one).toString();
-									 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-										if(su.contains("exception")){
-											System.err.println("写入数据异常！！！！  < "+su+" >");
-										}
-							 }
+//							 for(HashMap<String, Object> one:list1){
+//									String ttmp=JSONObject.fromObject(one).toString();
+//									 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//										if(su.contains("exception")){
+//											System.err.println("写入数据异常！！！！  < "+su+" >");
+//										}
+//							 }
 						}
 					}
 				}
@@ -83,10 +85,15 @@ public class Crawler {
 			String answer="";
 			String name="";
 			for(int j=0;j<dlist.size();j++){
-				answer=answer+dlist.get(j).text()+";";
+				if(j==dlist.size()-1){
+					answer=answer+dlist.get(j).text();
+				}else{
+				answer=answer+dlist.get(j).text()+"    ";
 				answer=answer.replaceAll("答", "");
-				name=name+dlist.get(j).select("a").text()+";";
+				}
+				name=name+""+dlist.get(j).select("a").text()+";";
 			}
+			System.out.println(answer);
 			if(!StringUtil.isEmpty(answer)){
 				map.put("ifanswer","1");
 			}else{
@@ -94,7 +101,8 @@ public class Crawler {
 			}
 			name=name.substring(0, name.length()-1);
 			String time=IKFunction.getTimeNowByStr("yyyy-MM-dd");
-			map.put("id", question+time);
+			map.put("id", IKFunction.md5(question+answer));
+			map.put("tid", question+time);
 			map.put("question", question);
 			map.put("time", time);
 			map.put("answer", answer);

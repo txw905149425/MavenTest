@@ -31,23 +31,23 @@ public class Crawler {
 			try{
 				for(int i=1;i<=num;i++){
 					Object one=IKFunction.array(rows, i);
-					Object name=IKFunction.keyVal(one,"userName");
+//					Object name=IKFunction.keyVal(one,"userName");
 					Object liveStageId=IKFunction.keyVal(one,"liveStageId");
 					String userId=IKFunction.keyVal(one,"userId").toString();
 					Object uid=IKFunction.keyVal(one,"liveId");
 					String value="deviceType=Android&appId=up&appVersion=4.4.8&platformType=app&channelNo=9510&manufacturer=Xiaomi&systemNo=4.4.4&deviceId=866401022288545&pageSize=20&flag=1&maxLiveContentId=0&pageNum=1&liveStageId="+liveStageId+"&liveId="+uid+"&userId=";
 					List<HashMap<String , Object>> list=parseDetail(value,userId);
 					if(!list.isEmpty()){
+//						System.out.println(list.toString());
 						mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-//						mongo.upsetManyMapByTableName(list, "ww_tzmb_ask_shares");
-						for(HashMap<String, Object> two:list){
-							two.remove("json_str");
-							String ttmp=JSONObject.fromObject(two).toString();
-							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-								if(su.contains("exception")){
-									System.err.println("写入数据异常！！！！  < "+su+" >");
-								}
-							}
+//						for(HashMap<String, Object> two:list){
+//							two.remove("json_str");
+//							String ttmp=JSONObject.fromObject(two).toString();
+//							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//								if(su.contains("exception")){
+//									System.err.println("写入数据异常！！！！  < "+su+" >");
+//								}
+//							}
 					}
 				}
 			}catch(Exception e){
@@ -67,7 +67,7 @@ public class Crawler {
 		HashMap<String , Object> result = null;
 		try {
 			String html=post.postHtml(url, map, value, "utf8", 2);
-//			System.out.println(html);
+			System.out.println(html);
 			Object json=IKFunction.jsonFmt(html);
 			Object data=IKFunction.keyVal(json, "resultData");
 			Object rows=IKFunction.keyVal(data,"content");
@@ -87,17 +87,21 @@ public class Crawler {
 				Object answer=IKFunction.keyVal(one,"content");
 				Object que=IKFunction.keyVal(one,"replyLiveMessage");
 				Object question=IKFunction.keyVal(que,"content");
-				if(!StringUtil.isEmpty(answer.toString())){
-					map.put("ifanswer","1");
-				}else{
-					map.put("ifanswer","0");
+				if("".equals(question.toString())){
+					continue;
 				}
-				result.put("id",question+""+time);
+				if(!StringUtil.isEmpty(answer.toString())){
+					result.put("ifanswer","1");
+				}else{
+					result.put("ifanswer","0");
+				}
+				result.put("id",IKFunction.md5(question+""+answer));
+				result.put("tid",question+""+time);
 				result.put("question",question);
 				result.put("name",name);
 				result.put("answer",answer);
 				result.put("time",time);
-				result.put("json_str",one.toString());
+//				result.put("json_str",one.toString());
 				result.put("website","优品股票通");
 				list.add(result);
 			}

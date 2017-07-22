@@ -49,14 +49,14 @@ public class CrawlerZxg {
 				List<HashMap<String, Object>> recordList=parseDetail(html);
 				if(!recordList.isEmpty()){
 					mongo.upsetManyMapByCollection(recordList, collection, "ww_ask_online_all");
-					for(HashMap<String, Object> one:recordList){
-						one.remove("json_str");
-						String ttmp=JSONObject.fromObject(one).toString();
-						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-							if(su.contains("exception")){
-								System.err.println("写入数据异常！！！！  < "+su+" >");
-							}
-						}
+//					for(HashMap<String, Object> one:recordList){
+//						one.remove("json_str");
+//						String ttmp=JSONObject.fromObject(one).toString();
+//						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//							if(su.contains("exception")){
+//								System.err.println("写入数据异常！！！！  < "+su+" >");
+//							}
+//						}
 				}
 			}
 			
@@ -95,10 +95,10 @@ public class CrawlerZxg {
 		Object block=IKFunction.keyVal(json, "data");
 		Object arr=IKFunction.keyVal(block, "data");
 		int num=IKFunction.rowsArray(arr);
-		Object question=null;
-		Object answer=null;
-		Object name=null;
-		String time=null;
+		String question="";
+		String answer="";
+		String name="";
+		String time="";
 		 HashMap<String, Object> map=null;
 		for(int i=1;i<=num;i++){
 			map=new HashMap<String, Object>();
@@ -110,31 +110,29 @@ public class CrawlerZxg {
 			}
 			if(tmp.toString().contains("parentInfo")){
 				Object que=IKFunction.keyVal(tmp, "parentInfo");
-				question=IKFunction.keyVal(que, "content");
-				answer=IKFunction.keyVal(tmp, "content");
+				question=IKFunction.keyVal(que, "content").toString();
+				answer=IKFunction.keyVal(tmp, "content").toString();
 			}else{
-				question=IKFunction.keyVal(tmp, "content");
+				question=IKFunction.keyVal(tmp, "content").toString();
 			}
-			name=IKFunction.keyVal(tmp, "nickname");
-			map.put("id",question+""+ctime);
+			name=IKFunction.keyVal(tmp, "nickname").toString();
+			map.put("id",IKFunction.md5(question+""+answer));
+			map.put("tid",question+""+ctime);
 			map.put("question", question);
 			map.put("name", name);
-			if(answer!=null){
-				map.put("answer", answer);
+			if(answer!=null&&answer.length()>4){
 				map.put("ifanswer","1");
 			}else{
 				map.put("ifanswer","0");
 			}
+			map.put("answer", answer);
 			map.put("time", time);
 			map.put("website", "自选股");
-			map.put("json_str", tmp.toString());
+//			map.put("json_str", tmp.toString());
 			list.add(map);
 		}
 		
 		return list;
 		
 	}
-	
-	
-	
 }

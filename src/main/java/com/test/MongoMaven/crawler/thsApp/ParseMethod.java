@@ -56,7 +56,7 @@ public class ParseMethod {
 		dbMap.put("id", code);
 		dbMap.put("name", name);
 		dbMap.put("code", code+""+name);
-		dbMap.put("result", tmp);
+//		dbMap.put("result", tmp);
 		return dbMap;
 	}
 	
@@ -85,14 +85,11 @@ public class ParseMethod {
 	}
 	
 	public static void main(String[] args) {
-		String str="僵尸股……<begin>{\"type\":\"br\", \"content\":\"\", \"action\":\"\"}<end>跟跌，不跟涨！";
-		int first=str.indexOf("<");
-		int last=str.lastIndexOf(">")+1;
-		System.out.println(first+"  "+last);
-		String tmp=str.substring(first, last);
-		System.out.println(str.replace(tmp, ""));
-		System.out.println(tmp);
-		
+		String str="僵尸股……<begin>{\"type\":\"br\", \"content\":\"\", \"action\":\"\"}<end>跟跌，不跟涨！僵尸股……<begin>{\"type\":\"br\", \"content\":\"\", \"action\":\"\"}<end>跟跌，不跟涨！僵尸股……<begin>{\"type\":\"br\", \"content\":\"\", \"action\":\"\"}<end>跟跌，不跟涨！";
+		str=str.replaceAll("<begin>","").replaceAll("<end>","");
+		System.out.println(str);
+		String test=str.replaceAll("\\{.*?\\}", "");
+		System.out.println(test);
 	}
 	
 	
@@ -115,21 +112,17 @@ public class ParseMethod {
 			long timel=Long.parseLong(utime.toString());
 			timeList.add(timel);
 			String ttt=IKFunction.timeFormat(utime.toString());  
-			Object ucontent=IKFunction.keyVal(block,"content");
+			String ucontent=IKFunction.keyVal(block,"content").toString();
+			if(ucontent.contains("<begin>")){//僵尸股……<begin>{"type":"br", "content":"", "action":""}<end>跟跌，不跟涨！
+				ucontent=ucontent.replaceAll("<begin>","").replaceAll("<end>","");
+				ucontent=ucontent.replaceAll("\\{.*?\\}", "");
+//				continue;
+			}
+			
 			String comment=IKFunction.keyVal(block,"comment").toString();
 			
-			if(!StringUtil.isEmpty(comment.toString())){
-				
+			if(!StringUtil.isEmpty(comment)){
 				//判断情况不确定，以后估计还有其他情况！！！！ 2017-06-13   唐
-				if(comment.contains("<begin>")){//僵尸股……<begin>{"type":"br", "content":"", "action":""}<end>跟跌，不跟涨！
-					int first=comment.indexOf("<");
-					int last=comment.lastIndexOf(">")+1;
-					String tmp=comment.substring(first, last);
-					comment=comment.replace(tmp, "");
-					
-					
-				}
-				
 				
 				List<HashMap<String,Object>> jsonMap=new ArrayList<HashMap<String,Object>>();
 				JSONObject js=JSONObject.fromObject(comment);
@@ -144,8 +137,12 @@ public class ParseMethod {
 	               Object time=IKFunction.keyVal(comm,"ctime");
 	               long timel1=Long.parseLong(time.toString());
 	               timeList.add(timel1);
-	               String ttt1=IKFunction.timeFormat(time.toString());  
-	               Object content=IKFunction.keyVal(comm,"content");
+	               String ttt1=IKFunction.timeFormat(time.toString());
+	               String content=IKFunction.keyVal(comm,"content").toString();
+	               if(content.toString().contains("<begin>")){
+	            	   content=content.replaceAll("<begin>","").replaceAll("<end>","");
+	            	   content=content.replaceAll("\\{.*?\\}", "");
+	               }
 //	               System.out.println("评论：    "+name+"   "+time+"   "+content);
 	            dbMap.put("name", name);
 	   			dbMap.put("time", ttt1);

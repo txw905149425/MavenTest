@@ -69,6 +69,7 @@ public class Crawler {
 				HashMap<String, Object> map=parseDetail(durl);
 				if(!map.isEmpty()){
 					map.put("id", title);
+					map.put("tid", IKFunction.md5(title));
 					map.put("newsClass", "新闻");
 					map.put("source", "全景网");
 //					map.put("related", "");

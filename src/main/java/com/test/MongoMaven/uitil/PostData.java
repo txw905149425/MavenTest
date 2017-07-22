@@ -137,7 +137,7 @@ public class PostData {
 	  
 	    
 	    public static void main(String[] args) throws ClientProtocolException, IOException {
-			String url="http://www.xyhn.gov.cn/cms/xzxklist";
+			String url="http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=delete_test";
 			String json="pagesize=20&page=0&id=998986";
 			String html=postHtml(url, new HashMap<String, String>(), json, "utf8", 2);
 			System.out.println(html);

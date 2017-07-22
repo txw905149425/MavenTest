@@ -18,14 +18,14 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
 public class XiaoquInformation {
-	static int threadNum=1;
+	static int threadNum=10;
 	public static void main(String[] args) {
 		 ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 		 MongoDbUtil mongo=new MongoDbUtil();
 		 MongoCollection<Document>  collection=mongo.getShardConn("ajk_guangzhou_community_name");
 //		 Bson filter = Filters.exists("url", true);
 		 Bson filter1 = Filters.exists("crawl", false);
-		 MongoCursor<Document> cursor =collection.find(filter1).filter(filter1).batchSize(10000).noCursorTimeout(true).iterator(); 
+		 MongoCursor<Document> cursor =collection.find().filter(filter1).batchSize(10000).noCursorTimeout(true).iterator(); 
 		 try{
 			DataUtil util=null;
 			 while(cursor.hasNext()){
@@ -38,7 +38,7 @@ public class XiaoquInformation {
 				 util=new DataUtil();
 				 util.setUrl(url.toString());
 				 util.setCode(code.toString());
-				 executor.execute(new Actions(util));
+				 executor.execute(new Actions(util,mongo));
 			 }
 			 cursor.close();
 			 executor.shutdown();	

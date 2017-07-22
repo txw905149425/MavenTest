@@ -39,14 +39,14 @@ public class Crawler1 {
 					List<HashMap<String, Object>> list = parse(html);
 					if (!list.isEmpty()) {
 						mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-						for(HashMap<String, Object> one:list){
-							one.remove("json_str");
-							String ttmp=JSONObject.fromObject(one).toString();
-							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-								if(su.contains("exception")){
-									System.err.println("写入数据异常！！！！  < "+su+" >");
-								}
-							}
+//						for(HashMap<String, Object> one:list){
+//							one.remove("json_str");
+//							String ttmp=JSONObject.fromObject(one).toString();
+//							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//								if(su.contains("exception")){
+//									System.err.println("写入数据异常！！！！  < "+su+" >");
+//								}
+//							}
 					}
 				}
 			}
@@ -76,6 +76,9 @@ public class Crawler1 {
 			Object answer=IKFunction.keyVal(ans,"content");
 			Object ctime=IKFunction.keyVal(ans, "ctime");
 			String time=IKFunction.timeFormat(ctime.toString());
+			if(!IKFunction.timeOK(time)){
+				continue;
+			}
 			Object que=IKFunction.keyVal(one, "content");
 			Object doc=IKFunction.JsoupDomFormat(que);
 			String question=IKFunction.jsoupTextByRowByDoc(doc, "body", 0);
@@ -84,8 +87,9 @@ public class Crawler1 {
 			}else{
 				map.put("ifanswer","0");
 			}
-			map.put("json_str",one.toString());
-			map.put("id", question+ctime);
+//			map.put("json_str",one.toString());
+			map.put("id", IKFunction.md5(question+answer));
+			map.put("tid", question+ctime);
 			map.put("question", question);
 			map.put("answer", answer);
 			map.put("time", time);

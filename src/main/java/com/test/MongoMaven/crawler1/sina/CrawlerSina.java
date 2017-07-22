@@ -37,15 +37,15 @@ public class CrawlerSina {
 				 List<HashMap<String, Object>> list= ParthMethod.parseList(html);
 				 if(!list.isEmpty()){
 					 mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-					 for(HashMap<String, Object> one:list){
-						 one.remove("json_str");
-						 String ttmp=JSONObject.fromObject(one).toString();
-//							http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json
-							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-								if(su.contains("exception")){
-									System.err.println("写入数据异常！！！！  < "+su+" >");
-								}
-						 }
+//					 for(HashMap<String, Object> one:list){
+//						 one.remove("json_str");
+//						 String ttmp=JSONObject.fromObject(one).toString();
+////							http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json
+//							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+//								if(su.contains("exception")){
+//									System.err.println("写入数据异常！！！！  < "+su+" >");
+//								}
+//						 }
 					 Object obj=list.get(list.size()-1).get("time");
 					 urltmp=IKFunction.charEncode(obj,"utf8");
 					 url="http://licaishi.sina.com.cn/api/askList?page=null&ind_id=1&is_p=null&u_time="+urltmp+"&__t="+d.getTime();

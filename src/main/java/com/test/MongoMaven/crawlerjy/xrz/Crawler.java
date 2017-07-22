@@ -69,28 +69,31 @@ public class Crawler {
 					if("买入".equals(type.toString())){
 						//1是买入，其他什么事卖出不知道
 						result.put("option", "0");
-					}else{
+					}else if("卖出".equals(type.toString())){
 						result.put("option", "1");
 					}
-					result.put("id",name+" "+type+" "+StockName+price+" "+timestr);
+					result.put("id",IKFunction.md5(name+" "+type+" "+StockName+price+" "+timestr));
+					result.put("tid",name+" "+type+" "+StockName+price+" "+timestr);
 					result.put("describe",describe);
 					result.put("StockCode", code);
 					result.put("StockName", StockName);
 					result.put("UserName", name);
 					result.put("closing_cost", price);
 					result.put("AddTime", time);
-					result.put("html",one);
+//					result.put("html",one);
 					result.put("fromPosition", lastWeight);
 					result.put("toPosition", toWeight);
 					result.put("website","仙人掌股票");
-					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
-					result.remove("html");
+//					result.remove("html");
 					JSONObject mm_data=JSONObject.fromObject(result);
-				   String su=post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//					http://localhost:8888/import?type=mm_stock_json
+				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 //						System.out.println(mm_data.toString());
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
+					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 				}
 			}
 		}

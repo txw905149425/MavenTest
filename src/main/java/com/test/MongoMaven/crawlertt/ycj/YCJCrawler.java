@@ -19,6 +19,7 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.PostData;
 
+//7*24小时直播 ：10分钟左右执行一次
 public class YCJCrawler {
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
@@ -59,7 +60,9 @@ public class YCJCrawler {
 						}
 						String title=block.select(".nc-arc-wrap>p>a").get(0).text();
 						String content=block.select(".nc-arc-wrap>p>span").get(0).text();
-						records.put("id", title+time);
+						records.put("id", IKFunction.md5(title+"云财经"));
+						records.put("timedel", IKFunction.getTimeNowByStr("yyyy-MM-dd"));
+						records.put("tid", title);
 						records.put("newsClass", "消息");
 						records.put("source", "云财经");
 						records.put("title", title);
@@ -67,13 +70,13 @@ public class YCJCrawler {
 						records.put("time", tt);
 						records.put("related", stockstr.trim());
 						records.put("code_list", list1);
-						mongo.upsertMapByTableName(records, "tt_json_all");
 						JSONObject mm_data=JSONObject.fromObject(records);
-					    String su=post.postHtml("http://wisefinance.chinaeast.cloudapp.chinacloudapi.cn:8000/wf/import?type=tt_stock_json_test",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+					    String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 						if(su.contains("exception")){
 							System.out.println(mm_data.toString());
 							System.err.println("写入数据异常！！！！  < "+su+" >");
 						}
+						mongo.upsertMapByTableName(records, "tt_json_all");
 					}
 				}catch(Exception e){
 					e.printStackTrace();
