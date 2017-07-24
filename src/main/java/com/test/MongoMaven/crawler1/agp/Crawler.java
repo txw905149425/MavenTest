@@ -28,7 +28,6 @@ public class Crawler {
 				Object  name=IKFunction.keyVal(one, "title");
 				String durl="https://www.5igupiao.com/api/live.php?act=qa_all_a&id="+uid;
 				String dhtml=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-//				System.out.println(dhtml);
 				if(!StringUtil.isEmpty(dhtml)&&dhtml.length()>50){
 					Object djson=IKFunction.jsonFmt(dhtml);
 					Object ddata=IKFunction.keyVal(djson, "qa_list");
@@ -48,6 +47,7 @@ public class Crawler {
 					    Object answer=IKFunction.keyVal(done, "answer");
 					    map.put("id",IKFunction.md5(question+time));
 						map.put("tid",question+time);
+						map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 						map.put("question", question);
 						map.put("name", name);
 						map.put("answer", answer);

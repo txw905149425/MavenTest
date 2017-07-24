@@ -24,7 +24,6 @@ public class CrawlerDzh {
 					String url="https://htg.yundzh.com/data/showindex_"+i+".json?49718476";
 					Map<String, String> resultMap=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
 					String html=resultMap.get("html");
-//					System.out.println(html);
 					List<HashMap<String, Object>> listMap=parseList(html);
 					if(!listMap.isEmpty()){
 						mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
@@ -81,6 +80,7 @@ public class CrawlerDzh {
 			map.put("question", que);
 			map.put("name", name);
 			map.put("answer", ans);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("time", time);
 			map.put("website", "大智慧");
 //			map.put("json_str", js.toString());

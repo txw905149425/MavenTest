@@ -18,7 +18,6 @@ public class Crawler {
 	public static void main(String[] args) {
 		try {
 			MongoDbUtil mongo=new MongoDbUtil();
-			PostData post=new PostData();
 			for(int i=1;i<=3;i++){
 				String url="https://content.api.guxiansheng.cn/index.php?c=question&a=get&pagesize=30&stock_code=&appId=android&key=&member_id=0&curpage="+i;
 				String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8",1,new HashMap<String, String>()).get("html");
@@ -54,9 +53,6 @@ public class Crawler {
 			Object one=IKFunction.array(list, i);
 			Object stockCode=IKFunction.keyVal(one, "stock_code");
 			String name=IKFunction.keyVal(one, "seller_name").toString();
-//			if(name.equals("趋势为王")){
-//			System.out.println("ssss");	
-//			}
 			String stockName=IKFunction.keyVal(one, "stock_name").toString();
 			Object question=stockName+"("+stockCode+")"+IKFunction.keyVal(one, "intro");
 			Object answer=IKFunction.keyVal(one, "answer_intro");
@@ -82,6 +78,7 @@ public class Crawler {
 			map.put("tid", question+timestr);
 			map.put("question", question);
 			map.put("time",time);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("name", name);
 			map.put("answer", answer);
 			map.put("website", "股先生");

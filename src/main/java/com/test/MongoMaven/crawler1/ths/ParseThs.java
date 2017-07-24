@@ -97,6 +97,7 @@ public class ParseThs {
 			map.put("question", question);
 			map.put("name", name);
 			map.put("answer", answer);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("time", time);
 			map.put("website", "同花顺");
 		}

@@ -27,24 +27,14 @@ public class CrawlerSC {
 		String url="http://gmv.cjzg.cn/Mv/get_more.html";
 		HashMap< String, String> map=new HashMap<String, String>();
 		ArrayList<NameValuePair> list=new ArrayList<NameValuePair>();
-		String html=null;
 		try {
 			 MongoDbUtil mongo=new MongoDbUtil();
-			 PostData post=new PostData();
 			for(int i=0;i<5;i++){
 				list.add(new BasicNameValuePair("loadingnum", i+""));
-				html = HttpUtil.postHtml(url, map, list, 1000, 1);
+				String html = HttpUtil.postHtml(url, map, list, 1000, 1);
 				List<HashMap<String, Object>> listMap=parseList(html);
 					if(!listMap.isEmpty()){
 						mongo.upsetManyMapByTableName(listMap, "ww_ask_online_all");
-//						for(HashMap<String, Object> one:listMap){
-//							String ttmp=JSONObject.fromObject(one).toString();
-//							 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-//								if(su.contains("exception")){
-//									System.err.println("写入数据异常！！！！  < "+su+" >");
-//								}
-//						 }
-						
 					}
 				}
 		} catch(Exception e) {
@@ -81,6 +71,7 @@ public class CrawlerSC {
 			map.put("tid",question+time);
 			map.put("question", question);
 			map.put("name", name);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("answer", answer);
 			map.put("time", time);
 			map.put("website", "全球市场直播");

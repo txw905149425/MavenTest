@@ -98,7 +98,7 @@ public class ComplieData {
 					String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 					if(!StringUtil.isEmpty(html)&&html.length()>50){
 						HashMap<String, Object > map=IKFunction.parseSina(html);
-					    selecprice= map.get("priceNow").toString();
+					    selecprice= map.get("priceE").toString();
 					}
 				}
 				 records.put("selecprice", selecprice);
@@ -126,32 +126,32 @@ public class ComplieData {
 			Object title= doc.get("title");
 			Object time= doc.get("selectime");
 			String price= doc.get("selecprice").toString();
-					if(StringUtil.isEmpty(price)||"0.00".equals(price)){
-						String url="";
-						if(code.toString().startsWith("6")){
-							url="http://hq.sinajs.cn/list=sh"+code;
-						}else{
-							url="http://hq.sinajs.cn/list=sz"+code;
-						}
-						String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-						if(!StringUtil.isEmpty(html)&&html.length()>50){
-						HashMap<String, Object > map=IKFunction.parseSina(html);
-							if(!map.isEmpty()){
-								price= map.get("priceNow").toString();
-							}
-						}
+		if(StringUtil.isEmpty(price)||"0.00".equals(price)){
+			String url="";
+			if(code.toString().startsWith("6")){
+				url="http://hq.sinajs.cn/list=sh"+code;
+			}else{
+				url="http://hq.sinajs.cn/list=sz"+code;
+			}
+			String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
+			if(!StringUtil.isEmpty(html)&&html.length()>50){
+			HashMap<String, Object > map=IKFunction.parseSina(html);
+				if(!map.isEmpty()){
+					price= map.get("priceE").toString();
+				}
+			}
 //						continue;
-					}
-					
-					if(price.contains(".")){
-						String [] pstr=price.split("\\.");
-						String ptmp=pstr[1];
-						if(ptmp.length()>2){
-							ptmp=ptmp.substring(0, 2);
-						}else if(ptmp.length()==1){
-							ptmp=ptmp+"0";
-						}
-						price=pstr[0]+"."+ptmp;
+		}
+		
+		if(price.contains(".")){
+			String [] pstr=price.split("\\.");
+			String ptmp=pstr[1];
+			if(ptmp.length()>2){
+				ptmp=ptmp.substring(0, 2);
+			}else if(ptmp.length()==1){
+				ptmp=ptmp+"0";
+			}
+			price=pstr[0]+"."+ptmp;
 			}
 			int supportnum=1;
 			List<HashMap<String, Object >> list1=new ArrayList<HashMap<String,Object>>();

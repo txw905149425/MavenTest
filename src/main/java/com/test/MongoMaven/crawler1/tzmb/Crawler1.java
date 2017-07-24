@@ -90,6 +90,7 @@ public class Crawler1 {
 //			map.put("json_str",one.toString());
 			map.put("id", IKFunction.md5(question+answer));
 			map.put("tid", question+ctime);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("question", question);
 			map.put("answer", answer);
 			map.put("time", time);

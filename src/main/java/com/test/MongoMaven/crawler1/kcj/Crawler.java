@@ -18,12 +18,14 @@ import com.test.MongoMaven.uitil.StringUtil;
 public class Crawler {
 	public static void main(String[] args) {
 		String url="http://wsq.mtq.tvm.cn/fastquery/actions/posts/getpostslist.do?&topicid=1512152327370c41948b89aa0412cef0ed_0&postsids=1702191341237348a0a34e9be09dae8ecd_0%2C1702151524424b48ae93d32029b6546820_0&datatype=1&first=true&ui=%7B%22st%22%3A1496578733%2C%22role%22%3A%22user%22%2C%22headimg%22%3A%22http%3A%2F%2Fwx.qlogo.cn%2Fmmopen%2F82iaiacrlczbia5g7b8fUjAOvdg0c032URtGZbPPgcsVYxexr6wLib31NZU0AEvCEoEh6IsW7R6jeE97AXuNjDibQOfW8ddtGmlLW%2F0%22%2C%22sex%22%3A%22%22%2C%22sign%22%3A%22013e93815e39814aa68557ee4d223b3a%22%2C%22fans%22%3A1%2C%22province%22%3A%22%22%2C%22v%22%3A1%2C%22nickname%22%3A%22ik%22%2C%22jibie%22%3A%22%22%2C%22wxtoken%22%3A%2248578ccf2f60%22%2C%22id%22%3A%22wx_onkiuuAyZ1G5RkNJLWsAtbDj-LZI_0%22%2C%22username%22%3A%22%22%7D";
-//		url="http://wsq.mtq.tvm.cn/fastquery/actions/posts/getpostslist.do?topicid=1512152327370c41948b89aa0412cef0ed_0&datatype=1&first=false&ui=%7B%22st%22%3A1496646652%2C%22role%22%3A%22user%22%2C%22headimg%22%3A%22http%3A%2F%2Fwx.qlogo.cn%2Fmmopen%2F82iaiacrlczbia5g7b8fUjAOvdg0c032URtGZbPPgcsVYxexr6wLib31NZU0AEvCEoEh6IsW7R6jeE97AXuNjDibQOfW8ddtGmlLW%2F0%22%2C%22sex%22%3A%22%22%2C%22sign%22%3A%22013e93815e39814aa68557ee4d223b3a%22%2C%22fans%22%3A1%2C%22province%22%3A%22%22%2C%22v%22%3A1%2C%22nickname%22%3A%22ik%22%2C%22jibie%22%3A%22%22%2C%22wxtoken%22%3A%2248578ccf2f60%22%2C%22id%22%3A%22wx_onkiuuAyZ1G5RkNJLWsAtbDj-LZI_0%22%2C%22username%22%3A%22%22%7D&last_id=170605112247084d5d8d6a5cc9538874da_0&last_timestamp=1496632967512";
+	try{
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		if(!StringUtil.isEmpty(html)&html.length()>200){
 			parseList(html);
 		}
-		
+	  }catch(Exception e){
+		  e.printStackTrace();
+	  }
 	}
 	
 	public static void parseList(String html){
@@ -53,6 +55,7 @@ public class Crawler {
 				records.put("id", IKFunction.md5(question));
 				records.put("tid", question+time);
 				records.put("name", uname);
+				records.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				records.put("time", time);
 				records.put("question", question);
 				records.put("answer", "");
@@ -139,6 +142,7 @@ public class Crawler {
 		            records.put("id", IKFunction.md5(question+time));
 		            records.put("tid", question+time);
 					records.put("name", uname);
+					records.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 					records.put("time", time);
 					records.put("question", question);
 					records.put("answer", answer);

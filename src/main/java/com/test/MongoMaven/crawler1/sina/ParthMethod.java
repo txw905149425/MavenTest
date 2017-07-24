@@ -44,7 +44,6 @@ public class ParthMethod {
 			map.put("name", name);
 			map.put("website", "新浪");
 //			map.put("json_str", js.toString());
-//			System.out.println(i+"  "+question+" < "+answer+" > "+time+"   "+name);
 			list.add(map);
 		}
 		return list;

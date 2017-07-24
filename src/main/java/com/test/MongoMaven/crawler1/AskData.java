@@ -44,10 +44,6 @@ public class AskData {
 					size++;
 					continue;
 				}
-				timedel=timedel.split(" ")[0];
-//				System.out.println(timedel);
-				doc.append("timedel", timedel);
-//				doc.remove("json_str");
 				doc.remove("_id");
 				doc.remove("crawl_time");
 				 JSONObject json=JSONObject.fromObject(doc);

@@ -88,6 +88,7 @@ public class CrawlerAsk {
 					result.put("answer", answer);
 					result.put("time", timestr);
 					result.put("website", "理想选股");
+					result.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 					listresult.add(result);
 				}
 		 }

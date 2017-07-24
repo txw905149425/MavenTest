@@ -73,6 +73,7 @@ public class Crawler {
 			map.put("question",question);
 			map.put("answer",answer);
 			map.put("name",name);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("time",time);
 			map.put("website","股票跟投网");
 			list.add(map);

@@ -125,6 +125,7 @@ public class CrawlerZxg {
 			}else{
 				map.put("ifanswer","0");
 			}
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("answer", answer);
 			map.put("time", time);
 			map.put("website", "自选股");

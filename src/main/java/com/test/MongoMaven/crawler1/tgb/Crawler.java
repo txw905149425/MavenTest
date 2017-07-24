@@ -34,6 +34,7 @@ public class Crawler {
 				map.put("name", name);
 				map.put("ifanswer", "0");
 				map.put("answer", "");
+				map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				map.put("time", time);
 				map.put("website", "淘股吧");
 				mongo.upsertMapByTableName(map, "ww_ask_online_all");

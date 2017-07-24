@@ -27,7 +27,6 @@ public class Crawler {
 	public static void main(String[] args) {
 		String url="http://live.9666.cn/getBroadcastListByAZ/";
 		MongoDbUtil mongo=new MongoDbUtil();
-		PostData post=new PostData();
 		String html=HttpUtil.getHtml(url,new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		Object doc=IKFunction.JsoupDomFormat(html);
 		int num=IKFunction.jsoupRowsByDoc(doc, ".black.f18.js-cbga");
@@ -108,6 +107,7 @@ public class Crawler {
 			map.put("time",time);
 			map.put("question",question);
 			map.put("name",name);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("answer",answer);
 			map.put("website","牛仔网");
 			listmap.add(map);

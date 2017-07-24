@@ -21,25 +21,24 @@ public class Crawler {
 	static PostData post=new PostData();
 	public static void main(String[] args) {
 		String url="http://api.uptougu.com/live/featuredStageLiveList?deviceType=Android&appId=up&appVersion=4.4.8&platformType=app&channelNo=9510&manufacturer=Xiaomi&systemNo=4.4.4&deviceId=866401022288545&pageSize=20&pageNum=1";
+	try{
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		MongoDbUtil mongo=new MongoDbUtil();
-		if(!StringUtil.isEmpty(html)){
+		if(!StringUtil.isEmpty(html)&&html.length()>200){
 			Object json=IKFunction.jsonFmt(html);
 			Object data=IKFunction.keyVal(json, "resultData");
 			Object rows=IKFunction.keyVal(data,"rows");
 			int num =IKFunction.rowsArray(rows);
-			try{
-				for(int i=1;i<=num;i++){
-					Object one=IKFunction.array(rows, i);
+			for(int i=1;i<=num;i++){
+				Object one=IKFunction.array(rows, i);
 //					Object name=IKFunction.keyVal(one,"userName");
-					Object liveStageId=IKFunction.keyVal(one,"liveStageId");
-					String userId=IKFunction.keyVal(one,"userId").toString();
-					Object uid=IKFunction.keyVal(one,"liveId");
-					String value="deviceType=Android&appId=up&appVersion=4.4.8&platformType=app&channelNo=9510&manufacturer=Xiaomi&systemNo=4.4.4&deviceId=866401022288545&pageSize=20&flag=1&maxLiveContentId=0&pageNum=1&liveStageId="+liveStageId+"&liveId="+uid+"&userId=";
-					List<HashMap<String , Object>> list=parseDetail(value,userId);
-					if(!list.isEmpty()){
-//						System.out.println(list.toString());
-						mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+				Object liveStageId=IKFunction.keyVal(one,"liveStageId");
+				String userId=IKFunction.keyVal(one,"userId").toString();
+				Object uid=IKFunction.keyVal(one,"liveId");
+				String value="deviceType=Android&appId=up&appVersion=4.4.8&platformType=app&channelNo=9510&manufacturer=Xiaomi&systemNo=4.4.4&deviceId=866401022288545&pageSize=20&flag=1&maxLiveContentId=0&pageNum=1&liveStageId="+liveStageId+"&liveId="+uid+"&userId=";
+				List<HashMap<String , Object>> list=parseDetail(value,userId);
+				if(!list.isEmpty()){
+					mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
 //						for(HashMap<String, Object> two:list){
 //							two.remove("json_str");
 //							String ttmp=JSONObject.fromObject(two).toString();
@@ -48,11 +47,11 @@ public class Crawler {
 //									System.err.println("写入数据异常！！！！  < "+su+" >");
 //								}
 //							}
-					}
 				}
-			}catch(Exception e){
-				e.printStackTrace();
 			}
+		  }
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		
 	}
@@ -67,7 +66,6 @@ public class Crawler {
 		HashMap<String , Object> result = null;
 		try {
 			String html=post.postHtml(url, map, value, "utf8", 2);
-			System.out.println(html);
 			Object json=IKFunction.jsonFmt(html);
 			Object data=IKFunction.keyVal(json, "resultData");
 			Object rows=IKFunction.keyVal(data,"content");
@@ -100,8 +98,8 @@ public class Crawler {
 				result.put("question",question);
 				result.put("name",name);
 				result.put("answer",answer);
+				result.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				result.put("time",time);
-//				result.put("json_str",one.toString());
 				result.put("website","优品股票通");
 				list.add(result);
 			}

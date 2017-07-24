@@ -78,6 +78,7 @@ public class AskCrawler {
 			map.put("tid",question+""+time);
 			map.put("question", question);
 			map.put("name", name);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("answer", answer);
 			map.put("time", time);
 			map.put("website", "全景网");

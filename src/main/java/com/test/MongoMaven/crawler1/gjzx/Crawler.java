@@ -32,15 +32,6 @@ public class Crawler {
 				int size=d.select("ul>li").size()-1;
 				List<HashMap<String, Object>> list=parse(html);
 				if(!list.isEmpty()){
-					
-					 for(HashMap<String, Object> one:list){
-							String ttmp=JSONObject.fromObject(one).toString();
-							 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-								if(su.contains("exception")){
-									System.err.println("写入数据异常！！！！  < "+su+" >");
-								}
-					 }
-//					 System.out.println("........");
 					 mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
 				}
 				if(size>1){
@@ -50,13 +41,6 @@ public class Crawler {
 					     List<HashMap<String, Object>> list1=parse(html);
 						if(!list1.isEmpty()){
 							mongo.upsetManyMapByTableName(list1, "ww_ask_online_all");
-//							 for(HashMap<String, Object> one:list1){
-//									String ttmp=JSONObject.fromObject(one).toString();
-//									 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww1_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-//										if(su.contains("exception")){
-//											System.err.println("写入数据异常！！！！  < "+su+" >");
-//										}
-//							 }
 						}
 					}
 				}
@@ -93,7 +77,6 @@ public class Crawler {
 				}
 				name=name+""+dlist.get(j).select("a").text()+";";
 			}
-			System.out.println(answer);
 			if(!StringUtil.isEmpty(answer)){
 				map.put("ifanswer","1");
 			}else{
@@ -104,6 +87,7 @@ public class Crawler {
 			map.put("id", IKFunction.md5(question+answer));
 			map.put("tid", question+time);
 			map.put("question", question);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("time", time);
 			map.put("answer", answer);
 			map.put("name", name);

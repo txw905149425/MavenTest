@@ -25,21 +25,16 @@ public class CrawlerCoach {
 
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
-		PostData post=new PostData();
 		MongoCollection<org.bson.Document> collection=mongo.getShardConn("ww_ask_online_all");	
 		String url="http://t.10jqka.com.cn/api.php?method=newcircle.getLives&mask=&brokerName=&sort=";
-		Map<String , String> result=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
-		String html=result.get("html");
+		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>()).get("html");;
 		try{
-			if(filter(html)){
+			if(!StringUtil.isEmpty(html)&&html.length()>200){
 				List<String> list=parseList(html);
 				for(String str:list){
 					String durl="http://t.10jqka.com.cn/api.php?method=newcircle.getCircleLiveList&allowHtml=1&sort=down&master=0&limit=100&fid="+str;
-//					System.out.println(durl);
-					result.clear();
-					result=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>());
-					 html=result.get("html");
-					 if(filter(html)){
+					html=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>()).get("html");
+					if(!StringUtil.isEmpty(html)&&html.length()>200){
 						 List<HashMap<String, Object>> records=parseDetail(html);
 						 if(!records.isEmpty()){
 							mongo.upsetManyMapByCollection(records, collection, "ww_ask_online_all");
@@ -63,18 +58,6 @@ public class CrawlerCoach {
 		}
 		
 		
-	}
-	
-	
-	public static boolean filter(String html){
-		if(StringUtil.isEmpty(html)){
-			return false;
-		}
-		int num=html.length();
-		if(num>300){
-			return true;
-		}
-		return false;
 	}
 	
 	public static List<String> parseList(String html){
@@ -134,6 +117,7 @@ public class CrawlerCoach {
 					map.put("name", name);
 					map.put("answer", answer);
 					map.put("time", time);
+					map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 					map.put("website", "股市教练");
 //					map.put("json_str", tmp.toString());
 					list.add(map);

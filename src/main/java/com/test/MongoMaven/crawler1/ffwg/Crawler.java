@@ -34,6 +34,7 @@ public class Crawler {
 					map.put("ifanswer","0");
 				}
 				map.put("answer", answer);
+				map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				map.put("id", IKFunction.md5(question+""+time));
 				map.put("tid",question+""+time);
 				map.put("question", question);

@@ -16,7 +16,6 @@ public class Crawler {
     	String url="http://wengu.aniu.com/WenGu/hotAnswer.do?&aniuuid=&type=0&pno=1";
     	try{
     	String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-//    	System.out.println(html);
     	if(!StringUtil.isBlank(html)&&html.length()>200){
     		List<HashMap<String, Object>> list=parseList(html);
     		if(!list.isEmpty()){
@@ -51,6 +50,7 @@ public class Crawler {
 			map.put("time", time);
 			map.put("question", question);
 			map.put("answer", "");
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("ifanswer","0");
 			map.put("website", "问股票");
 			list.add(map);

@@ -11,9 +11,9 @@ public class Crawler {
 	//http://www.ourkp.com/tw
 	public static void main(String[] args) {
 		String url="http://www.ourkp.com/qaapi/getlist/?type=1&lastid=&ctype=1&only=0";
-//		Cookie:tid=169875567_1500534660_595; vjuids=-4c11ba0d3.15d5ed5f3d0.0.63c633ac48934; sid=9509545dc2da827409f0bfda75dc791fc74fc90c; vict=AWVRNQBqVmMDbF48AiwCNAc0CmcAb1QyUDBXOVRlA2IDZwAxUmAAOlczBWUBN1RrAzwPNFQyBzZRY1JtWm4BNAFiUWAAMFZjA2xeOAJmAm4HNgpjADBUZFA9VzxUYg%3D%3D; vjlast=1500534666.1500534666.30
 		HashMap<String, String> map1=new HashMap<String, String>();
 		map1.put("Cookie", "tid=169875567_1500534660_595; vjuids=-4c11ba0d3.15d5ed5f3d0.0.63c633ac48934; sid=9509545dc2da827409f0bfda75dc791fc74fc90c; vict=AWVRNQBqVmMDbF48AiwCNAc0CmcAb1QyUDBXOVRlA2IDZwAxUmAAOlczBWUBN1RrAzwPNFQyBzZRY1JtWm4BNAFiUWAAMFZjA2xeOAJmAm4HNgpjADBUZFA9VzxUYg%3D%3D; vjlast=1500534666.1500534666.30");
+	  try{
 		String html=HttpUtil.getHtml(url, map1, "utf8", 1, new HashMap<String, String>()).get("html");
 		if(!StringUtil.isEmpty(html)&&html.length()>100){
 			MongoDbUtil mongo=new MongoDbUtil();
@@ -42,14 +42,14 @@ public class Crawler {
 				map.put("question", question);
 				map.put("name", name);
 				map.put("answer", answer);
+				map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				map.put("time", time);
 				map.put("website", "天天看盘");
 				mongo.upsertMapByTableName(map, "ww_ask_online_all");
-				
 			}
-			
-			
 		}
-		
+	  }catch(Exception e){
+		  e.printStackTrace();
+	  }
 	}
 }

@@ -40,6 +40,7 @@ public class Crawler {
 					map.put("name", name);
 					map.put("answer", answer);
 					map.put("time", time);
+					map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 					map.put("website", "红顾问");
 					mongo.upsertMapByTableName(map, "ww_hgw");
 				}

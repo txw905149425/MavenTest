@@ -18,7 +18,6 @@ public class Crawler {
 	
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
-		PostData post=new PostData();
 		HashMap<String , String> map=new HashMap<String, String>();
 		map.put("Content-Type", "application/x-www-form-urlencoded");
 		map.put("Host", "api.gongniuchaogu.com");
@@ -30,7 +29,7 @@ public class Crawler {
 	try {
 			for(int i=117;i<200;i++){
 				String data="t=1493184600&token=eb717c98c40d236dbf054c1e8875387eace3021a&h_id="+i+"&machine=HM+NOTE+1LTE&os=4.4.4&platform=2&protocolVersion=2.0&qudao=1000001&resolution=720*1280&type=new&uuid=866401022288545&version=2.4.4";
-					String html=post.postHtml(url, map,data, "utf8", 2);
+					String html=PostData.postHtml(url, map,data, "utf8", 2);
 					if(html.length()<100){
 						continue;
 					}

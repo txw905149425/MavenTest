@@ -16,10 +16,11 @@ import com.test.MongoMaven.uitil.StringUtil;
 public class CrawlerJrj {
 	public static void main(String[] args) {
 		MongoDbUtil mongo=new MongoDbUtil();
-		 PostData post=new PostData();
+	    PostData post=new PostData();
 		String url="http://itougu.jrj.com.cn/ques/na.shtml";
 		HashMap<String , String> map =new HashMap<String, String>();
 		 Map<String, String> resultMap=null;
+	try {
 		 for(int i=1;i<5;i++){
 			 if(i!=1){
 				url="http://itougu.jrj.com.cn/ques/na_"+i+".shtml";
@@ -30,23 +31,13 @@ public class CrawlerJrj {
 				 continue;
 			 }
 			 List<HashMap<String, Object>> list= ParseMethod.parseList(html);
-			 try {
-				 if(!list.isEmpty()){
-					mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-//					for(HashMap<String, Object> one:list){
-//						String ttmp=JSONObject.fromObject(one).toString();
-//						System.out.println(ttmp);
-//						 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-//							if(su.contains("exception")){
-//								System.err.println("写入数据异常！！！！  < "+su+" >");
-//							}
-//				     }
-				 }
-			} catch (Exception e) {
+			 if(!list.isEmpty()){
+				mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+			 }
+		 }
+	  } catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-		 }
-//		 System.out.println(".....................");
+	  }
 	}
 }

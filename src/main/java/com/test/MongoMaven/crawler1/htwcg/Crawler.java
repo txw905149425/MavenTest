@@ -62,6 +62,7 @@ public class Crawler {
             records.put("tid", question+time);
 			records.put("name", name);
 			records.put("time", time);
+			records.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			records.put("question", question);
 			records.put("answer", answer);
 			records.put("website", "海淘王炒股票");

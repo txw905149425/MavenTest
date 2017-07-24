@@ -28,15 +28,6 @@ public class Crawler {
 			if(!list.isEmpty()){
 				MongoDbUtil mongo=new MongoDbUtil();
 				mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
-				PostData post=new PostData();
-				for(HashMap<String, Object> one:list){
-					String ttmp=JSONObject.fromObject(one).toString();
-//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ss_stock_json
-					 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-						if(su.contains("exception")){
-							System.err.println("写入数据异常！！！！  < "+su+" >");
-						}
-			     }
 			}
 		}
 	} catch (Exception e) {
@@ -73,7 +64,6 @@ public class Crawler {
 			}
 			String question=str[0];
 			String answer=str[2];
-//			System.out.println(str.length+"   "+content);
 			if(!StringUtil.isEmpty(answer)){
 				map.put("ifanswer","1");
 			}else{
@@ -81,6 +71,7 @@ public class Crawler {
 			}
 			map.put("id", IKFunction.md5(question+answer));
 			map.put("tid", question+time);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("question", question);
 			map.put("time", time);
 			map.put("answer",answer);
