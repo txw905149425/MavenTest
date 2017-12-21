@@ -3,12 +3,12 @@ package com.test.MongoMaven.crawler1.hnnn;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import org.jsoup.helper.StringUtil;
-
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
+import com.test.MongoMaven.uitil.StringUtil;
 
+//海纳牛牛
 public class Crawler {
 	public static void main(String[] args) {
 	 String url="http://advisor.0606.com.cn/api/weblive/room/hot?access_token=&limit=20&type=0&page=1";
@@ -16,7 +16,7 @@ public class Crawler {
 //	 http://advisor.0606.com.cn/api/weblive/messages/43a58de05457647be46cf5ee?ref_id=248a83e959ea8df5ee3d605d&limit=20
 	try{
 	 String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-	 if(!StringUtil.isBlank(html)&&html.length()>200){
+	 if(!StringUtil.isEmpty(html)&&html.length()>200){
 		 	MongoDbUtil mongo=new MongoDbUtil();
 		 	Object json=IKFunction.jsonFmt(html);
 		 	Object data=IKFunction.keyVal(json, "data");
@@ -28,14 +28,17 @@ public class Crawler {
 		 		Object tmp=IKFunction.keyVal(one, "advisor");
 		 		String name=IKFunction.keyVal(tmp, "name").toString();
 		 		String turl="http://advisor.0606.com.cn/api/weblive/rooms/"+uid+"?access_token=";
+		 		System.out.println("turl: "+turl);
+		 		System.out.println("*************");
 		 		 String thtml=HttpUtil.getHtml(turl, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-		 		 if(!StringUtil.isBlank(thtml)&&thtml.length()>100){
+		 		 if(!StringUtil.isEmpty(thtml)&&thtml.length()>100){
 		 			Object tjson=IKFunction.jsonFmt(thtml);
 				 	Object tdata=IKFunction.keyVal(tjson, "data");
 				 	Object uuid=IKFunction.keyVal(tdata, "chat_channel_id");
 				 	String durl="http://advisor.0606.com.cn/api/weblive/messages/"+uid+"?ref_id="+uuid+"&limit=20";
+				 	System.out.println("durl:  "+durl);
 				 	String dhtml=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
-				 	 if(!StringUtil.isBlank(dhtml)&&dhtml.length()>100){
+				 	 if(!StringUtil.isEmpty(dhtml)&&dhtml.length()>100){
 				 		 Object djson=IKFunction.jsonFmt(dhtml);
 				 		 Object ddata=IKFunction.keyVal(djson, "data");
 				 		 Object listData=IKFunction.keyVal(ddata, "messages");	 
@@ -68,16 +71,21 @@ public class Crawler {
 				 			 if(content.contains("<span")){
 				 					question=content.replaceAll("<span.*?>","JCJ").split("JCJ")[0];
 				 					answer=content.replaceAll("<span.*?>","JCJ").split("JCJ")[1];
-				 				 }else if(content.contains("\n")){
+				 			}else if(content.contains("\n")){
 				 					question=content.split("\n")[0];
 				 					answer=content.split("\n")[1];
-				 				 }
+				 			}
 				 			 if(question.contains(">@")){
 				 				 question=question.split(":")[1];
 				 			 }
 				 			 if("".equals(question)){
 				 				 continue;
 				 			 }
+				 			if(!StringUtil.isEmpty(answer.toString())){
+								map.put("ifanswer", "1");
+							}else{
+								map.put("ifanswer", "0");
+							}
 				 			map.put("id",IKFunction.md5(question+time));
 							map.put("tid",question+time);
 							map.put("question", question);

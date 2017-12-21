@@ -17,6 +17,7 @@ public class XiaoquRentList {
 		 Bson filter = Filters.exists("listed", false);
 		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator(); 
 		 HashMap<String,Object> rec=null;
+		 try{
 		 while(cursor.hasNext()){
 			 Document doc=cursor.next();
 			 Object uid=doc.get("uid");
@@ -45,6 +46,10 @@ public class XiaoquRentList {
 			 mongo.upsertDocByTableName(doc, "ajk_shanghai_community_information");
 //			
 		 }
+		 } catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	  cursor.close();
 	}
 }

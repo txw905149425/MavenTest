@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import com.test.MongoMaven.uitil.Constants;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -34,9 +35,9 @@ public class Crawler {
 				for(HashMap<String, Object> result:list){
 					result.remove("crawl_time");
 					JSONObject mm_data=JSONObject.fromObject(result);
-//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
+//					http://wisefinance.chinanorth.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
 //					http://localhost:8888/import?type=tt_stock_json
-				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+				   String su=post.postHtml(Constants.ES_URI+"type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.out.println(mm_data.toString());
 						System.err.println("写入数据异常！！！！  < "+su+" >");

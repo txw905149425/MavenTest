@@ -170,7 +170,7 @@ public class ComplieData {
 				 list.remove(num);
 			}
 			 list1.add(map1);
-			 records.put("id", code);
+			 records.put("id", code+""+time);
 			 records.put("stockName", name);
 			 records.put("code", code);
 			 records.put("selectime", time);
@@ -181,7 +181,16 @@ public class ComplieData {
 			 list.add(records);
 		 }
 		   cursor.close();
-		   Collections.sort(list, new Comparator<HashMap<String, Object >>() {
+		   List<HashMap<String, Object >> listOne=new ArrayList<HashMap<String,Object>>();
+			for(HashMap<String,Object > record:list){
+				String t1=record.get("supportnum").toString();
+				int time=Integer.parseInt(t1);
+				if(time<=2){
+					continue;
+				}
+				listOne.add(record);
+			}
+			 Collections.sort(listOne, new Comparator<HashMap<String, Object >>() {
 		            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
 		                String  t1 =a.get("supportnum").toString();
 		                String t2 = b.get("supportnum").toString();
@@ -191,21 +200,16 @@ public class ComplieData {
 		                return time1-time;
 		            }
 		        });
-//			for(HashMap<String,Object > record:list){
-//				record.remove("crawl_time");
-//				 JSONObject mm_data=JSONObject.fromObject(record);
-//				  String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=xg_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
-//					if(su.contains("exception")){
-//						System.out.println(mm_data.toString());
-//						System.err.println("写入数据异常！！！！  < "+su+" >");
-//					}
-//			}
-//		   Calendar   cal   =   Calendar.getInstance();
-//		   cal.add(Calendar.DATE,   -1);
-//		   String yesterday = new SimpleDateFormat( "yyyy-MM-dd ").format(cal.getTime());
-//		   MongoCursor<org.bson.Document> cursor1= mongo.getShardConn("xg_stock_last_json").find().filter(Filters.eq("selectime",yesterday)).batchSize(10000).noCursorTimeout(true).iterator();
-		   mongo.getShardConn("xg_stock_last_json").deleteMany(Filters.exists("id"));
-		   mongo.upsetManyMapByTableName(list, "xg_stock_last_json");
+//		   MongoCollection<Document> collectiondele=mongo.getShardConn("xg_stock_last_json");
+//		   MongoCursor<Document> cursordele =collectiondele.find().batchSize(10000).noCursorTimeout(true).iterator();
+//		   while(cursordele.hasNext()){
+//			   Document d  = cursordele .next(); //遍历每一条数据
+//			   d.remove("_id");
+//			   mongo.upsertDocByTableName(d, "xg_stock_last_json_all");
+//		   }
+		   mongo.getShardConn("xg_stock_last_json").deleteMany(Filters.exists("id")); 
+		   mongo.upsetManyMapByTableName(listOne, "xg_stock_last_json");
+		   mongo.upsetManyMapByTableName(listOne, "xg_stock_last_json_all");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

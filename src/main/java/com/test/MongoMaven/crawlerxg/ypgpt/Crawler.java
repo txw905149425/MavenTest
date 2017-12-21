@@ -22,6 +22,7 @@ public class Crawler {
 			List<HashMap<String, Object>> listmap=null;
 			HashMap<String,Object> stockmap=null;
 			HashMap<String,Object> records=null;
+			try {
 			for(int i=1;i<=num;i++){
 				records=new HashMap<String, Object>();
 				Object one=IKFunction.array(html, i);
@@ -36,6 +37,7 @@ public class Crawler {
 //				if("".equals(time)){
 //					System.err.println("sss  "+date);
 //				}
+//				./mongoexport -h 127.0.0.1:27071 -d crawler -u group2017 -p group2017666 -c xg_stock_last -f stockName,code,supportnum -o  /home/jcj/gupiao.csv  --type csv
 				Object title=IKFunction.keyVal(one, "gsName");
 				Object abs=IKFunction.keyVal(one, "gsStyle");
 				Object describe=IKFunction.keyVal(one, "reviewDesc");
@@ -75,7 +77,13 @@ public class Crawler {
 				mongo.upsertMapByTableName(records, "xg_ypgpt_stock");
 				mongo.upsertMapByTableName(records, "xg_stock_json_all");
 			}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
+			
 	}
 	
 }

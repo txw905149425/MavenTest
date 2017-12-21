@@ -1,7 +1,9 @@
 package com.test.MongoMaven.crawler.ajk.beijing.fangzi;
 
 import java.util.HashMap;
+
 import org.bson.Document;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -12,6 +14,7 @@ public class XiaoquRentList {
 		 MongoCollection<Document>  collection=mongo.getShardConn("ajk_beijing_community_information");
 		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator(); 
 		 HashMap<String,Object> rec=null;
+	try {
 		 while(cursor.hasNext()){
 			 Document doc=cursor.next();
 			 Object uid=doc.get("uid");
@@ -34,9 +37,13 @@ public class XiaoquRentList {
 		    	String url="http://beijing.anjuke.com/community/props/rent/"+uid+"/p"+i;
 		    	rec.put("id", url) ;
 		    	rec.put("uid", uid) ;
-		    	mongo.upsertMapByTableName(rec, "ajk_beijing_list_url");
+				mongo.upsertMapByTableName(rec, "ajk_beijing_list_url");
 		     }
 		 }
+    } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	  cursor.close();
 	}
 }

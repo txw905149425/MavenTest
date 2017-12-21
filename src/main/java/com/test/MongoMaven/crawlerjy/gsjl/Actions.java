@@ -78,9 +78,9 @@ public class Actions implements Runnable{
 							result.put("website","股市教练");
 //							result.remove("html");
 							JSONObject mm_data=JSONObject.fromObject(result);
-//							http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//							http://wisefinance.chinanorth.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
 //							http://localhost:8888/import?type=mm_stock_json
-						   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+						   String su=post.postHtml("http://wisefinance.chinanorth.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 							if(su.contains("exception")){
 								System.err.println("写入数据异常！！！！  < "+su+" >");
 							}

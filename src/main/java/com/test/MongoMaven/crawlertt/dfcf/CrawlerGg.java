@@ -13,6 +13,7 @@ import org.jsoup.nodes.Element;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import com.test.MongoMaven.uitil.Constants;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -78,7 +79,7 @@ public class CrawlerGg {
 				map.put("related", code);
 				map.put("code_list", list1);
 				JSONObject mm_data=JSONObject.fromObject(map);
-			    String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+			    String su=post.postHtml(Constants.ES_URI+"type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 				if(su.contains("exception")){
 					System.out.println(mm_data.toString());
 					System.err.println("写入数据异常！！！！  < "+su+" >");

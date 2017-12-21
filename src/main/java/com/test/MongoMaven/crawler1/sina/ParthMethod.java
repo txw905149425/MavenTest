@@ -42,6 +42,7 @@ public class ParthMethod {
 			map.put("question", question);
 			map.put("time", time);
 			map.put("name", name);
+			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("website", "新浪");
 //			map.put("json_str", js.toString());
 			list.add(map);

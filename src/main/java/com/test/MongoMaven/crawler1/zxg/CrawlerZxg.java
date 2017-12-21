@@ -27,7 +27,6 @@ public class CrawlerZxg {
 	
 	public static void main(String[] args) {
 		 MongoDbUtil mongo=new MongoDbUtil();
-		 PostData post=new PostData();
 		 MongoCollection<Document> collection=mongo.getShardConn("ww_ask_online_all");		
 		String url="http://proxy.finance.qq.com/group/newstockgroup/Live/getSquareList3?check=0&_appName=android&_dev=HM+NOTE+1LTE&_devId=28ec48936b5a9d2b42feb837340121c6d4a090b2&_mid=28ec48936b5a9d2b42feb837340121c6d4a090b2&_md5mid=7473A582ACF122D5CF8466B2C6B21A5E&_omgid=2dc4062302a6154fc7d804bd8d3d2b5dbc5a001021070b&_omgbizid=a487cdcc46702543c7f8511f43c222dfd58f014021230a&_appver=5.4.1&_ifChId=119&_screenW=720&_screenH=1280&_osVer=4.4.4&_uin=10000&_wxuin=20000&_net=WIFI&__random_suffix=37667";
 		HashMap<String, String> map= new HashMap<String, String>();
@@ -117,14 +116,12 @@ public class CrawlerZxg {
 			}
 			name=IKFunction.keyVal(tmp, "nickname").toString();
 			map.put("id",IKFunction.md5(question+""+answer));
-			map.put("tid",question+""+ctime);
 			map.put("question", question);
 			map.put("name", name);
-			if(answer!=null&&answer.length()>4){
-				map.put("ifanswer","1");
-			}else{
-				map.put("ifanswer","0");
+			if(answer==null||answer.length()<4){
+				continue;
 			}
+			map.put("ifanswer","1");
 			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("answer", answer);
 			map.put("time", time);

@@ -84,7 +84,7 @@ public class Crawler {
 			}
 			name=name.substring(0, name.length()-1);
 			String time=IKFunction.getTimeNowByStr("yyyy-MM-dd");
-			map.put("id", IKFunction.md5(question+answer));
+			map.put("id", IKFunction.md5(question+time));
 			map.put("tid", question+time);
 			map.put("question", question);
 			map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));

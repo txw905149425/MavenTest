@@ -90,7 +90,7 @@ public class HaveData {
 		String block=doc.select(".info.clear-after>h1>a").get(0).text();
 		for(int i=0;i<num;i++){
 		  String fudu =doc.select("div[data-ratio]").get(i).text();
-		  if(fudu.contains("-")){
+		  if(fudu.contains("-")||fudu.equals("0.00%")){
 			  continue;
 		  }
 		  map=new HashMap<String, Object>();
@@ -110,7 +110,7 @@ public class HaveData {
 	
 	
 	public static void getYcjData(){
-		String url="http://www.Ycjg.com/markethot/hot_news.html";
+		String url="http://www.yuncaijing.com/markethot/hot_news.html";
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		parseYcjList(html);
 		
@@ -121,7 +121,7 @@ public class HaveData {
 			Object doc=IKFunction.JsoupDomFormat(html);
 			int num=IKFunction.jsoupRowsByDoc(doc, ".content1>h3>a");
 			for(int i=0;i<num;i++){
-				String durl="http://www.Ycjg.com"+IKFunction.jsoupListAttrByDoc(doc, ".content1>h3>a","href", i);
+				String durl="http://www.yuncaijing.com"+IKFunction.jsoupListAttrByDoc(doc, ".content1>h3>a","href", i);
 				String dhtml=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 				List<HashMap<String, Object >> list=parseYcjDetail(dhtml);
 				if(!list.isEmpty()){
@@ -142,7 +142,7 @@ public class HaveData {
 		String block=doc.select(".breadcrumb>li>a").get(1).text();
 		for(int i=0;i<num;i++){
 		  String fudu =doc.select("tr[data-code]>td[class]").get(i).text();
-		  if(fudu.contains("-")){
+		  if(fudu.contains("-")||fudu.equals("0.00%")){
 			  continue;
 		  }
 		  map=new HashMap<String, Object>();
@@ -195,7 +195,7 @@ public class HaveData {
 		String block=doc.select(".board-hq>h3").get(0).text();
 		for(int i=0;i<num;i++){
 		  String fudu =doc.select(".m-table.m-pager-table>tbody>tr>td:nth-child(5)").get(i).text();
-		  if(fudu.contains("-")){
+		  if(fudu.contains("-")||fudu.equals("0.00")){
 			  continue;
 		  }
 		  map=new HashMap<String, Object>();

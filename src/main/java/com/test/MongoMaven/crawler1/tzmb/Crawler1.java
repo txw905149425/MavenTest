@@ -35,7 +35,7 @@ public class Crawler1 {
 				Object uid = doc.get("id");
 				String url = "http://www.imaibo.net/index.php?app=qae&mod=Question&act=answersOfAnchor&limit=10&min=0&showHead=1&expert_uid="+ uid;
 				String html = HttpUtil.getHtml(url,new HashMap<String, String>(), "utf8", 1,new HashMap<String, String>()).get("html");
-				if (html.length() > 300) {
+				if (!StringUtil.isEmpty(html)&&html.length() > 300) {
 					List<HashMap<String, Object>> list = parse(html);
 					if (!list.isEmpty()) {
 						mongo.upsetManyMapByTableName(list, "ww_ask_online_all");

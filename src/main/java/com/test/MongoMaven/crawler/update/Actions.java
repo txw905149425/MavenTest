@@ -25,20 +25,29 @@ public class Actions implements Runnable{
 	     String url=util.getUrl();
 	     String code=util.getCode();
 	     String html=HttpUtil.getHtml(url, map, "utf8", 1,new HashMap<String, String>()).get("html");
-//	     System.out.println("1  "+html);
-		if(!StringUtil.isEmpty(html)&&html.length()>200){
+	     System.out.println("1  "+html);
+	    try{
+		if(!StringUtil.isEmpty(html)){
 				Object js=IKFunction.jsonFmt(html);
-				Object data=IKFunction.keyVal(js, "result");
-				if(!"null".equals(data.toString())){
+				Object result=IKFunction.keyVal(js, "result");
+				String errorMsg=IKFunction.keyVal(js, "errorMsg").toString();
+				if(result.toString().length()>50){
 					HashMap<String, Object> map1=new HashMap<String, Object>();
-					Object one=IKFunction.keyVal(IKFunction.keyVal(data, "1"),"forumObj");
-					Object name=IKFunction.keyVal(one, "name");
+					Object list=IKFunction.keyVal(result, "postlist");
+					Object one=IKFunction.keyVal(list, "1");
+					Object obj=IKFunction.keyVal(one, "forumObj");
+					Object name=IKFunction.keyVal(obj, "name");
 					map1.put("id", code);
 					map1.put("name", name);
 					mongo.upsertMapByTableName(map1, "stock_code");
+				}else if("没有帖子".equals(errorMsg)){
+					System.out.println(errorMsg);
 				}
 		
 		}
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }
 		
 		
 	}

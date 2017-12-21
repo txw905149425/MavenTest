@@ -40,7 +40,7 @@ public class Crawler {
 //					mongo.upsetManyMapByTableName(list, "mm_gp360_deal_dynamic");
 					for(HashMap<String, Object> one:list){
 						String ttmp=JSONObject.fromObject(one).toString();
-//						http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//						Constants.ES_URI+type=mm_stock_json
 //						http://localhost:8888/import?type=mm_stock_json
 						 String su= post.postHtml("http://localhost:8888/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
 							if(su.contains("exception")){
@@ -106,6 +106,7 @@ public class Crawler {
 			map.put("UserName", name);
 			map.put("website", "360股票");
 			map.put("url", url);
+			map.put("timedel", IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 			map.put("tid", name+time+stockName+option);
 			map.put("id", IKFunction.md5(name+time+stockName+option));
 			listmap.add(map);

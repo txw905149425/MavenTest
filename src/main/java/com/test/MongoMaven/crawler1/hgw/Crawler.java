@@ -27,22 +27,44 @@ public class Crawler {
 					if(!IKFunction.timeOK(time)){
 						continue;
 					}
-					map=new HashMap<String, Object>();
-					Object name=IKFunction.keyVal(one,"teacher_name");
-					Object stock_name=IKFunction.keyVal(one, "stock_name");
-					Object stock_code=IKFunction.keyVal(one, "stock_code");		
-					Object que=IKFunction.keyVal(one, "question");
-					String question=stock_name+"("+stock_code+")"+que;
-					Object answer=IKFunction.keyVal(one, "answer");
-					map.put("id",IKFunction.md5(question+time));
-					map.put("tid",question+time);
-					map.put("question", question);
-					map.put("name", name);
-					map.put("answer", answer);
-					map.put("time", time);
-					map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
-					map.put("website", "红顾问");
-					mongo.upsertMapByTableName(map, "ww_hgw");
+					Object tid=IKFunction.keyVal(one,"advisor_id");
+					String durl="http://www.hongguwen.com/newhome//adviser/getQuestion?advisor_id="+tid+"&page=1";
+					String dhtml=HttpUtil.getHtml(durl,new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
+					if(!StringUtil.isEmpty(dhtml)&&dhtml.length()>100){
+						Object djson=IKFunction.jsonFmt(dhtml);
+						Object ddata=IKFunction.keyVal(djson, "data");
+						Object dlist=IKFunction.keyVal(ddata, "list");
+						int size=IKFunction.rowsArray(dlist);
+						for(int j=1;j<=size;j++){
+							Object done=IKFunction.array(dlist,j);
+							Object dtimeObj=IKFunction.keyVal(done,"answer_time");
+							String dtime=IKFunction.timeFormat(dtimeObj.toString());
+							if(!IKFunction.timeOK(dtime)){
+								continue;
+							}
+							Object que=IKFunction.keyVal(done, "content");
+							Object answer=IKFunction.keyVal(done, "answer");
+							Object stock_name=IKFunction.keyVal(done, "stock_name");
+							Object stock_code=IKFunction.keyVal(done, "stock_code");
+							String question=stock_name+"("+stock_code+")"+que;
+							Object name=IKFunction.keyVal(one,"teacher_name");
+							map=new HashMap<String, Object>();
+							if(!StringUtil.isEmpty(answer.toString())){
+								map.put("ifanswer", "1");
+							}else{
+								map.put("ifanswer", "0");
+							}
+							map.put("id",IKFunction.md5(question+answer));
+							map.put("tid",question+dtime);
+							map.put("question", question);
+							map.put("name", name);
+							map.put("answer", answer);
+							map.put("time", time);
+							map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
+							map.put("website", "红顾问");
+							mongo.upsertMapByTableName(map, "ww_ask_online_all");
+						}
+					}
 				}
 			}
 		}catch(Exception e){

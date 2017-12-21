@@ -58,6 +58,11 @@ public class Crawler {
 			String question=IKFunction.jsoupTextByRowByDoc(doc, "div.userask", i).replace("问", "");
 			String name=IKFunction.jsoupTextByRowByDoc(doc, "div.auther", i);
 			String answer=IKFunction.jsoupTextByRowByDoc(doc, "span.answername-b", i);
+			if(!StringUtil.isEmpty(answer)){
+				records.put("ifanswer", "1");
+			}else{
+				records.put("ifanswer", "0");
+			}
 			records.put("id", IKFunction.md5(question+time));
             records.put("tid", question+time);
 			records.put("name", name);

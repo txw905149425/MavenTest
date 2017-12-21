@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.sf.json.JSONObject;
 
+import com.test.MongoMaven.uitil.Constants;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -65,9 +66,9 @@ public class CrawlerAtg {
 //					mongo.upsertMapByTableName(result, "mm_deal_dynamic_all");
 					JSONObject mm_data=JSONObject.fromObject(result);
 //					System.out.println(mm_data.toString());
-//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//					http://wisefinance.chinanorth.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
 //					http://localhost:8888/import?type=mm_stock_json
-				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+				   String su=post.postHtml(Constants.ES_URI+"type=mm_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}

@@ -37,7 +37,12 @@ public class Crawler {
 				map.put("time", time);
 				map.put("content", text);
 				map.put("newsClass", newsClass);
-				mongo.upsertMapByTableName(map,"tt_zx");
+				try {
+					mongo.upsertMapByTableName(map,"tt_zx");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		}

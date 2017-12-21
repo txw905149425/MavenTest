@@ -38,6 +38,11 @@ public class Crawler {
 				String name=el.get(i).select(".user-name").get(0).text();
 				map.put("id",IKFunction.md5(question+time));
 				map.put("tid",question+time);
+				if(!StringUtil.isEmpty(answer.toString())){
+					map.put("ifanswer", "1");
+				}else{
+					map.put("ifanswer", "0");
+				}
 				map.put("question", question);
 				map.put("name", name);
 				map.put("answer", answer);
@@ -45,7 +50,6 @@ public class Crawler {
 				map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				map.put("website", "约投顾");
 				mongo.upsertMapByTableName(map, "ww_ask_online_all");
-						
 			}
 		}
 	  }catch(Exception e){

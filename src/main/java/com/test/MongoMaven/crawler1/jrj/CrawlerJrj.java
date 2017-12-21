@@ -33,6 +33,7 @@ public class CrawlerJrj {
 			 List<HashMap<String, Object>> list= ParseMethod.parseList(html);
 			 if(!list.isEmpty()){
 				mongo.upsetManyMapByTableName(list, "ww_ask_online_all");
+//				mongo.upsetManyMapByTableName(list, "ww_jrj");
 			 }
 		 }
 	  } catch (Exception e) {

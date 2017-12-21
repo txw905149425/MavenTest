@@ -38,18 +38,7 @@ public class CrawlerCoach {
 						 List<HashMap<String, Object>> records=parseDetail(html);
 						 if(!records.isEmpty()){
 							mongo.upsetManyMapByCollection(records, collection, "ww_ask_online_all");
-//							  for(HashMap<String, Object> one:records){
-//								one.remove("json_str");
-//								String ttmp=JSONObject.fromObject(one).toString();
-//								System.out.println(ttmp);
-//								 String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
-//									if(su.contains("exception")){
-//										System.err.println("写入数据异常！！！！  < "+su+" >");
-//									}
-//								}
-							}
-							
-						
+						 }
 					 }
 				}
 			}

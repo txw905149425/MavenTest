@@ -22,9 +22,9 @@ public class CrawlerEastMoney {
 		ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 			 MongoDbUtil mongo=new MongoDbUtil();
 			 MongoCollection<Document>  collection=mongo.getShardConn("stock_code");
-//			 Bson filter = Filters.exists("name", true);
-//			 Bson filter = Filters.eq("id", "600000");
-			 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator(); 
+			 Bson filter = Filters.exists("name", true);
+//			 Bson filter = Filters.eq("id", "601398");
+			 MongoCursor<Document> cursor =collection.find().filter(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
 			 Document doc=null;
 			 DataUtil util=null;
 			 while(cursor.hasNext()){
@@ -40,8 +40,6 @@ public class CrawlerEastMoney {
 			 }
 		   cursor.close();
 		  executor.shutdown();
-		  
 	}
-
 	
 }

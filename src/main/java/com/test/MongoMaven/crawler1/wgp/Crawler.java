@@ -13,7 +13,7 @@ import com.test.MongoMaven.uitil.MongoDbUtil;
 public class Crawler {
 	//
     public static void main(String[] args) {
-    	String url="http://wengu.aniu.com/WenGu/hotAnswer.do?&aniuuid=&type=0&pno=1";
+    	String url="http://wengu.aniu.com/index_hotAnswer.shtml?type=0&pno=1";
     	try{
     	String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
     	if(!StringUtil.isBlank(html)&&html.length()>200){

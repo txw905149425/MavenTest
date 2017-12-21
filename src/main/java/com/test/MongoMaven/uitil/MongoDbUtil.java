@@ -15,7 +15,9 @@ import org.jsoup.Jsoup;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
+import com.mongodb.MongoSocketReadTimeoutException;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.ListIndexesIterable;
@@ -45,13 +47,17 @@ public class MongoDbUtil {
 		String password = "group2017666"; // Mongodb密码
 		String host = "127.0.0.1"; // Mongodb服务器地址
 		Integer port = 27017; // Mongodb端口
-//		
+		host="jiangcaijin.chinanorth.cloudapp.chinacloudapi.cn";
 		port=27071;
 		String dbname = "crawler"; // 使用的数据库名
 		ServerAddress svrAddr = new ServerAddress(host, port);
 		MongoCredential credential = MongoCredential.createCredential(username,userdb, password.toCharArray());
 		@SuppressWarnings("resource")
-		MongoClient mongoClient = new MongoClient(svrAddr,Arrays.asList(credential));
+		MongoClient mongoClient = new MongoClient(svrAddr,Arrays.asList(credential),MongoClientOptions.builder().socketTimeout(15000)
+                .minHeartbeatFrequency(25)
+                .heartbeatSocketTimeout(10000)
+                .socketKeepAlive(false)
+                .build());
 		mongoDataBase = mongoClient.getDatabase(dbname);
 		return mongoDataBase;
 	}
@@ -92,7 +98,8 @@ public class MongoDbUtil {
 							collectionsUniqueIndex.add(tableName);
 						}else{
 							collectionsUniqueIndex.add(tableName);
-						}}catch(Exception es){
+						}
+					}catch(Exception es){
 							
 						}
 					}
@@ -148,7 +155,7 @@ public class MongoDbUtil {
  }
 	
 	
-	public  Boolean upsertMapByCollection(HashMap<String, Object> records,MongoCollection<Document> collection,String tableName) {
+	public  Boolean upsertMapByCollection(HashMap<String, Object> records,MongoCollection<Document> collection,String tableName) throws Exception{
 		Boolean isInsertSuccess = false;
 		DBCollection d = null;
 		String id4log = "";
@@ -170,12 +177,7 @@ public class MongoDbUtil {
 			updateDocument.append("$set", insertDocument);
 			UpdateOptions options = new UpdateOptions().upsert(true);
 			UpdateResult result = null;
-			try{
-				result = collection.updateOne(searchQuery, updateDocument, options);
-			}catch(Exception es){
-				es.printStackTrace();
-			}
-			
+			result = collection.updateOne(searchQuery, updateDocument, options);
 			if (result != null  ) {
 				isInsertSuccess = true;
 //				if(result.getMatchedCount()>0){
@@ -190,7 +192,7 @@ public class MongoDbUtil {
 		return isInsertSuccess;
 	}
 	
-	public  Boolean upsertMapByTableName(HashMap<String, Object> records,String tableName) {
+	public  Boolean upsertMapByTableName(HashMap<String, Object> records,String tableName) throws Exception{
 		Boolean isInsertSuccess = false;
 		MongoCollection<Document> collection = getShardConn(tableName);
 		String id4log = "";

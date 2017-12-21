@@ -11,6 +11,7 @@ public class Crawler {
 
 	public static void main(String[] args) { 
 		MongoDbUtil mongo=new MongoDbUtil();
+		try{
 		for(int i=1;i<=5;i++){
 			String url="http://www.imaibo.net/master?pagelets[]=hotMan&type=last&force_mode=1&t=443967&page="+i;
 			String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
@@ -25,7 +26,10 @@ public class Crawler {
 				mongo.upsertMapByTableName(map, "ww_tzmb_user");
 			}
 		}
-		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

@@ -65,7 +65,7 @@ public class SpeakStock {
 					
 					 Collections.sort(listMap, new Comparator<HashMap<String, Object >>() {
 				            public int compare(HashMap<String, Object > a, HashMap<String, Object > b) {
-				                String  one =a.get("lastCommentTime").toString();
+				            	String  one =a.get("lastCommentTime").toString();
 				                String two = b.get("lastCommentTime").toString();
 				                int time=str2TimeMuli(one);
 				                int time1=str2TimeMuli(two);
@@ -81,16 +81,16 @@ public class SpeakStock {
 					 JSONObject json=JSONObject.fromObject(records);
 					 //必须要格式化成json才能写入到数据库
 //					 System.out.println(json.toString());
-//					 http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ss_stock_json
+//					 Constants.ES_URI+type=ss_stock_json
 //					 http://localhost:8888/import?type=ss_stock_json
-				String su=post.postHtml("http://localhost:8888/import?type=ss_stock_json",new HashMap<String, String>(), json.toString(), "utf-8", 1);
+					String su=post.postHtml("http://localhost:8888/import?type=ss_stock_json",new HashMap<String, String>(), json.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.err.println("写入数据异常！！！！  < "+su+" >");
 					}
 					mongo.upsertMapByTableName(records, "test1");
-//					long t3=System.currentTimeMillis();
-//					 System.out.println("插入到gavinduan耗时：    "+(t3-t2));
 				 }
+				 
+				 cursor.close();
 		 }catch(Exception e){
 //			 System.out.println("哦哦哦，有网站没有评论哟！！");
 			 e.printStackTrace();

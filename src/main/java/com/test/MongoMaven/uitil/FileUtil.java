@@ -83,17 +83,22 @@ public class FileUtil {
 	   }
 		
 		
-		public static List<Document>  readFileReturnDoc(String url){
-			List<Document> list=new ArrayList<Document>();
+		public static Document  readFileReturnDoc(String url){
+//			List<Document> list=new ArrayList<Document>();
+			 Document	doc=new Document();
 			 try {
 				   InputStream input = new FileInputStream(url);
 				   BufferedReader reader = new BufferedReader(new InputStreamReader(input, "utf8"));
 				   String line = null;
 				   while ((line = reader.readLine()) != null) {
 					   if(line!=null&&line!=""){
-						 Document	doc=new Document();
-						 doc.append("id", line);
-					     list.add(doc);
+						 if(line.contains(":")){
+							 String key=line.split(":")[0];
+							 String value=line.split(":")[1];
+							 doc.append(key, value);
+						 }else {
+						     doc.append("id", line);
+						 }
 					   }
 				   }
 				   reader.close();
@@ -104,7 +109,7 @@ public class FileUtil {
 				   e.printStackTrace();
 				  }
 			 
-			 return list;
+			 return doc;
 	   }
 		
 		public static String read(String filename) {

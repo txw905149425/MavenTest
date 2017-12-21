@@ -16,6 +16,7 @@ import org.bson.conversions.Bson;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -25,36 +26,32 @@ public class AskData {
 	public static void main(String[] args){
 		 PostData post=new PostData();
 		 MongoDbUtil mongo=new MongoDbUtil();
-		 MongoCollection<Document>  collection=mongo.getShardConn("ww_ask_online_all");
-		 Document sort=new Document("_id",-1);
+		 MongoCollection<Document>  collection=mongo.getShardConn("ww_update");
+		 String today=IKFunction.getTimeNowByStr("yyyy-MM-dd");
+		 Bson filter=Filters.exists("es_flag",false);
+		 Document find=new Document("timedel",today);
 	  try {
-			 MongoCursor<Document> cursor =collection.find().sort(sort).batchSize(10000).noCursorTimeout(true).iterator();
+			 MongoCursor<Document> cursor =collection.find(find).filter(filter).batchSize(10000).noCursorTimeout(true).iterator();
 			 Document doc=null;
-			 int size=1;
 			 while(cursor.hasNext()){
-				 if(size==700){
-					break;
-				 }
 				 doc=cursor.next();
+				 Object id=doc.get("id");
 				if(!doc.containsKey("answer")){
-					continue;
-				}
-				String timedel=doc.get("time").toString();
-				if(!IKFunction.timeOK(timedel)){
-					size++;
 					continue;
 				}
 				doc.remove("_id");
 				doc.remove("crawl_time");
 				 JSONObject json=JSONObject.fromObject(doc);
-//				 http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=ww_stock_json
+//				 Constants.ES_URI+type=ww_stock_json
 //				 http://localhost:8888/import?type=ww_stock_json
 				String su= post.postHtml("http://localhost:8888/import?type=ww_stock_json",new HashMap<String, String>(),json.toString(), "utf-8", 1);
 				if(su.contains("exception")){
 					System.err.println("写入数据异常！！！！  < "+su+" >");
 				}
 				mongo.upsertDocByTableName(doc, "ww_test");
-				size++;
+				doc.append("es_flag", "1");
+				doc.append("id", id);
+				mongo.upsertDocByTableName(doc, "ww_update");
 			 }
 	  }catch (Exception e) {
 				// TODO Auto-generated catch block

@@ -177,7 +177,12 @@ public class ParseMethod {
 		MongoDbUtil mongo=new MongoDbUtil();
 		HashMap<String , Object> records=parseDetail(html);
 		records.put("id", "http://zh.zu.anjuke.com/fangyuan/1058243146");
+		try{
 		mongo.upsertMapByTableName(records, "test");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

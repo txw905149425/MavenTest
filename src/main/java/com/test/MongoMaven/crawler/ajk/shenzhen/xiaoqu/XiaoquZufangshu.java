@@ -23,6 +23,7 @@ public class XiaoquZufangshu {
 			 Bson filter = Filters.exists("crawl_rent", false);
 			 MongoCursor<Document> cursor =collection.find(filter).batchSize(10000).noCursorTimeout(true).iterator();
 			 Map<String, String> resultMap=null;
+			try{
 			 while(cursor.hasNext()){
 				 Document doc=cursor.next();
 				 Object  uid=doc.get("uid");
@@ -44,6 +45,11 @@ public class XiaoquZufangshu {
 					 System.err.println(html);
 				 }
 			 }
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			cursor.close();
 		}
 
 		private static HashMap<String, Object> parse(String html) {

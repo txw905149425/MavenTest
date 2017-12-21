@@ -5,34 +5,7 @@ import java.net.InetAddress;
 
 public class Constants {
 
-	public static String JAVA_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	public static String DATE_FORMAT_YMD = "yyyyMMdd";
-	public static String NOYEAR_DATE_FORMAT = "MM-dd HH:mm:ss";
-	// 默认的全局Redis服务器连接IP和对应的端口
-	private static String redis_global_ip = "468456456";
-	private static int redis_global_port = 4554;
-	private static String redis_global_passwd = "545645456456";
-
-	public static void SET_REDIS_GLOBAL_PASSWD(String passwd) {
-		redis_global_passwd = passwd;
-	}
-
-	public static String REDIS_GLOBAL_IP = "globalRedisIp";
-
-	public static String REDIS_GLOBAL_IP() {
-		return redis_global_ip;
-	}
-
-	public static String REDIS_GLOBAL_PORT = "globalRedisPort";
-
-	public static int REDIS_GLOBAL_PORT() {
-		return redis_global_port;
-	}
-
-	public static String REDIS_GLOBAL_PASSWORD = "globalRedisPasswd";
-
-	public static String REDIS_GLOBAL_PASSWORD() {
-		return redis_global_passwd;
-	}
+	public static String ES_URI = "http://jiangcaijin.chinanorth.cloudapp.chinacloudapi.cn/wf/import?";
+	
 
 }

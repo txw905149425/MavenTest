@@ -316,104 +316,6 @@ public class IKFunction {
 
 	// 7.格式化时间(yyyy-MM-dd HH:mm:ss)
 
-public  static String dateFmt(Object obj, String format) {
-		if (obj == null || obj.toString().isEmpty()) {
-			return "";
-		}
-		SimpleDateFormat sdf = null;
-		String today = "" ;
-		if(obj.equals("format")){
-			sdf = new SimpleDateFormat(format);
-			Calendar cal = Calendar.getInstance();
-			today = sdf.format(cal.getTime());
-			return today ;
-		}
-		String value = obj.toString();
-		value = value.toString().trim();
-		format = format.trim();
-		String[] formats = format.split("\\|");
-
-		sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar cal = Calendar.getInstance();
-		today = sdf.format(cal.getTime());
-		cal.add(Calendar.DATE, -1);
-		String yesterday = sdf.format(cal.getTime());
-		cal.add(Calendar.DATE, -1);
-		String byesterday = sdf.format(cal.getTime());
-		String year = cal.get(Calendar.YEAR) + "";
-
-		long sysTime = System.currentTimeMillis();
-		if (value.indexOf("秒") != -1) {
-			long time = sysTime - Integer.parseInt(regexp(value, "(\\d*)")) * 1000;
-			SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			java.util.Date dt = new Date(time);
-			return sdft.format(dt);
-
-		}
-		if (value.indexOf("分") != -1) {
-			long time = sysTime - Integer.parseInt(regexp(value, "(\\d*)")) * 60000;
-			SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			java.util.Date dt = new Date(time);
-			return sdft.format(dt);
-		}
-		if (value.indexOf("半小时") != -1) {
-			long time = sysTime - 60000 * 30;
-			SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			java.util.Date dt = new Date(time);
-			return sdft.format(dt);
-		}
-		if (value.indexOf("小时") != -1) {
-			long time = sysTime - Integer.parseInt(regexp(value, "(\\d*)")) * 60000 * 60;
-			SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			java.util.Date dt = new Date(time);
-			return sdft.format(dt);
-		}
-		if (value.indexOf("天前") != -1) {
-			long time = sysTime - Integer.parseInt(regexp(value, "(\\d*)")) * 60000 * 60 * 24;
-			SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			java.util.Date dt = new Date(time);
-			return sdft.format(dt);
-		}
-
-		if (value.indexOf("今天") != -1) {
-			return today + " " + regexp(value, "(\\d*:\\d*)") + ":00";
-		}
-		if (value.indexOf("昨天") != -1) {
-			return yesterday + " " + regexp(value, "(\\d*:\\d*)") + ":00";
-		}
-		if (value.indexOf("前天") != -1) {
-			return byesterday + " " + regexp(value, "(\\d*:\\d*)") + ":00";
-		}
-
-		for (String str : formats) {
-			try {
-				if (str.equals("EEE MMM dd HH:mm:ss Z yyyy")) {
-					SimpleDateFormat in = new SimpleDateFormat(str, Locale.US);
-					SimpleDateFormat out = new SimpleDateFormat(Constants.JAVA_DATE_FORMAT);
-					return out.format(in.parse(value));
-				}
-				SimpleDateFormat sdft = new SimpleDateFormat(str);
-				Date d = sdft.parse(value);
-				if (str.equals("MM月dd日HH:mm")) {
-					sdft.applyPattern(Constants.NOYEAR_DATE_FORMAT);
-					return year + "-" + sdft.format(d);
-				} else if (str.equals("MM-dd")) {
-					sdft.applyPattern(str);
-					return year + "-" + sdft.format(d) + " 00:00:00";
-				} else if (str.equals("MM-dd HH:mm")) {
-					sdft.applyPattern(str);
-					return year + "-" + sdft.format(d) + ":00";
-				} else {
-					sdft.applyPattern(Constants.JAVA_DATE_FORMAT);
-					return sdft.format(d);
-				}
-			} catch (ParseException e) {
-				continue;
-			}
-		}
-
-		return "";
-	}
 
 	
 
@@ -1204,10 +1106,6 @@ public  static String dateFmt(Object obj, String format) {
 		}
 	}
 
-	// 系统时间字符串 yyyy-MM-dd HH:mm:ss
-	public static String sysDateStr() {
-		return new SimpleDateFormat(Constants.JAVA_DATE_FORMAT).format(new Date());
-	}
 
 	public static Long sysDate() {
 		return System.currentTimeMillis();
@@ -1278,10 +1176,6 @@ public  static String dateFmt(Object obj, String format) {
 		return result;
 	}
 
-	// 系统时间年月日 yyyyMMdd
-	public static String sysDateYmd() {
-		return new SimpleDateFormat(Constants.DATE_FORMAT_YMD).format(new Date());
-	}
 
 	// 系统时间long
 	public String sysDateLong() {
@@ -2047,6 +1941,15 @@ public  static String dateFmt(Object obj, String format) {
 			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
 			     String dateNowStr = sdf.format(date); 
 				str=dateNowStr;
+			}else if(str.contains("小时前")){
+				String tmp=str.replace("小时前", "");
+				int num=Integer.parseInt(tmp);
+				long numMill=num*60*1000*60;
+				Long s =System.currentTimeMillis()-numMill;
+				Date date=new Date(s);
+			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+			     String dateNowStr = sdf.format(date); 
+				str=dateNowStr;
 			}else if(str.contains("刚刚")){
 				Date date=new Date();
 			     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
@@ -2171,6 +2074,9 @@ public  static String dateFmt(Object obj, String format) {
 	
 	public static boolean htmlFilter(String html,String css){
 		boolean flag=false;
+		if(StringUtil.isEmpty(html)){
+			return false;
+		}
 		org.jsoup.nodes.Document doc=Jsoup.parse(html);
 		Elements es = doc.select(css);
 		if (es.size() > 0) {		
@@ -2226,7 +2132,27 @@ public  static String dateFmt(Object obj, String format) {
     public static String enBase64(byte[] key) throws Exception {   
         return (new BASE64Encoder()).encodeBuffer(key);   
     }
-	
+
+    /*
+     * 判断俩个时间，相隔多少个小时
+     * @pram startTime、endTime :判断的时间
+     * @pram hour 相隔多少小时
+     * */
+    public static boolean judgeTime(String startTime, String endTime,int hour) throws Exception { 
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+        java.util.Date start = sdf.parse(startTime); 
+        java.util.Date end = sdf.parse(endTime); 
+        long cha = end.getTime() - start.getTime(); 
+        double result = cha * 1.0 / (1000 * 60 * 60); 
+        if(result<=hour){ 
+             //System.out.println("可用");   
+             return true; 
+        }else{ 
+             //System.out.println("已过期");  
+             return false; 
+        } 
+    } 
+    
 	public static String getTimeNowByStr(String format){
 		if(StringUtil.isEmpty(format)){
 			return "";
@@ -2322,66 +2248,69 @@ public  static String dateFmt(Object obj, String format) {
 			 return map;
 	}
 	
-	public static void main(String[] args) throws Exception {
-		System.out.println(timeFormat("1496998173"));
-//		System.out.println(java.net.URLDecoder.decode("http://weixin.sogou.com/weixin?type=2&query=%E4%B8%AD%E5%9B%BD%E9%93%B6%E8%A1%8C", "utf-8"));
-		//testRegex();
-		//	String rs =	judgeResultValid("不好意思！系统暂无“坐位背部探查”的相关知识。","不好意思;系统暂无;相关知识");
-//	System.out.println(rs);
-//		extractJsonHexunList("");
-		
-//		testRegex();
-//		joinJsonArrayByJsoupHexun("");
-//		testXpath();
-//		parseHexunjson();
-//		testJsoup();
-//		long cur_time = 1470968260757L;
-//		Date date = new Date(cur_time);
-//		String sss="/pages/show/indexNotice.jsp?GGID=aMdnTtK9Sw6GvFx2&HTMLPATH=htmlPage//201612//aMdnTtK9Sw6GvFx2.html";
-//		System.out.println(regexp(sss,"GGID=(.*)&"));
-//		System.out.println(regexp(sss,"HTMLPATH=(.*)"));
+	/**
+     * 获取当前日期是星期几<br>
+     * 
+     * @param dt
+     * @return 当前日期是星期几
+     */
+    public static String getWeekOfDate(Date dt) {
+        String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
 	
-		System.out.println(timeFormat("05-15 15:23"));
-//		Document d=Jsoup.parse(html);
-//		int num=jsoupRows(d, "li[class]>a");
-//		tmpNeed();
-//		System.out.println(num);
-//		for(int i=0;i<num;i++){
-//			String url=jsoupTextByRowByDoc(d, "#DataList1>tbody>tr>td>a",0);
-//			System.out.println(url);
-//		}
-//		System.out.println("*********"+d.select("td.LineRow:eq(1)").html());
-//		clickByRow()
-//		String url=jsoupTextByRowByDoc(d, ".pages>li>a:contains(末页)",0);
-//		String value=jsoupTextByRowByDoc(d, "li>.listDate+span>a",1);
-//		System.out.println(regexp(url,"(\\d+)"));
-//		System.out.println(divided(regexp(url,"(\\d+)"), "40"));
-//		String value=jsoupListAttrByDoc(d, ".pages>li>a:contains(末页)","href",0);
-//		System.out.println(regexp(value,"PageNo=(\\d+)"));
-//		System.out.println(value);
-//		System.out.println(url);
-//		Object tt=regexp(value,"infodetail(.*)");
-//		System.out.println("*****"+tt);
-//		System.out.println(arrayFmt(url));
-//		/contract/contractsMainByBuyer.do?method=download&acceId=191755
-////		<a href="./P020170103630231652715.pdf" target="_blank">评标报告.pdf</a>
-//		String aa=tmp_jsoupMap2Js(d, ".xx>p>a", "a", "a", "href","REGEX", "(.*)");
-//		jsoupKeepLabelWithCleanByDoc(html, selector, cleanSelector)
-//		String str="<script>"+
-//		 "ids = [['200160080', '12包对应招标文件一册：12.21发布稿：青大附院设备YHA2016-1048（原2016-647废标重招）青大附院招标文件.pdf', '/opt/apache-tomcat-6.0.41/webapps/sdgp2014/upload/attach/20161221165759_8433.pdf'],"+
-//		           "['200160081', '12包对应招标文件二册：12.21发布稿：青大附院设备YHA2016-1048（原2016-647废标重招）青大附院招标文件.pdf', '/opt/apache-tomcat-6.0.41/webapps/sdgp2014/upload/attach/20161221165806_8433.pdf']];"+
-//		  "</script>";
-//		tmp_jsoupMap2Js(html, selectorBlock, selectorClean, selectorHref, attr, add_url, regex)
-//		System.out.println(arrayFmt(str));
-//		String aa=tmp_jsoupMap2Js(d, "script", "script", "script", "var ids =.*?, '()", "", "<a href=\".(.*)\" tar");
-//		$TMPJSOUPMAP2JS(tidyDom,"script","script","script","<a.*>(.*?)</a>",$REGEXP($KEYVAL(task,"url"),"(.*)/.*?.htm"),"<a href=\".(.*)\" tar")
-//		System.out.println(aa);
-//		String test_str="showList_showDetail('402886873b304024013b4dfbcae50697','政采代（乙）字第51090号','01','2012-09-10','2015-09-09','01','7e952f52_9afb_4bce_a44f_878f66ad0c8b');";
-//		String tmp=regexp(test_str, "showList_showDetail\\((.*?)\\);");
-//		tmp=replace_str(tmp, "'", "");
-//		System.out.println(tmp);
-//		Object obj=split(tmp, ",");
-//		System.out.println(array(obj, 1));
-		System.out.println(timeFormat("07:53:45"));
+
+	/**
+     * 获取几天前（后）的日期。
+     * @param d 日期是正整数:获取几天后的日期，负数几天前的数据 
+     * @param format 返回日期格式
+     */
+    public static String getDateByIndexDay(int d,String format) {
+    	Date date=new Date();//取时间  
+    	Calendar calendar = new GregorianCalendar();  
+    	calendar.setTime(date);  
+    	calendar.add(calendar.DATE,d);//把日期往后增加一天.整数往后推,负数往前移动  
+    	date=calendar.getTime(); //这个时间就是日期往后推一天的结果   
+    	SimpleDateFormat formatter = new SimpleDateFormat(format);  
+    	String day = formatter.format(date);
+        return day;
+    }
+    
+    /**
+     * 比较俩个时间差了多少天
+     * @param d1 时间格式字符串  
+     * @param d2 时间格式字符串
+     * @return 俩个时间所差天数
+     */
+    public static int comlitTimeReturnDay(String d1,String d2){
+    	 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd"); 
+         int day=1000000;
+    	 try{
+	    	 java.util.Date start = sdf.parse(d1); 
+	         java.util.Date end = sdf.parse(d2); 
+	         Calendar cal = Calendar.getInstance();
+	         cal.setTime(start);    
+	         long time1 = cal.getTimeInMillis();                 
+	         cal.setTime(end);    
+	         long time2 = cal.getTimeInMillis();
+	         long dtime=time2-time1;
+	         long dd=dtime/(1000*3600*24);
+	         day=(int)dd;
+         }catch(Exception e){
+        	 e.printStackTrace();
+         }
+         return day;
+    }
+    
+	public static void main(String[] args) throws Exception {
+		
+		int num=comlitTimeReturnDay("2017-11-27","2017-11-27");
+		System.out.println(num);
+		
 	}
 }

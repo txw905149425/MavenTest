@@ -32,7 +32,6 @@ public class UpdateStockData {
 				 tmp="sz"+code;
 			 }
 			 String url="http://hq.sinajs.cn/list="+tmp;
-			 System.out.println(url);
 			 String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 			 if(!StringUtil.isEmpty(html)&&html.length()>50){
 //				 System.out.println(html);
@@ -40,7 +39,6 @@ public class UpdateStockData {
 				 Object name=map.get("name");
 				 doc.put("name", name);
 				 mongo.upsertDocByTableName(doc, "stock_code");
-				 System.out.println(code+"  "+name);
 			 }
 		 }
 		 System.out.println("..................");

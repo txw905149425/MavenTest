@@ -70,7 +70,6 @@ public class HttpUtil {
 			   String pwd="";
 		try {
 			   if(!proxyMap.isEmpty()){
-				   //密码设置代理
 				   if(proxyMap.containsKey("ip")){
 					   ip=proxyMap.get("ip");
 				   }
@@ -83,22 +82,21 @@ public class HttpUtil {
 				   if(proxyMap.containsKey("pwd")){
 					   pwd=proxyMap.get("pwd");
 				   }
-				    if(proxyMap.containsKey("need")){
-				    	credsProvider.setCredentials(new AuthScope(ip,port), new UsernamePasswordCredentials(user,pwd));
-						   httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
-						   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost(ip,port);
-						    configBuilder.setProxy(proxyer);  //设置代理
-					   }else{
-						   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost(ip,port);
-							configBuilder.setProxy(proxyer);					   }
+			     if(proxyMap.containsKey("need")){
+			    	 //密码设置代理
+			    	credsProvider.setCredentials(new AuthScope(ip,port), new UsernamePasswordCredentials(user,pwd));
+					httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
+					org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost(ip,port);
+					configBuilder.setProxy(proxyer);
+				 }else{
+					   org.apache.http.HttpHost proxyer = new org.apache.http.HttpHost(ip,port);
+						configBuilder.setProxy(proxyer);					   }
 			   }
 			   if(time<10000){
 				   requestConfig=configBuilder.setConnectTimeout(18000).setConnectionRequestTimeout(15000).setSocketTimeout(15000).build();
 			   }else{
 				   requestConfig=configBuilder.setConnectTimeout(time).setConnectionRequestTimeout(time).setSocketTimeout(time).build();
 			   }
-			   
-			   
 			    httpGet.setConfig(requestConfig);  
 		 		 httpGet.setHeader("Accept-Encoding","gzip, deflate, sdch");  
 	 			 httpGet.setHeader("Accept-Language","zh-CN,zh;q=0.8");  
@@ -150,7 +148,7 @@ public class HttpUtil {
 					    for (int i = 0; i < header.length; i++){ 
 //					    	System.out.println(header[i].getName() + ":" + header[i].getValue()); 
 						    if (header[i].getName().equalsIgnoreCase("Set-Cookie")){ 
-						     	resultMap.put("setCookie",header[i].getValue());
+						     	resultMap.put("cookie",header[i].getValue());
 						    }else if(header[i].getName().equalsIgnoreCase("cookie")){
 						    	resultMap.put("cookie",header[i].getValue());
 						    }
@@ -183,7 +181,7 @@ public class HttpUtil {
 						
 					}
 			} else {
-					System.out.println("MyClient抓取页面失败： " + "执行的URL： " + url + " StatusCode: " + statusCode);
+					System.out.println("MyClient抓取页面失败:  " + url + " StatusCode: " + statusCode);
 			}
 		} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block

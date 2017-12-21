@@ -73,7 +73,7 @@ public class ParseMethod {
 					}
 				}
 				 long t2=System.currentTimeMillis();
-				 System.out.println("two:  "+(t2-t1));
+//				 System.out.println("two:  "+(t2-t1));
 		}
 //		oneMapRecord.put("list", listDbMap);
 		return listDbMap;

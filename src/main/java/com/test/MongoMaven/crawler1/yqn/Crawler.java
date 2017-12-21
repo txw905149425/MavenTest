@@ -37,6 +37,11 @@ public class Crawler {
 					String question="["+qu+"]"+que;
 					String name=IKFunction.jsoupTextByRowByDoc(doc1, ".qn-avatar-info>ul", 0);
 					String answer=IKFunction.jsoupTextByRowByDoc(doc1, ".qn-QA-answerCt", 0).replace("答", "");
+					if(!StringUtil.isEmpty(answer.toString())){
+						map.put("ifanswer", "1");
+					}else{
+						map.put("ifanswer", "0");
+					}
 					map.put("id",IKFunction.md5(question+answer));
 					map.put("tid",question+time);
 					map.put("question", question);

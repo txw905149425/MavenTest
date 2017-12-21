@@ -10,15 +10,17 @@ import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
 import com.test.MongoMaven.uitil.StringUtil;
 
+
+//爱股票
 public class Crawler {
 //  https://www.5igupiao.com/AllLiveMsg/master_rank
 	public static void main(String[] args) {
-		String url="https://www.5igupiao.com/index.php?s=/Api/Live/search&order_type=follow_nums&u_id=undefined&number=20";
+		String url="https://app.aigupiao.com/api2/live.php?&number=20&act=search&u_id=0&field=title&page=1&keyword=&order_type=follow_nums&appversion=4.1.1";
 	try {
 		String html=HttpUtil.getHtml(url, new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 		if(!StringUtil.isEmpty(html)&&html.length()>100){
 			Object json=IKFunction.jsonFmt(html);
-			Object data=IKFunction.keyVal(json, "datalist");
+			Object data=IKFunction.keyVal(json, "live_list");
 			int num=IKFunction.rowsArray(data);
 			List<HashMap<String, Object>> list=new ArrayList<HashMap<String,Object>>();
 			HashMap<String, Object > map=null;
@@ -45,6 +47,11 @@ public class Crawler {
 						map=new HashMap<String, Object>();
 					    Object question=IKFunction.keyVal(done,"question");
 					    Object answer=IKFunction.keyVal(done, "answer");
+					    if(!StringUtil.isEmpty(answer.toString())){
+							map.put("ifanswer", "1");
+						}else{
+							map.put("ifanswer", "0");
+						}
 					    map.put("id",IKFunction.md5(question+time));
 						map.put("tid",question+time);
 						map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));

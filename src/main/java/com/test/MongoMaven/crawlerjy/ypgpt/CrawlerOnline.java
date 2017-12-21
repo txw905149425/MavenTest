@@ -25,9 +25,9 @@ public class CrawlerOnline {
 			    PostData post=new PostData();
 		    	for(HashMap<String, Object> one:listMap){
 					String ttmp=JSONObject.fromObject(one).toString();
-//					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
+//					http://wisefinance.chinanorth.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json
 //					http://localhost:8888/import?type=mm_stock_json
-					 String su= post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
+					 String su= post.postHtml("http://wisefinance.chinanorth.cloudapp.chinacloudapi.cn/wf/import?type=mm_stock_json",new HashMap<String, String>(),ttmp, "utf-8", 1);
 						if(su.contains("exception")){
 							System.err.println("写入数据异常！！！！  < "+su+" >");
 						}

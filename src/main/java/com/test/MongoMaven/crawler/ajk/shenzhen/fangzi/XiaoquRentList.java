@@ -1,7 +1,9 @@
 package com.test.MongoMaven.crawler.ajk.shenzhen.fangzi;
 
 import java.util.HashMap;
+
 import org.bson.Document;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -13,6 +15,7 @@ public class XiaoquRentList {
 		 MongoCursor<Document> cursor =collection.find().batchSize(10000).noCursorTimeout(true).iterator(); 
 		 HashMap<String,Object> rec=null;
 		 long many=0;
+		 try{
 		 while(cursor.hasNext()){
 			 Document doc=cursor.next();
 			 Object uid=doc.get("uid");
@@ -38,6 +41,10 @@ public class XiaoquRentList {
 		    	mongo.upsertMapByTableName(rec, "ajk_shenzhen_list_url");
 		     }
 		 }
+		 } catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	  cursor.close();
 	  System.err.println(many);
 	}

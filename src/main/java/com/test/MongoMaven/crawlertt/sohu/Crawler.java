@@ -19,6 +19,7 @@ public class Crawler {
 			Object doc=IKFunction.JsoupDomFormat(html);
 			Document d=Jsoup.parse(html);
 			int num=IKFunction.jsoupRowsByDoc(doc, "li[t]");
+			try{
 			for(int i=0;i<num;i++){
 				HashMap<String, Object> map=new HashMap<String, Object>();
 				String time=IKFunction.getTimeNowByStr("yyyy-MM-dd")+" "+IKFunction.jsoupTextByRowByDoc(doc, "li[t]>div.left_date",i);
@@ -52,7 +53,11 @@ public class Crawler {
 				map.put("newsClass", newsClass);
 				mongo.upsertMapByTableName(map,"tt_sohu");
 			}
-			
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 }

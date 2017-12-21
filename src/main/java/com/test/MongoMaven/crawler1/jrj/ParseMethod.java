@@ -32,12 +32,16 @@ public class ParseMethod {
 			String durl=e.select(".goflow").get(0).attr("href");
 			String dhtml=HttpUtil.getHtml(durl, new HashMap<String, String>(), "utf8",1, new HashMap<String, String>()).get("html");
 			if(!StringUtil.isEmpty(dhtml)&&IKFunction.htmlFilter(dhtml, "span.content")){
-				map=parseDetail(dhtml);
 				String name=e.select(".name.fl").get(0).text();
+				map=parseDetail(dhtml,name);
+				if(!map.containsKey("ifanswer")){
+					continue;
+				}
 				map.put("id", IKFunction.md5(question+timeObject));
 				map.put("tid", question+timeObject);
 				map.put("question", question);
 				map.put("time", time);
+				map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 				map.put("name", name);
 				map.put("website", "爱投顾");
 				list.add(map);
@@ -46,16 +50,24 @@ public class ParseMethod {
 		return list;
 	}
 	
-	public static HashMap<String, Object> parseDetail(String html){
+	public static HashMap<String, Object> parseDetail(String html,String name){
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		Object doc=IKFunction.JsoupDomFormat(html);
-		String answer=IKFunction.jsoupTextByRowByDoc(doc,"span.content", 0);
-	    if(!StringUtil.isEmpty(answer.toString())){
-	 		map.put("ifanswer","1");
-	 		map.put("answer", answer);
-		}else{
-			map.put("ifanswer","0");
+		int num=IKFunction.jsoupRowsByDoc(doc, "span.content");
+		for(int i=0;i<num;i++){
+			String uname=IKFunction.jsoupTextByRowByDoc(doc, ".name.fl", i);
+			if(uname.equals(name)){
+				String answer=IKFunction.jsoupTextByRowByDoc(doc,"span.content", i);
+			    if(!StringUtil.isEmpty(answer.toString())){
+			 		map.put("ifanswer","1");
+			 		map.put("answer", answer);
+				}else{
+					map.put("ifanswer","0");
+					map.put("answer", "");
+				}
+			}
 		}
+		
 		return map;
 	}
 }

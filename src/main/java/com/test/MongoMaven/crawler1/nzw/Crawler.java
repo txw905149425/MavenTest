@@ -38,7 +38,7 @@ public class Crawler {
 				String dhtml=HttpUtil.getHtml(durl,new HashMap<String, String>(), "utf8", 1, new HashMap<String, String>()).get("html");
 				String rid=IKFunction.regexp(dhtml, "\"rid\":(\\d+)");
 				if(!"".equals(rid)){
-					String lurl="http://liven.9666.info/others.php?rid=335893";//+rid;
+					String lurl="http://liven.9666.info/others.php?rid="+rid;
 					 String lhtml=HttpUtil.getHtml(lurl, new HashMap<String, String>(), "utf8",1, new HashMap<String, String>()).get("html");
 					 List<HashMap<String, Object>> list= parse(lhtml);
 					 if(!list.isEmpty()){

@@ -21,9 +21,9 @@ public class CrawlerTHS {
 			 MongoDbUtil mongo=new MongoDbUtil();
 			 MongoCollection<Document>  collection=mongo.getShardConn("stock_code");
 			 Bson filter = Filters.exists("name", true);
-//			 new Document().append("id", "601008")
+//			 Bson filter = Filters.eq("id", "601398");
 //			 Bson filter1 = new Document("id","601008");
-			 MongoCursor<Document> cursor =collection.find(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
+			 MongoCursor<Document> cursor =collection.find().filter(filter).batchSize(10000).noCursorTimeout(true).iterator(); 
 			 DataUtil util=null;
 			 while(cursor.hasNext()){
 				 Document doc=cursor.next();

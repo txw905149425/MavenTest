@@ -38,6 +38,7 @@ public class Crawler {
 					map.put("id",IKFunction.md5(question+answer));
 					map.put("tid",question+timeObj);
 					map.put("time",time);
+					map.put("timedel",IKFunction.getTimeNowByStr("yyyy-MM-dd"));
 					map.put("question",question);
 					map.put("name",name);
 					map.put("answer",answer);
@@ -48,7 +49,6 @@ public class Crawler {
 				    MongoDbUtil mongo=new MongoDbUtil();
 				    mongo.upsetManyMapByTableName(listmap, "ww_ask_online_all");
 				}
-				
 			}
 		}catch(Exception e){
 			e.printStackTrace();

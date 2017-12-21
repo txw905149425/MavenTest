@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.sf.json.JSONObject;
 
+import com.test.MongoMaven.uitil.Constants;
 import com.test.MongoMaven.uitil.HttpUtil;
 import com.test.MongoMaven.uitil.IKFunction;
 import com.test.MongoMaven.uitil.MongoDbUtil;
@@ -39,7 +40,7 @@ public class Crawler {
 					JSONObject mm_data=JSONObject.fromObject(result);
 //					http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json
 //					http://localhost:8888/import?type=tt_stock_json
-				   String su=post.postHtml("http://jiangfinance.chinaeast.cloudapp.chinacloudapi.cn/wf/import?type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
+				   String su=post.postHtml(Constants.ES_URI+"type=tt_stock_json",new HashMap<String, String>(), mm_data.toString(), "utf-8", 1);
 					if(su.contains("exception")){
 						System.out.println(mm_data.toString());
 						System.err.println("写入数据异常！！！！  < "+su+" >");

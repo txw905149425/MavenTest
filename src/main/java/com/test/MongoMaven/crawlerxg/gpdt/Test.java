@@ -47,6 +47,7 @@ public class Test {
 //			System.out.println(js);
 			Object list=IKFunction.keyVal(js, "vtDaySec");
 			int num=IKFunction.rowsArray(list);
+			try{
 			for(int i=1;i<=num;i++){
 				records=new HashMap<String, Object>();
 				Object one=IKFunction.array(list, i);
@@ -102,7 +103,13 @@ public class Test {
 				mongo.upsertMapByTableName(records, "xg_gpdt_stock");
 				mongo.upsertMapByTableName(records, "xg_stock_json_all");
 			}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
+			
 	}
 	
 	

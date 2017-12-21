@@ -21,7 +21,8 @@ public class CrawlerTHS {
 		  ExecutorService executor = Executors.newFixedThreadPool(threadNum);
 			 MongoDbUtil mongo=new MongoDbUtil();
 			 MongoCollection<Document>  collection=mongo.getShardConn("stock_code");
-			 Bson filter = Filters.exists("name", false);
+			 Bson filter = Filters.exists("id", true);
+//			 Bson filter = Filters.eq("name", "");
 //			 new Document().append("id", "601008")
 //			 Bson filter1 = new Document("id","600000");
 			 MongoCursor<Document> cursor =collection.find(filter).batchSize(10000).noCursorTimeout(true).iterator(); 

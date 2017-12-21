@@ -77,7 +77,12 @@ public class Test {
 			records.put("time", time);
 			records.put("id", time+""+title);
 			records.put("list", listMap);
-			mongo.upsertMapByTableName(records, "xg_gpdt_stock");
+			try {
+				mongo.upsertMapByTableName(records, "xg_gpdt_stock");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	
